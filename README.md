@@ -1,6 +1,3 @@
-# nandboxbotsapi
-Easy to use library to create nandbox bots
-
 # nandbox Bot Java Library
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/nandbox/nandboxbotsapi/blob/master/LICENSE)
