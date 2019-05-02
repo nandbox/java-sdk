@@ -1,0 +1,1 @@
+This folder is used by test bots to put downloaded files

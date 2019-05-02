@@ -1,0 +1,296 @@
+package com.nandbox.bots.api.outmessages;
+
+import com.nandbox.bots.api.data.Menu;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+
+/**
+ * This abstract class is the superclass of all classes representing Output
+ * messages .
+ * 
+ * 
+ * @author Ahmed A. El-Malatawy
+ *
+ */
+public abstract class OutMessage {
+
+	public enum OutMessageMethod {
+		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles,generatePermanentUrl
+
+	}
+	
+	public static final int WEB_PREVIEW_DISABLE = 1;
+	public static final int WEB_PREVIEW_HIDE_LINK = 2;
+	public static final int WEB_PREVIEW_INSTANCE_VIEW = 3;	
+	public static final int WEB_PREVIEW_INSTANCE_WITHOUT_LINK = 4;	
+
+	protected static final String KEY_METHOD = "method";
+	protected static final String KEY_CHAT_ID = "chat_id";
+	protected static final String KEY_REFERENCE = "reference";
+	protected static final String KEY_TO_USER_ID = "to_user_id";
+	protected static final String KEY_REPLAY_TO_MESSAGE_ID = "reply_to_message_id";
+	protected static final String KEY_WEB_PAGE_PREVIEW = "web_page_preview";
+	protected static final String KEY_DISABLE_NOTIFICATION = "disable_notification";
+	protected static final String KEY_CAPTION = "caption";
+	protected static final String KEY_ECHO = "echo";
+	protected static final String KEY_MENU_REF = "menu_ref";
+	protected static final String KEY_INLINE_MENU = "inline_menu";
+	protected static final String KEY_CHAT_SETTINGS = "chat_settings";
+	protected static final String KEY_STYLE = "style";
+
+	protected OutMessageMethod method;
+	protected String chatId;
+	protected Long reference;
+	protected String toUserId;
+	protected String replyToMessageId;
+	protected Integer webPagePreview;
+	protected Boolean disableNotification;
+	protected String caption;
+	private Integer echo;
+	private String menuRef;
+	private Menu[] inlineMenus;
+	private Integer chatSettings;
+
+	
+	public JSONObject toJsonObject() {
+
+		JSONObject obj = new JSONObject();
+
+		if (method != null) {
+			obj.put(KEY_METHOD, method);
+		}
+
+		if (chatId != null) {
+			obj.put(KEY_CHAT_ID, chatId);
+		}
+
+		if (reference != null) {
+			obj.put(KEY_REFERENCE, reference);
+		}
+
+		if (toUserId != null) {
+			obj.put(KEY_TO_USER_ID, toUserId);
+		}
+
+		if (replyToMessageId != null) {
+			obj.put(KEY_REPLAY_TO_MESSAGE_ID, replyToMessageId);
+		}
+
+		if (webPagePreview != null) {
+			obj.put(KEY_WEB_PAGE_PREVIEW, webPagePreview);
+		}
+
+		if (disableNotification != null) {
+			obj.put(KEY_DISABLE_NOTIFICATION, disableNotification);
+		}
+
+		if (caption != null) {
+			obj.put(KEY_CAPTION, caption);
+		}
+
+		if (echo != null) {
+			obj.put(KEY_ECHO, echo);
+		}
+
+		if (menuRef != null) {
+			obj.put(KEY_MENU_REF, menuRef);
+		}
+		if (inlineMenus != null) {
+			JSONArray inlineMenusArrayObj = new JSONArray();
+			for (int i = 0; i < inlineMenus.length; i++) {
+				inlineMenusArrayObj.add(inlineMenus[i].toJsonObject());
+			}
+
+			obj.put(KEY_INLINE_MENU, inlineMenusArrayObj);
+		}
+
+		if (chatSettings != null) {
+			obj.put(KEY_CHAT_SETTINGS, chatSettings);
+		}
+		return obj;
+	}
+
+	/**
+	 * @return the webPagePreview
+	 */
+	public Integer getWebPagePreview() {
+		return webPagePreview;
+	}
+
+	/**
+	 * @param webPagePreview
+	 *            the webPagePreview to set
+	 */
+	public void setWebPagePreview(Integer webPagePreview) {
+		this.webPagePreview = webPagePreview;
+	}
+
+	/**
+	 * @return the method
+	 */
+	public OutMessageMethod getMethod() {
+		return method;
+	}
+
+	/**
+	 * @param method
+	 *            the method to set
+	 */
+	public void setMethod(OutMessageMethod method) {
+		this.method = method;
+	}
+
+	/**
+	 * @return the chatId
+	 */
+	public String getChatId() {
+		return chatId;
+	}
+
+	/**
+	 * @param chatId
+	 *            the chatId to set
+	 */
+	public void setChatId(String chatId) {
+		this.chatId = chatId;
+	}
+
+	/**
+	 * @return the reference
+	 */
+	public Long getReference() {
+		return reference;
+	}
+
+	/**
+	 * @param reference
+	 *            the reference to set
+	 */
+	public void setReference(Long reference) {
+		this.reference = reference;
+	}
+
+	/**
+	 * @return the toUserId
+	 */
+	public String getToUserId() {
+		return toUserId;
+	}
+
+	/**
+	 * @param toUserId
+	 *            the toUserId to set
+	 */
+	public void setToUserId(String toUserId) {
+		this.toUserId = toUserId;
+	}
+
+	/**
+	 * @return the replyToMessageId
+	 */
+	public String getReplyToMessageId() {
+		return replyToMessageId;
+	}
+
+	/**
+	 * @param replyToMessageId
+	 *            the replyToMessageId to set Disables link previews for links in
+	 *            this message
+	 */
+	public void setReplyToMessageId(String replyToMessageId) {
+		this.replyToMessageId = replyToMessageId;
+	}
+
+	/**
+	 * @return the disableNotification
+	 */
+	public Boolean getDisableNotification() {
+		return disableNotification;
+	}
+
+	/**
+	 * @param disableNotification
+	 *            the disableNotification to Sends the message silently. Users will
+	 *            receive a notification with no sound.
+	 */
+	public void setDisableNotification(Boolean disableNotification) {
+		this.disableNotification = disableNotification;
+	}
+
+	/**
+	 * @return the caption
+	 */
+	public String getCaption() {
+		return caption;
+	}
+
+	/**
+	 * @param caption
+	 *            the caption to set
+	 */
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+	/**
+	 * @return the echo
+	 */
+	public Integer getEcho() {
+		return echo;
+	}
+
+	/**
+	 * @param echo
+	 *            the echo to set
+	 */
+	public void setEcho(Integer echo) {
+		this.echo = echo;
+	}
+
+	/**
+	 * @return the menuRef
+	 */
+	public String getMenuRef() {
+		return menuRef;
+	}
+
+	/**
+	 * @param menuRef
+	 *            the menuRef to set
+	 */
+	public void setMenuRef(String menuRef) {
+		this.menuRef = menuRef;
+	}
+
+	/**
+	 * @return the inlineMenu
+	 */
+	public Menu[] getInlineMenu() {
+		return inlineMenus;
+	}
+
+	/**
+	 * @param inlineMenu
+	 *            the inlineMenu to set
+	 */
+	public void setInlineMenu(Menu[] inlineMenu) {
+		this.inlineMenus = inlineMenu;
+	}
+
+	/**
+	 * @return the chatSettings
+	 */
+	public Integer getChatSettings() {
+		return chatSettings;
+	}
+
+	/**
+	 * @param chatSettings the chatSettings to set
+	 */
+	public void setChatSettings(Integer chatSettings) {
+		this.chatSettings = chatSettings;
+	}
+
+
+}
