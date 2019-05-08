@@ -17,9 +17,6 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 
 	private Button navigationButton;
 
-	/**
-	 * @return the navigationButton
-	 */
 
 	
 	public SetNavigationButtonOutMessage() {
@@ -33,6 +30,10 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 		}
 		return obj;
 	}
+
+	/**
+	 * @return the navigationButton
+	 */
 
 	public Button getNavigationButton() {
 		return navigationButton;

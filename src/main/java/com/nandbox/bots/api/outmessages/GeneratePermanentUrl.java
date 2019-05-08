@@ -40,14 +40,14 @@ public class GeneratePermanentUrl extends OutMessage {
 	}
 
 	/**
-	 * @return the param1
+	 * @return the generic parameter used as a reference  
 	 */
 	public String getParam1() {
 		return param1;
 	}
 
 	/**
-	 * @param param1 the param1 to set
+	 * @param param1 Generic parameter to set any reference 
 	 */
 	public void setParam1(String param1) {
 		this.param1 = param1;

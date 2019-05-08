@@ -261,7 +261,7 @@ public class Chat {
 	}
 
 	/**
-	 * @param user or bot user name to set
+	 * @param name user or bot name to set
 	 */
 	public void setName(String name) {
 		this.name = name;

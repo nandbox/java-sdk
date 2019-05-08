@@ -31,12 +31,9 @@ public class User {
 	private String status;
 	private String profile;
 	private Photo photo;
-	/**
-	 * @param obj
-	 *           Json object to be used to compose User object
-	 */
-	public User() {
 
+	
+	public User() { 
 	}
 
 	public User(JSONObject obj) {

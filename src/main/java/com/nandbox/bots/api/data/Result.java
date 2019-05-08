@@ -193,7 +193,7 @@ public class Result {
 	}
 
 	/**
-	 * @param hight the height to set
+	 * @param height the height to set
 	 */
 	public void setHeight(Long height) {
 		this.height = height;

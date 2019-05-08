@@ -82,7 +82,7 @@ public class Row {
 	
 	
 	/**
-	 * @param buttons
+	 * @param button
 	 *            the buttons to set
 	 */
 	public void setButton(Button button) {

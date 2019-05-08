@@ -70,8 +70,8 @@ public class UpdateOutMessage extends OutMessage {
 	}
 
 	/**
-	 * @param message
-	 *            the message to set
+	 * @param text
+	 *            the text message to set
 	 */
 	public void setText(String text) {
 		this.text = text;

@@ -46,7 +46,8 @@ public final class Nandbox {
 
 		/**
 		 * This event indicates that the bot is successfully connected and authenticated
-		 * with nandbox server. * @param api reference for the api interface to be used
+		 * with nandbox server.
+		 * @param api reference for the api interface to be used
 		 * to send any message to nandbox server
 		 * 
 		 */
@@ -102,7 +103,7 @@ public final class Nandbox {
 		public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback);
 
 		/**
-		 * @param obj
+		 * @param msgAck Message ack object holding acknowledge message details 
 		 */
 		public void onMessagAckCallback(MessageAck msgAck);
 
@@ -138,12 +139,12 @@ public final class Nandbox {
 		/**
 		 * This event should be used to handle user restarting bot action
 		 * 
-		 * @param user
+		 * @param user object holding information about 
 		 */
 		public void userStartedBot(User user);
 
 		/**
-		 * @param user
+		 * @param user the bot profile
 		 */
 		public void onMyProfile(User user);
 
@@ -151,37 +152,42 @@ public final class Nandbox {
 		 * @param user
 		 */
 		/**
-		 * @param user
+		 * @param user user object contain user details 
 		 */
 		public void onUserDetails(User user);
 
 		/**
-		 * @param user
+		 * @param user details of the usee who stopped the bot
 		 */
 		public void userStoppedBot(User user);
 
 		/**
-		 * @param user
+		 * @param user details of the use who left the bot
 		 */
 		public void userLeftBot(User user);
 
 		/**
-		 * @param permenantUrl
+		 * Call back for generating URL 
+		 * @param permenantUrl the generated permanent URL details
 		 */
 		public void permanentUrl(PermanentUrl permenantUrl);
 
 		/**
-		 * @param chat
+		 * @param chat chat object contain details of specific chat
 		 */
 		public void onChatDetails(Chat chat);
 
 		/**
-		 * @param inlineSearch
+		 * @param inlineSearch inline search object that contain inline search info
 		 */
 		public void onInlineSearh(InlineSearch inlineSearch); 
 		
 	} 
 	
+	/**
+	 * @author Ahmed A. El-Malatawy
+	 *
+	 */
 	public interface Api {
 
 		/**
@@ -201,10 +207,11 @@ public final class Nandbox {
 		public Long sendText(String chatId, String text);
 
 		/**
-		 * @param chatId
-		 * @param text
-		 * @param bgColor
-		 * @return
+		 * @param chatId  Unique identifier for the target chat or User id and can not set
+		 *            to null
+		 * @param text text message to send
+		 * @param bgColor text message background color Hex code in format : #HHHHHH 
+		 * @return reference the sent message reference
 		 */
 		public Long sendTextWithBackground(String chatId, String text, String bgColor);
 
@@ -782,7 +789,7 @@ public final class Nandbox {
 		 * 
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
-		 * @param message
+		 * @param text
 		 *            The new message text
 		 * @param caption
 		 *            The new caption text
@@ -796,7 +803,7 @@ public final class Nandbox {
 		/**
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
-		 * @param message
+		 * @param text
 		 *            The new message text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
@@ -818,7 +825,7 @@ public final class Nandbox {
 		/**
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
-		 * @param message
+		 * @param text
 		 *            The new message text
 		 * @param chatId
 		 *            Id of Target Group or Channel id
@@ -939,10 +946,11 @@ public final class Nandbox {
 		 */
 		void getMyProfiles();
 
+	
 		/**
 		 * Use this method to generate permanent URL for the file
+		 * @param file  unique file Id for the file  
+		 * @param param1 Generic parameter to set any local reference for the permanent  file
 		 */
-		void generatePermanentUrl(String file, String param1);
-
-	}
+		void generatePermanentUrl(String file, String param1); }
 }
