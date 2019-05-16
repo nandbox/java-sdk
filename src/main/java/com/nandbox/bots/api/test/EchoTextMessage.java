@@ -17,7 +17,7 @@ import net.minidev.json.JSONObject;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783908051088:0:hDY4D4o7rZGb9DS8J4cKKFGUZ3hcaq"; // you can put your own bot token
+	public static final String TOKEN = "<PUT your token here >";
 
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();

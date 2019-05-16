@@ -42,7 +42,7 @@ import net.minidev.json.JSONObject;
  *
  */
 public class TestTextMessage {
-	public static final String TOKEN = "90091784169275314:0:MPgzj802RbiMZ3RL7GHpwuDp9QxVTq";// you can put your own bot token
+	public static final String TOKEN = "<PUT your token here >";
 
 	private static HashMap<Long, OutMessage> outMsgsListener = new HashMap<>();
 

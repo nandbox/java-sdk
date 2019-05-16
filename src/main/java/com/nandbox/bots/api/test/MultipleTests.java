@@ -48,7 +48,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783798913765:0:K6wCrG0sY6AwQzBJtnq6wLqej5V2a7"; // you can put your own bot token
+	public static final String TOKEN = "<PUT your token here >";
 	
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 

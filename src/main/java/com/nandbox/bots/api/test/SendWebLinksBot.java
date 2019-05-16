@@ -25,7 +25,7 @@ import net.minidev.json.JSONObject;
  *
  */
 public class SendWebLinksBot {
-	public static final String TOKEN = "90091784656342996:0:90eH09mTSJ4ME9A77AuDJjhEzDCqHF";// you can put your own bot token
+	public static final String TOKEN = "<PUT your token here >";
 	private static final Integer CHAT_SETTINGS = 1;
 	private static final Integer FROM_ADMIN = 1;
 	private static final String TEXT = "text";
