@@ -28,6 +28,7 @@ If you don't know how to get bot configuration data and token from nandbox
 - Open your bot in nandbox app then open  top right menu and click to `Get token` .This process explained in this [video](https://www.youtube.com/watch?v=FXb6tjOuxSc&feature=youtu.be).
 
 
+
 You will get data like this:
 ``` 
 token:90091783784280234234WBBPmJAnSD5ILIkc6N6QjY3ZzeY
