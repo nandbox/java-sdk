@@ -16,14 +16,14 @@ import net.minidev.json.JSONObject;
 public abstract class OutMessage {
 
 	public enum OutMessageMethod {
-		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles,generatePermanentUrl
+		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle
 
 	}
-	
+
 	public static final int WEB_PREVIEW_DISABLE = 1;
 	public static final int WEB_PREVIEW_HIDE_LINK = 2;
-	public static final int WEB_PREVIEW_INSTANCE_VIEW = 3;	
-	public static final int WEB_PREVIEW_INSTANCE_WITHOUT_LINK = 4;	
+	public static final int WEB_PREVIEW_INSTANCE_VIEW = 3;
+	public static final int WEB_PREVIEW_INSTANCE_WITHOUT_LINK = 4;
 
 	protected static final String KEY_METHOD = "method";
 	protected static final String KEY_CHAT_ID = "chat_id";
@@ -52,7 +52,6 @@ public abstract class OutMessage {
 	private Menu[] inlineMenus;
 	private Integer chatSettings;
 
-	
 	public JSONObject toJsonObject() {
 
 		JSONObject obj = new JSONObject();
@@ -286,11 +285,11 @@ public abstract class OutMessage {
 	}
 
 	/**
-	 * @param chatSettings the chatSettings to set
+	 * @param chatSettings
+	 *            the chatSettings to set
 	 */
 	public void setChatSettings(Integer chatSettings) {
 		this.chatSettings = chatSettings;
 	}
-
 
 }

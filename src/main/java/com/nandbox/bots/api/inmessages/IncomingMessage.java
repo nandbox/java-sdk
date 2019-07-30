@@ -3,6 +3,7 @@
  */
 package com.nandbox.bots.api.inmessages;
 
+import com.nandbox.bots.api.data.Article;
 import com.nandbox.bots.api.data.Audio;
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.Contact;
@@ -30,7 +31,7 @@ public class IncomingMessage {
 
 	public enum MessageType {
 
-		text, photo, video, audio, voice, contact, location, gif, document, text_file, sticker;
+		text, photo, video, audio, voice, contact, location, gif, document, text_file, sticker, article;
 	}
 
 	public static final String KEY_MESSAGE = "message";
@@ -57,8 +58,9 @@ public class IncomingMessage {
 	private static final String KEY_TEXT_FILE = "text_file";
 	protected static final String KEY_STATUS = "status";
 	protected static final String KEY_CHAT_SETTINGS = "chat_settings";
-	protected static final String KEY_BG_COLOR = "bg_color";	
-	
+	protected static final String KEY_BG_COLOR = "bg_color";
+	private static final String KEY_ARTICLE = "article";
+	private static final String KEY_URL = "url";
 
 	private String messageId;
 	private String type;
@@ -84,7 +86,10 @@ public class IncomingMessage {
 	private String status;
 	private Integer chatSettings;
 	private String bgColor;
-
+	private Article article;
+	private String url;
+	
+	
 	public IncomingMessage(JSONObject jsonObj) {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_MESSAGE);
@@ -100,20 +105,22 @@ public class IncomingMessage {
 		this.voice = obj.get(KEY_VOICE) != null ? new Voice((JSONObject) obj.get(KEY_VOICE)) : null;
 		this.video = obj.get(KEY_VIDEO) != null ? new Video((JSONObject) obj.get(KEY_VIDEO)) : null;
 		this.audio = obj.get(KEY_AUDIO) != null ? new Audio((JSONObject) obj.get(KEY_AUDIO)) : null;
+		this.article = obj.get(KEY_ARTICLE) != null ? new Article((JSONObject) obj.get(KEY_ARTICLE)) : null;
 
 		this.sticker = obj.get(KEY_STICKER) != null ? new Sticker((JSONObject) obj.get(KEY_STICKER)) : null;
 
 		this.textFile = obj.get(KEY_TEXT_FILE) != null ? new TextFile((JSONObject) obj.get(KEY_TEXT_FILE)) : null;
 
 		this.text = (String) obj.get(KEY_TEXT);
-		this.messageId =  (String)obj.get(KEY_MESSAGE_ID);
+		this.messageId = (String) obj.get(KEY_MESSAGE_ID);
 		this.date = Long.parseLong(String.valueOf(obj.get(KEY_DATE)));
 		this.reference = Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)));
 		this.from = fromUser;
 		this.sentTo = sentToUser;
 		this.fromAdmin = (Utils.getInteger(obj.get(KEY_FROM_ADMIN)));
-		this.type = (String)obj.get(KEY_TYPE);
+		this.type = (String) obj.get(KEY_TYPE);
 		this.caption = (String) obj.get(KEY_CAPTION);
+		this.url = (String) obj.get(KEY_URL);
 		this.replyToMessageId = (String) obj.get(KEY_REPLAY_TO_MESSAGE_ID);
 		this.status = (String) obj.get(KEY_STATUS);
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
@@ -160,6 +167,9 @@ public class IncomingMessage {
 		if (caption != null)
 			obj.put(KEY_CAPTION, caption);
 
+		if (url != null)
+			obj.put(KEY_URL, url);
+		
 		if (replyToMessageId != null)
 			obj.put(KEY_REPLAY_TO_MESSAGE_ID, replyToMessageId);
 
@@ -198,6 +208,10 @@ public class IncomingMessage {
 		if (audio != null) {
 			obj.put(KEY_AUDIO, audio.toJsonObject());
 		}
+
+		if (article != null) {
+			obj.put(KEY_ARTICLE, article.toJsonObject());
+		}
 		if (sticker != null) {
 			obj.put(KEY_STICKER, sticker.toJsonObject());
 		}
@@ -205,7 +219,7 @@ public class IncomingMessage {
 		if (textFile != null) {
 			obj.put(KEY_TEXT_FILE, textFile.toJsonObject());
 		}
-		
+
 		if (bgColor != null) {
 			obj.put(KEY_BG_COLOR, bgColor);
 		}
@@ -563,6 +577,22 @@ public class IncomingMessage {
 		this.chatSettings = chatSettings;
 	}
 
+	/**
+	 * @return the Article
+	 */
+	public Article getArticle() {
+		return article;
+	}
+
+	/**
+	 * @param article
+	 */
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+
+
 	public boolean isVideoMsg() {
 		return isMsgWithType(MessageType.video);
 	}
@@ -620,9 +650,18 @@ public class IncomingMessage {
 	}
 
 	/**
-	 * @param bgColor the bgColor to set
+	 * @param bgColor
+	 *            the bgColor to set
 	 */
 	public void setBgColor(String bgColor) {
 		this.bgColor = bgColor;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
