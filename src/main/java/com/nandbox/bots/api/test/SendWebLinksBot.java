@@ -6,6 +6,7 @@ import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.inmessages.BlackList;
 import com.nandbox.bots.api.inmessages.ChatAdministrators;
 import com.nandbox.bots.api.inmessages.ChatMember;
 import com.nandbox.bots.api.inmessages.ChatMenuCallback;
@@ -14,7 +15,7 @@ import com.nandbox.bots.api.inmessages.InlineMessageCallback;
 import com.nandbox.bots.api.inmessages.InlineSearch;
 import com.nandbox.bots.api.inmessages.MessageAck;
 import com.nandbox.bots.api.inmessages.PermanentUrl;
-
+import com.nandbox.bots.api.inmessages.WhiteList;
 import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONObject;
 
@@ -229,6 +230,18 @@ public class SendWebLinksBot {
 		        // format it as hexadecimal string (with hashtag and leading zeros)
 		       return String.format("#%06x", nextInt);
 
+			}
+
+			@Override
+			public void onBlackList(BlackList blackList) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onWhiteList(WhiteList blackList) {
+				// TODO Auto-generated method stub
+				
 			}
 
 		});

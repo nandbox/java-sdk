@@ -16,7 +16,7 @@ import net.minidev.json.JSONObject;
 public abstract class OutMessage {
 
 	public enum OutMessageMethod {
-		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle
+		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,getBlacklist, getWhitelist,addBlacklist,addWhitelist, deleteBlacklist,  addBlacklistPatterns, deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist
 
 	}
 
@@ -37,8 +37,9 @@ public abstract class OutMessage {
 	protected static final String KEY_MENU_REF = "menu_ref";
 	protected static final String KEY_INLINE_MENU = "inline_menu";
 	protected static final String KEY_CHAT_SETTINGS = "chat_settings";
-	protected static final String KEY_STYLE = "style";
+	protected static final String KEY_STYLE = "style";	
 
+	
 	protected OutMessageMethod method;
 	protected String chatId;
 	protected Long reference;
@@ -51,6 +52,7 @@ public abstract class OutMessage {
 	private String menuRef;
 	private Menu[] inlineMenus;
 	private Integer chatSettings;
+	
 
 	public JSONObject toJsonObject() {
 

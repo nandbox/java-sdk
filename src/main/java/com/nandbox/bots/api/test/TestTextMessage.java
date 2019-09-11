@@ -14,6 +14,7 @@ import com.nandbox.bots.api.data.Photo;
 import com.nandbox.bots.api.data.Result;
 import com.nandbox.bots.api.data.Row;
 import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.inmessages.BlackList;
 import com.nandbox.bots.api.inmessages.ChatAdministrators;
 import com.nandbox.bots.api.inmessages.ChatMember;
 import com.nandbox.bots.api.inmessages.ChatMenuCallback;
@@ -22,6 +23,7 @@ import com.nandbox.bots.api.inmessages.InlineMessageCallback;
 import com.nandbox.bots.api.inmessages.InlineSearch;
 import com.nandbox.bots.api.inmessages.MessageAck;
 import com.nandbox.bots.api.inmessages.PermanentUrl;
+import com.nandbox.bots.api.inmessages.WhiteList;
 import com.nandbox.bots.api.inmessages.IncomingMessage.MessageType;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.InlineSearchAnswer;
@@ -42,7 +44,7 @@ import net.minidev.json.JSONObject;
  *
  */
 public class TestTextMessage {
-	public static final String TOKEN = "<PUT your token here >";
+	public static final String TOKEN = "90091784679223920:0:y5blRYSsqarBU2nl3o7WuBdd8XGCIX";
 
 	private static HashMap<Long, OutMessage> outMsgsListener = new HashMap<>();
 
@@ -770,6 +772,18 @@ public class TestTextMessage {
 
 			@Override
 			public void onInlineSearh(InlineSearch inlineSearch) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onBlackList(BlackList blackList) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onWhiteList(WhiteList blackList) {
 				// TODO Auto-generated method stub
 				
 			}

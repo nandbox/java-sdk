@@ -16,6 +16,7 @@ import com.nandbox.bots.api.data.TextFile;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.data.Video;
 import com.nandbox.bots.api.data.Voice;
+import com.nandbox.bots.api.data.WhiteListUser;
 import com.nandbox.bots.api.util.Utils;
 
 import net.minidev.json.JSONObject;
@@ -59,6 +60,7 @@ public class IncomingMessage {
 	protected static final String KEY_STATUS = "status";
 	protected static final String KEY_CHAT_SETTINGS = "chat_settings";
 	protected static final String KEY_BG_COLOR = "bg_color";
+	protected static final String WHITELIST_USER = "users";
 	private static final String KEY_ARTICLE = "article";
 	private static final String KEY_URL = "url";
 
@@ -88,6 +90,7 @@ public class IncomingMessage {
 	private String bgColor;
 	private Article article;
 	private String url;
+	private WhiteListUser whitelistUser;
 	
 	
 	public IncomingMessage(JSONObject jsonObj) {
@@ -125,6 +128,8 @@ public class IncomingMessage {
 		this.status = (String) obj.get(KEY_STATUS);
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
+		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null : new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
+
 
 	}
 
@@ -222,6 +227,10 @@ public class IncomingMessage {
 
 		if (bgColor != null) {
 			obj.put(KEY_BG_COLOR, bgColor);
+		}
+		
+		if (whitelistUser != null) {
+			obj.put(WHITELIST_USER, whitelistUser);
 		}
 
 		System.out.println("to " + obj.toJSONString());
@@ -663,5 +672,13 @@ public class IncomingMessage {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public WhiteListUser getWhitelistUser() {
+		return whitelistUser;
+	}
+
+	public void setWhitelistUser(WhiteListUser whitelistUser) {
+		this.whitelistUser = whitelistUser;
 	}
 }

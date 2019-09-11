@@ -1,7 +1,12 @@
 package com.nandbox.bots.api;
 
+import java.util.List;
+
 import com.nandbox.bots.api.data.Chat;
+import com.nandbox.bots.api.data.Data;
 import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.data.WhiteListUser;
+import com.nandbox.bots.api.inmessages.BlackList;
 import com.nandbox.bots.api.inmessages.ChatAdministrators;
 import com.nandbox.bots.api.inmessages.ChatMember;
 import com.nandbox.bots.api.inmessages.ChatMenuCallback;
@@ -10,6 +15,7 @@ import com.nandbox.bots.api.inmessages.InlineMessageCallback;
 import com.nandbox.bots.api.inmessages.InlineSearch;
 import com.nandbox.bots.api.inmessages.MessageAck;
 import com.nandbox.bots.api.inmessages.PermanentUrl;
+import com.nandbox.bots.api.inmessages.WhiteList;
 import com.nandbox.bots.api.outmessages.OutMessage;
 
 import net.minidev.json.JSONObject;
@@ -47,8 +53,10 @@ public final class Nandbox {
 		/**
 		 * This event indicates that the bot is successfully connected and authenticated
 		 * with nandbox server.
-		 * @param api reference for the api interface to be used
-		 * to send any message to nandbox server
+		 * 
+		 * @param api
+		 *            reference for the api interface to be used to send any message to
+		 *            nandbox server
 		 * 
 		 */
 		public void onConnect(Nandbox.Api api);
@@ -103,7 +111,8 @@ public final class Nandbox {
 		public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback);
 
 		/**
-		 * @param msgAck Message ack object holding acknowledge message details 
+		 * @param msgAck
+		 *            Message ack object holding acknowledge message details
 		 */
 		public void onMessagAckCallback(MessageAck msgAck);
 
@@ -139,12 +148,14 @@ public final class Nandbox {
 		/**
 		 * This event should be used to handle user restarting bot action
 		 * 
-		 * @param user object holding information about 
+		 * @param user
+		 *            object holding information about
 		 */
 		public void userStartedBot(User user);
 
 		/**
-		 * @param user the bot profile
+		 * @param user
+		 *            the bot profile
 		 */
 		public void onMyProfile(User user);
 
@@ -152,38 +163,50 @@ public final class Nandbox {
 		 * @param user
 		 */
 		/**
-		 * @param user user object contain user details 
+		 * @param user
+		 *            user object contain user details
 		 */
 		public void onUserDetails(User user);
 
 		/**
-		 * @param user details of the usee who stopped the bot
+		 * @param user
+		 *            details of the usee who stopped the bot
 		 */
 		public void userStoppedBot(User user);
 
 		/**
-		 * @param user details of the use who left the bot
+		 * @param user
+		 *            details of the use who left the bot
 		 */
 		public void userLeftBot(User user);
 
 		/**
-		 * Call back for generating URL 
-		 * @param permenantUrl the generated permanent URL details
+		 * Call back for generating URL
+		 * 
+		 * @param permenantUrl
+		 *            the generated permanent URL details
 		 */
 		public void permanentUrl(PermanentUrl permenantUrl);
 
 		/**
-		 * @param chat chat object contain details of specific chat
+		 * @param chat
+		 *            chat object contain details of specific chat
 		 */
 		public void onChatDetails(Chat chat);
 
 		/**
-		 * @param inlineSearch inline search object that contain inline search info
+		 * @param inlineSearch
+		 *            inline search object that contain inline search info
 		 */
-		public void onInlineSearh(InlineSearch inlineSearch); 
+		public void onInlineSearh(InlineSearch inlineSearch);
 		
-	} 
-	
+		public void onBlackList(BlackList blackList);
+		
+		public void onWhiteList(WhiteList whiteList);
+
+
+	}
+
 	/**
 	 * @author Ahmed A. El-Malatawy
 	 *
@@ -207,10 +230,13 @@ public final class Nandbox {
 		public Long sendText(String chatId, String text);
 
 		/**
-		 * @param chatId  Unique identifier for the target chat or User id and can not set
+		 * @param chatId
+		 *            Unique identifier for the target chat or User id and can not set
 		 *            to null
-		 * @param text text message to send
-		 * @param bgColor text message background color Hex code in format : #HHHHHH 
+		 * @param text
+		 *            text message to send
+		 * @param bgColor
+		 *            text message background color Hex code in format : #HHHHHH
 		 * @return reference the sent message reference
 		 */
 		public Long sendTextWithBackground(String chatId, String text, String bgColor);
@@ -946,11 +972,41 @@ public final class Nandbox {
 		 */
 		void getMyProfiles();
 
-	
 		/**
 		 * Use this method to generate permanent URL for the file
-		 * @param file  unique file Id for the file  
-		 * @param param1 Generic parameter to set any local reference for the permanent  file
+		 * 
+		 * @param file
+		 *            unique file Id for the file
+		 * @param param1
+		 *            Generic parameter to set any local reference for the permanent
+		 *            file
 		 */
-		void generatePermanentUrl(String file, String param1); }
+		void generatePermanentUrl(String file, String param1);
+
+
+		void getBlackList(String chatId);
+
+		void getWhiteList(String chatId);
+
+		void addBlackList(String chatId, List<String> users);
+
+//		void addWhiteList(String chatId, List<SignupUser> signupUser);
+
+		void deleteBlackList(String chatId, List<String> users);
+
+		void deleteWhiteList(String chatId, List<String> users);
+
+		void addBlacklistPatterns(String chatId, List<Data> data);
+		
+		void addWhitelistPatterns(String chatId, List<Data> data);
+
+		void deleteBlackListPatterns(String chatId, List<String> pattern);
+
+		void deleteWhiteListPatterns(String chatId, List<String> pattern);
+
+
+		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers);
+
+
+	}
 }

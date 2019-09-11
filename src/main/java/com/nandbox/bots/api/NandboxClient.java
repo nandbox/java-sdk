@@ -1,8 +1,7 @@
 package com.nandbox.bots.api;
 
-import static com.nandbox.bots.api.util.Utils.getUniqueId;
 import static com.nandbox.bots.api.util.Utils.formatDate;
-
+import static com.nandbox.bots.api.util.Utils.getUniqueId;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +27,10 @@ import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.nandbox.bots.api.data.Chat;
+import com.nandbox.bots.api.data.Data;
 import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.data.WhiteListUser;
+import com.nandbox.bots.api.inmessages.BlackList;
 import com.nandbox.bots.api.inmessages.ChatAdministrators;
 import com.nandbox.bots.api.inmessages.ChatMember;
 import com.nandbox.bots.api.inmessages.ChatMenuCallback;
@@ -36,18 +39,30 @@ import com.nandbox.bots.api.inmessages.InlineMessageCallback;
 import com.nandbox.bots.api.inmessages.InlineSearch;
 import com.nandbox.bots.api.inmessages.MessageAck;
 import com.nandbox.bots.api.inmessages.PermanentUrl;
+import com.nandbox.bots.api.inmessages.WhiteList;
+import com.nandbox.bots.api.outmessages.AddBlackListOutMessage;
+import com.nandbox.bots.api.outmessages.AddBlacklistPatternsOutMessage;
+import com.nandbox.bots.api.outmessages.AddWhiteListOutMessage;
+import com.nandbox.bots.api.outmessages.AddWhitelistPatternsOutMessage;
 import com.nandbox.bots.api.outmessages.AudioOutMessage;
 import com.nandbox.bots.api.outmessages.BanChatMemberOutMessage;
 import com.nandbox.bots.api.outmessages.ContactOutMessage;
+import com.nandbox.bots.api.outmessages.DeleteBlackListOutMessage;
+import com.nandbox.bots.api.outmessages.DeleteBlackListPatternsOutMessage;
+import com.nandbox.bots.api.outmessages.DeleteWhiteListOutMessage;
+import com.nandbox.bots.api.outmessages.DeleteWhiteListPatternsOutMessage;
 import com.nandbox.bots.api.outmessages.DocumentOutMessage;
 import com.nandbox.bots.api.outmessages.GeneratePermanentUrl;
+import com.nandbox.bots.api.outmessages.GetBlackListOutMessage;
 import com.nandbox.bots.api.outmessages.GetChatAdministratorsOutMessage;
 import com.nandbox.bots.api.outmessages.GetChatMemberOutMessage;
 import com.nandbox.bots.api.outmessages.GetChatOutMessage;
 import com.nandbox.bots.api.outmessages.GetMyProfiles;
 import com.nandbox.bots.api.outmessages.GetUserOutMessage;
+import com.nandbox.bots.api.outmessages.GetWhiteListOutMessage;
 import com.nandbox.bots.api.outmessages.LocationOutMessage;
 import com.nandbox.bots.api.outmessages.OutMessage;
+import com.nandbox.bots.api.outmessages.OutMessage.OutMessageMethod;
 import com.nandbox.bots.api.outmessages.PhotoOutMessage;
 import com.nandbox.bots.api.outmessages.RecallOutMessage;
 import com.nandbox.bots.api.outmessages.RemoveChatMemberOutMessage;
@@ -58,7 +73,6 @@ import com.nandbox.bots.api.outmessages.UnbanChatMember;
 import com.nandbox.bots.api.outmessages.UpdateOutMessage;
 import com.nandbox.bots.api.outmessages.VideoOutMessage;
 import com.nandbox.bots.api.outmessages.VoiceOutMessage;
-import com.nandbox.bots.api.outmessages.OutMessage.OutMessageMethod;
 
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
@@ -71,7 +85,7 @@ import net.minidev.json.JSONValue;
  */
 public class NandboxClient {
 	private static final String CONFIG_FILE = "config.properties";
-	private static String BOT_ID = null ;
+	private static String BOT_ID = null;
 	private static NandboxClient nandboxClient;
 	private WebSocketClient webSocketClient;
 	int closingCounter = 0;
@@ -80,7 +94,6 @@ public class NandboxClient {
 	private URI uri;
 	static final String KEY_METHOD = "method";
 	static final String KEY_ERROR = "error";
-	
 
 	public static Properties getConfigs() {
 		Properties configs = new Properties();
@@ -101,10 +114,11 @@ public class NandboxClient {
 		private static final int NO_OF_RETRIES_IF_CONN_TIMEDOUT = 10;
 		private static final int NO_OF_RETRIES_IF_CONN_CLOSED = 10;
 		private static final String KEY_USER = "user";
+		private static final String KEY_BLACKLIST = "blacklist";
+		private static final String KEY_WHITELIST = "whitelist";
 		private static final String KEY_CHAT = "chat";
 		private static final String KEY_NAME = "name";
 		private static final String KEY_ID = "ID";
-		
 
 		Nandbox.Callback callback;
 		Session session;
@@ -303,29 +317,31 @@ public class NandboxClient {
 
 					return reference;
 				}
-				
+
 				@Override
-				public Long sendTextWithBackground(String chatId, String text,String bgColor) {
+				public Long sendTextWithBackground(String chatId, String text, String bgColor) {
 					Long reference = getUniqueId();
-					sendText(chatId, text, reference,null,null,null,null,null,bgColor);
+					sendText(chatId, text, reference, null, null, null, null, null, bgColor);
 
 					return reference;
 				}
+
 				@Override
 				public void sendText(String chatId, String text, Long reference) {
 
-					sendText(chatId, text, reference, null, null, null, null, null,null);
+					sendText(chatId, text, reference, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendText(String chatId, String text, Long reference, String replyToMessageId,
-						String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings,String bgColor) {
+						String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings,
+						String bgColor) {
 					TextOutMessage message = new TextOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
 							disableNotification, null, chatSettings);
 					message.setMethod(OutMessageMethod.sendMessage);
 					message.setText(text);
-					message.setBgColor(bgColor);					
+					message.setBgColor(bgColor);
 					send(message);
 
 				}
@@ -658,7 +674,6 @@ public class NandboxClient {
 					GetChatOutMessage chatOutMessage = new GetChatOutMessage();
 					chatOutMessage.setChatId(chatId);
 					api.send(chatOutMessage);
-
 				}
 
 				@Override
@@ -675,6 +690,85 @@ public class NandboxClient {
 					banChatMemberOutMessage.setChatId(chatId);
 					banChatMemberOutMessage.setUserId(userId);
 					api.send(banChatMemberOutMessage);
+				}
+
+				@Override
+				public void addBlackList(String chatId, List<String> users) {
+
+					AddBlackListOutMessage addBlackListOutMessage = new AddBlackListOutMessage();
+					addBlackListOutMessage.setChatId(chatId);
+					addBlackListOutMessage.setUsers(users);
+
+					api.send(addBlackListOutMessage);
+				}
+
+				@Override
+				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers) {
+
+					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
+					
+					addWhiteistOutMessage.setChatId(chatId);
+					addWhiteistOutMessage.setWhiteListUser(whiteListUsers);
+					api.send(addWhiteistOutMessage);
+				}
+
+				@Override
+				public void deleteBlackList(String chatId, List<String> users) {
+
+					DeleteBlackListOutMessage deleteBlackListOutMessage = new DeleteBlackListOutMessage();
+					deleteBlackListOutMessage.setChatId(chatId);
+					deleteBlackListOutMessage.setUsers(users);
+
+					api.send(deleteBlackListOutMessage);
+				}
+
+				@Override
+				public void deleteWhiteList(String chatId, List<String> users) {
+
+					DeleteWhiteListOutMessage deleteWhiteListOutMessage = new DeleteWhiteListOutMessage();
+					deleteWhiteListOutMessage.setChatId(chatId);
+					deleteWhiteListOutMessage.setUsers(users);
+
+					api.send(deleteWhiteListOutMessage);
+				}
+
+				@Override
+				public void deleteBlackListPatterns(String chatId, List<String> pattern) {
+
+					DeleteBlackListPatternsOutMessage deleteBlackListPatterns = new DeleteBlackListPatternsOutMessage();
+					deleteBlackListPatterns.setChatId(chatId);
+					deleteBlackListPatterns.setPattern(pattern);
+
+					api.send(deleteBlackListPatterns);
+				}
+				
+				@Override
+				public void deleteWhiteListPatterns(String chatId, List<String> pattern) {
+
+					DeleteWhiteListPatternsOutMessage deleteWhiteListPatterns = new DeleteWhiteListPatternsOutMessage();
+					deleteWhiteListPatterns.setChatId(chatId);
+					deleteWhiteListPatterns.setPattern(pattern);
+
+					api.send(deleteWhiteListPatterns);
+				}
+
+				
+				@Override
+				public void addBlacklistPatterns(String chatId, List<Data> data) {
+
+					AddBlacklistPatternsOutMessage addBlacklistPatternsOutMessage = new AddBlacklistPatternsOutMessage();
+					addBlacklistPatternsOutMessage.setChatId(chatId);
+					addBlacklistPatternsOutMessage.setData(data);
+					api.send(addBlacklistPatternsOutMessage);
+				}
+				
+				@Override
+				public void addWhitelistPatterns(String chatId, List<Data> data) {
+
+					AddWhitelistPatternsOutMessage addWhitelistPatternsOutMessage = new AddWhitelistPatternsOutMessage();
+					addWhitelistPatternsOutMessage.setChatId(chatId);
+					addWhitelistPatternsOutMessage.setData(data);
+					api.send(addWhitelistPatternsOutMessage);
 				}
 
 				@Override
@@ -725,6 +819,20 @@ public class NandboxClient {
 				public void getMyProfiles() {
 					GetMyProfiles getMyProfiles = new GetMyProfiles();
 					api.send(getMyProfiles);
+				}
+
+				@Override
+				public void getBlackList(String chatId) {
+					GetBlackListOutMessage getBlackListOutMessage = new GetBlackListOutMessage();
+					getBlackListOutMessage.setChatId(chatId);
+					api.send(getBlackListOutMessage);
+				}
+
+				@Override
+				public void getWhiteList(String chatId) {
+					GetWhiteListOutMessage getWhiteListOutMessage = new GetWhiteListOutMessage();
+					getWhiteListOutMessage.setChatId(chatId);
+					api.send(getWhiteListOutMessage);
 				}
 
 				@Override
@@ -786,7 +894,7 @@ public class NandboxClient {
 				case "inlineSearch":
 					InlineSearch inlineSearch = new InlineSearch(obj);
 					callback.onInlineSearh(inlineSearch);
-					return;					
+					return;
 				case "messageAck":
 					MessageAck msgAck = new MessageAck(obj);
 					callback.onMessagAckCallback(msgAck);
@@ -826,6 +934,14 @@ public class NandboxClient {
 				case "userLeftBot":
 					user = new User((JSONObject) obj.get(KEY_USER));
 					callback.userLeftBot(user);
+					return;
+				case "blacklist":
+					BlackList blackList = new BlackList(obj);
+					callback.onBlackList(blackList);
+					return;
+				case "whitelist":
+					WhiteList whiteList = new WhiteList(obj);
+					callback.onWhiteList(whiteList);
 					return;
 				case "permanentUrl":
 					PermanentUrl permenantURL = new PermanentUrl(obj);
@@ -924,8 +1040,7 @@ public class NandboxClient {
 		this.uri = uri;
 	}
 
-	public static String getBotId()
-	{
+	public static String getBotId() {
 		return BOT_ID;
 	}
 }
