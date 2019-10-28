@@ -16,7 +16,7 @@ import net.minidev.json.JSONObject;
 public abstract class OutMessage {
 
 	public enum OutMessageMethod {
-		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,getBlacklist, getWhitelist,addBlacklist,addWhitelist, deleteBlacklist,  addBlacklistPatterns, deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist
+		sendMessage, sendPhoto, sendVideo, sendAudio, sendVoice, sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton, inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember, unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,getBlacklist, getWhitelist,addBlacklist,addWhitelist, deleteBlacklist,  addBlacklistPatterns, deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist,setAdminChatMenu,setAdminNavigationButton 
 
 	}
 

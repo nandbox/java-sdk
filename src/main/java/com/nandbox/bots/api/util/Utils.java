@@ -1,13 +1,18 @@
 package com.nandbox.bots.api.util;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.nandbox.bots.api.Nandbox.Api;
 import com.nandbox.bots.api.data.Button;
+import com.nandbox.bots.api.data.TagDefination;
+import com.nandbox.bots.api.outmessages.SetAdminNavigationButtonOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 
 /**
@@ -46,6 +51,18 @@ public class Utils {
 		Button fb = new Button();
 		fb.setNextMenu(nextMenu);
 		SetNavigationButtonOutMessage navMsg = new SetNavigationButtonOutMessage();
+		navMsg.setChatId(chatId);
+		navMsg.setNavigationButton(fb);
+
+		api.send(navMsg);
+
+	}
+	
+	public void setAdminNavigationButton(String chatId, String nextMenu, Api api) {
+
+		Button fb = new Button();
+		fb.setNextMenu(nextMenu);
+		SetAdminNavigationButtonOutMessage navMsg = new SetAdminNavigationButtonOutMessage();
 		navMsg.setChatId(chatId);
 		navMsg.setNavigationButton(fb);
 
@@ -102,5 +119,17 @@ public class Utils {
 	public static boolean isNotEmpty(String string) {
 		return !"".equals(string);
 	}
+	
+//	public static ArrayList<String> getTagsNames(Tag[] tagsDef, List<String> memberTags) {
+//		
+//		ArrayList<String> result = new ArrayList<String>();
+//		for (Iterator iterator = memberTags.iterator(); iterator.hasNext();) {
+//			String tagId = (String) iterator.next();
+//			
+//			result.add(e)
+//			
+//		}
+		
+//	}
 
 }
