@@ -2,6 +2,7 @@ package com.nandbox.bots.api.outmessages;
 
 import com.nandbox.bots.api.data.Button;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -13,38 +14,36 @@ import net.minidev.json.JSONObject;
  */
 public class SetNavigationButtonOutMessage extends OutMessage {
 
-	protected static final String KEY_NAVIGATION_BUTTON = "navigation_button";
+	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_buttons";
 
-	private Button navigationButton;
+	private Button[] navigationButtons;
 
-
-	
 	public SetNavigationButtonOutMessage() {
 		this.method = OutMessageMethod.setNavigationButton;
 	}
+
 	@Override
 	public JSONObject toJsonObject() {
+
 		JSONObject obj = super.toJsonObject();
-		if (navigationButton != null) {
-			obj.put(KEY_NAVIGATION_BUTTON, navigationButton.toJsonObject());
+		if (navigationButtons != null) {
+			JSONArray navBtnArrayObj = new JSONArray();
+			for (int i = 0; i < navigationButtons.length; i++) {
+				navBtnArrayObj.add(navigationButtons[i].toJsonObject());
+			}
+
+			obj.put(KEY_NAVIGATION_BUTTONS, navBtnArrayObj);
 		}
 		return obj;
 	}
 
-	/**
-	 * @return the navigationButton
-	 */
-
-	public Button getNavigationButton() {
-		return navigationButton;
+	public Button[] getNavigationButtons() {
+		return navigationButtons;
 	}
 
-	/**
-	 * @param navigationButton
-	 *            the navigationButton to set
-	 */
-	public void setNavigationButton(Button navigationButton) {
-		this.navigationButton = navigationButton;
+	public void setNavigationButtons(Button[] navigationButtons) {
+		this.navigationButtons = navigationButtons;
 	}
+
 
 }

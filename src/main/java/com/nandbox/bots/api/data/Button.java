@@ -1,4 +1,4 @@
- package com.nandbox.bots.api.data;
+package com.nandbox.bots.api.data;
 
 import net.minidev.json.JSONObject;
 
@@ -19,9 +19,10 @@ public class Button {
 	private static final String KEY_NEXT_MENU = "next_menu";
 	private static final String KEY_CHAT = "chat";
 	private static final String KEY_BUTTON_ICON = "button_icon";
-	private static final String KEY_BUTTON_ICON_BG_COLOR = "button_icon_bgcolor";	
+	private static final String KEY_BUTTON_ICON_BG_COLOR = "button_icon_bgcolor";
 	public static final String BUTTON_QUERY_LOCATION = "location";
 	public static final String BUTTON_QUERY_CONTACT = "contact";
+	public static final String KEY_BUTTON_NAV_TYPE = "nav_type";
 
 	private Integer buttonSpan;
 	private Integer buttonOrder;
@@ -34,7 +35,8 @@ public class Button {
 	private String nextMenu;
 	private String chat;
 	private String buttonIcon;
-	private String buttonIconBgColor;	
+	private String buttonIconBgColor;
+	private String navType;
 
 	public Button() {
 
@@ -43,7 +45,7 @@ public class Button {
 	public Button(String buttonLable) {
 		this.buttonLabel = buttonLable;
 	}
-	
+
 	/**
 	 * @param obj
 	 *            json object to be used to compose User object
@@ -60,7 +62,8 @@ public class Button {
 		this.nextMenu = (String) obj.get(KEY_NEXT_MENU);
 		this.chat = (String) obj.get(KEY_CHAT);
 		this.buttonIcon = (String) obj.get(KEY_BUTTON_ICON);
-		this.buttonIconBgColor = (String) obj.get(KEY_BUTTON_ICON_BG_COLOR);		
+		this.buttonIconBgColor = (String) obj.get(KEY_BUTTON_ICON_BG_COLOR);
+		this.navType = (String) obj.get(KEY_BUTTON_NAV_TYPE);
 
 	}
 
@@ -82,7 +85,7 @@ public class Button {
 		if (buttonTextColor != null)
 			obj.put(KEY_BUTTON_TEXT_COLOR, buttonTextColor);
 		if (buttonIcon != null)
-			obj.put(KEY_BUTTON_ICON , buttonIcon);
+			obj.put(KEY_BUTTON_ICON, buttonIcon);
 		if (buttonIconBgColor != null)
 			obj.put(KEY_BUTTON_ICON_BG_COLOR, buttonIconBgColor);
 		if (buttonQuery != null)
@@ -94,6 +97,10 @@ public class Button {
 
 		if (chat != null) {
 			obj.put(KEY_CHAT, chat);
+		}
+
+		if (navType != null) {
+			obj.put(KEY_BUTTON_NAV_TYPE, navType);
 		}
 
 		return obj;
@@ -258,7 +265,8 @@ public class Button {
 	}
 
 	/**
-	 * @param buttonIcon the buttonIcon to set
+	 * @param buttonIcon
+	 *            the buttonIcon to set
 	 */
 	public void setButtonIcon(String buttonIcon) {
 		this.buttonIcon = buttonIcon;
@@ -272,9 +280,18 @@ public class Button {
 	}
 
 	/**
-	 * @param buttonIconBgColor the buttonIconBgColor to set
+	 * @param buttonIconBgColor
+	 *            the buttonIconBgColor to set
 	 */
 	public void setButtonIconBgColor(String buttonIconBgColor) {
 		this.buttonIconBgColor = buttonIconBgColor;
+	}
+
+	public String getNavType() {
+		return navType;
+	}
+
+	public void setNavType(String navType) {
+		this.navType = navType;
 	}
 }
