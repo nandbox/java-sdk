@@ -1,8 +1,11 @@
 package com.nandbox.bots.api.inmessages;
 
-import com.nandbox.bots.api.util.Utils;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.util.Utils;
 
 import net.minidev.json.JSONObject;
 
@@ -21,13 +24,16 @@ public class ChatMember {
 	private static final String KEY_TYPE = "type";
 	private static final String KEY_MEMBER_SINCE = "member_since";
 	private static final String KEY_STATUS = "status";
+	private static final String KEY_TAGS = "tags";
 
 	private User user;
 	private Chat chat;
 	private String type;
 	private Long memberSince;
 	private String status;
+	private List<String> tags = new ArrayList<>();
 
+	@SuppressWarnings("unchecked")
 	public ChatMember(JSONObject jsonObj) {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_CHAT_MEMBER);
@@ -37,12 +43,20 @@ public class ChatMember {
 		this.type = (String) obj.get(KEY_TYPE);
 		this.memberSince = Utils.getLong(obj.get(KEY_MEMBER_SINCE));
 		this.status = (String) obj.get(KEY_STATUS);
+		this.tags = (ArrayList<String>) obj.get(KEY_TAGS);
+//		this.tags = (String) obj.get(KEY_TAGS);
+		
+
+
 
 	}
 
 	public JSONObject toJsonObject() {
 
 		JSONObject obj = new JSONObject();
+		if (tags != null) {
+			obj.put(KEY_TAGS, tags);
+		}
 
 		if (user != null) {
 			obj.put(KEY_USER, user.toJsonObject());
@@ -137,6 +151,14 @@ public class ChatMember {
 	 */
 	public void setChat(Chat chat) {
 		this.chat = chat;
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 
 }

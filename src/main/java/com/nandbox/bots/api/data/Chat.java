@@ -1,5 +1,6 @@
 package com.nandbox.bots.api.data;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -13,7 +14,7 @@ public class Chat {
 
 	private static final String KEY_ID = "id";
 	private static final String KEY_TITLE = "title";
-	private static final String KEY_NAME = "name";	
+	private static final String KEY_NAME = "name";
 	private static final String KEY_TYPE = "type";
 	private static final String KEY_VERSION = "version";
 	private static final String KEY_LANGUAGE_CODE = "language_code";
@@ -23,10 +24,11 @@ public class Chat {
 	private static final String KEY_CATEGORY = "category";
 	private static final String KEY_MEMBER_COUNT = "member_count";
 	private static final String KEY_INVITE_LINK = "invite_link";
+	private static final String KEY_TAGS_DEFINITION = "tagsDefinition";
 
 	private String id;
 	private String title;
-	private String name;	
+	private String name;
 	private String type;
 	private String version;
 	private Integer languageCode;
@@ -36,6 +38,7 @@ public class Chat {
 	private String category;
 	private Integer memberCount;
 	private String inviteLink;
+	private TagDefination[] tagsDefinition;
 
 	public Chat() {
 	}
@@ -44,16 +47,27 @@ public class Chat {
 
 		this.id = (String) obj.get(KEY_ID);
 		this.title = (String) obj.get(KEY_TITLE);
-		this.name = (String) obj.get(KEY_NAME);		
+		this.name = (String) obj.get(KEY_NAME);
 		this.type = (String) obj.get(KEY_TYPE);
 		this.version = (String) obj.get(KEY_VERSION);
 		this.languageCode = (Integer) obj.get(KEY_LANGUAGE_CODE);
 		this.regions = (String) obj.get(KEY_REGIONS);
 		this.description = (String) obj.get(KEY_DESCRIPTION);
-		this.category = (String)obj.get(KEY_CATEGORY);
+		this.category = (String) obj.get(KEY_CATEGORY);
 		this.memberCount = (Integer) obj.get(KEY_MEMBER_COUNT);
 		this.inviteLink = (String) obj.get(KEY_INVITE_LINK);
 
+		// this.tag = obj.get(KEY_TAGS_DEFINITION) != null
+		// ? new Tag((JSONObject) obj.get(KEY_TAGS_DEFINITION))
+		// : null;
+
+		JSONArray tagsArrayObj = (JSONArray) obj.get(KEY_TAGS_DEFINITION);
+		if (null !=tagsArrayObj) {
+			setTagsDefinition(new TagDefination[tagsArrayObj.size()]);
+			for (int i = 0; i < tagsArrayObj.size(); i++) {
+				getTagsDefinition()[i] = new TagDefination((JSONObject) tagsArrayObj.get(i));
+			}
+		}
 	}
 
 	public JSONObject toJsonObject() {
@@ -64,7 +78,7 @@ public class Chat {
 		if (title != null)
 			obj.put(KEY_TITLE, title);
 		if (getName() != null)
-			obj.put(KEY_NAME, getName());		
+			obj.put(KEY_NAME, getName());
 		if (type != null)
 			obj.put(KEY_TYPE, type);
 		if (version != null)
@@ -83,6 +97,15 @@ public class Chat {
 			obj.put(KEY_INVITE_LINK, inviteLink);
 		if (photo != null)
 			obj.put(KEY_PHOTO, photo);
+
+		// if (tag != null)
+		// obj.put(KEY_TAGS_DEFINITION, tag);
+
+		// JSONArray tagsArrayObj = new JSONArray();
+		// for (int i = 0; i < tag.length; i++) {
+		// tagsArrayObj.add(tag[i].toJsonObject());
+		// }
+		// obj.put(KEY_TAGS_DEFINITION, tagsArrayObj);
 
 		return obj;
 
@@ -261,10 +284,27 @@ public class Chat {
 	}
 
 	/**
-	 * @param name user or bot name to set
+	 * @param name
+	 *            user or bot name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public TagDefination[] getTagsDefinition() {
+		return tagsDefinition;
+	}
+
+	public void setTagsDefinition(TagDefination[] tagsDefinition) {
+		this.tagsDefinition = tagsDefinition;
+	}
+
+	// public Tag getTag() {
+	// return tag;
+	// }
+	//
+	// public void setTag(Tag tag) {
+	// this.tag = tag;
+	// }
 
 }

@@ -12,6 +12,7 @@ import com.nandbox.bots.api.data.Gif;
 import com.nandbox.bots.api.data.Location;
 import com.nandbox.bots.api.data.Photo;
 import com.nandbox.bots.api.data.Sticker;
+import com.nandbox.bots.api.data.TagDefination;
 import com.nandbox.bots.api.data.TextFile;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.data.Video;
@@ -63,6 +64,7 @@ public class IncomingMessage {
 	protected static final String WHITELIST_USER = "users";
 	private static final String KEY_ARTICLE = "article";
 	private static final String KEY_URL = "url";
+//	private static final String KEY_TAG= "tagsDefinition";
 
 	private String messageId;
 	private String type;
@@ -91,6 +93,8 @@ public class IncomingMessage {
 	private Article article;
 	private String url;
 	private WhiteListUser whitelistUser;
+	private TagDefination tag;
+	
 	
 	
 	public IncomingMessage(JSONObject jsonObj) {
@@ -129,6 +133,7 @@ public class IncomingMessage {
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
 		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null : new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
+//		this.tag = obj.get(KEY_TAG) != null ? new Tag((JSONObject) obj.get(KEY_TAG)) : null;
 
 
 	}
@@ -233,6 +238,10 @@ public class IncomingMessage {
 			obj.put(WHITELIST_USER, whitelistUser);
 		}
 
+		
+//		if (tag != null) {
+//			obj.put(KEY_TAG, tag);
+//		}
 		System.out.println("to " + obj.toJSONString());
 		return obj;
 
@@ -680,5 +689,13 @@ public class IncomingMessage {
 
 	public void setWhitelistUser(WhiteListUser whitelistUser) {
 		this.whitelistUser = whitelistUser;
+	}
+
+	public TagDefination getTag() {
+		return tag;
+	}
+
+	public void setTag(TagDefination tag) {
+		this.tag = tag;
 	}
 }
