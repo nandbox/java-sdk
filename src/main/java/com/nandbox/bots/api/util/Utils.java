@@ -41,7 +41,7 @@ public class Utils {
 		return durationInMinsAndSeconds;
 	}
 
-	public void setNavigationButton(String chatId, String nextMenu, Api api) {
+	public static void setNavigationButton(String chatId, String nextMenu, Api api) {
 
 		Button navigationButton = new Button();
 		navigationButton.setNextMenu(nextMenu);
@@ -54,7 +54,7 @@ public class Utils {
 
 	}
 
-	public void setAdminNavigationButton(String chatId, String nextMenu, Api api) {
+	public static void setAdminNavigationButton(String chatId, String nextMenu, Api api) {
 
 		Button adminNavigationButton = new Button();
 		adminNavigationButton.setNextMenu(nextMenu);
