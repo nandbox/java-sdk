@@ -144,8 +144,7 @@ public class TestTextMessage {
 
 					String chatId = incomingMsg.getChat().getId();
 
-					Utils utility = new Utils();
-					utility.setNavigationButton(chatId, "mainMenu", api);
+					Utils.setNavigationButton(chatId, "mainMenu", api);
 
 					Button menuBtn1 = createButton("Main", "mainCB", 1, "Gray", "Red", null, null);
 					Button menuBtn2 = createButton("Funny", "funnyCB", 1, "Gray", "Red", null,

@@ -318,8 +318,7 @@ public class MultipleTests {
 
 							String chatId = incomingMsg.getChat().getId();
 
-							Utils utility = new Utils();
-							utility.setNavigationButton(chatId, "mainMenu", api);
+							Utils.setNavigationButton(chatId, "mainMenu", api);
 
 							Button menuBtn1 = createButton("مصراوي", "mainCB", 1, "Gray", "Red", null, null);
 							menuBtn1.setButtonIcon("ic_smoke_free_24dp");

@@ -114,8 +114,6 @@ public class NandboxClient {
 		private static final int NO_OF_RETRIES_IF_CONN_TIMEDOUT = 10;
 		private static final int NO_OF_RETRIES_IF_CONN_CLOSED = 10;
 		private static final String KEY_USER = "user";
-		private static final String KEY_BLACKLIST = "blacklist";
-		private static final String KEY_WHITELIST = "whitelist";
 		private static final String KEY_CHAT = "chat";
 		private static final String KEY_NAME = "name";
 		private static final String KEY_ID = "ID";
