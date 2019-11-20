@@ -25,6 +25,8 @@ public class ChatMember {
 	private static final String KEY_MEMBER_SINCE = "member_since";
 	private static final String KEY_STATUS = "status";
 	private static final String KEY_TAGS = "tags";
+	private static final String KEY_ACCOUNT_TYPE = "account_type";
+	private static final String KEY_MSISDN = "msisdn";
 
 	private User user;
 	private Chat chat;
@@ -32,7 +34,9 @@ public class ChatMember {
 	private Long memberSince;
 	private String status;
 	private List<String> tags = new ArrayList<>();
-
+	private String accountType;
+	private String msisdn;
+	
 	@SuppressWarnings("unchecked")
 	public ChatMember(JSONObject jsonObj) {
 
@@ -44,6 +48,8 @@ public class ChatMember {
 		this.memberSince = Utils.getLong(obj.get(KEY_MEMBER_SINCE));
 		this.status = (String) obj.get(KEY_STATUS);
 		this.tags = (ArrayList<String>) obj.get(KEY_TAGS);
+		this.accountType = (String) obj.get(KEY_ACCOUNT_TYPE);
+		this.msisdn = (String) obj.get(KEY_MSISDN);
 //		this.tags = (String) obj.get(KEY_TAGS);
 		
 
@@ -74,6 +80,13 @@ public class ChatMember {
 			obj.put(KEY_STATUS, status);
 		}
 
+		if (accountType != null) {
+			obj.put(KEY_ACCOUNT_TYPE, accountType);
+		}
+		
+		if (msisdn != null) {
+			obj.put(KEY_MSISDN, msisdn);
+		}
 		return obj;
 
 	}
@@ -159,6 +172,22 @@ public class ChatMember {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getMsisdn() {
+		return msisdn;
+	}
+
+	public void setMsisdn(String msisdn) {
+		this.msisdn = msisdn;
 	}
 
 }
