@@ -244,6 +244,12 @@ public class SendWebLinksBot {
 				
 			}
 
+			@Override
+			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
+				// TODO Auto-generated method stub
+				
+			}
+
 		});
 
 	}

@@ -143,6 +143,11 @@ public class EchoTextMessage {
 				
 			}
 
+			@Override
+			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
+				
+			}
+
 
 		});
 	}

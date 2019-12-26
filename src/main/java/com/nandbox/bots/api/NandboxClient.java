@@ -881,6 +881,10 @@ public class NandboxClient {
 					IncomingMessage incomingMsg = new IncomingMessage(obj);
 					callback.onReceive(incomingMsg);
 					return;
+				case "scheduledMessage":
+					IncomingMessage incomingScheduleMsg = new IncomingMessage(obj);
+					callback.onScheduleMessage(incomingScheduleMsg);
+					return;
 				case "chatMenuCallback":
 					ChatMenuCallback chatMenuCallback = new ChatMenuCallback(obj);
 					callback.onChatMenuCallBack(chatMenuCallback);

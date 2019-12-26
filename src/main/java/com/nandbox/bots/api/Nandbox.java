@@ -203,6 +203,15 @@ public final class Nandbox {
 		public void onBlackList(BlackList blackList);
 		
 		public void onWhiteList(WhiteList whiteList);
+		
+		/**
+		 * This event should be used to handle incoming schedule message from server
+		 * 
+		 * @param incomingScheduleMsg
+		 *           incoming Schedule message from server
+		 */
+
+		public void onScheduleMessage(IncomingMessage incomingScheduleMsg);
 
 
 	}

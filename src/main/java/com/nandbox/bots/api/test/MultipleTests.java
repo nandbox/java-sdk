@@ -53,7 +53,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783845360162:0:P1SQvGAKqp3Ka2vxOvBInVRE5hqVAR";
+	public static final String TOKEN = "<PUT your token here >";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -88,6 +88,8 @@ public class MultipleTests {
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
+				
+
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
@@ -876,6 +878,14 @@ public class MultipleTests {
 				System.out.println("getEop()=" + whiteList.getEop());
 				System.out.println("getChat().getId()=" + whiteList.getChat().getId());
 
+			}
+
+			@Override
+			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
+
+				System.out.println("incomingScheduleMsg.getChat().getId()=" + incomingScheduleMsg.getChat().getId());
+
+				System.out.println("incomingScheduleMsg.getScheduleDate()=" + incomingScheduleMsg.getScheduleDate());
 			}
 
 		});

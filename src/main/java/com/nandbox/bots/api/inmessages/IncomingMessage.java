@@ -64,7 +64,8 @@ public class IncomingMessage {
 	protected static final String WHITELIST_USER = "users";
 	private static final String KEY_ARTICLE = "article";
 	private static final String KEY_URL = "url";
-//	private static final String KEY_TAG= "tagsDefinition";
+	private static final String KEY_SCHEDULE_DATE = "schedule_date";
+	// private static final String KEY_TAG= "tagsDefinition";
 
 	private String messageId;
 	private String type;
@@ -94,9 +95,8 @@ public class IncomingMessage {
 	private String url;
 	private WhiteListUser whitelistUser;
 	private TagDefination tag;
-	
-	
-	
+	private Long scheduleDate;
+
 	public IncomingMessage(JSONObject jsonObj) {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_MESSAGE);
@@ -132,9 +132,13 @@ public class IncomingMessage {
 		this.status = (String) obj.get(KEY_STATUS);
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
-		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null : new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
-//		this.tag = obj.get(KEY_TAG) != null ? new Tag((JSONObject) obj.get(KEY_TAG)) : null;
-
+		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null
+				: new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
+		// this.tag = obj.get(KEY_TAG) != null ? new Tag((JSONObject) obj.get(KEY_TAG))
+		// : null;
+		this.scheduleDate = obj.get(KEY_SCHEDULE_DATE) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_SCHEDULE_DATE)))
+				: null;
 
 	}
 
@@ -179,7 +183,7 @@ public class IncomingMessage {
 
 		if (url != null)
 			obj.put(KEY_URL, url);
-		
+
 		if (replyToMessageId != null)
 			obj.put(KEY_REPLAY_TO_MESSAGE_ID, replyToMessageId);
 
@@ -233,15 +237,17 @@ public class IncomingMessage {
 		if (bgColor != null) {
 			obj.put(KEY_BG_COLOR, bgColor);
 		}
-		
+
 		if (whitelistUser != null) {
 			obj.put(WHITELIST_USER, whitelistUser);
 		}
+		if (scheduleDate != null) {
+			obj.put(KEY_SCHEDULE_DATE, scheduleDate);
+		}
 
-		
-//		if (tag != null) {
-//			obj.put(KEY_TAG, tag);
-//		}
+		// if (tag != null) {
+		// obj.put(KEY_TAG, tag);
+		// }
 		System.out.println("to " + obj.toJSONString());
 		return obj;
 
@@ -609,8 +615,6 @@ public class IncomingMessage {
 		this.article = article;
 	}
 
-
-
 	public boolean isVideoMsg() {
 		return isMsgWithType(MessageType.video);
 	}
@@ -698,4 +702,13 @@ public class IncomingMessage {
 	public void setTag(TagDefination tag) {
 		this.tag = tag;
 	}
+
+	public Long getScheduleDate() {
+		return scheduleDate;
+	}
+
+	public void setScheduleDate(Long scheduleDate) {
+		this.scheduleDate = scheduleDate;
+	}
+
 }

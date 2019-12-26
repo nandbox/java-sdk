@@ -44,7 +44,7 @@ import net.minidev.json.JSONObject;
  *
  */
 public class TestTextMessage {
-	public static final String TOKEN = "90091784679223920:0:y5blRYSsqarBU2nl3o7WuBdd8XGCIX";
+	public static final String TOKEN = "<PUT your token here >";
 
 	private static HashMap<Long, OutMessage> outMsgsListener = new HashMap<>();
 
@@ -78,36 +78,38 @@ public class TestTextMessage {
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
 
-				System.err.println(
-						"=========>> " + incomingMsg.getType() + " Message Received =========>>");
+				
+				if (incomingMsg.getText().equalsIgnoreCase("sd")) {
+					TextOutMessage textOutMessage = new TextOutMessage();
+					textOutMessage.setText("test Schedule Date Message");
+					textOutMessage.setReference(Utils.getUniqueId());
+					textOutMessage.setChatId(incomingMsg.getChat().getId());
+					textOutMessage.setScheduleDate(System.currentTimeMillis()+60000);
+					api.send(textOutMessage);
+				}
+			
+				
+				
+				System.err.println("=========>> " + incomingMsg.getType() + " Message Received =========>>");
 				System.out.println("incomingMsg.getMessageId() : " + incomingMsg.getMessageId());
 				System.out.println("incomingMsg.getDate() : " + incomingMsg.getDate());
 				System.out.println("incomingMsg.getReference() : " + incomingMsg.getReference());
 				System.out.println("incomingMsg.getCaption(): " + incomingMsg.getCaption());
 
 				if (incomingMsg.getSentTo() != null) {
-					System.out.println(
-							"incomingMsg.getSentTo().getId() : " + incomingMsg.getSentTo().getId());
+					System.out.println("incomingMsg.getSentTo().getId() : " + incomingMsg.getSentTo().getId());
 				}
 				System.out.println("================start of Chat Object ===================");
-				System.out.println(
-						"incomingMsg.getChat().getId() : " + incomingMsg.getChat().getId());
-				System.out.println(
-						"incomingMsg.getChat().getTitle() :" + incomingMsg.getChat().getTitle());
-				System.out.println(
-						"incomingMsg.getChat().getName() :" + incomingMsg.getChat().getName());				
-				System.out.println(
-						"incomingMsg.getChat().getType() :" + incomingMsg.getChat().getType());
+				System.out.println("incomingMsg.getChat().getId() : " + incomingMsg.getChat().getId());
+				System.out.println("incomingMsg.getChat().getTitle() :" + incomingMsg.getChat().getTitle());
+				System.out.println("incomingMsg.getChat().getName() :" + incomingMsg.getChat().getName());
+				System.out.println("incomingMsg.getChat().getType() :" + incomingMsg.getChat().getType());
 				System.out.println("================End of Chat Object ===================");
 				System.out.println("================Start of From User Object ===================");
-				System.out.println(
-						"incomingMsg.getFrom().getId() : " + incomingMsg.getFrom().getId());
-				System.out.println(
-						"incomingMsg.getFrom().getName() : " + incomingMsg.getFrom().getName());
-				System.out.println("incomingMsg.getFrom().getTerminal(): "
-						+ incomingMsg.getFrom().getTerminal());
-				System.out.println("incomingMsg.getFrom().getVersion() : "
-						+ incomingMsg.getFrom().getVersion());
+				System.out.println("incomingMsg.getFrom().getId() : " + incomingMsg.getFrom().getId());
+				System.out.println("incomingMsg.getFrom().getName() : " + incomingMsg.getFrom().getName());
+				System.out.println("incomingMsg.getFrom().getTerminal(): " + incomingMsg.getFrom().getTerminal());
+				System.out.println("incomingMsg.getFrom().getVersion() : " + incomingMsg.getFrom().getVersion());
 				System.out.println("================End of From User Object ===================");
 
 				// Incoming Text Message
@@ -122,7 +124,7 @@ public class TestTextMessage {
 				// api.sendText(incomingMsg.getChat().getId(), "replay", reference,
 				// incomingMsg.getMessageId(), null, null, null);
 				// }
-				//api.sendText(incomingMsg.getChat().getId(), "Hello Worldz");
+				// api.sendText(incomingMsg.getChat().getId(), "Hello Worldz");
 				// Long reference = getUniqueId();
 
 				// api.sendText("90090684265384780", "faar", reference, null,
@@ -147,10 +149,8 @@ public class TestTextMessage {
 					Utils.setNavigationButton(chatId, "mainMenu", api);
 
 					Button menuBtn1 = createButton("Main", "mainCB", 1, "Gray", "Red", null, null);
-					Button menuBtn2 = createButton("Funny", "funnyCB", 1, "Gray", "Red", null,
-							null);
-					Button menuBtn3 = createButton("Option", "optionCB", 1, "Gray", "Red", null,
-							null);
+					Button menuBtn2 = createButton("Funny", "funnyCB", 1, "Gray", "Red", null, null);
+					Button menuBtn3 = createButton("Option", "optionCB", 1, "Gray", "Red", null, null);
 
 					SetChatMenuOutMessage outmsg = new SetChatMenuOutMessage();
 
@@ -178,8 +178,8 @@ public class TestTextMessage {
 
 					outmsg.setEcho(1);
 					String menuRef = MAIN_MENU_001;
-					Button oneBtn = createButton("Send me your location", "oneBtnCB", 1,
-							"#A5B8BC", "yellow", Button.BUTTON_QUERY_LOCATION, null);
+					Button oneBtn = createButton("Send me your location", "oneBtnCB", 1, "#A5B8BC", "yellow",
+							Button.BUTTON_QUERY_LOCATION, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -193,8 +193,8 @@ public class TestTextMessage {
 					outMsgsListener.put(reference, outmsg);
 					api.send(outmsg);
 
-				} 
-				
+				}
+
 				else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
 
 					TextOutMessage outmsg = new TextOutMessage();
@@ -206,8 +206,8 @@ public class TestTextMessage {
 
 					outmsg.setEcho(1);
 					String menuRef = MAIN_MENU_001;
-					Button oneBtn = createButton("Visit a Milestone", "oneBtnCBInWebView", 1,
-							"RED", "White", null, null);
+					Button oneBtn = createButton("Visit a Milestone", "oneBtnCBInWebView", 1, "RED", "White", null,
+							null);
 					oneBtn.setButtonURL("https://edition.cnn.com/");
 
 					Row firstRow = new Row();
@@ -222,8 +222,7 @@ public class TestTextMessage {
 					outMsgsListener.put(reference, outmsg);
 					api.send(outmsg);
 
-				}
-				else if ("2b".equalsIgnoreCase(incomingMsg.getText())) {
+				} else if ("2b".equalsIgnoreCase(incomingMsg.getText())) {
 					TextOutMessage outmsg = new TextOutMessage();
 					Long reference = getUniqueId();
 					outmsg.setChatId(incomingMsg.getChat().getId());
@@ -231,10 +230,10 @@ public class TestTextMessage {
 					outmsg.setText(incomingMsg.getText());
 
 					String menuRef = "MAIN_MENU_001";
-					Button btnOne = createButton("Please Send me your location now ", "RequestLocation",
-							1, "RED", "White", Button.BUTTON_QUERY_LOCATION, null);
-					Button btnTwo = createButton("Send me your Contact", "RequestContact", 2,
-							"RED", "White", Button.BUTTON_QUERY_CONTACT, null);
+					Button btnOne = createButton("Please Send me your location now ", "RequestLocation", 1, "RED",
+							"White", Button.BUTTON_QUERY_LOCATION, null);
+					Button btnTwo = createButton("Send me your Contact", "RequestContact", 2, "RED", "White",
+							Button.BUTTON_QUERY_CONTACT, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -247,7 +246,7 @@ public class TestTextMessage {
 					outMsgsListener.put(reference, outmsg);
 					api.send(outmsg);
 				}
-				
+
 				else if ("2bc".equalsIgnoreCase(incomingMsg.getText())) {
 					TextOutMessage outmsg = new TextOutMessage();
 					Long reference = getUniqueId();
@@ -257,10 +256,10 @@ public class TestTextMessage {
 					outmsg.setWebPagePreview(WEB_PREVIEW_INSTANCE_VIEW);
 
 					String menuRef = "MAIN_MENU_001";
-					Button btnOne = createButton("Send me your location", "RequestLocation",
-							1, "RED", "White", Button.BUTTON_QUERY_LOCATION, null);
-					Button btnTwo = createButton("Send me your Contact", "RequestContact", 2,
-							"RED", "White", Button.BUTTON_QUERY_CONTACT, null);
+					Button btnOne = createButton("Send me your location", "RequestLocation", 1, "RED", "White",
+							Button.BUTTON_QUERY_LOCATION, null);
+					Button btnTwo = createButton("Send me your Contact", "RequestContact", 2, "RED", "White",
+							Button.BUTTON_QUERY_CONTACT, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -283,12 +282,9 @@ public class TestTextMessage {
 
 					outmsg.setEcho(1);
 					String menuRef = "MAIN_MENU_001";
-					Button btn1 = createButton("Naruto", "NarutoCB", 1, "#A5B8BC", "white", null,
-							null);
-					Button btn2 = createButton("Sasuke", "SasukeCB", 2, "#A5B8BC", "white", null,
-							null);
-					Button btn3 = createButton("Sakura", "SakuraCB", 2, "#A5B8BC", "white", null,
-							null);
+					Button btn1 = createButton("Naruto", "NarutoCB", 1, "#A5B8BC", "white", null, null);
+					Button btn2 = createButton("Sasuke", "SasukeCB", 2, "#A5B8BC", "white", null, null);
+					Button btn3 = createButton("Sakura", "SakuraCB", 2, "#A5B8BC", "white", null, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -338,12 +334,11 @@ public class TestTextMessage {
 					outmsg.setChatId(incomingMsg.getChat().getId());
 					outmsg.setReference(reference);
 					outmsg.setCaption("Old Caption");
-					String uploadedPhotoId = MediaTransfer.uploadFile(TOKEN,
-							"./upload/welcome.jpg");
+					String uploadedPhotoId = MediaTransfer.uploadFile(TOKEN, "./upload/welcome.jpg");
 					outmsg.setPhoto(uploadedPhotoId);
 					String menuRef = "MAIN_MENU_001";
-					Button editCaptionBtn = createButton("Edit Caption", "editCaptionCB", 1,
-							"#A5B8BC", "white", null, null);
+					Button editCaptionBtn = createButton("Edit Caption", "editCaptionCB", 1, "#A5B8BC", "white", null,
+							null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -364,8 +359,8 @@ public class TestTextMessage {
 					outmsg.setReference(reference);
 					outmsg.setText("Old Text");
 					String menuRef = "MAIN_MENU_001";
-					Button editCaptionBtn = createButton("Edit Text", "editTextChatCB", 1,
-							"#A5B8BC", "white", null, null);
+					Button editCaptionBtn = createButton("Edit Text", "editTextChatCB", 1, "#A5B8BC", "white", null,
+							null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -385,8 +380,7 @@ public class TestTextMessage {
 					outmsg.setReference(reference);
 					outmsg.setText("Old Text");
 					String menuRef = "MAIN_MENU_001";
-					Button editCaptionBtn = createButton("Edit Text", "editTextCB", 1, "#A5B8BC",
-							"white", null, null);
+					Button editCaptionBtn = createButton("Edit Text", "editTextCB", 1, "#A5B8BC", "white", null, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -405,12 +399,11 @@ public class TestTextMessage {
 					outmsg.setChatId(incomingMsg.getChat().getId());
 					outmsg.setReference(reference);
 					outmsg.setCaption("Old Caption");
-					String uploadedPhotoId = MediaTransfer.uploadFile(TOKEN,
-							"./upload/welcome.jpg");
+					String uploadedPhotoId = MediaTransfer.uploadFile(TOKEN, "./upload/welcome.jpg");
 					outmsg.setPhoto(uploadedPhotoId);
 					String menuRef = "MAIN_MENU_001";
-					Button editCaptionBtn = createButton("Edit Caption", "editCaptionChatCB", 1,
-							"#A5B8BC", "white", null, null);
+					Button editCaptionBtn = createButton("Edit Caption", "editCaptionChatCB", 1, "#A5B8BC", "white",
+							null, null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -432,8 +425,8 @@ public class TestTextMessage {
 					outmsg.setReference(reference);
 					outmsg.setText("Old Text");
 					String menuRef = "MAIN_MENU_001";
-					Button editCaptionBtn = createButton("Edit Text", "editTextChatCBboth", 1,
-							"#A5B8BC", "white", null, null);
+					Button editCaptionBtn = createButton("Edit Text", "editTextChatCBboth", 1, "#A5B8BC", "white", null,
+							null);
 
 					Row firstRow = new Row();
 					firstRow.setRowOrder(1);
@@ -453,8 +446,7 @@ public class TestTextMessage {
 					inlineSearchAnswer.setSearchId(1);
 
 					Result results2 = new Result();
-					results2.setId(
-							"d2ba4e79f2e240d145e8be48f1ef98ece2f283193bce80f1b7ddbd0e8daae23a.gif");
+					results2.setId("d2ba4e79f2e240d145e8be48f1ef98ece2f283193bce80f1b7ddbd0e8daae23a.gif");
 
 					results2.setCaption("test GIF caption");
 					results2.setDescription("Test GIF desc");
@@ -473,23 +465,20 @@ public class TestTextMessage {
 					inlineSearchAnswer.setSearchId(1);
 
 					Result results = new Result();
-					results.setId(
-							"8b6229eefde75174b6cb5474b38e7f2f55a280a17ccc1f18a3ed6f5416890070.mp4");
+					results.setId("8b6229eefde75174b6cb5474b38e7f2f55a280a17ccc1f18a3ed6f5416890070.mp4");
 					results.setCaption("test Video caption");
 					results.setDescription("Test Video desc");
 					results.setTitle("Test Video title");
 
 					Result results2 = new Result();
-					results2.setId(
-							"d2ba4e79f2e240d145e8be48f1ef98ece2f283193bce80f1b7ddbd0e8daae23a.gif");
+					results2.setId("d2ba4e79f2e240d145e8be48f1ef98ece2f283193bce80f1b7ddbd0e8daae23a.gif");
 
 					results2.setCaption("test GIF caption");
 					results2.setDescription("Test GIF desc");
 					results2.setTitle("Test GIF title");
 
 					Result results3 = new Result();
-					results3.setId(
-							"4bdb5b65838706092cff9de33694641aa0b7a02899b0884d07df2f58374bf40d.jpg");
+					results3.setId("4bdb5b65838706092cff9de33694641aa0b7a02899b0884d07df2f58374bf40d.jpg");
 					results3.setCaption("test Photo caption");
 					results3.setDescription("Test Photo desc");
 					results3.setTitle("Test Photo title");
@@ -559,34 +548,28 @@ public class TestTextMessage {
 					user.setProfile("other");
 					user.setStatus("I am set My profile Bot 2 ");
 					Photo photo = new Photo();
-					photo.setId(
-							"e801b7277dbd921376f26b13aeadf0ee4b49950a66641f2761863a823e035845.jpg");
+					photo.setId("e801b7277dbd921376f26b13aeadf0ee4b49950a66641f2761863a823e035845.jpg");
 
 					api.setMyProifle(user);
 
-				}
-				else if ("linkPreview".equalsIgnoreCase(incomingMsg.getText())) {
+				} else if ("linkPreview".equalsIgnoreCase(incomingMsg.getText())) {
 					try {
 						Thread.sleep(5000L);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					api.sendText(incomingMsg.getChat().getId(), "Link without prview http://www.nandbox.com",getUniqueId(),null,null,WEB_PREVIEW_DISABLE,true,null,null);
-					api.sendText(incomingMsg.getChat().getId(), "Link with prview http://www.nandbox.com",getUniqueId(),null,null,null,true,null,null);					
-				}
-				else if ("getChatAdmins".equalsIgnoreCase(incomingMsg.getText()))
-						{
-							api.getChatAdministrators(incomingMsg.getChat().getId());
-						}
-				else if ("getMyProfile".equalsIgnoreCase(incomingMsg.getText()))
-				{
+					api.sendText(incomingMsg.getChat().getId(), "Link without prview http://www.nandbox.com",
+							getUniqueId(), null, null, WEB_PREVIEW_DISABLE, true, null, null);
+					api.sendText(incomingMsg.getChat().getId(), "Link with prview http://www.nandbox.com",
+							getUniqueId(), null, null, null, true, null, null);
+				} else if ("getChatAdmins".equalsIgnoreCase(incomingMsg.getText())) {
+					api.getChatAdministrators(incomingMsg.getChat().getId());
+				} else if ("getMyProfile".equalsIgnoreCase(incomingMsg.getText())) {
 					api.getMyProfiles();
 				}
-				
-				
+
 			}
-			
 
 			private ArrayList<Menu> createOtherMenus() {
 				ArrayList<Menu> otherMenus = new ArrayList<>();
@@ -594,10 +577,9 @@ public class TestTextMessage {
 				answerA.setMenuRef("AnswerA");
 				Row aAnswerRow = new Row();
 				Row backRow = new Row();
-				Button youAnsweredABtn = createButton("You answered A", "AnsweredAMessage", 1,
-						"#A5B8BC", "white", null, null);
-				Button backBtn = createButton("Back", "AnsweredAMessage", 1, "#A5B8BC", "white",
-						null, "Question1");
+				Button youAnsweredABtn = createButton("You answered A", "AnsweredAMessage", 1, "#A5B8BC", "white", null,
+						null);
+				Button backBtn = createButton("Back", "AnsweredAMessage", 1, "#A5B8BC", "white", null, "Question1");
 				aAnswerRow.setButtons(new Button[] { youAnsweredABtn });
 				backRow.setButtons(new Button[] { backBtn });
 				answerA.setRows(new Row[] { aAnswerRow, backRow });
@@ -605,8 +587,8 @@ public class TestTextMessage {
 				return otherMenus;
 			}
 
-			private Button createButton(String label, String callback, int order, String bgColor,
-					String txtColor, String buttonQuery, String nextMenuRef) {
+			private Button createButton(String label, String callback, int order, String bgColor, String txtColor,
+					String buttonQuery, String nextMenuRef) {
 				Button btn = new Button();
 				btn.setButtonLabel(label);
 				btn.setButtonOrder(order);
@@ -664,8 +646,8 @@ public class TestTextMessage {
 				OutMessage removedOutMsg = outMsgsListener.remove(Long.valueOf(reference));
 				System.out.println("***** Ack for Message with Reference : " + reference);
 				if (removedOutMsg != null) {
-					System.out.println("***** Removed Out Message from Resource Listener : "
-							+ removedOutMsg.toJsonObject());
+					System.out.println(
+							"***** Removed Out Message from Resource Listener : " + removedOutMsg.toJsonObject());
 				}
 
 			}
@@ -686,8 +668,7 @@ public class TestTextMessage {
 				}
 
 				if (chatMenuCallback.getButtonCallback().equals("funnyCB")) {
-					api.sendText(chatId,
-							"Why are frogs always so happy? They eat what ever bugs them");
+					api.sendText(chatId, "Why are frogs always so happy? They eat what ever bugs them");
 				}
 
 			}
@@ -765,26 +746,29 @@ public class TestTextMessage {
 
 			@Override
 			public void onChatDetails(Chat chat) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onInlineSearh(InlineSearch inlineSearch) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onBlackList(BlackList blackList) {
-				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onWhiteList(WhiteList blackList) {
-				// TODO Auto-generated method stub
-				
+
+			}
+
+			@Override
+			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
+				System.out.println("incomingScheduleMsg.getChat().getId()=" + incomingScheduleMsg.getChat().getId());
+
+				System.out.println("incomingScheduleMsg.getScheduleDate()=" + incomingScheduleMsg.getScheduleDate());
 			}
 		});
 
