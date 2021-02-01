@@ -1,6 +1,12 @@
 package com.nandbox.bots.api.outmessages;
 import net.minidev.json.JSONObject;
 
+/**
+ * This class represents Output Message used to cancel a scheduled message .
+ * 
+ * @author Omar Abdellatif
+ *
+ */
 
 public class CancelScheduledOutMessage extends OutMessage {
 	
