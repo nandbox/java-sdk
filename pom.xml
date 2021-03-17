@@ -7,7 +7,7 @@
 
 	<groupId>com.nandbox.bots.api</groupId>
 	<artifactId>bots-api</artifactId>
-	<version>1.1.4</version>
+	<version>1.1.5</version>
 
 	<name>nandboxbots-api</name>
 	<url>https://botapi.nandbox.com</url>
@@ -95,6 +95,11 @@
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-client</artifactId>
 			<version>9.3.18.v20170406</version>
+		</dependency>
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
 		</dependency>
 	</dependencies>
 

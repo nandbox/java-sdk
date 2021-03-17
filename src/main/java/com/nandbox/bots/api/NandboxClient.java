@@ -16,6 +16,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -94,6 +99,10 @@ public class NandboxClient {
 	private URI uri;
 	static final String KEY_METHOD = "method";
 	static final String KEY_ERROR = "error";
+	public static final Logger log = Logger.getLogger(NandboxClient.class);
+	Logger rootLogger = Logger.getRootLogger();
+	
+	
 
 	public static Properties getConfigs() {
 		Properties configs = new Properties();
@@ -108,6 +117,9 @@ public class NandboxClient {
 		return configs;
 	}
 
+	
+	
+	
 	@WebSocket(maxTextMessageSize = 100000)
 	public class InternalWebSocket {
 		private static final int NO_OF_RETRIES_IF_CONN_TO_SERVER_REFUSED = 20;
@@ -1009,6 +1021,7 @@ public class NandboxClient {
 
 	private NandboxClient() throws Exception {
 		setUri(new URI(getConfigs().getProperty("URI")));
+		setLogger(getConfigs().getProperty("MaxLogSize"),getConfigs().getProperty("NumberOfLogFiles"),getConfigs().getProperty("LogLevel"),getConfigs().getProperty("LogPath"));
 		webSocketClient = new WebSocketClient(new SslContextFactory());
 		webSocketClient.start();
 
@@ -1023,6 +1036,7 @@ public class NandboxClient {
 	public static NandboxClient get() throws Exception {
 		if (nandboxClient == null)
 			init();
+			
 		return nandboxClient;
 	}
 
@@ -1045,4 +1059,36 @@ public class NandboxClient {
 	public static String getBotId() {
 		return BOT_ID;
 	}
+	
+	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
+	{
+		if(level.equals("Debug"))
+		{
+			this.rootLogger.setLevel(Level.DEBUG);
+		}
+		else if(level.equals("Info"))
+		{
+			this.rootLogger.setLevel(Level.INFO);
+		}
+		else if(level.equals("Warn"))
+		{
+			this.rootLogger.setLevel(Level.WARN);
+		}
+		else if(level.equals("Error"))
+		{
+			this.rootLogger.setLevel(Level.ERROR);
+		}
+		else if(level.equals("Fatal"))
+		{
+			this.rootLogger.setLevel(Level.FATAL);
+		}
+		
+		PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n");
+		RollingFileAppender fileAppender = new RollingFileAppender(layout,path);
+		fileAppender.setMaxBackupIndex(Integer.parseInt(numOfFiles));
+		fileAppender.setMaxFileSize(maxSize);
+		rootLogger.addAppender(fileAppender);
+	}
+	
+	
 }
