@@ -1062,25 +1062,29 @@ public class NandboxClient {
 	
 	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
 	{
-		if(level.equals("Debug"))
+		if(level.equalsIgnoreCase("Debug"))
 		{
 			this.rootLogger.setLevel(Level.DEBUG);
 		}
-		else if(level.equals("Info"))
+		else if(level.equalsIgnoreCase("Info"))
 		{
 			this.rootLogger.setLevel(Level.INFO);
 		}
-		else if(level.equals("Warn"))
+		else if(level.equalsIgnoreCase("Warn"))
 		{
 			this.rootLogger.setLevel(Level.WARN);
 		}
-		else if(level.equals("Error"))
+		else if(level.equalsIgnoreCase("Error"))
 		{
 			this.rootLogger.setLevel(Level.ERROR);
 		}
-		else if(level.equals("Fatal"))
+		else if(level.equalsIgnoreCase("Fatal"))
 		{
 			this.rootLogger.setLevel(Level.FATAL);
+		}
+		else if(level.equalsIgnoreCase("Trace"))
+		{
+			this.rootLogger.setLevel(Level.TRACE);
 		}
 		
 		PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n");
