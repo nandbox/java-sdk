@@ -70,7 +70,8 @@ public class MediaTransfer {
 			requestConfig.setConnectionRequestTimeout(40 * 1000);
 			requestConfig.setSocketTimeout(40 * 1000);
 			httpGetRequest.setConfig(requestConfig.build());
-			System.out.println("Executing request " + httpGetRequest.getRequestLine());
+			//System.out.println("Executing request " + httpGetRequest.getRequestLine());
+			NandboxClient.log.info("Executing request " + httpGetRequest.getRequestLine());
 
 			httpGetRequest.setHeader("Content-type", CONTENT_TYPE);
 			httpGetRequest.setHeader("X-TOKEN", token);
@@ -78,7 +79,9 @@ public class MediaTransfer {
 			long downloadStartTime = Calendar.getInstance().getTimeInMillis();
 			HttpResponse response = httpclient.execute(httpGetRequest);
 			long downloadEndTime = Calendar.getInstance().getTimeInMillis();
-			System.out.println("Download File : " + mediaFileId + " took around "
+			//System.out.println("Download File : " + mediaFileId + " took around "
+			//		+ (downloadEndTime - downloadStartTime) / 1000 + " Seconds");
+			NandboxClient.log.info("Download File : " + mediaFileId + " took around "
 					+ (downloadEndTime - downloadStartTime) / 1000 + " Seconds");
 
 			savingDirPath = savingDirPath != null ? savingDirPath : "./"; // If savingDirPath is
@@ -89,11 +92,13 @@ public class MediaTransfer {
 			inputStream = response.getEntity().getContent();
 			outputStream = new FileOutputStream(mediaFileFullPath);
 			IOUtils.copy(inputStream, outputStream);
-			System.out.println("File Saved Locally Successfully");
+			//System.out.println("File Saved Locally Successfully");
+			NandboxClient.log.info("File Saved Locally Successfully");
 			result = 0;
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			NandboxClient.log.error(e.getStackTrace());
 			result = -1;
 
 		} finally {
@@ -107,12 +112,14 @@ public class MediaTransfer {
 					outputStream.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				NandboxClient.log.error(e.getStackTrace());
 			}
 
 		}
 
-		System.out.println("Result =" + result);
+		//System.out.println("Result =" + result);
+		NandboxClient.log.info("Result =" + result);
 		return result;
 	}
 
@@ -136,11 +143,13 @@ public class MediaTransfer {
 			try {
 				fileContentType = Files.probeContentType(file.toPath());
 			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println();
+				//e.printStackTrace();
+				//System.out.println();
+				NandboxClient.log.error(e.getStackTrace());
 			}
 
-			System.out.println("fileContentType " + fileContentType);
+			//System.out.println("fileContentType " + fileContentType);
+			NandboxClient.log.info("fileContentType " + fileContentType);
 
 			String uploadServerURL = NandboxClient.getConfigs().getProperty("UploadServer");
 			HttpRequestBase httpputrequest = new HttpPut(uploadServerURL + file.getName());
@@ -157,16 +166,20 @@ public class MediaTransfer {
 
 			((HttpPut) httpputrequest).setEntity(fileEntity);
 
-			System.out.println("executing request " + httpputrequest.getRequestLine());
+			//System.out.println("executing request " + httpputrequest.getRequestLine());
+			NandboxClient.log.info("executing request " + httpputrequest.getRequestLine());
 			CloseableHttpResponse response = null;
 			try {
 				long uploadStartTime = Calendar.getInstance().getTimeInMillis();
 				response = httpclient.execute(httpputrequest);
 				long uploadEndTime = Calendar.getInstance().getTimeInMillis();
-				System.out.println("Upload File : " + mediaFileFullPath + " took "
-						+ (uploadEndTime - uploadStartTime) / 1000 + " Seconds");
+				//System.out.println("Upload File : " + mediaFileFullPath + " took "
+				//		+ (uploadEndTime - uploadStartTime) / 1000 + " Seconds");
+				NandboxClient.log.info("Upload File : " + mediaFileFullPath + " took "
+								+ (uploadEndTime - uploadStartTime) / 1000 + " Seconds");
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				NandboxClient.log.error(e.getStackTrace());
 			}
 
 			if (response != null) {
@@ -179,23 +192,28 @@ public class MediaTransfer {
 						br = new BufferedReader(
 								new InputStreamReader((response.getEntity().getContent())));
 					} catch (UnsupportedOperationException | IOException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
+						NandboxClient.log.error(e.getStackTrace());
 					}
 
-					System.out.println("Output from Server ...."
+					//System.out.println("Output from Server ...."
+					//		+ response.getStatusLine().getStatusCode() + "\n");
+					NandboxClient.log.info("Output from Server ...."
 							+ response.getStatusLine().getStatusCode() + "\n");
 
 					if (br != null) {
 
 						while ((output = br.readLine()) != null) {
-							System.out.println("output " + output);
+							//System.out.println("output " + output);
+							NandboxClient.log.info("output " + output);
 
 							sb.append(output);
 						}
 
 					}
 				} else {
-					System.out.println(response.getStatusLine().getStatusCode());
+					//System.out.println(response.getStatusLine().getStatusCode());
+					NandboxClient.log.info(response.getStatusLine().getStatusCode());
 				}
 
 				if (Utils.isNotEmpty(sb.toString())) {
@@ -205,15 +223,18 @@ public class MediaTransfer {
 					media = String.valueOf(obj.get("file"));
 				}
 
-				System.out.println("Uploaded Media File ID is : " + media);
+				//System.out.println("Uploaded Media File ID is : " + media);
+				NandboxClient.log.info("Uploaded Media File ID is : " + media);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			NandboxClient.log.error(e.getStackTrace());
 		} finally {
 			try {
 				httpclient.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				NandboxClient.log.error(e.getStackTrace());
 			}
 		}
 		return media;

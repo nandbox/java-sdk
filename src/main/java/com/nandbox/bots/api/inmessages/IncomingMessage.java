@@ -3,6 +3,7 @@
  */
 package com.nandbox.bots.api.inmessages;
 
+import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Article;
 import com.nandbox.bots.api.data.Audio;
 import com.nandbox.bots.api.data.Chat;
@@ -248,7 +249,8 @@ public class IncomingMessage {
 		// if (tag != null) {
 		// obj.put(KEY_TAG, tag);
 		// }
-		System.out.println("to " + obj.toJSONString());
+		//System.out.println("to " + obj.toJSONString());
+		NandboxClient.log.info("to " + obj.toJSONString());
 		return obj;
 
 	}

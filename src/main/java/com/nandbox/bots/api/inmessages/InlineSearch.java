@@ -36,7 +36,7 @@ public class InlineSearch {
 
 	public InlineSearch(JSONObject jsonObj) {
 
-		System.out.println("json " + jsonObj.toJSONString());
+		//System.out.println("json " + jsonObj.toJSONString());
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_INLINE_SEARCH);
 
 		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
@@ -83,7 +83,7 @@ public class InlineSearch {
 			obj.put(KEY_KEYWORDS, keywords);
 		}			
 
-		System.out.println("to " + obj.toJSONString());
+		//System.out.println("to " + obj.toJSONString());
 		return obj;
 
 	}

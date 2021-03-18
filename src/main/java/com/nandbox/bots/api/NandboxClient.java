@@ -157,7 +157,8 @@ public class NandboxClient {
 							InternalWebSocket.this.send(obj.toJSONString());
 						}
 					} catch (Exception e) {
-						System.err.println(e);
+						//System.err.println(e);
+						NandboxClient.log.error(e);
 					}
 					if (interrupted)
 						return;
@@ -180,20 +181,26 @@ public class NandboxClient {
 
 		@OnWebSocketClose
 		public void onClose(int statusCode, String reason) {
-			System.out.println("INTERNAL: ONCLOSE");
-			System.out.println("StatusCode = " + statusCode);
-			System.out.println("Reason : " + reason);
+			//System.out.println("INTERNAL: ONCLOSE");
+			//System.out.println("StatusCode = " + statusCode);
+			//System.out.println("Reason : " + reason);
+			NandboxClient.log.info("INTERNAL: ONCLOSE");
+			NandboxClient.log.info("StatusCode = " + statusCode);
+			NandboxClient.log.info("Reason : " + reason);
 
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
-			System.out.println("Date = " + dateFormat.format(date));
-
+			//System.out.println("Date = " + dateFormat.format(date));
+			NandboxClient.log.info("Date = " + dateFormat.format(date));
+			
+			
 			authenticated = false;
 			if (pingThread != null) {
 				try {
 					pingThread.interrupt();
 				} catch (Exception e) {
-					System.err.println(e);
+					//System.err.println(e);
+					NandboxClient.log.error(e);
 				}
 			}
 			pingThread = null;
@@ -203,37 +210,45 @@ public class NandboxClient {
 			if ((statusCode == 1000 || statusCode == 1006 || statusCode == 1001 || statusCode == 1005)
 					&& closingCounter < NO_OF_RETRIES_IF_CONN_CLOSED) {
 				try {
-
-					System.out.println("Please wait 10 seconds for Reconnecting ");
+					//System.out.println("Please wait 10 seconds for Reconnecting ");
+					NandboxClient.log.info("Please wait 10 seconds for Reconnecting ");
 					TimeUnit.SECONDS.sleep(10);
 					closingCounter = closingCounter + 1;
-					System.out.println("Conenction Closing counter is  : " + closingCounter);
+					//System.out.println("Conenction Closing counter is  : " + closingCounter);
+					NandboxClient.log.info("Conenction Closing counter is  : " + closingCounter);
 				} catch (InterruptedException e1) {
-					e1.printStackTrace();
+					//e1.printStackTrace();
+					NandboxClient.log.error(e1.getStackTrace());
 					Thread.currentThread().interrupt();
 				}
 				stopWebSocketClient();
 				try {
 					reconnectWebSocketClient();
 				} catch (Exception e) {
-					e.printStackTrace();
+					//e.printStackTrace();
+					NandboxClient.log.error(e.getStackTrace());
 					Thread.currentThread().interrupt();
 				}
 
 			} else {
-				System.out.println("End nandbox client");
+				//System.out.println("End nandbox client");
+				NandboxClient.log.info("End nandbox client");
 				System.exit(0);
 			}
 		}
 
 		private void reconnectWebSocketClient() throws Exception {
-			System.out.println("Creating new webSocketClient");
+			//System.out.println("Creating new webSocketClient");
+			NandboxClient.log.info("Creating new webSocketClient");
 			webSocketClient = new WebSocketClient(new SslContextFactory());
 			webSocketClient.start();
-			System.out.println("webSocketClient started");
-			System.out.println("Getting NandboxClient Instance");
+			//System.out.println("webSocketClient started");
+			//System.out.println("Getting NandboxClient Instance");
+			NandboxClient.log.info("webSocketClient started");
+			NandboxClient.log.info("Getting NandboxClient Instance");
 			NandboxClient nandboxClient = NandboxClient.get();
-			System.out.println("Calling NandboxClient connect");
+			//System.out.println("Calling NandboxClient connect");
+			NandboxClient.log.info("Calling NandboxClient connect");
 			nandboxClient.connect(token, callback);
 		}
 
@@ -244,29 +259,35 @@ public class NandboxClient {
 					session.getRemote().sendString(s);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				NandboxClient.log.error(e.getStackTrace());
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				NandboxClient.log.error(e.getStackTrace());
 			}
 		}
 
 		public void stopWebSocketClient() {
-			System.out.println("Stopping Websocket client");
+			//System.out.println("Stopping Websocket client");
+			NandboxClient.log.info("Stopping Websocket client");
 			try {
 				if (InternalWebSocket.this != null)
 					InternalWebSocket.this.getSession().close();
 			} catch (Exception e) {
-				System.out.println("Exception : " + e.getMessage() + " while closing websocket session");
+				//System.out.println("Exception : " + e.getMessage() + " while closing websocket session");
+				NandboxClient.log.error("Exception : " + e.getMessage() + " while closing websocket session");
 			}
 			try {
 				if (webSocketClient != null) {
 					webSocketClient.stop();
 					webSocketClient.destroy();
 					webSocketClient = null;
-					System.out.println("Websocket client stopped Successfully");
+					//System.out.println("Websocket client stopped Successfully");
+					NandboxClient.log.info("Websocket client stopped Successfully");
 				}
 			} catch (Exception e) {
-				System.out.println("Exception : " + e.getMessage() + " while stopping and destroying webSocketClient");
+				//System.out.println("Exception : " + e.getMessage() + " while stopping and destroying webSocketClient");
+				NandboxClient.log.error("Exception : " + e.getMessage() + " while stopping and destroying webSocketClient");
 			}
 
 		}
@@ -274,7 +295,8 @@ public class NandboxClient {
 		@OnWebSocketConnect
 		public void onConnect(Session session) {
 			this.session = session;
-			System.out.println("INTERNAL: ONCONNECT");
+			//System.out.println("INTERNAL: ONCONNECT");
+			NandboxClient.log.info("INTERNAL: ONCONNECT");
 
 			JSONObject authObject = new JSONObject();
 			authObject.put(KEY_METHOD, "TOKEN_AUTH");
@@ -286,7 +308,8 @@ public class NandboxClient {
 				@Override
 				public void send(OutMessage message) {
 					JSONObject messageObj = message.toJsonObject();
-					System.err.println(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
+					//System.err.println(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
+					NandboxClient.log.info(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
 					InternalWebSocket.this.send(messageObj.toJSONString());
 				}
 
@@ -855,7 +878,8 @@ public class NandboxClient {
 				}
 
 			};
-			System.err.println(authObject.toJSONString());
+			//System.err.println(authObject.toJSONString());
+			NandboxClient.log.error(authObject.toJSONString());
 			send(authObject.toJSONString());
 		}
 
@@ -863,24 +887,31 @@ public class NandboxClient {
 		public void onUpdate(String msg) {
 			User user;
 			lastMessage = System.currentTimeMillis();
-			System.out.println("INTERNAL: ONMESSAGE");
+			//System.out.println("INTERNAL: ONMESSAGE");
+			NandboxClient.log.info("INTERNAL: ONMESSAGE");
 			JSONObject obj = (JSONObject) JSONValue.parse(msg);
-			System.out.println(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
+			//System.out.println(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
+			NandboxClient.log.info(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
 			String method = (String) obj.get(KEY_METHOD);
 			if (method != null) {
-				System.err.println("method: " + method);
+				//System.err.println("method: " + method);
+				NandboxClient.log.info("method: " + method);
 				switch (method) {
 				case "TOKEN_AUTH_OK":
-					System.out.println("Authenticated!");
+					//System.out.println("Authenticated!");
+					NandboxClient.log.info("Authenticated!");
 					authenticated = true;
 					BOT_ID = String.valueOf(obj.get(KEY_ID));
-					System.err.println("====> Your Bot Id is : " + BOT_ID);
-					System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
+					//System.err.println("====> Your Bot Id is : " + BOT_ID);
+					//System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
+					NandboxClient.log.info("====> Your Bot Id is : " + BOT_ID);
+					NandboxClient.log.info("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
 					if (pingThread != null) {
 						try {
 							pingThread.interrupt();
 						} catch (Exception e) {
-							System.err.println(e);
+							//System.err.println(e);
+							NandboxClient.log.error(e);
 						}
 					}
 					pingThread = null;
@@ -967,45 +998,52 @@ public class NandboxClient {
 				}
 			} else {
 				String error = String.valueOf(obj.get(KEY_ERROR));
-				System.err.println("Error : " + error);
+				//System.err.println("Error : " + error);
+				NandboxClient.log.error("Error : " + error);
 			}
 		}
 
 		@OnWebSocketError
 		public void onError(Session session, Throwable cause) {
-			System.err.println("INTERNAL: ONERROR");
+			//System.err.println("INTERNAL: ONERROR");
+			NandboxClient.log.error("INTERNAL: ONERROR");
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
 			if (cause != null) {
-				System.err.println("Error due to : " + cause.getMessage() + " On : " + dateFormat.format(date));
+				//System.err.println("Error due to : " + cause.getMessage() + " On : " + dateFormat.format(date));
+				NandboxClient.log.error("Error due to : " + cause.getMessage() + " On : " + dateFormat.format(date));
 				callback.onError();
 
 				if (cause instanceof ConnectException && timeOutCounter < NO_OF_RETRIES_IF_CONN_TIMEDOUT) {
 
 					try {
-
-						System.out.println(cause.getMessage() + " , Please wait 10 seconds for Reconnecting ");
+						//System.out.println(cause.getMessage() + " , Please wait 10 seconds for Reconnecting ");
+						NandboxClient.log.info(cause.getMessage() + " , Please wait 10 seconds for Reconnecting ");
 						stopWebSocketClient();
 						TimeUnit.SECONDS.sleep(10);
 						timeOutCounter++;
-						System.out.println("Connection Time out count is : " + timeOutCounter);
+						//System.out.println("Connection Time out count is : " + timeOutCounter);
+						NandboxClient.log.info("Connection Time out count is : " + timeOutCounter);
 						reconnectWebSocketClient();
 					} catch (Exception e1) {
-						e1.printStackTrace();
+						//e1.printStackTrace();
+						NandboxClient.log.error(e1.getStackTrace());
 						Thread.currentThread().interrupt();
 					}
 
 				} else if (cause instanceof SocketTimeoutException
 						&& connRefusedCounter < NO_OF_RETRIES_IF_CONN_TO_SERVER_REFUSED) {
 					try {
-
-						System.out.println(cause.getMessage() + ", Please wait 30 seconds for Reconnecting ");
+						//System.out.println(cause.getMessage() + ", Please wait 30 seconds for Reconnecting ");
+						NandboxClient.log.info(cause.getMessage() + ", Please wait 30 seconds for Reconnecting ");
 						stopWebSocketClient();
 						TimeUnit.SECONDS.sleep(30);
 						connRefusedCounter++;
-						System.out.println("Connection Refused Counter " + connRefusedCounter);
+						//System.out.println("Connection Refused Counter " + connRefusedCounter);
+						NandboxClient.log.info("Connection Refused Counter " + connRefusedCounter);
 						reconnectWebSocketClient();
 					} catch (Exception e1) {
+						//nots sure
 						e1.printStackTrace();
 						Thread.currentThread().interrupt();
 					}
