@@ -898,12 +898,12 @@ public class NandboxClient {
 				NandboxClient.log.info("method: " + method);
 				switch (method) {
 				case "TOKEN_AUTH_OK":
-					//System.out.println("Authenticated!");
+					System.out.println("Authenticated!");
 					NandboxClient.log.info("Authenticated!");
 					authenticated = true;
 					BOT_ID = String.valueOf(obj.get(KEY_ID));
-					//System.err.println("====> Your Bot Id is : " + BOT_ID);
-					//System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
+					System.err.println("====> Your Bot Id is : " + BOT_ID);
+					System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
 					NandboxClient.log.info("====> Your Bot Id is : " + BOT_ID);
 					NandboxClient.log.info("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
 					if (pingThread != null) {
@@ -1100,6 +1100,15 @@ public class NandboxClient {
 	
 	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
 	{
+		if(level == null || level.equals(""))
+			level = "Info";
+		if(maxSize == null || maxSize.equals(""))
+			maxSize = "5kb";
+		if(numOfFiles == null || numOfFiles.equals(""))
+			numOfFiles = "5";
+		if(path == null || path.equals(""))
+			path ="logsInfo";
+		
 		if(level.equalsIgnoreCase("Debug"))
 		{
 			this.rootLogger.setLevel(Level.DEBUG);
