@@ -1100,6 +1100,7 @@ public class NandboxClient {
 	
 	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
 	{
+		System.out.println(level);
 		if(level == null)
 			level = "Info";
 		if(maxSize == null)
