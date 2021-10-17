@@ -124,7 +124,7 @@ public class NandboxClient {
 	public class InternalWebSocket {
 		private static final int NO_OF_RETRIES_IF_CONN_TO_SERVER_REFUSED = 20;
 		private static final int NO_OF_RETRIES_IF_CONN_TIMEDOUT = 10;
-		private static final int NO_OF_RETRIES_IF_CONN_CLOSED = 10;
+		private static final int NO_OF_RETRIES_IF_CONN_CLOSED = 20;
 		private static final String KEY_USER = "user";
 		private static final String KEY_CHAT = "chat";
 		private static final String KEY_NAME = "name";
