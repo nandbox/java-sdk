@@ -20,6 +20,7 @@ public class User {
 	private static final String KEY_STATUS = "status";
 	private static final String KEY_PHOTO = "photo";
 	private static final String KEY_PROFILE = "profile";
+	private static final String KEY_SHORT_NAME = "short_name";
 
 	private String id;
 	private String name;
@@ -31,6 +32,7 @@ public class User {
 	private String status;
 	private String profile;
 	private Photo photo;
+	private String shortName;
 
 	
 	public User() { 
@@ -48,6 +50,8 @@ public class User {
 		this.profile = (String) obj.get(KEY_PROFILE);
 
 		this.photo = obj.get(KEY_PHOTO) != null ? new Photo((JSONObject) obj.get(KEY_PHOTO)) : null;
+		
+		this.shortName = (String) obj.get(KEY_SHORT_NAME);
 	}
 
 	public JSONObject toJsonObject() {
@@ -79,8 +83,12 @@ public class User {
 
 		if (profile != null)
 			obj.put(KEY_PROFILE, profile);
+		
 		if (photo != null)
 			obj.put(KEY_PHOTO, photo);
+		
+		if(shortName != null)
+			obj.put(KEY_SHORT_NAME, shortName);
 
 		return obj;
 
@@ -234,4 +242,13 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
 }
