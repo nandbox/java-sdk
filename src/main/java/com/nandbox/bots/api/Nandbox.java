@@ -286,10 +286,12 @@ public final class Nandbox {
 		 *            backText message Background color in hexadecimal format (Hex
 		 *            triplet ) or according to its common English name . Example : Red
 		 *            color can be set as #FF0000
+		 * @param tab 
+		 * 			tab ID to which you want to send the message
 		 * 
 		 */
 		public void sendText(String chatId, String text, Long reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor);
+				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor, String tab);
 
 		/**
 		 * @param chatId
@@ -344,10 +346,12 @@ public final class Nandbox {
 		 *            "Photo caption 0-256 characters "
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only .
+		 * @param tab 
+		 * 			tab ID to which you want to send the message
 		 */
 		public void sendPhoto(String chatId, String photoFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings);
+				Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -401,10 +405,12 @@ public final class Nandbox {
 		 *            "video caption 0-256 characters "
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message
 		 */
 		public void sendVideo(String chatId, String videoFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings);
+				Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -465,10 +471,12 @@ public final class Nandbox {
 		 *            title of the audio
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message
 		 */
 		public void sendAudio(String chatId, String audioFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String performer,
-				String title, Integer chatSettings);
+				String title, Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -520,9 +528,11 @@ public final class Nandbox {
 		 *            no sound.
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendContact(String chatId, String phoneNumber, String name, Long reference, String replyToMessageId,
-				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings);
+				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -579,10 +589,12 @@ public final class Nandbox {
 		 *            size of the voice
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendVoice(String chatId, String voiceFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, Long size,
-				Integer chatSettings);
+				Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -640,10 +652,12 @@ public final class Nandbox {
 		 *            size of document
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message          
 		 */
 		public void sendDocument(String chatId, String documentFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String name,
-				Integer size, Integer chatSettings);
+				Integer size, Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -699,10 +713,12 @@ public final class Nandbox {
 		 *            details of the location
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendlocation(String chatId, String latitude, String longitude, Long reference,
 				String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-				String name, String details, Integer chatSettings);
+				String name, String details, Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -758,9 +774,11 @@ public final class Nandbox {
 		 *            caption 0-256 characters "
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendGIF(String chatId, String gifFileId, Long reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings);
+				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab);
 
 		/**
 		 * @param chatId
@@ -814,10 +832,12 @@ public final class Nandbox {
 		 *            caption 0-256 characters "
 		 * @param chatSettings
 		 *            <B>1</B> to send to Chat(i.e. group/Channel)super admins only
+		 * @param tab 
+		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendGIFVideo(String chatId, String gifFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings);
+				Integer chatSettings, String tab);
 
 		/**
 		 * Use this message to update existing Message sent
@@ -832,8 +852,10 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 * @param chatId
 		 *            Id of Target Group or Channel id
+		 * @param tab 
+		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId);
+		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, String tab);
 
 		/**
 		 * @param messageId
@@ -842,10 +864,11 @@ public final class Nandbox {
 		 *            The new message text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
-		 * 
+		 * @param tab 
+		 * 			tab ID to which you want to send the message    
 		 * 
 		 */
-		void updateTextMsg(String messageId, String text, String toUserId);
+		void updateTextMsg(String messageId, String text, String toUserId, String tab);
 
 		/**
 		 * @param messageId
@@ -854,8 +877,10 @@ public final class Nandbox {
 		 *            The new caption text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
+		 * @param tab 
+		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMediaCaption(String messageId, String caption, String toUserId);
+		void updateMediaCaption(String messageId, String caption, String toUserId, String tab);
 
 		/**
 		 * @param messageId
@@ -864,8 +889,10 @@ public final class Nandbox {
 		 *            The new message text
 		 * @param chatId
 		 *            Id of Target Group or Channel id
+		 * @param tab 
+		 * 			tab ID to which you want to send the message               
 		 */
-		void updateChatMsg(String messageId, String text, String chatId);
+		void updateChatMsg(String messageId, String text, String chatId, String tab);
 
 		/**
 		 * @param messageId
@@ -874,8 +901,10 @@ public final class Nandbox {
 		 *            The new caption text
 		 * @param chatId
 		 *            Id of Target Group or Channel id
+		 * @param tab 
+		 * 			tab ID to which you want to send the message                
 		 */
-		void updateChatMediaCaption(String messageId, String caption, String chatId);
+		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab);
 
 		/**
 		 * Use this method to get profile for a user

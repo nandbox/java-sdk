@@ -40,6 +40,7 @@ public abstract class OutMessage {
 	protected static final String KEY_CHAT_SETTINGS = "chat_settings";
 	protected static final String KEY_STYLE = "style";
 	protected static final String KEY_SCHEDULE_DATE = "schedule_date";
+	protected static final String KEY_TAB = "tab";
 
 	protected OutMessageMethod method;
 	protected String chatId;
@@ -54,7 +55,7 @@ public abstract class OutMessage {
 	private Menu[] inlineMenus;
 	private Integer chatSettings;
 	private Long scheduleDate;
-
+	private String tab;
 
 
 	public JSONObject toJsonObject() {
@@ -115,6 +116,10 @@ public abstract class OutMessage {
 
 		if (scheduleDate != null) {
 			obj.put(KEY_SCHEDULE_DATE, scheduleDate);
+		}
+		
+		if (tab != null) {
+			obj.put(KEY_TAB, tab);
 		}
 		return obj;
 	}
@@ -316,5 +321,19 @@ public abstract class OutMessage {
 	public void setScheduleDate(Long scheduleDate) {
 		this.scheduleDate = scheduleDate;
 	}
+
+	public String getTab() {
+		return tab;
+	}
+
+	
+	/**
+	 * @param tabId
+	 *            
+	 */
+	public void setTab(String tab) {
+		this.tab = tab;
+	}
+
 
 }

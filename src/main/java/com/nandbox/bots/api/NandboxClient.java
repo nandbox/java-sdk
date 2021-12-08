@@ -315,7 +315,7 @@ public class NandboxClient {
 
 				private void prepareOutMessage(OutMessage message, String chatId, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						String caption, Integer chatSettings) {
+						String caption, Integer chatSettings, String tab) {
 
 					message.setChatId(chatId);
 					message.setReference(reference);
@@ -340,6 +340,10 @@ public class NandboxClient {
 					if (chatSettings != null) {
 						message.setChatSettings(chatSettings);
 					}
+					
+					if (tab != null) {
+						message.setTab(tab);
+					}
 
 				}
 
@@ -354,7 +358,7 @@ public class NandboxClient {
 				@Override
 				public Long sendTextWithBackground(String chatId, String text, String bgColor) {
 					Long reference = getUniqueId();
-					sendText(chatId, text, reference, null, null, null, null, null, bgColor);
+					sendText(chatId, text, reference, null, null, null, null, null, bgColor, null);
 
 					return reference;
 				}
@@ -362,16 +366,16 @@ public class NandboxClient {
 				@Override
 				public void sendText(String chatId, String text, Long reference) {
 
-					sendText(chatId, text, reference, null, null, null, null, null, null);
+					sendText(chatId, text, reference, null, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendText(String chatId, String text, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings,
-						String bgColor) {
+						String bgColor, String tab) {
 					TextOutMessage message = new TextOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings);
+							disableNotification, null, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendMessage);
 					message.setText(text);
 					message.setBgColor(bgColor);
@@ -392,18 +396,18 @@ public class NandboxClient {
 				@Override
 				public void sendPhoto(String chatId, String photoId, Long reference, String caption) {
 
-					sendPhoto(chatId, photoId, reference, null, null, null, null, caption, null);
+					sendPhoto(chatId, photoId, reference, null, null, null, null, caption, null, null);
 
 				}
 
 				@Override
 				public void sendPhoto(String chatId, String photoFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings) {
+						Integer chatSettings, String tab) {
 
 					PhotoOutMessage message = new PhotoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendPhoto);
 					message.setPhoto(photoFileId);
 					send(message);
@@ -420,17 +424,17 @@ public class NandboxClient {
 				@Override
 				public void sendContact(String chatId, String phoneNumber, String name, Long reference) {
 
-					sendContact(chatId, phoneNumber, name, reference, null, null, null, null, null);
+					sendContact(chatId, phoneNumber, name, reference, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendContact(String chatId, String phoneNumber, String name, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						Integer chatSettings) {
+						Integer chatSettings, String tab) {
 
 					ContactOutMessage contactOutMessage = new ContactOutMessage();
 					prepareOutMessage(contactOutMessage, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings);
+							disableNotification, null, chatSettings, tab);
 
 					contactOutMessage.setMethod(OutMessageMethod.sendContact);
 					contactOutMessage.setPhoneNumber(phoneNumber);
@@ -451,17 +455,17 @@ public class NandboxClient {
 				@Override
 				public void sendVideo(String chatId, String videoId, Long reference, String caption) {
 
-					sendVideo(chatId, videoId, reference, null, null, null, null, caption, null);
+					sendVideo(chatId, videoId, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendVideo(String chatId, String videoFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings) {
+						Integer chatSettings, String tab) {
 
 					VideoOutMessage message = new VideoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVideo);
 					message.setVideo(videoFileId);
 					send(message);
@@ -481,17 +485,17 @@ public class NandboxClient {
 				@Override
 				public void sendAudio(String chatId, String audioFileId, Long reference, String caption) {
 
-					sendAudio(chatId, audioFileId, reference, null, null, null, null, caption, null, null, null);
+					sendAudio(chatId, audioFileId, reference, null, null, null, null, caption, null, null, null, null);
 				}
 
 				@Override
 				public void sendAudio(String chatId, String audioFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						String performer, String title, Integer chatSettings) {
+						String performer, String title, Integer chatSettings, String tab) {
 
 					AudioOutMessage message = new AudioOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendAudio);
 					message.setPerformer(performer);
 					message.setTitle(title);
@@ -511,17 +515,17 @@ public class NandboxClient {
 				@Override
 				public void sendVoice(String chatId, String voiceFileId, Long reference, String caption) {
 
-					sendVoice(chatId, voiceFileId, reference, null, null, null, null, caption, null, null);
+					sendVoice(chatId, voiceFileId, reference, null, null, null, null, caption, null, null, null);
 				}
 
 				@Override
 				public void sendVoice(String chatId, String voiceFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, Long size,
-						Integer chatSettings) {
+						Integer chatSettings, String tab) {
 
 					VoiceOutMessage message = new VoiceOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVoice);
 					message.setSize(size);
 					message.setVoice(voiceFileId);
@@ -539,18 +543,18 @@ public class NandboxClient {
 				@Override
 				public void sendDocument(String chatId, String documentFileId, Long reference, String caption) {
 
-					sendDocument(chatId, documentFileId, reference, null, null, null, null, caption, null, null, null);
+					sendDocument(chatId, documentFileId, reference, null, null, null, null, caption, null, null, null, null);
 
 				}
 
 				@Override
 				public void sendDocument(String chatId, String documentFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						String name, Integer size, Integer chatSettings) {
+						String name, Integer size, Integer chatSettings, String tab) {
 
 					DocumentOutMessage message = new DocumentOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendDocument);
 					message.setDocument(documentFileId);
 					message.setName(name);
@@ -568,17 +572,17 @@ public class NandboxClient {
 
 				@Override
 				public void sendlocation(String chatId, String latitude, String longitude, Long reference) {
-					sendlocation(chatId, latitude, longitude, reference, null, null, null, null, null, null, null);
+					sendlocation(chatId, latitude, longitude, reference, null, null, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendlocation(String chatId, String latitude, String longitude, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						String name, String details, Integer chatSettings) {
+						String name, String details, Integer chatSettings, String tab) {
 
 					LocationOutMessage message = new LocationOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings);
+							disableNotification, null, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendLocation);
 					message.setName(name);
 					message.setDetails(details);
@@ -599,16 +603,16 @@ public class NandboxClient {
 				@Override
 				public void sendGIF(String chatId, String gif, Long reference, String caption) {
 
-					sendPhoto(chatId, gif, reference, null, null, null, null, caption, null);
+					sendPhoto(chatId, gif, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendGIF(String chatId, String gif, Long reference, String replyToMessageId, String toUserId,
-						Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings) {
+						Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab) {
 
 					PhotoOutMessage message = new PhotoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendPhoto);
 					message.setPhoto(gif);
 					send(message);
@@ -628,17 +632,17 @@ public class NandboxClient {
 				@Override
 				public void sendGIFVideo(String chatId, String gif, Long reference, String caption) {
 
-					sendVideo(chatId, gif, reference, null, null, null, null, caption, null);
+					sendVideo(chatId, gif, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendGIFVideo(String chatId, String gif, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings) {
+						Integer chatSettings, String tab) {
 
 					VideoOutMessage message = new VideoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVideo);
 					message.setVideo(gif);
 					send(message);
@@ -647,7 +651,7 @@ public class NandboxClient {
 
 				@Override
 				public void updateMessage(String messageId, String text, String caption, String toUserId,
-						String chatId) {
+						String chatId, String tab) {
 
 					UpdateOutMessage updateMessage = new UpdateOutMessage();
 
@@ -656,33 +660,34 @@ public class NandboxClient {
 					updateMessage.setCaption(caption);
 					updateMessage.setToUserId(toUserId);
 					updateMessage.setChatId(chatId);
+					updateMessage.setTab(tab);
 
 					send(updateMessage);
 
 				}
 
 				@Override
-				public void updateTextMsg(String messageId, String text, String toUserId) {
+				public void updateTextMsg(String messageId, String text, String toUserId, String tab) {
 
-					updateMessage(messageId, text, null, toUserId, null);
+					updateMessage(messageId, text, null, toUserId, null, tab);
 				}
 
 				@Override
-				public void updateMediaCaption(String messageId, String caption, String toUserId) {
+				public void updateMediaCaption(String messageId, String caption, String toUserId, String tab) {
 
-					updateMessage(messageId, null, caption, toUserId, null);
+					updateMessage(messageId, null, caption, toUserId, null, tab);
 				}
 
 				@Override
-				public void updateChatMsg(String messageId, String text, String chatId) {
+				public void updateChatMsg(String messageId, String text, String chatId, String tab) {
 
-					updateMessage(messageId, text, null, null, chatId);
+					updateMessage(messageId, text, null, null, chatId, tab);
 				}
 
 				@Override
-				public void updateChatMediaCaption(String messageId, String caption, String chatId) {
+				public void updateChatMediaCaption(String messageId, String caption, String chatId, String tab) {
 
-					updateMessage(messageId, null, caption, null, chatId);
+					updateMessage(messageId, null, caption, null, chatId, tab);
 				}
 
 				@Override

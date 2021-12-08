@@ -560,9 +560,9 @@ public class TestTextMessage {
 						e.printStackTrace();
 					}
 					api.sendText(incomingMsg.getChat().getId(), "Link without prview http://www.nandbox.com",
-							getUniqueId(), null, null, WEB_PREVIEW_DISABLE, true, null, null);
+							getUniqueId(), null, null, WEB_PREVIEW_DISABLE, true, null, null, null);
 					api.sendText(incomingMsg.getChat().getId(), "Link with prview http://www.nandbox.com",
-							getUniqueId(), null, null, null, true, null, null);
+							getUniqueId(), null, null, null, true, null, null, null);
 				} else if ("getChatAdmins".equalsIgnoreCase(incomingMsg.getText())) {
 					api.getChatAdministrators(incomingMsg.getChat().getId());
 				} else if ("getMyProfile".equalsIgnoreCase(incomingMsg.getText())) {
@@ -618,23 +618,23 @@ public class TestTextMessage {
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionCB")) {
-					api.updateMediaCaption(msgId, "My New Caption ", userId);
+					api.updateMediaCaption(msgId, "My New Caption ", userId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextCB")) {
-					api.updateTextMsg(msgId, "My New Text ", userId);
+					api.updateTextMsg(msgId, "My New Text ", userId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCB")) {
-					api.updateChatMsg(msgId, "My New Text in group ", chatId);
+					api.updateChatMsg(msgId, "My New Text in group ", chatId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionChatCB")) {
-					api.updateChatMsg(msgId, "My New Caption in group ", chatId);
+					api.updateChatMsg(msgId, "My New Caption in group ", chatId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCBboth")) {
-					api.updateMessage(msgId, "my new message", null, userId, chatId);
+					api.updateMessage(msgId, "my new message", null, userId, chatId, null);
 				}
 
 			}

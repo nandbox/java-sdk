@@ -93,7 +93,7 @@ public class MultipleTests {
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
-
+						
 						if (incomingMsg.getText().equalsIgnoreCase("getChatMember")) {
 							api.getChatMember(incomingMsg.getChat().getId(), incomingMsg.getFrom().getId());
 						} else if (incomingMsg.getText().equals("getAdmins")) {
@@ -214,7 +214,14 @@ public class MultipleTests {
 
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
 
-						if (incomingMsg.getText().equals("getMyProfile")) {
+
+						if (incomingMsg.getText().startsWith("Tab")) {
+							String tabId = incomingMsg.getText().split(" ")[1]; 
+							System.out.println("Tab ID is " + tabId);
+							Long reference = getUniqueId();
+							api.sendText(incomingMsg.getChat().getId(), "Your tab id is " + tabId, reference, null, null, null, null, null, null, tabId);
+							return;
+						} else if (incomingMsg.getText().equals("getMyProfile")) {
 							api.getMyProfiles();
 						} else if (incomingMsg.getText().equals("getChat")) {
 							api.getChat(incomingMsg.getChat().getId());
@@ -425,7 +432,7 @@ public class MultipleTests {
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, "Document Caption");
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, getUniqueId(), "Send doc with ref");
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, getUniqueId(), null, null, null,
-						null, "from all option send", null, null, null);
+						null, "from all option send", null, null, null, null);
 
 				api.sendText(incomingMsg.getChat().getId(),
 						"Document size : " + incomingMsg.getDocument().getSize() + " , Document File Name is : "
@@ -456,7 +463,7 @@ public class MultipleTests {
 						incomingMsg.getContact().getName(), getUniqueId());
 
 				api.sendContact(incomingMsg.getChat().getId(), incomingMsg.getContact().getPhoneNumber(),
-						incomingMsg.getContact().getName(), getUniqueId(), null, null, null, null, null);
+						incomingMsg.getContact().getName(), getUniqueId(), null, null, null, null, null, null);
 
 				api.sendText(incomingMsg.getChat().getId(), " Contact Name  is : " + incomingMsg.getContact().getName()
 						+ " Phone number  is : " + incomingMsg.getContact().getPhoneNumber());
@@ -476,7 +483,7 @@ public class MultipleTests {
 				String uploadedTextFileId = MediaTransfer.uploadFile(TOKEN, "./download/" + textFileId);
 
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedTextFileId, getUniqueId(), null, null, null,
-						null, "Text File Caption", null, null, null);
+						null, "Text File Caption", null, null, null, null);
 
 			}
 
@@ -509,7 +516,7 @@ public class MultipleTests {
 						incomingMsg.getLocation().getLongitude(), getUniqueId());
 				api.sendlocation(incomingMsg.getChat().getId(), incomingMsg.getLocation().getLatitude(),
 						incomingMsg.getLocation().getLongitude(), getUniqueId(), null, null, null, null, null, null,
-						null);
+						null, null);
 
 				api.sendText(incomingMsg.getChat().getId(),
 						" Latitude is : " + incomingMsg.getLocation().getLatitude() + " Longitude is : "
@@ -580,7 +587,7 @@ public class MultipleTests {
 						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, "without ref");
 						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, getUniqueId(), "with ref");
 						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, getUniqueId(), null, null,
-								null, null, "with option", null);
+								null, null, "with option", null, null);
 					}
 
 				} else {
