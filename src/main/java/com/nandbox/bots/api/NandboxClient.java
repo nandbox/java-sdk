@@ -16,11 +16,17 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.RollingFileAppender;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.builder.api.AppenderComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilder;
+import org.apache.logging.log4j.core.config.builder.api.ConfigurationBuilderFactory;
+import org.apache.logging.log4j.core.config.builder.api.LayoutComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.api.RootLoggerComponentBuilder;
+import org.apache.logging.log4j.core.config.builder.impl.BuiltConfiguration;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -99,8 +105,8 @@ public class NandboxClient {
 	private URI uri;
 	static final String KEY_METHOD = "method";
 	static final String KEY_ERROR = "error";
-	public static final Logger log = Logger.getLogger(NandboxClient.class);
-	Logger rootLogger = Logger.getRootLogger();
+	public static final Logger log = (Logger) LogManager.getLogger(NandboxClient.class);
+	Logger rootLogger = (Logger) LogManager.getRootLogger();
 	
 	
 
@@ -1105,46 +1111,62 @@ public class NandboxClient {
 	
 	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
 	{
-		System.out.println(level);
-		if(level == null)
-			level = "Info";
-		if(maxSize == null)
-			maxSize = "5kb";
-		if(numOfFiles == null)
-			numOfFiles = "5";
-		if(path == null)
-			path ="logsInfo";
+		if(level == null) level = "Info";
+		if(maxSize == null) maxSize = "5kb";
+		if(numOfFiles == null) numOfFiles = "5";
+		if(path == null) path ="logsInfo";
 		
-		if(level.equalsIgnoreCase("Debug"))
-		{
-			this.rootLogger.setLevel(Level.DEBUG);
-		}
-		else if(level.equalsIgnoreCase("Info"))
-		{
-			this.rootLogger.setLevel(Level.INFO);
-		}
-		else if(level.equalsIgnoreCase("Warn"))
-		{
-			this.rootLogger.setLevel(Level.WARN);
-		}
-		else if(level.equalsIgnoreCase("Error"))
-		{
-			this.rootLogger.setLevel(Level.ERROR);
-		}
-		else if(level.equalsIgnoreCase("Fatal"))
-		{
-			this.rootLogger.setLevel(Level.FATAL);
-		}
-		else if(level.equalsIgnoreCase("Trace"))
-		{
-			this.rootLogger.setLevel(Level.TRACE);
-		}
+		if(level.equalsIgnoreCase("Debug")) this.rootLogger.atLevel(Level.DEBUG);
+		else if(level.equalsIgnoreCase("Info")) this.rootLogger.atLevel(Level.INFO);
+		else if(level.equalsIgnoreCase("Warn")) this.rootLogger.atLevel(Level.WARN);
+		else if(level.equalsIgnoreCase("Error")) this.rootLogger.atLevel(Level.ERROR);
+		else if(level.equalsIgnoreCase("Fatal")) this.rootLogger.atLevel(Level.FATAL);
+		else if(level.equalsIgnoreCase("Trace")) this.rootLogger.atLevel(Level.TRACE);
 		
-		PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n");
-		RollingFileAppender fileAppender = new RollingFileAppender(layout,path);
-		fileAppender.setMaxBackupIndex(Integer.parseInt(numOfFiles));
-		fileAppender.setMaxFileSize(maxSize);
-		rootLogger.addAppender(fileAppender);
+		reconfigureLogger(path, maxSize, numOfFiles, level);
+		
+	}
+	
+	void reconfigureLogger(String path, String maxSize, String numOfFiles, String level) {
+		ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
+		
+		AppenderComponentBuilder rolling = builder.newAppender("rolling", "RollingFile");
+		rolling.addAttribute("fileName", path);
+		rolling.addAttribute("filePattern", "rolling-%d{MM-dd-yy}.log.gz");
+
+		
+		ComponentBuilder<?> triggeringPolicies = builder.newComponent("Policies")
+//				  .addComponent(builder.newComponent("CronTriggeringPolicy")
+//				  .addAttribute("schedule", "0 0 0 * * ?"))
+				  .addComponent(builder.newComponent("SizeBasedTriggeringPolicy")
+				  .addAttribute("size", maxSize));
+				 
+		rolling.addComponent(triggeringPolicies);
+		
+		ComponentBuilder<?> rolloverStrategy = builder.newComponent("DefaultRolloverStrategy")
+				.addAttribute("max", numOfFiles);
+		
+		rolling.addComponent(rolloverStrategy);
+		
+		
+		String logPattern = "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n";
+		LayoutComponentBuilder standard = builder.newLayout("PatternLayout");
+		standard.addAttribute("pattern", logPattern);
+
+		rolling.add(standard);
+
+		RootLoggerComponentBuilder rootLogger = builder.newRootLogger(level);
+		rootLogger.add(builder.newAppenderRef("rolling"));
+		
+		builder.add(rolling);
+		builder.add(rootLogger);
+		
+//		builder.writeXmlConfiguration(System.out);
+//		System.out.println();
+		
+		BuiltConfiguration config = builder.build();
+		Configurator.reconfigure(config);
+		
 	}
 	
 	
