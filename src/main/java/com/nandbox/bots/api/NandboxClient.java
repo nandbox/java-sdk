@@ -1127,15 +1127,16 @@ public class NandboxClient {
 		
 	}
 	
-	void reconfigureLogger(String path, String maxSize, String numOfFiles, String level) {
+	void reconfigureLogger(String filename, String maxSize, String numOfFiles, String level) {
 		ConfigurationBuilder<BuiltConfiguration> builder = ConfigurationBuilderFactory.newConfigurationBuilder();
 		
 		AppenderComponentBuilder rolling = builder.newAppender("rolling", "RollingFile");
-		rolling.addAttribute("fileName", path);
-		rolling.addAttribute("filePattern", "rolling-%d{MM-dd-yy}.log.gz");
+		rolling.addAttribute("fileName", filename);
+		rolling.addAttribute("filePattern", filename+"-%i.log");
 
 		
 		ComponentBuilder<?> triggeringPolicies = builder.newComponent("Policies")
+//				Uncomment to add a time based roll over strategy.
 //				  .addComponent(builder.newComponent("CronTriggeringPolicy")
 //				  .addAttribute("schedule", "0 0 0 * * ?"))
 				  .addComponent(builder.newComponent("SizeBasedTriggeringPolicy")
@@ -1161,6 +1162,7 @@ public class NandboxClient {
 		builder.add(rolling);
 		builder.add(rootLogger);
 		
+//		Uncomment to print the log configurations in XML format.
 //		builder.writeXmlConfiguration(System.out);
 //		System.out.println();
 		
