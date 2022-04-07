@@ -328,7 +328,7 @@ public abstract class OutMessage {
 
 	
 	/**
-	 * @param tabId
+	 * @param tab tab id to set
 	 *            
 	 */
 	public void setTab(String tab) {

@@ -91,7 +91,7 @@ import net.minidev.json.JSONValue;
 /**
  * NandboxClient Class
  * 
- * @author Hossam
+ * @author Ahmed A. El-Malatawy
  *
  */
 public class NandboxClient {
