@@ -1,3 +1,4 @@
+package com.nandbox.bots.api.test;
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
