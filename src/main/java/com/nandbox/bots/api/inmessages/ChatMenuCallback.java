@@ -5,6 +5,7 @@ import com.nandbox.bots.api.data.ButtonQueryResult;
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.User;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -25,6 +26,7 @@ public class ChatMenuCallback {
 	private static final String KEY_CHAT = "chat";
 	private static final String KEY_FROM = "from";
 	private static final String KEY_MENU_REF = "menu_ref";
+	private static final String KEY_BUTTON_DATA= "button_data";
 
 	private Long date;
 	private String nextMenu;
@@ -33,6 +35,7 @@ public class ChatMenuCallback {
 	private Chat chat;
 	private String buttonCallback;
 	private String menuRef;
+	private JSONArray buttonData;
 	ButtonQueryResult buttonQueryResult;
 
 	public ChatMenuCallback(JSONObject jsonObj) {
@@ -51,6 +54,8 @@ public class ChatMenuCallback {
 		this.buttonCallback = String.valueOf(obj.get(KEY_BUTTON_CALLBACK));
 		this.nextMenu = String.valueOf(obj.get(KEY_NEXT_MENU));
 		this.date = Utils.getLong(obj.get(KEY_DATE));
+		this.buttonData = (JSONArray) obj.get(KEY_BUTTON_DATA);
+
 	}
 
 	/**
@@ -86,6 +91,8 @@ public class ChatMenuCallback {
 		if (nextMenu != null)
 			obj.put(KEY_NEXT_MENU, nextMenu);
 
+		if (buttonData!=null)
+			obj.put(KEY_BUTTON_DATA,buttonData);
 		//System.out.println("to " + obj.toJSONString());
 		return obj;
 
@@ -209,6 +216,10 @@ public class ChatMenuCallback {
 	 */
 	public void setButtonQueryResult(ButtonQueryResult buttonQueryResult) {
 		this.buttonQueryResult = buttonQueryResult;
+	}
+
+	public JSONArray getButtonData() {
+		return buttonData;
 	}
 
 }
