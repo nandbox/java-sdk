@@ -905,6 +905,12 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message                
 		 */
 		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab);
+		
+		void sendCellText(String userId, String screenId, String cellId, String text, Long reference);
+		
+		void sendCellPhoto(String userId, String screenId, String cellId, String photoFileId, Long reference);
+		
+		void sendCellVideo(String userId, String screenId, String cellId, String videoFileId, Long reference);
 
 		/**
 		 * Use this method to get profile for a user
