@@ -611,7 +611,7 @@ public class IncomingMessage {
 	}
 
 	/**
-	 * @param article
+	 * @param article article to set
 	 */
 	public void setArticle(Article article) {
 		this.article = article;
