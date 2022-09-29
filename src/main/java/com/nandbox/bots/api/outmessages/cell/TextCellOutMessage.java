@@ -22,7 +22,7 @@ public class TextCellOutMessage extends CellOutMessage {
 		JSONObject obj = super.toJsonObject();
 		
 		if(text != null)
-			obj.put(KEY_TEXT, userId);
+			obj.put(KEY_TEXT, text);
 
 		return obj;
 	}

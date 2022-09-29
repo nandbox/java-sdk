@@ -4,12 +4,14 @@ import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.inmessages.*;
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Random;
 
 public class Main {
     public static String TOKEN;
@@ -50,10 +52,25 @@ public class Main {
             @Override
             public void onChatMenuCallBack(ChatMenuCallback chatMenuCallback) {
                 System.out.println("Inside onChatMenuCallBack fn");
-                System.out.println(chatMenuCallback.getButtonData());
-                String chatId = chatMenuCallback.getChat().getId(); // get your chat Id
-//                String text = chatMenuCallback.getText(); // get your text message
-                api.sendText(chatId, chatMenuCallback.getButtonData().toJSONString()); // Sending message back as an Echo
+                JSONObject callBackData = chatMenuCallback.toJsonObject();
+                String userId = (String)((JSONObject) callBackData.get("chat")).get("id");
+                System.out.println(userId);
+                String screenId = ((String) callBackData.get("menu_ref"));
+                System.out.println(screenId);
+                String cellId =((String) callBackData.get("button_callback"));
+                System.out.println(cellId);
+                JSONArray button_data =((JSONArray)callBackData.get("button_data"));
+                JSONObject addJsonObject = new JSONObject();
+                Random random = new Random();
+                int randNumber = random.nextInt(1000);
+                addJsonObject.put("button_callback",null);
+                addJsonObject.put("button_id","buttond53jhdqvc");
+                addJsonObject.put("button_value",randNumber + "testing new feature");
+                addJsonObject.put("button_description",randNumber + "this is a description for the new feature");
+                addJsonObject.put("button_db",1);
+                button_data.add(addJsonObject);
+                System.out.println(button_data);
+                api.sendCellText(userId,screenId,cellId,button_data.toString(), 99555555220L);
             }
 
             @Override

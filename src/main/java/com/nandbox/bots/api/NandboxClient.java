@@ -888,6 +888,7 @@ public class NandboxClient {
 				public void sendCellText(String userId, String screenId, String cellId, String text, Long reference) {
 					TextCellOutMessage textMsg = new TextCellOutMessage();
 					textMsg.setUserId(userId);
+//					textMsg.setChatId(userId);
 					textMsg.setCellId(cellId);
 					textMsg.setScreenId(screenId);
 					textMsg.setText(text);
