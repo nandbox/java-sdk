@@ -74,6 +74,9 @@ import com.nandbox.bots.api.outmessages.GetWhiteListOutMessage;
 import com.nandbox.bots.api.outmessages.LocationOutMessage;
 import com.nandbox.bots.api.outmessages.OutMessage;
 import com.nandbox.bots.api.outmessages.OutMessage.OutMessageMethod;
+import com.nandbox.bots.api.outmessages.cell.PhotoCellOutMessage;
+import com.nandbox.bots.api.outmessages.cell.TextCellOutMessage;
+import com.nandbox.bots.api.outmessages.cell.VideoCellOutMessage;
 import com.nandbox.bots.api.outmessages.PhotoOutMessage;
 import com.nandbox.bots.api.outmessages.RecallOutMessage;
 import com.nandbox.bots.api.outmessages.RemoveChatMemberOutMessage;
@@ -314,7 +317,7 @@ public class NandboxClient {
 				@Override
 				public void send(OutMessage message) {
 					JSONObject messageObj = message.toJsonObject();
-					//System.err.println(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
+					System.out.println(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
 					NandboxClient.log.info(formatDate(new Date()) + ">>>>>> Sending Message :" + messageObj);
 					InternalWebSocket.this.send(messageObj.toJSONString());
 				}
@@ -886,6 +889,41 @@ public class NandboxClient {
 					generatePermanentUrl.setParam1(param1);
 					api.send(generatePermanentUrl);
 
+				}
+
+				@Override
+				public void sendCellText(String userId, String screenId, String cellId, String text, Long reference) {
+					TextCellOutMessage textMsg = new TextCellOutMessage();
+					textMsg.setUserId(userId);
+					textMsg.setCellId(cellId);
+					textMsg.setScreenId(screenId);
+					textMsg.setText(text);
+					textMsg.setReference(reference);
+					api.send(textMsg);
+				}
+
+				@Override
+				public void sendCellPhoto(String userId, String screenId, String cellId, String photoFileId,
+						Long reference) {
+					PhotoCellOutMessage photoMsg = new PhotoCellOutMessage();
+					photoMsg.setUserId(userId);
+					photoMsg.setCellId(cellId);
+					photoMsg.setScreenId(screenId);
+					photoMsg.setPhoto(photoFileId);
+					photoMsg.setReference(reference);
+					api.send(photoMsg);
+				}
+
+				@Override
+				public void sendCellVideo(String userId, String screenId, String cellId, String videoFileId,
+						Long reference) {
+					VideoCellOutMessage videoMsg = new VideoCellOutMessage();
+					videoMsg.setUserId(userId);
+					videoMsg.setCellId(cellId);
+					videoMsg.setScreenId(screenId);
+					videoMsg.setVideo(videoFileId);
+					videoMsg.setReference(reference);
+					api.send(videoMsg);
 				}
 
 			};
