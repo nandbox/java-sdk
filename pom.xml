@@ -6,11 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.nandbox.bots.api</groupId>
-	<artifactId>bots-api</artifactId>
-	<version>1.1.9</version>
+	<artifactId>nandboxbots-api</artifactId>
+	<version>1.1.12</version>
 
 	<name>nandboxbots-api</name>
-	<url>https://botapi.nandbox.com</url>
+	<url>https://github.com/nandbox/nandboxbotsapi</url>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -34,15 +34,15 @@
 	<scm>
 		<connection>scm:git:git://github.com/nandbox/nandboxbotsapi.git</connection>
 		<developerConnection>scm:git:ssh://github.com:nandbox/nandboxbotsapi.git</developerConnection>
-		<url>http://github.com/nandbox/nandboxbotsapi.git/tree/master</url>
+		<url>https://github.com/nandbox/nandboxbotsapi</url>
 	</scm>
 
 	<developers>
 		<developer>
-			<email>ahmed.malatawy@nandbox.com</email>
-			<name>Ahmed A. El-Malatawy</name>
-			<url>https://github.com/nandbox</url>
-			<id>amalatawy</id>
+			<email>ameer.alahmedy@nandbox.com</email>
+			<name>Amir Salah</name>
+			<url>https://github.com/AmirAlahmedy</url>
+			<id>AmirAlahmedy</id>
 		</developer>
 	</developers>
 
@@ -152,7 +152,11 @@
 			</plugin>
 		</plugins>
 	</build>
-	<description>Easy to use library to create nandbox Bots</description>
+	<description>Easy to use library to create nandbox bots.</description>
+	<organization>
+		<name>nandbox Inc.</name>
+		<url>https://nandbox.com/</url>
+	</organization>
 </project>
 
  

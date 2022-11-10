@@ -23,6 +23,7 @@ public class EchoTextMessage {
 	public static final String TOKEN = "<PUT your token here >";
 
 	public static void main(String[] args) throws Exception {
+		
 		NandboxClient client = NandboxClient.get();
 		client.connect(TOKEN, new Nandbox.Callback() {
 			Nandbox.Api api = null;
@@ -49,12 +50,12 @@ public class EchoTextMessage {
 
 			@Override
 			public void onClose() {
-
+				System.out.println("Closed!");
 			}
 
 			@Override
 			public void onError() {
-
+				System.out.println("Error!");
 			}
 
 			@Override
@@ -109,37 +110,31 @@ public class EchoTextMessage {
 
 			@Override
 			public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void permanentUrl(PermanentUrl permenantUrl) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onChatDetails(Chat chat) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onInlineSearh(InlineSearch inlineSearch) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onBlackList(BlackList blackList) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onWhiteList(WhiteList blackList) {
-				// TODO Auto-generated method stub
 				
 			}
 
