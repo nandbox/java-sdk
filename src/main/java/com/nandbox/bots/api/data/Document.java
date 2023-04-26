@@ -20,6 +20,10 @@ public class Document {
 	private String name;
 	private Long size;
 
+	/**
+	 Creates a new Document object from a JSONObject.
+	 @param obj the JSONObject to create the document from
+	 */
 	public Document(JSONObject obj) {
 		this.id = String.valueOf(obj.get(KEY_ID));
 		this.name = String.valueOf(obj.get(KEY_NAME));
@@ -27,6 +31,10 @@ public class Document {
 
 	}
 
+	/**
+	 Returns a JSONObject representation of the document.
+	 @return the JSONObject representation of the document
+	 */
 	public JSONObject toJsonObject() {
 		JSONObject obj = new JSONObject();
 		if (id != null)
@@ -39,6 +47,10 @@ public class Document {
 
 	}
 
+	/**
+	 Returns a string representation of the document in JSON format.
+	 @return a string representation of the document in JSON format
+	 */
 	@Override
 	public String toString() {
 		StringBuilder  outStrBuf = new StringBuilder ();
@@ -54,45 +66,54 @@ public class Document {
 	}
 
 	/**
-	 * @return the size
+	 * Returns the size of the document.
+	 *
+	 * @return the size of the document
 	 */
 	public Long getSize() {
 		return size;
 	}
 
 	/**
-	 * @param size
-	 *            the size to set
+	 * Sets the size of the document.
+	 *
+	 * @param size the size to set
 	 */
 	public void setSize(Long size) {
 		this.size = size;
 	}
 
 	/**
-	 * @return the id
+	 * Returns the ID of the document.
+	 *
+	 * @return the ID of the document
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Sets the ID of the document.
+	 *
+	 * @param id the ID to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the name
+	 * Returns the name of the document.
+	 *
+	 * @return the name of the document
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * Sets the name of the document.
+	 *
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;

@@ -8,6 +8,10 @@ import net.minidev.json.JSONObject;
  * @author Hossam
  *
  */
+
+/**
+ * Represents a contact with a name and a phone number.
+ */
 public class Contact {
 
 	private static final String KEY_NAME = "name";
@@ -16,11 +20,21 @@ public class Contact {
 	private String name;
 	private String phoneNumber;
 
+	/**
+	 * Creates a new Contact object from a JSONObject.
+	 *
+	 * @param obj the JSONObject to create the contact from
+	 */
 	public Contact(JSONObject obj) {
 		this.name = String.valueOf(obj.get(KEY_NAME));
 		this.phoneNumber = String.valueOf(obj.get(KEY_PHONE_NUMBER));
 	}
 
+	/**
+	 * Returns a JSONObject representation of the contact.
+	 *
+	 * @return the JSONObject representation of the contact
+	 */
 	public JSONObject toJsonObject() {
 		JSONObject obj = new JSONObject();
 		if (name != null)
@@ -31,6 +45,11 @@ public class Contact {
 
 	}
 
+	/**
+	 * Returns a JSON-formatted string representation of the contact.
+	 *
+	 * @return the JSON-formatted string representation of the contact
+	 */
 	@Override
 	public String toString() {
 		StringBuilder  outStrBuf = new StringBuilder();
@@ -45,30 +64,36 @@ public class Contact {
 	}
 
 	/**
-	 * @return the name
+	 * Returns the name of the contact.
+	 *
+	 * @return the name of the contact
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * Sets the name of the contact.
+	 *
+	 * @param name the name to set for the contact
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the phoneNumber
+	 * Returns the phone number of the contact.
+	 *
+	 * @return the phone number of the contact
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
 	/**
-	 * @param phoneNumber
-	 *            the phoneNumber to set
+	 * Sets the phone number of the contact.
+	 *
+	 * @param phoneNumber the phone number to set for the contact
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;

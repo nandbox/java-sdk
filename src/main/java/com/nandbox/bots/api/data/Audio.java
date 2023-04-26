@@ -14,21 +14,69 @@ import net.minidev.json.JSONObject;
  * @author Ahmed A. El-Malatawy
  *
  */
+/**
+
+ The Audio class represents an audio file and contains information about the audio file such as its ID, title, performer,
+
+ size and duration.
+ */
 public class Audio {
 
+	/**
+
+	 The key used to represent the ID of the audio file in JSON objects.
+	 */
 	public static final String KEY_ID = "id";
+	/**
+
+	 The key used to represent the title of the audio file in JSON objects.
+	 */
 	public static final String KEY_TITLE = "title";
+	/**
+
+	 The key used to represent the performer of the audio file in JSON objects.
+	 */
 	public static final String KEY_PERFORMER = "performer";
+	/**
+
+	 The key used to represent the size of the audio file in JSON objects.
+	 */
 	public static final String KEY_SIZE = "size";
+	/**
 
+	 The key used to represent the duration of the audio file in JSON objects.
+	 */
 	public static final String KEY_DURATION = "duration";
+	/**
 
+	 The ID of the audio file.
+	 */
 	private String id;
-	private String title;
-	private String performer;
-	private Long size;
-	private Integer duration;
+	/**
 
+	 The title of the audio file.
+	 */
+	private String title;
+	/**
+
+	 The performer of the audio file.
+	 */
+	private String performer;
+	/**
+
+	 The size of the audio file in bytes.
+	 */
+	private Long size;
+	/**
+
+	 The duration of the audio file in seconds.
+	 */
+	private Integer duration;
+	/**
+
+	 Constructs an Audio object from a JSONObject.
+	 @param obj the JSONObject from which to construct the Audio object.
+	 */
 	public Audio(JSONObject obj) {
 		this.id = String.valueOf(obj.get(KEY_ID));
 		this.title = String.valueOf(obj.get(KEY_TITLE));
@@ -36,7 +84,12 @@ public class Audio {
 		this.size = Utils.getLong(obj.get(KEY_SIZE));
 		this.duration = Utils.getInteger(obj.get(KEY_DURATION));
 	}
+	/**
 
+	 Returns a JSONObject representing the Audio object.
+
+	 @return a JSONObject representing the Audio object.
+	 */
 	public JSONObject toJsonObject() {
 		JSONObject obj = new JSONObject();
 
@@ -60,75 +113,90 @@ public class Audio {
 	}
 
 	/**
-	 * @return the id
+
+	 Returns the ID of the audio file.
+	 @return the ID of the audio file.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+
+	 Sets the ID of the audio file.
+	 @param id the ID of the audio file to be set.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the size
+
+	 Returns the size of the audio file in bytes.
+	 @return the size of the audio file in bytes.
 	 */
 	public Long getSize() {
 		return size;
 	}
 
 	/**
-	 * @param size
-	 *            the size to set
+
+	 Sets the size of the audio file in bytes.
+	 @param size the size of the audio file to be set.
 	 */
 	public void setSize(Long size) {
 		this.size = size;
 	}
 
 	/**
-	 * @return the duration
+
+	 Returns the duration of the audio file in seconds.
+	 @return the duration of the audio file in seconds.
 	 */
 	public Integer getDuration() {
 		return duration;
 	}
 
 	/**
-	 * @param duration
-	 *            the duration to set
+
+	 Sets the duration of the audio file in seconds.
+	 @param duration the duration of the audio file to be set.
 	 */
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 
 	/**
-	 * @return the title
+
+	 Returns the title of the audio file.
+	 @return the title of the audio file.
 	 */
 	public String getTitle() {
 		return title;
 	}
 
 	/**
-	 * @param title
-	 *            the title to set
+
+	 Sets the title of the audio file.
+	 @param title the title of the audio file to be set.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * @return the performer name
+
+	 Returns the performer name of the audio file.
+	 @return the performer name of the audio file.
 	 */
 	public String getPerformer() {
 		return performer;
 	}
 
 	/**
-	 * @param performer
-	 *            the performer name to set
+
+	 Sets the performer name of the audio file.
+	 @param performer the performer name of the audio file to be set.
 	 */
 	public void setPerformer(String performer) {
 		this.performer = performer;

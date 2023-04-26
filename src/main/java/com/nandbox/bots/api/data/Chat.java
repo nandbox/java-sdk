@@ -6,12 +6,16 @@ import net.minidev.json.JSONObject;
 /**
  * Object representing incoming Message source (i.e. from Group or Channel or
  * Contact ) and sender (i.e. Sender user , Group, or Channel)
- * 
+ *
  * @author Hossam
  *
  */
+/**
+ * The Chat class represents a chat in a messaging application.
+ */
 public class Chat {
 
+	// Constants for the keys in JSON objects
 	private static final String KEY_ID = "id";
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_NAME = "name";
@@ -26,6 +30,7 @@ public class Chat {
 	private static final String KEY_INVITE_LINK = "invite_link";
 	private static final String KEY_TAGS_DEFINITION = "tagsDefinition";
 
+	// Fields representing the properties of the chat
 	private String id;
 	private String title;
 	private String name;
@@ -40,11 +45,19 @@ public class Chat {
 	private String inviteLink;
 	private TagDefination[] tagsDefinition;
 
+	/**
+	 * Default constructor for Chat objects.
+	 */
 	public Chat() {
 	}
 
+	/**
+	 * Constructor that initializes a Chat object with the values from a JSONObject.
+	 *
+	 * @param obj the JSONObject to initialize the Chat object with.
+	 */
 	public Chat(JSONObject obj) {
-
+		// Initialize fields with values from the JSONObject
 		this.id = (String) obj.get(KEY_ID);
 		this.title = (String) obj.get(KEY_TITLE);
 		this.name = (String) obj.get(KEY_NAME);
@@ -57,12 +70,8 @@ public class Chat {
 		this.memberCount = (Integer) obj.get(KEY_MEMBER_COUNT);
 		this.inviteLink = (String) obj.get(KEY_INVITE_LINK);
 
-		// this.tag = obj.get(KEY_TAGS_DEFINITION) != null
-		// ? new Tag((JSONObject) obj.get(KEY_TAGS_DEFINITION))
-		// : null;
-
 		JSONArray tagsArrayObj = (JSONArray) obj.get(KEY_TAGS_DEFINITION);
-		if (null !=tagsArrayObj) {
+		if (null != tagsArrayObj) {
 			setTagsDefinition(new TagDefination[tagsArrayObj.size()]);
 			for (int i = 0; i < tagsArrayObj.size(); i++) {
 				getTagsDefinition()[i] = new TagDefination((JSONObject) tagsArrayObj.get(i));
@@ -70,6 +79,11 @@ public class Chat {
 		}
 	}
 
+	/**
+	 * Returns a JSONObject representation of the Chat object.
+	 *
+	 * @return a JSONObject representation of the Chat object.
+	 */
 	public JSONObject toJsonObject() {
 
 		JSONObject obj = new JSONObject();
@@ -97,165 +111,186 @@ public class Chat {
 			obj.put(KEY_INVITE_LINK, inviteLink);
 		if (photo != null)
 			obj.put(KEY_PHOTO, photo);
-
-		// if (tag != null)
-		// obj.put(KEY_TAGS_DEFINITION, tag);
-
-		// JSONArray tagsArrayObj = new JSONArray();
-		// for (int i = 0; i < tag.length; i++) {
-		// tagsArrayObj.add(tag[i].toJsonObject());
-		// }
-		// obj.put(KEY_TAGS_DEFINITION, tagsArrayObj);
-
 		return obj;
 
 	}
 
 	/**
-	 * @return the id
+	 * Getter method for the id field.
+	 *
+	 * @return the id of the chat.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Setter method for the id field.
+	 *
+	 * @param id the id of the chat.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the Title for channels and group chats
+	 * Getter method for the title field.
+	 *
+	 * @return the title of the chat.
 	 */
 	public String getTitle() {
 		return title;
 	}
 
 	/**
-	 * @param title
-	 *            the Title for channels and group chats set
+	 * Setter method for the title field.
+	 *
+	 * @param title the title of the chat.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * @return the version
+	 * Getter method for the version field.
+	 *
+	 * @return the version of the chat.
 	 */
 	public String getVersion() {
 		return version;
 	}
 
 	/**
-	 * @param version
-	 *            the version to set
+	 * Setter method for the version field.
+	 *
+	 * @param version the version of the chat.
 	 */
 	public void setVersion(String version) {
 		this.version = version;
 	}
 
 	/**
-	 * @return the languageCode
+	 * Getter method for the languageCode field.
+	 *
+	 * @return the language code of the chat.
 	 */
 	public Integer getLanguageCode() {
 		return languageCode;
 	}
 
 	/**
-	 * @param languageCode
-	 *            the languageCode to set
+	 * Setter method for the languageCode field.
+	 *
+	 * @param languageCode the language code of the chat.
 	 */
 	public void setLanguageCode(Integer languageCode) {
 		this.languageCode = languageCode;
 	}
 
 	/**
-	 * @return the regions
+	 * Getter method for the regions field.
+	 *
+	 * @return the regions of the chat.
 	 */
 	public String getRegions() {
 		return regions;
 	}
 
 	/**
-	 * @param regions
-	 *            the regions to set
+	 * Setter method for the regions field.
+	 *
+	 * @param regions the regions of the chat.
 	 */
 	public void setRegions(String regions) {
 		this.regions = regions;
 	}
 
 	/**
-	 * @return the description
+	 * Getter method for the description field.
+	 *
+	 * @return the description of the chat.
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * Setter method for the description field.
+	 *
+	 * @param description the description of the chat.
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * @return the category
+	 * Getter method for the category field.
+	 *
+	 * @return the category of the chat.
 	 */
 	public String getCategory() {
 		return category;
 	}
 
 	/**
-	 * @param category
-	 *            the category to set
+	 * Setter method for the category field.
+	 *
+	 * @param category the category of the chat.
 	 */
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
 	/**
-	 * @return the memberCount
+	 * Getter method for the memberCount field.
+	 *
+	 * @return the member count of the chat.
 	 */
 	public Integer getMemberCount() {
 		return memberCount;
 	}
 
 	/**
-	 * @param memberCount
-	 *            the memberCount to set
+	 * Setter method for the memberCount field.
+	 *
+	 * @param memberCount the member count of the chat.
 	 */
 	public void setMemberCount(Integer memberCount) {
 		this.memberCount = memberCount;
 	}
 
 	/**
-	 * @return the inviteLink
+	 * Getter method for the inviteLink field.
+	 *
+	 * @return the invite link of the chat.
 	 */
 	public String getInviteLink() {
 		return inviteLink;
 	}
 
 	/**
-	 * @param inviteLink
-	 *            the inviteLink to set
+	 * Setter method for the inviteLink field.
+	 *
+	 * @param inviteLink the invite link of the chat.
 	 */
 	public void setInviteLink(String inviteLink) {
 		this.inviteLink = inviteLink;
 	}
 
+
 	/**
-	 * @return the photo
+	 * Getter method for the photo field.
+	 *
+	 * @return the photo of the chat.
 	 */
 	public Photo getPhoto() {
 		return photo;
 	}
 
 	/**
-	 * @param photo
-	 *            the photo to set
+	 * Setter method for the photo field.
+	 *
+	 * @param photo the photo of the chat.
 	 */
 	public void setPhoto(Photo photo) {
 		this.photo = photo;
@@ -269,8 +304,7 @@ public class Chat {
 	}
 
 	/**
-	 * @param type
-	 *            the type to set
+	 * @param type the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
@@ -284,27 +318,30 @@ public class Chat {
 	}
 
 	/**
-	 * @param name
-	 *            user or bot name to set
+	 * @param name user or bot name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Getter method for the tagsDefinition field.
+	 *
+	 * @return the tag definitions of the chat.
+	 */
+
 	public TagDefination[] getTagsDefinition() {
 		return tagsDefinition;
 	}
 
+	/**
+	 * Setter method for the tagsDefinition field.
+	 *
+	 * @param tagsDefinition the tag definitions of the chat.
+	 */
 	public void setTagsDefinition(TagDefination[] tagsDefinition) {
 		this.tagsDefinition = tagsDefinition;
 	}
 
-	// public Tag getTag() {
-	// return tag;
-	// }
-	//
-	// public void setTag(Tag tag) {
-	// this.tag = tag;
-	// }
-
 }
+

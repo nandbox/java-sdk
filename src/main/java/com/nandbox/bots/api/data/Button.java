@@ -6,8 +6,10 @@ import net.minidev.json.JSONObject;
  * @author Ahmed A. El-Malatawy
  *
  */
+// This is a Java class called "Button" that appears to be used for creating UI buttons.
 public class Button {
 
+	// These are constants used as keys for JSON objects.
 	private static final String KEY_BUTTON_SPAN = "button_span";
 	private static final String KEY_BUTTON_ORDER = "button_order";
 	private static final String KEY_BUTTON_TEXT_COLOR = "button_textcolor";
@@ -24,6 +26,7 @@ public class Button {
 	public static final String BUTTON_QUERY_CONTACT = "contact";
 	public static final String KEY_BUTTON_NAV_TYPE = "nav_type";
 
+	// These are private fields representing the properties of a button.
 	private Integer buttonSpan;
 	private Integer buttonOrder;
 	private String buttonTextColor;
@@ -38,17 +41,19 @@ public class Button {
 	private String buttonIconBgColor;
 	private String navType;
 
+	// This is the default constructor for the Button class.
 	public Button() {
 
 	}
 
+	// This is a constructor that takes a buttonLabel parameter.
 	public Button(String buttonLable) {
 		this.buttonLabel = buttonLable;
 	}
 
 	/**
-	 * @param obj
-	 *            json object to be used to compose User object
+	 * This is a constructor that takes a JSONObject parameter, which used to create a Button object from a JSON object.
+	 * @param obj The JSON object to be used to compose a Button object.
 	 */
 	public Button(JSONObject obj) {
 		this.buttonOrder = (Integer) obj.get(KEY_BUTTON_ORDER);
@@ -67,9 +72,14 @@ public class Button {
 
 	}
 
+	/**
+	 * This method converts a Button object to a JSONObject.
+	 * @return A JSONObject representing the Button object.
+	 */
 	public JSONObject toJsonObject() {
 		JSONObject obj = new JSONObject();
 
+		// If a field is not null, add it to the JSONObject.
 		if (buttonOrder != null)
 			obj.put(KEY_BUTTON_ORDER, buttonOrder);
 		if (buttonSpan != null)
@@ -91,14 +101,17 @@ public class Button {
 		if (buttonQuery != null)
 			obj.put(KEY_BUTTON_QUERY, buttonQuery);
 
+		// If nextMenu is not null, add it to the JSONObject.
 		if (nextMenu != null) {
 			obj.put(KEY_NEXT_MENU, nextMenu);
 		}
 
+		// If chat is not null, add it to the JSONObject.
 		if (chat != null) {
 			obj.put(KEY_CHAT, chat);
 		}
 
+		// If navType is not null, add it to the JSONObject.
 		if (navType != null) {
 			obj.put(KEY_BUTTON_NAV_TYPE, navType);
 		}
@@ -108,189 +121,210 @@ public class Button {
 	}
 
 	/**
-	 * @return the buttonOrder
+	 * This method returns the label of the button.
+	 * @return The label of the button.
 	 */
 	public Integer getButtonOrder() {
 		return buttonOrder;
 	}
 
 	/**
-	 * @param buttonOrder
-	 *            the buttonOrder to set
+	 * This method sets the label of the button.
+	 * @param buttonLabel The new label of the button.
 	 */
 	public void setButtonOrder(Integer buttonOrder) {
 		this.buttonOrder = buttonOrder;
 	}
 
 	/**
-	 * @return the buttonSpan
+	 * This method returns the span associated with the button.
+	 * @return The span associated with the button.
 	 */
 	public Integer getButtonSpan() {
 		return buttonSpan;
 	}
 
 	/**
-	 * @param buttonSpan
-	 *            the buttonSpan to set
+	 * This method sets the span associated with the button.
+	 * @param buttonSpan The new span associated with the button.
 	 */
 	public void setButtonSpan(Integer buttonSpan) {
 		this.buttonSpan = buttonSpan;
 	}
 
 	/**
-	 * @return the buttonTextColor
+	 * This method returns the text Color associated with the button.
+	 * @return The text Color associated with the button.
 	 */
 	public String getButtonTextColor() {
 		return buttonTextColor;
 	}
 
 	/**
-	 * @param buttonTextColor
-	 *            the buttonTextColor to set
+	 * This method sets the text Color associated with the button.
+	 * @param buttonTextColor The new text Color associated with the button.
 	 */
 	public void setButtonTextColor(String buttonTextColor) {
 		this.buttonTextColor = buttonTextColor;
 	}
 
 	/**
-	 * @return the buttonBgColor
+	 * This method returns the background color of the button.
+	 * @return The background color of the button.
 	 */
 	public String getButtonBgColor() {
 		return buttonBgColor;
 	}
 
 	/**
-	 * @param buttonBgColor
-	 *            the buttonBgColor to set
+	 * This method sets the background color of the button.
+	 * @param buttonBgColor The new background color of the button.
 	 */
 	public void setButtonBgColor(String buttonBgColor) {
 		this.buttonBgColor = buttonBgColor;
 	}
 
 	/**
-	 * @return the buttonCallBack
+	 * This method returns the callBack of the button.
+	 * @return The callBack of the button.
 	 */
 	public String getButtonCallBack() {
 		return buttonCallBack;
 	}
 
 	/**
-	 * @param buttonCallBack
-	 *            the buttonCallBack to set
+	 * This method sets the callBack of the button.
+	 * @param buttonCallBack The new callBack of the button.
 	 */
 	public void setButtonCallBack(String buttonCallBack) {
 		this.buttonCallBack = buttonCallBack;
 	}
 
 	/**
-	 * @return the buttonLabel
+	 * This method returns the label associated with the button.
+	 * @return The label associated with the button.
 	 */
 	public String getButtonLabel() {
 		return buttonLabel;
 	}
 
 	/**
-	 * @param buttonLabel
-	 *            the buttonLabel to set
+	 * This method sets the label associated with the button.
+	 * @param buttonLabel The new label associated with the button.
 	 */
 	public void setButtonLabel(String buttonLabel) {
 		this.buttonLabel = buttonLabel;
 	}
 
 	/**
-	 * @return the buttonURL
+	 * This method returns the url of the button.
+	 * @return The url of the button.
 	 */
 	public String getButtonURL() {
 		return buttonURL;
 	}
 
 	/**
-	 * @param buttonURL
-	 *            the buttonURL to set
+	 * This method sets the url of the button.
+	 * @param buttonURL The url of the button.
 	 */
 	public void setButtonURL(String buttonURL) {
 		this.buttonURL = buttonURL;
 	}
 
 	/**
-	 * @return the buttonQuery
+	 * This method returns the query of the button.
+	 * @return The query of the button.
 	 */
 	public String getButtonQuery() {
 		return buttonQuery;
 	}
 
 	/**
-	 * @param buttonQuery
-	 *            the buttonQuery to set
+	 * This method sets the query of the button.
+	 * @param buttonQuery The query of the button.
 	 */
 	public void setButtonQuery(String buttonQuery) {
 		this.buttonQuery = buttonQuery;
 	}
 
 	/**
-	 * @return the nextMenuRef
+	 * This method returns the next menu associated with the button.
+	 * @return The next menu associated with the button.
 	 */
 	public String getNextMenu() {
 		return nextMenu;
 	}
 
 	/**
-	 * @param nextMenu
-	 *            the nextMenuRef to set
+	 * This method sets the next menu associated with the button.
+	 * @param nextMenu The new next menu associated with the button.
 	 */
 	public void setNextMenu(String nextMenu) {
 		this.nextMenu = nextMenu;
 	}
 
 	/**
-	 * @return the chat
+	 * This method returns the chat associated with the button.
+	 * @return The chat associated with the button.
 	 */
 	public String getChat() {
 		return chat;
 	}
 
 	/**
-	 * @param chat
-	 *            the chat to set
+	 * This method sets the chat associated with the button.
+	 * @param chat The new chat associated with the button.
 	 */
 	public void setChat(String chat) {
 		this.chat = chat;
 	}
 
 	/**
-	 * @return the buttonIcon
+	 * This method returns the icon associated with the button.
+	 * @return The icon associated with the button.
 	 */
 	public String getButtonIcon() {
 		return buttonIcon;
 	}
 
 	/**
-	 * @param buttonIcon
-	 *            the buttonIcon to set
+	 * This method sets the icon associated with the button.
+	 * @param buttonIcon The new icon associated with the button.
 	 */
 	public void setButtonIcon(String buttonIcon) {
 		this.buttonIcon = buttonIcon;
 	}
 
 	/**
-	 * @return the buttonIconBgColor
+	 * This method returns the background color of the icon associated with the button.
+	 * @return The background color of the icon associated with the button.
 	 */
 	public String getButtonIconBgColor() {
 		return buttonIconBgColor;
 	}
 
 	/**
+	 * This method set the background color of the icon associated with the button.
 	 * @param buttonIconBgColor
-	 *            the buttonIconBgColor to set
+	 *
 	 */
 	public void setButtonIconBgColor(String buttonIconBgColor) {
 		this.buttonIconBgColor = buttonIconBgColor;
 	}
 
+	/**
+	 * This method returns the nav type.
+	 * @return The nav type.
+	 */
 	public String getNavType() {
 		return navType;
 	}
 
+	/**
+	 * This method set the nav type.
+	 * @param navType
+	 */
 	public void setNavType(String navType) {
 		this.navType = navType;
 	}

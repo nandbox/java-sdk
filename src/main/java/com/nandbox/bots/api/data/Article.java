@@ -10,6 +10,10 @@ import net.minidev.json.JSONObject;
  * @author Hossam Mohamed
  *
  */
+
+/**
+ * Represents an article object with various attributes such as id, width, height, size, and thumbnail.
+ */
 public class Article {
 
 	public static final String KEY_ID = "id";
@@ -35,6 +39,10 @@ public class Article {
 	private Long size;
 	private Thumbnail thumbnail;
 
+	/**
+	 * Constructs an Article object using a JSONObject.
+	 * @param obj The JSONObject to use for initialization.
+	 */
 	public Article(JSONObject obj) {
 
 		this.id = String.valueOf(obj.get(KEY_ID));
@@ -48,7 +56,10 @@ public class Article {
 		// this.photo = String.valueOf(obj.get(KEY_PHOTO));
 		// this.photoUrl = String.valueOf(obj.get(KEY_PHOTO_URL));
 	}
-
+	/**
+	 * Returns a JSONObject representation of the article object.
+	 * @return The JSONObject representation of the article object.
+	 */
 	public JSONObject toJsonObject() {
 		JSONObject obj = new JSONObject();
 
@@ -71,76 +82,83 @@ public class Article {
 
 	}
 
+	// Getters and setters
+
 	/**
-	 * @return the id
+	 * Returns the article ID.
+	 * @return The article ID.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * Sets the article ID.
+	 * @param id The article ID to set.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the width
+	 * Returns the width of the article.
+	 * @return The width of the article.
 	 */
 	public Integer getWidth() {
 		return width;
 	}
 
 	/**
-	 * @param width
-	 *            the width to set
+	 * Sets the width of the article.
+	 * @param width The width of the article to set.
 	 */
 	public void setWidth(Integer width) {
 		this.width = width;
 	}
 
 	/**
-	 * @return the height
+	 * Returns the height of the article.
+	 * @return The height of the article.
 	 */
 	public Integer getHeight() {
 		return height;
 	}
 
 	/**
-	 * @param height
-	 *            the height to set
+	 * Sets the height of the article.
+	 * @param height The height of the article to set.
 	 */
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
 
 	/**
-	 * @return the size
+	 * Returns the size of the article.
+	 * @return The size of the article.
 	 */
 	public Long getSize() {
 		return size;
 	}
 
 	/**
-	 * @param size
-	 *            the size to set
+	 * Sets the size of the article.
+	 * @param size The size of the article to set.
 	 */
 	public void setSize(Long size) {
 		this.size = size;
 	}
 
 	/**
-	 * @return the thumbnail
+	 * Returns the thumbnail of the article.
+	 * @return The thumbnail of the article.
 	 */
 	public Thumbnail getThumbnail() {
 		return thumbnail;
 	}
 
 	/**
-	 * @param thumbnail
-	 *            the thumbnail to set
+	 * Sets the thumbnail of the article.
+	 * @param thumbnail The thumbnail of the article to set.
 	 */
 	public void setThumbnail(Thumbnail thumbnail) {
 		this.thumbnail = thumbnail;

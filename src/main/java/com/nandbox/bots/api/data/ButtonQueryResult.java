@@ -2,27 +2,41 @@ package com.nandbox.bots.api.data;
 
 import net.minidev.json.JSONObject;
 
+/**
+ * ButtonQueryResult is a Java class that represents the result of a query made from a button press.
+ * The class has three private instance variables of type String called latitude, longitude, and contact.
+ * It also has three static final variables of type String called KEY_LATITUDE, KEY_LONGITUDE, and KEY_CONTACT.
+ */
 public class ButtonQueryResult {
 
-
+	// Constants for JSON keys
 	private static final String KEY_LATITUDE = "latitude";
 	private static final String KEY_LONGITUDE = "longitude";
 	private static final String KEY_CONTACT = "contact";
-	
+
+	// Instance variables
 	private String latitude;
 	private String longitude;
 	private String  contact;
-	
-	public ButtonQueryResult(JSONObject obj) {
 
+	/**
+	 * Constructs a ButtonQueryResult object from a JSONObject.
+	 * @param obj a JSONObject representing a button query result
+	 */
+	public ButtonQueryResult(JSONObject obj) {
+		// Extract values from JSONObject and initialize instance variables
 		this.latitude = String.valueOf(obj.get(KEY_LATITUDE));
 		this.longitude = String.valueOf(obj.get(KEY_LONGITUDE));
 		this.contact = String.valueOf((KEY_CONTACT));
 
 	}
 
+	/**
+	 * Returns a JSONObject containing the values of latitude, longitude, and contact.
+	 * @return a JSONObject representing a button query result
+	 */
 	public JSONObject toJsonObject() {
-
+		// Create new JSONObject and add instance variable values if not null
 		JSONObject obj = new JSONObject();
 		if (latitude != null)
 			obj.put(KEY_LATITUDE, latitude);
@@ -35,48 +49,59 @@ public class ButtonQueryResult {
 		if (contact != null)
 			obj.put(KEY_CONTACT, contact);
 
-		
+
 		return obj;
 
 	}
-	
-	
+
+
 	/**
-	 * @return the latitude
+	 * Returns the latitude instance variable.
+	 * @return the latitude of the button query result
 	 */
 	public String getLatitude() {
 		return latitude;
 	}
+
 	/**
-	 * @param latitude the latitude to set
+	 * Sets the latitude instance variable.
+	 * @param latitude the new latitude of the button query result
 	 */
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
+
 	/**
-	 * @return the longitude
+	 * Returns the longitude instance variable.
+	 * @return the longitude of the button query result
 	 */
 	public String getLongitude() {
 		return longitude;
 	}
+
 	/**
-	 * @param longitude the longitude to set
+	 * Sets the longitude instance variable.
+	 * @param longitude the new longitude of the button query result
 	 */
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+
 	/**
-	 * @return the contact
+	 * Returns the contact instance variable.
+	 * @return the contact of the button query result
 	 */
 	public String getContact() {
 		return contact;
 	}
+
 	/**
-	 * @param contact the contact to set
+	 * Sets the contact instance variable.
+	 * @param contact the new contact of the button query result
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
-	
+
 }
