@@ -2,20 +2,8 @@ package com.nandbox.bots.api;
 
 import java.util.List;
 
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.Data;
-import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.data.WhiteListUser;
-import com.nandbox.bots.api.inmessages.BlackList;
-import com.nandbox.bots.api.inmessages.ChatAdministrators;
-import com.nandbox.bots.api.inmessages.ChatMember;
-import com.nandbox.bots.api.inmessages.ChatMenuCallback;
-import com.nandbox.bots.api.inmessages.IncomingMessage;
-import com.nandbox.bots.api.inmessages.InlineMessageCallback;
-import com.nandbox.bots.api.inmessages.InlineSearch;
-import com.nandbox.bots.api.inmessages.MessageAck;
-import com.nandbox.bots.api.inmessages.PermanentUrl;
-import com.nandbox.bots.api.inmessages.WhiteList;
+import com.nandbox.bots.api.data.*;
+import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.OutMessage;
 
 import net.minidev.json.JSONObject;
@@ -213,7 +201,7 @@ public final class Nandbox {
 
 		public void onScheduleMessage(IncomingMessage incomingScheduleMsg);
 
-
+		public void onWorkflowDetails(WorkflowDetails workflowDetails);
 	}
 
 	/**
@@ -1051,6 +1039,6 @@ public final class Nandbox {
 
 		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers);
 
-
+		void setWorkflow(String userId , String screenId,String appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
 	}
 }

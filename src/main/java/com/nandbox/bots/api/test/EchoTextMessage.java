@@ -5,18 +5,13 @@ import com.nandbox.bots.api.Nandbox.Api;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
 import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.inmessages.BlackList;
-import com.nandbox.bots.api.inmessages.ChatAdministrators;
-import com.nandbox.bots.api.inmessages.ChatMember;
-import com.nandbox.bots.api.inmessages.ChatMenuCallback;
-import com.nandbox.bots.api.inmessages.IncomingMessage;
-import com.nandbox.bots.api.inmessages.InlineMessageCallback;
-import com.nandbox.bots.api.inmessages.InlineSearch;
-import com.nandbox.bots.api.inmessages.MessageAck;
-import com.nandbox.bots.api.inmessages.PermanentUrl;
-import com.nandbox.bots.api.inmessages.WhiteList;
+import com.nandbox.bots.api.data.WorkflowCell;
+import com.nandbox.bots.api.inmessages.*;
 
 import net.minidev.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EchoTextMessage {
 
@@ -146,6 +141,11 @@ public class EchoTextMessage {
 			@Override
 			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
 				
+			}
+
+			@Override
+			public void onWorkflowDetails(WorkflowDetails workflowDetails) {
+
 			}
 
 

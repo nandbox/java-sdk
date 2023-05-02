@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import com.nandbox.bots.api.data.*;
+import com.nandbox.bots.api.inmessages.*;
+import com.nandbox.bots.api.outmessages.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -30,63 +33,17 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.Data;
-import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.data.WhiteListUser;
-import com.nandbox.bots.api.inmessages.BlackList;
-import com.nandbox.bots.api.inmessages.ChatAdministrators;
-import com.nandbox.bots.api.inmessages.ChatMember;
-import com.nandbox.bots.api.inmessages.ChatMenuCallback;
-import com.nandbox.bots.api.inmessages.IncomingMessage;
-import com.nandbox.bots.api.inmessages.InlineMessageCallback;
-import com.nandbox.bots.api.inmessages.InlineSearch;
-import com.nandbox.bots.api.inmessages.MessageAck;
-import com.nandbox.bots.api.inmessages.PermanentUrl;
-import com.nandbox.bots.api.inmessages.WhiteList;
-import com.nandbox.bots.api.outmessages.AddBlackListOutMessage;
-import com.nandbox.bots.api.outmessages.AddBlacklistPatternsOutMessage;
-import com.nandbox.bots.api.outmessages.AddWhiteListOutMessage;
-import com.nandbox.bots.api.outmessages.AddWhitelistPatternsOutMessage;
-import com.nandbox.bots.api.outmessages.AudioOutMessage;
-import com.nandbox.bots.api.outmessages.BanChatMemberOutMessage;
-import com.nandbox.bots.api.outmessages.ContactOutMessage;
-import com.nandbox.bots.api.outmessages.DeleteBlackListOutMessage;
-import com.nandbox.bots.api.outmessages.DeleteBlackListPatternsOutMessage;
-import com.nandbox.bots.api.outmessages.DeleteWhiteListOutMessage;
-import com.nandbox.bots.api.outmessages.DeleteWhiteListPatternsOutMessage;
-import com.nandbox.bots.api.outmessages.DocumentOutMessage;
-import com.nandbox.bots.api.outmessages.GeneratePermanentUrl;
-import com.nandbox.bots.api.outmessages.GetBlackListOutMessage;
-import com.nandbox.bots.api.outmessages.GetChatAdministratorsOutMessage;
-import com.nandbox.bots.api.outmessages.GetChatMemberOutMessage;
-import com.nandbox.bots.api.outmessages.GetChatOutMessage;
-import com.nandbox.bots.api.outmessages.GetMyProfiles;
-import com.nandbox.bots.api.outmessages.GetUserOutMessage;
-import com.nandbox.bots.api.outmessages.GetWhiteListOutMessage;
-import com.nandbox.bots.api.outmessages.LocationOutMessage;
-import com.nandbox.bots.api.outmessages.OutMessage;
 import com.nandbox.bots.api.outmessages.OutMessage.OutMessageMethod;
 import com.nandbox.bots.api.outmessages.cell.PhotoCellOutMessage;
 import com.nandbox.bots.api.outmessages.cell.TextCellOutMessage;
 import com.nandbox.bots.api.outmessages.cell.VideoCellOutMessage;
-import com.nandbox.bots.api.outmessages.PhotoOutMessage;
-import com.nandbox.bots.api.outmessages.RecallOutMessage;
-import com.nandbox.bots.api.outmessages.RemoveChatMemberOutMessage;
-import com.nandbox.bots.api.outmessages.SetChatOutMessage;
-import com.nandbox.bots.api.outmessages.SetMyProfileOutMessage;
-import com.nandbox.bots.api.outmessages.TextOutMessage;
-import com.nandbox.bots.api.outmessages.UnbanChatMember;
-import com.nandbox.bots.api.outmessages.UpdateOutMessage;
-import com.nandbox.bots.api.outmessages.VideoOutMessage;
-import com.nandbox.bots.api.outmessages.VoiceOutMessage;
 
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
 
 /**
  * NandboxClient Class
- * 
+ *
  * @author Ahmed A. El-Malatawy
  *
  */
@@ -103,8 +60,8 @@ public class NandboxClient {
 	static final String KEY_ERROR = "error";
 	public static final Logger log = Logger.getLogger(NandboxClient.class);
 	Logger rootLogger = Logger.getRootLogger();
-	
-	
+
+
 
 	public static Properties getConfigs() {
 		Properties configs = new Properties();
@@ -119,9 +76,9 @@ public class NandboxClient {
 		return configs;
 	}
 
-	
-	
-	
+
+
+
 	@WebSocket(maxTextMessageSize = 100000)
 	public class InternalWebSocket {
 		private static final int NO_OF_RETRIES_IF_CONN_TO_SERVER_REFUSED = 20;
@@ -194,8 +151,8 @@ public class NandboxClient {
 			Date date = new Date();
 			//System.out.println("Date = " + dateFormat.format(date));
 			NandboxClient.log.info("Date = " + dateFormat.format(date));
-			
-			
+
+
 			authenticated = false;
 			if (pingThread != null) {
 				try {
@@ -342,7 +299,7 @@ public class NandboxClient {
 					if (chatSettings != null) {
 						message.setChatSettings(chatSettings);
 					}
-					
+
 					if (tab != null) {
 						message.setTab(tab);
 					}
@@ -746,10 +703,31 @@ public class NandboxClient {
 				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers) {
 
 					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
-					
+
 					addWhiteistOutMessage.setChatId(chatId);
 					addWhiteistOutMessage.setWhiteListUser(whiteListUsers);
 					api.send(addWhiteistOutMessage);
+				}
+
+				/**
+				 * @param userId
+				 * @param screenId
+				 * @param workflowCell
+				 * @param reference
+				 * @param disableNotification
+				 */
+				@Override
+				public void setWorkflow(String userId, String screenId,String appId, List<WorkflowCell> workflowCell, Long reference, Boolean disableNotification) {
+					SetWorkflowOutMessage setWorkflowOutMessage = new SetWorkflowOutMessage();
+					setWorkflowOutMessage.setUserId(userId);
+					setWorkflowOutMessage.setScreenId(screenId);
+					setWorkflowOutMessage.setAppId(appId);
+					setWorkflowOutMessage.setWorkflowCell(workflowCell);
+					setWorkflowOutMessage.setReference(reference);
+					setWorkflowOutMessage.setDisableNotification(disableNotification);
+
+					send(setWorkflowOutMessage);
+
 				}
 
 				@Override
@@ -781,7 +759,7 @@ public class NandboxClient {
 
 					api.send(deleteBlackListPatterns);
 				}
-				
+
 				@Override
 				public void deleteWhiteListPatterns(String chatId, List<String> pattern) {
 
@@ -792,7 +770,7 @@ public class NandboxClient {
 					api.send(deleteWhiteListPatterns);
 				}
 
-				
+
 				@Override
 				public void addBlacklistPatterns(String chatId, List<Data> data) {
 
@@ -801,7 +779,7 @@ public class NandboxClient {
 					addBlacklistPatternsOutMessage.setData(data);
 					api.send(addBlacklistPatternsOutMessage);
 				}
-				
+
 				@Override
 				public void addWhitelistPatterns(String chatId, List<Data> data) {
 
@@ -1034,6 +1012,10 @@ public class NandboxClient {
 					PermanentUrl permenantURL = new PermanentUrl(obj);
 					callback.permanentUrl(permenantURL);
 					return;
+				case "workflowDetails":
+					WorkflowDetails workflowDetails = new WorkflowDetails(obj);
+					callback.onWorkflowDetails(workflowDetails);
+					return;
 				default:
 					callback.onReceive(obj);
 					return;
@@ -1116,7 +1098,7 @@ public class NandboxClient {
 	public static NandboxClient get() throws Exception {
 		if (nandboxClient == null)
 			init();
-			
+
 		return nandboxClient;
 	}
 
@@ -1139,7 +1121,7 @@ public class NandboxClient {
 	public static String getBotId() {
 		return BOT_ID;
 	}
-	
+
 	public void setLogger(String maxSize,String numOfFiles,String level,String path) throws IOException
 	{
 		System.out.println(level);
@@ -1151,7 +1133,7 @@ public class NandboxClient {
 			numOfFiles = "5";
 		if(path == null)
 			path ="logsInfo";
-		
+
 		if(level.equalsIgnoreCase("Debug"))
 		{
 			this.rootLogger.setLevel(Level.DEBUG);
@@ -1176,13 +1158,13 @@ public class NandboxClient {
 		{
 			this.rootLogger.setLevel(Level.TRACE);
 		}
-		
+
 		PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n");
 		RollingFileAppender fileAppender = new RollingFileAppender(layout,path);
 		fileAppender.setMaxBackupIndex(Integer.parseInt(numOfFiles));
 		fileAppender.setMaxFileSize(maxSize);
 		rootLogger.addAppender(fileAppender);
 	}
-	
-	
+
+
 }

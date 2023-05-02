@@ -16,17 +16,8 @@ import com.nandbox.bots.api.data.Menu;
 import com.nandbox.bots.api.data.Row;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.data.WhiteListUser;
-import com.nandbox.bots.api.inmessages.BlackList;
-import com.nandbox.bots.api.inmessages.ChatAdministrators;
-import com.nandbox.bots.api.inmessages.ChatMember;
-import com.nandbox.bots.api.inmessages.ChatMenuCallback;
-import com.nandbox.bots.api.inmessages.IncomingMessage;
+import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.inmessages.IncomingMessage.MessageType;
-import com.nandbox.bots.api.inmessages.InlineMessageCallback;
-import com.nandbox.bots.api.inmessages.InlineSearch;
-import com.nandbox.bots.api.inmessages.MessageAck;
-import com.nandbox.bots.api.inmessages.PermanentUrl;
-import com.nandbox.bots.api.inmessages.WhiteList;
 import com.nandbox.bots.api.outmessages.ArticleOutMessage;
 import com.nandbox.bots.api.outmessages.AudioOutMessage;
 import com.nandbox.bots.api.outmessages.ContactOutMessage;
@@ -893,6 +884,11 @@ public class MultipleTests {
 				System.out.println("incomingScheduleMsg.getChat().getId()=" + incomingScheduleMsg.getChat().getId());
 
 				System.out.println("incomingScheduleMsg.getScheduleDate()=" + incomingScheduleMsg.getScheduleDate());
+			}
+
+			@Override
+			public void onWorkflowDetails(WorkflowDetails workflowDetails) {
+
 			}
 
 		});

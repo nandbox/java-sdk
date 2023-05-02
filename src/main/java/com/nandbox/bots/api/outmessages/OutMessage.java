@@ -23,7 +23,7 @@ public abstract class OutMessage {
 		unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,
 		getBlacklist, getWhitelist, addBlacklist, addWhitelist, deleteBlacklist, addBlacklistPatterns,
 		deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist, setAdminChatMenu,
-		setAdminNavigationButton, cancelMessageSchedule
+		setAdminNavigationButton, cancelMessageSchedule,setWorkflow
 
 	}
 

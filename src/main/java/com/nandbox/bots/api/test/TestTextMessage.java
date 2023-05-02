@@ -14,16 +14,7 @@ import com.nandbox.bots.api.data.Photo;
 import com.nandbox.bots.api.data.Result;
 import com.nandbox.bots.api.data.Row;
 import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.inmessages.BlackList;
-import com.nandbox.bots.api.inmessages.ChatAdministrators;
-import com.nandbox.bots.api.inmessages.ChatMember;
-import com.nandbox.bots.api.inmessages.ChatMenuCallback;
-import com.nandbox.bots.api.inmessages.IncomingMessage;
-import com.nandbox.bots.api.inmessages.InlineMessageCallback;
-import com.nandbox.bots.api.inmessages.InlineSearch;
-import com.nandbox.bots.api.inmessages.MessageAck;
-import com.nandbox.bots.api.inmessages.PermanentUrl;
-import com.nandbox.bots.api.inmessages.WhiteList;
+import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.inmessages.IncomingMessage.MessageType;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.InlineSearchAnswer;
@@ -769,6 +760,11 @@ public class TestTextMessage {
 				System.out.println("incomingScheduleMsg.getChat().getId()=" + incomingScheduleMsg.getChat().getId());
 
 				System.out.println("incomingScheduleMsg.getScheduleDate()=" + incomingScheduleMsg.getScheduleDate());
+			}
+
+			@Override
+			public void onWorkflowDetails(WorkflowDetails workflowDetails) {
+
 			}
 		});
 
