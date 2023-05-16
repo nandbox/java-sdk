@@ -11,6 +11,7 @@ import net.minidev.json.JSONObject;
  * @author ameer
  *
  */
+@Deprecated
 public class PhotoCellOutMessage extends CellOutMessage {
 
 	private static final String KEY_PHOTO = "photo";

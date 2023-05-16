@@ -9,6 +9,7 @@ import net.minidev.json.JSONObject;
  * @author ameer
  *
  */
+@Deprecated
 public class CellOutMessage extends OutMessage {
 	
 	protected static final String KEY_USER_ID = "user_id";

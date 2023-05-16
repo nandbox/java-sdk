@@ -8,6 +8,7 @@ import net.minidev.json.JSONObject;
  * @author ameer
  *
  */
+@Deprecated
 public class TextCellOutMessage extends CellOutMessage {
 	
 	private static final String KEY_TEXT = "text";

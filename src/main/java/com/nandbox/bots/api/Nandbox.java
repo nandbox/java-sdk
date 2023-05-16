@@ -894,10 +894,13 @@ public final class Nandbox {
 		 */
 		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab);
 		
+		@Deprecated
 		void sendCellText(String userId, String screenId, String cellId, String text, Long reference);
-		
+
+		@Deprecated
 		void sendCellPhoto(String userId, String screenId, String cellId, String photoFileId, Long reference);
-		
+
+		@Deprecated
 		void sendCellVideo(String userId, String screenId, String cellId, String videoFileId, Long reference);
 
 		/**

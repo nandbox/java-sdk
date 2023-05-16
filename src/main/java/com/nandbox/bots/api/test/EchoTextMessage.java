@@ -15,7 +15,7 @@ import java.util.List;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "<PUT your token here >";
+	public static final String TOKEN = "90091788682644557:0:y8JU28ReWfxahCEcnuJTZnyda7hJ4g";
 
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();

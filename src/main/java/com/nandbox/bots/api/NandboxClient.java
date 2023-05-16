@@ -863,6 +863,7 @@ public class NandboxClient {
 				}
 
 				@Override
+				@Deprecated
 				public void sendCellText(String userId, String screenId, String cellId, String text, Long reference) {
 					TextCellOutMessage textMsg = new TextCellOutMessage();
 					textMsg.setUserId(userId);
@@ -874,6 +875,7 @@ public class NandboxClient {
 				}
 
 				@Override
+				@Deprecated
 				public void sendCellPhoto(String userId, String screenId, String cellId, String photoFileId,
 						Long reference) {
 					PhotoCellOutMessage photoMsg = new PhotoCellOutMessage();
@@ -886,6 +888,7 @@ public class NandboxClient {
 				}
 
 				@Override
+				@Deprecated
 				public void sendCellVideo(String userId, String screenId, String cellId, String videoFileId,
 						Long reference) {
 					VideoCellOutMessage videoMsg = new VideoCellOutMessage();
