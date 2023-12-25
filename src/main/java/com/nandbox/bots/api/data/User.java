@@ -21,6 +21,7 @@ public class User {
 	private static final String KEY_PHOTO = "photo";
 	private static final String KEY_PROFILE = "profile";
 	private static final String KEY_SHORT_NAME = "short_name";
+	private static final String KEY_LOGIN_ID = "login_id";
 
 	private String id;
 	private String name;
@@ -33,6 +34,7 @@ public class User {
 	private String profile;
 	private Photo photo;
 	private String shortName;
+	private Long loginId;
 
 	
 	public User() { 
@@ -52,6 +54,7 @@ public class User {
 		this.photo = obj.get(KEY_PHOTO) != null ? new Photo((JSONObject) obj.get(KEY_PHOTO)) : null;
 		
 		this.shortName = (String) obj.get(KEY_SHORT_NAME);
+		this.loginId = (Long) obj.get(KEY_LOGIN_ID);
 	}
 
 	public JSONObject toJsonObject() {
@@ -89,6 +92,9 @@ public class User {
 		
 		if(shortName != null)
 			obj.put(KEY_SHORT_NAME, shortName);
+
+		if(loginId != null)
+			obj.put(KEY_LOGIN_ID, loginId);
 
 		return obj;
 
@@ -249,6 +255,10 @@ public class User {
 
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
+	}
+
+	public long getLoginId() {
+		return loginId;
 	}
 
 }

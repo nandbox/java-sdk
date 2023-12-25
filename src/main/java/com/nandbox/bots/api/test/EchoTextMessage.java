@@ -148,6 +148,14 @@ public class EchoTextMessage {
 
 			}
 
+			/**
+			 * @param chat
+			 */
+			@Override
+			public void onCreateChat(Chat chat) {
+
+			}
+
 
 		});
 	}

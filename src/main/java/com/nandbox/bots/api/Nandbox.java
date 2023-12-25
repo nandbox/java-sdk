@@ -202,6 +202,8 @@ public final class Nandbox {
 		public void onScheduleMessage(IncomingMessage incomingScheduleMsg);
 
 		public void onWorkflowDetails(WorkflowDetails workflowDetails);
+
+		void onCreateChat(Chat chat);
 	}
 
 	/**
@@ -1043,5 +1045,9 @@ public final class Nandbox {
 		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers);
 
 		void setWorkflow(String userId , String screenId,String appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
+		void setWorkflowAction(String userId ,String vappId, String screenId,String nextScreen,Long reference);
+		void createChat(String type,String title, int isPublic,long reference);
+		void addChatMember(long chatId, long userId);
+		void addChatAdminMember(long chatId, long userId);
 	}
 }

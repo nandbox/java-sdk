@@ -25,6 +25,7 @@ public class Chat {
 	private static final String KEY_MEMBER_COUNT = "member_count";
 	private static final String KEY_INVITE_LINK = "invite_link";
 	private static final String KEY_TAGS_DEFINITION = "tagsDefinition";
+	private static final String KEY_REFERENCE = "reference";
 
 	private String id;
 	private String title;
@@ -39,6 +40,7 @@ public class Chat {
 	private Integer memberCount;
 	private String inviteLink;
 	private TagDefination[] tagsDefinition;
+	private Long reference;
 
 	public Chat() {
 	}
@@ -56,7 +58,7 @@ public class Chat {
 		this.category = (String) obj.get(KEY_CATEGORY);
 		this.memberCount = (Integer) obj.get(KEY_MEMBER_COUNT);
 		this.inviteLink = (String) obj.get(KEY_INVITE_LINK);
-
+		this.reference = (long) obj.get(KEY_REFERENCE);
 		// this.tag = obj.get(KEY_TAGS_DEFINITION) != null
 		// ? new Tag((JSONObject) obj.get(KEY_TAGS_DEFINITION))
 		// : null;
@@ -97,7 +99,8 @@ public class Chat {
 			obj.put(KEY_INVITE_LINK, inviteLink);
 		if (photo != null)
 			obj.put(KEY_PHOTO, photo);
-
+		if (reference != null)
+			obj.put(KEY_REFERENCE, reference);
 		// if (tag != null)
 		// obj.put(KEY_TAGS_DEFINITION, tag);
 
@@ -297,6 +300,14 @@ public class Chat {
 
 	public void setTagsDefinition(TagDefination[] tagsDefinition) {
 		this.tagsDefinition = tagsDefinition;
+	}
+
+	public Long getReference() {
+		return reference;
+	}
+
+	public void setReference(Long reference) {
+		this.reference = reference;
 	}
 
 	// public Tag getTag() {

@@ -88,6 +88,7 @@ public class NandboxClient {
 		private static final String KEY_CHAT = "chat";
 		private static final String KEY_NAME = "name";
 		private static final String KEY_ID = "ID";
+		private static final String KEY_REFERENCE = "reference";
 
 		Nandbox.Callback callback;
 		Session session;
@@ -699,6 +700,30 @@ public class NandboxClient {
 					api.send(addBlackListOutMessage);
 				}
 
+				/**
+				 * @param chatId
+				 * @param userId
+				 */
+				@Override
+				public void addChatMember(long chatId, long userId) {
+					AddChatMemberOutMessage addChatMemberOutMessage = new AddChatMemberOutMessage();
+					addChatMemberOutMessage.setChatId(chatId);
+					addChatMemberOutMessage.setUserId(userId);
+					api.send(addChatMemberOutMessage);
+				}
+
+				/**
+				 * @param chatId
+				 * @param userId
+				 */
+				@Override
+				public void addChatAdminMember(long chatId, long userId) {
+					AddChatAdminMemberOutMessage addChatAdminMemberOutMessage = new AddChatAdminMemberOutMessage();
+					addChatAdminMemberOutMessage.setChatId(chatId);
+					addChatAdminMemberOutMessage.setUserId(userId);
+					api.send(addChatAdminMemberOutMessage);
+				}
+
 				@Override
 				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers) {
 
@@ -726,8 +751,42 @@ public class NandboxClient {
 					setWorkflowOutMessage.setReference(reference);
 					setWorkflowOutMessage.setDisableNotification(disableNotification);
 
-					send(setWorkflowOutMessage);
+					api.send(setWorkflowOutMessage);
 
+				}
+
+				/**
+				 * @param userId
+				 * @param vappId
+				 * @param screenId
+				 * @param nextScreen
+				 * @param reference
+				 */
+				@Override
+				public void setWorkflowAction(String userId,String vappId, String screenId, String nextScreen, Long reference) {
+					SetWorkflowActionOutMessage setWorkflowActionOutMessage = new SetWorkflowActionOutMessage();
+					setWorkflowActionOutMessage.setUserId(userId);
+					setWorkflowActionOutMessage.setVappId(vappId);
+					setWorkflowActionOutMessage.setScreenId(screenId);
+					setWorkflowActionOutMessage.setNextScreen(nextScreen);
+					setWorkflowActionOutMessage.setReference(reference);
+					api.send(setWorkflowActionOutMessage);
+				}
+
+				/**
+				 * @param type
+				 * @param title
+				 * @param isPublic
+				 */
+				@Override
+				public void createChat(String type,String title, int isPublic,long reference) {
+					CreateChatOutMessage createChatOutMessage = new CreateChatOutMessage();
+					createChatOutMessage.setType(type);
+					createChatOutMessage.setTitle(title);
+					createChatOutMessage.setIsPublic(isPublic);
+					createChatOutMessage.setReference(reference);
+
+					api.send(createChatOutMessage);
 				}
 
 				@Override
@@ -975,6 +1034,11 @@ public class NandboxClient {
 					ChatMember chatMember = new ChatMember(obj);
 					callback.onChatMember(chatMember);
 					return;
+				case "createChatAck":
+					Chat chatObj = new Chat((JSONObject) obj.get(KEY_CHAT));
+					chatObj.setReference((long) obj.get(KEY_REFERENCE));
+					callback.onCreateChat(chatObj);
+					return;
 				case "myProfile":
 					user = new User((JSONObject) obj.get(KEY_USER));
 					callback.onMyProfile(user);
@@ -1015,7 +1079,7 @@ public class NandboxClient {
 					PermanentUrl permenantURL = new PermanentUrl(obj);
 					callback.permanentUrl(permenantURL);
 					return;
-				case "workflowDetails":
+				case "workflowCell":
 					WorkflowDetails workflowDetails = new WorkflowDetails(obj);
 					callback.onWorkflowDetails(workflowDetails);
 					return;

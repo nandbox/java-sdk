@@ -246,6 +246,14 @@ public class SendWebLinksBot {
 
 			}
 
+			/**
+			 * @param chat
+			 */
+			@Override
+			public void onCreateChat(Chat chat) {
+
+			}
+
 		});
 
 	}

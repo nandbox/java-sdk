@@ -140,6 +140,14 @@ public class Main {
             public void onWorkflowDetails(WorkflowDetails workflowDetails) {
 
             }
+
+            /**
+             * @param chat
+             */
+            @Override
+            public void onCreateChat(Chat chat) {
+
+            }
         });
 
 

@@ -26,7 +26,7 @@ public class ChatMember {
 	private static final String KEY_STATUS = "status";
 	private static final String KEY_TAGS = "tags";
 	private static final String KEY_ACCOUNT_TYPE = "account_type";
-	private static final String KEY_MSISDN = "msisdn";
+	private static final String KEY_LOGIN_ID = "login_id";
 
 	private User user;
 	private Chat chat;
@@ -35,7 +35,7 @@ public class ChatMember {
 	private String status;
 	private List<String> tags = new ArrayList<>();
 	private String accountType;
-	private String msisdn;
+	private String loginId;
 	
 	@SuppressWarnings("unchecked")
 	public ChatMember(JSONObject jsonObj) {
@@ -49,7 +49,7 @@ public class ChatMember {
 		this.status = (String) obj.get(KEY_STATUS);
 		this.tags = (ArrayList<String>) obj.get(KEY_TAGS);
 		this.accountType = (String) obj.get(KEY_ACCOUNT_TYPE);
-		this.msisdn = (String) obj.get(KEY_MSISDN);
+		this.loginId = (String) obj.get(KEY_LOGIN_ID);
 //		this.tags = (String) obj.get(KEY_TAGS);
 		
 
@@ -84,8 +84,8 @@ public class ChatMember {
 			obj.put(KEY_ACCOUNT_TYPE, accountType);
 		}
 		
-		if (msisdn != null) {
-			obj.put(KEY_MSISDN, msisdn);
+		if (loginId != null) {
+			obj.put(KEY_LOGIN_ID, loginId);
 		}
 		return obj;
 
@@ -182,12 +182,12 @@ public class ChatMember {
 		this.accountType = accountType;
 	}
 
-	public String getMsisdn() {
-		return msisdn;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setMsisdn(String msisdn) {
-		this.msisdn = msisdn;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 }
