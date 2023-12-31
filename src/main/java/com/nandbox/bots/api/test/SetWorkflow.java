@@ -158,6 +158,12 @@ public class SetWorkflow {
 
             }
 
+			@Override
+			public void onCreateChat(Chat chat) {
+				// TODO Auto-generated method stub
+				
+			}
+
 
         });
     }

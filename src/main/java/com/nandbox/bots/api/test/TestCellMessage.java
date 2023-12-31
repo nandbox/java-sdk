@@ -143,6 +143,12 @@ public class TestCellMessage {
 
 			   }
 
+			@Override
+			public void onCreateChat(Chat chat) {
+				// TODO Auto-generated method stub
+				
+			}
+
 
 		   });
 

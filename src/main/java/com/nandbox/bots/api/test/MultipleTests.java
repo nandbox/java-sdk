@@ -891,6 +891,12 @@ public class MultipleTests {
 
 			}
 
+			@Override
+			public void onCreateChat(Chat chat) {
+				// TODO Auto-generated method stub
+				
+			}
+
 		});
 
 	}

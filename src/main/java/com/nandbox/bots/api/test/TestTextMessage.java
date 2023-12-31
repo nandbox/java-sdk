@@ -766,6 +766,12 @@ public class TestTextMessage {
 			public void onWorkflowDetails(WorkflowDetails workflowDetails) {
 
 			}
+
+			@Override
+			public void onCreateChat(Chat chat) {
+				// TODO Auto-generated method stub
+				
+			}
 		});
 
 	}
