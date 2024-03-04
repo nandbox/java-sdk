@@ -58,7 +58,7 @@ public class Chat {
 		this.category = (String) obj.get(KEY_CATEGORY);
 		this.memberCount = (Integer) obj.get(KEY_MEMBER_COUNT);
 		this.inviteLink = (String) obj.get(KEY_INVITE_LINK);
-		this.reference = (long) obj.get(KEY_REFERENCE);
+		this.reference = obj.get(KEY_REFERENCE)==null ? null:(long) obj.get(KEY_REFERENCE);
 		// this.tag = obj.get(KEY_TAGS_DEFINITION) != null
 		// ? new Tag((JSONObject) obj.get(KEY_TAGS_DEFINITION))
 		// : null;
