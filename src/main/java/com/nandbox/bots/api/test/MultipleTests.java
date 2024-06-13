@@ -352,7 +352,7 @@ public class MultipleTests {
 							api.sendText(incomingMsg.getChat().getId(), incomingMsg.getText());
 						}
 					}
-
+					if (incomingMsg.getFrom().getId().equals(TOKEN.split(":")[0])) return ;
 					if (MessageType.text_file.toString().equals(incomingMsg.getType())) {
 						handleIncomingTextFileMsg(incomingMsg);
 					}
