@@ -3,10 +3,7 @@ package com.nandbox.bots.api.test;
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.Nandbox.Api;
 import com.nandbox.bots.api.NandboxClient;
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.ProductItem;
-import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.data.WorkflowCell;
+import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 
 import net.minidev.json.JSONObject;
@@ -92,6 +89,12 @@ public class EchoTextMessage {
 			public void onProductItem(ProductItem productItem) {
 
 			}
+
+			@Override
+			public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			}
+
 
 			@Override
 			public void onUserDetails(User user) {

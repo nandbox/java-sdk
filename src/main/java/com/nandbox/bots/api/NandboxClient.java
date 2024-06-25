@@ -629,6 +629,13 @@ public class NandboxClient {
 				}
 
 				@Override
+				public void getCollectionProduct(String collectionProductId) {
+					GetCollectionProductOutMessage collectionProductOutMessage = new GetCollectionProductOutMessage();
+					collectionProductOutMessage.setId(collectionProductId);
+					api.send(collectionProductOutMessage);
+				}
+
+				@Override
 				public void updateTextMsg(String messageId, String text, String toUserId, String tab) {
 
 					updateMessage(messageId, text, null, toUserId, null, tab);
@@ -677,7 +684,9 @@ public class NandboxClient {
 				}
 				@Override
 				public void getProductItem(String productId) {
-
+					GetProductItemOutMessage getProductItemOutMessage = new GetProductItemOutMessage();
+					getProductItemOutMessage.setProductId(productId);
+					api.send(getProductItemOutMessage);
 				}
 
 				@Override
@@ -1031,6 +1040,10 @@ public class NandboxClient {
 				case "inlineSearch":
 					InlineSearch inlineSearch = new InlineSearch(obj);
 					callback.onInlineSearh(inlineSearch);
+					return;
+				case "getCollectionProductResponse":
+					CollectionProduct collectionProduct = new CollectionProduct(obj);
+					callback.onCollectionProduct(collectionProduct);
 					return;
 				case "messageAck":
 					MessageAck msgAck = new MessageAck(obj);

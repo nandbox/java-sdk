@@ -818,6 +818,13 @@ public class MultipleTests {
 			}
 
 			@Override
+			public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			}
+
+
+
+			@Override
 			public void userStoppedBot(User user) {
 
 			}

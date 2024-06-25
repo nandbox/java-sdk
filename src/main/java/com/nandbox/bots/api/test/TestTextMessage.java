@@ -685,6 +685,11 @@ public class TestTextMessage {
 			}
 
 			@Override
+			public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			}
+
+			@Override
 			public void onChatAdministrators(ChatAdministrators chatAdministrators) {
 				System.out.println("ChatAdministrators " + chatAdministrators.getChat().getId());
 

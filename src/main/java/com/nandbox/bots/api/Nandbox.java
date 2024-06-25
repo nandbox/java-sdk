@@ -153,8 +153,11 @@ public final class Nandbox {
 		 */
 		public void onProductItem(ProductItem productItem);
 		/**
-		 * @param user
+		 * @param collectionProduct
+		 * 			  the collection
 		 */
+		public void onCollectionProduct(CollectionProduct collectionProduct);
+
 		/**
 		 * @param user
 		 *            user object contain user details
@@ -861,15 +864,21 @@ public final class Nandbox {
 		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, String tab);
 
 		/**
+		 * @param collectionProductId
+		  			id for the collection
+		 *
+		 */
+		public void getCollectionProduct(String collectionProductId);
+		/**
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
 		 * @param text
 		 *            The new message text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
-		 * @param tab 
-		 * 			tab ID to which you want to send the message    
-		 * 
+		 * @param tab
+		 * 			tab ID to which you want to send the message
+		 *
 		 */
 		void updateTextMsg(String messageId, String text, String toUserId, String tab);
 
