@@ -9,13 +9,7 @@ import java.util.HashMap;
 
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
-import com.nandbox.bots.api.data.Button;
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.Data;
-import com.nandbox.bots.api.data.Menu;
-import com.nandbox.bots.api.data.Row;
-import com.nandbox.bots.api.data.User;
-import com.nandbox.bots.api.data.WhiteListUser;
+import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.inmessages.IncomingMessage.MessageType;
 import com.nandbox.bots.api.outmessages.ArticleOutMessage;
@@ -44,7 +38,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091784467538281:0:IFsvvXV4gHqPyr7zCAh3Ni7Yp41pnO";
+	public static final String TOKEN = "90091785371560007:0:cfVQTNRgB5G21liL9ltzP8RzuTR5Yx";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -79,8 +73,8 @@ public class MultipleTests {
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
-				
-
+				String productItemId = "5121105821126175";
+				api.getProductItem(productItemId);
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
@@ -816,6 +810,11 @@ public class MultipleTests {
 				System.out.println("user.getProfile() : " + user.getProfile());
 				System.out.println("user.getIsBot() : " + user.getIsBot());
 				System.out.println("user.getVersion() : " + user.getVersion());
+			}
+
+			@Override
+			public void onProductItem(ProductItem productItem) {
+				System.out.println("product: " + productItem.toJsonObject().toString());
 			}
 
 			@Override

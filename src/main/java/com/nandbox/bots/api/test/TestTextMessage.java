@@ -7,13 +7,7 @@ import java.util.HashMap;
 
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
-import com.nandbox.bots.api.data.Button;
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.Menu;
-import com.nandbox.bots.api.data.Photo;
-import com.nandbox.bots.api.data.Result;
-import com.nandbox.bots.api.data.Row;
-import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.inmessages.IncomingMessage.MessageType;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
@@ -682,6 +676,11 @@ public class TestTextMessage {
 				if (myprofile.getPhoto() != null) {
 					System.out.println("Photo().getId " + myprofile.getPhoto().getId());
 				}
+
+			}
+
+			@Override
+			public void onProductItem(ProductItem productItem) {
 
 			}
 

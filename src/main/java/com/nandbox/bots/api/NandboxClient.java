@@ -353,6 +353,8 @@ public class NandboxClient {
 					return reference;
 				}
 
+
+
 				@Override
 				public void sendPhoto(String chatId, String photoId, Long reference, String caption) {
 
@@ -672,6 +674,10 @@ public class NandboxClient {
 					GetChatOutMessage chatOutMessage = new GetChatOutMessage();
 					chatOutMessage.setChatId(chatId);
 					api.send(chatOutMessage);
+				}
+				@Override
+				public void getProductItem(String productId) {
+
 				}
 
 				@Override
@@ -1005,6 +1011,10 @@ public class NandboxClient {
 				case "message":
 					IncomingMessage incomingMsg = new IncomingMessage(obj);
 					callback.onReceive(incomingMsg);
+					return;
+				case "getProductItemResponse":
+					ProductItem productItem = new ProductItem(obj);
+					callback.onProductItem(productItem);
 					return;
 				case "scheduledMessage":
 					IncomingMessage incomingScheduleMsg = new IncomingMessage(obj);

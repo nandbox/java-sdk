@@ -38,6 +38,7 @@ public final class Nandbox {
 	 */
 	public interface Callback {
 
+
 		/**
 		 * This event indicates that the bot is successfully connected and authenticated
 		 * with nandbox server.
@@ -146,7 +147,11 @@ public final class Nandbox {
 		 *            the bot profile
 		 */
 		public void onMyProfile(User user);
-
+		/**
+		 * @param productItem
+		 * 			  the product
+		 */
+		public void onProductItem(ProductItem productItem);
 		/**
 		 * @param user
 		 */
@@ -297,6 +302,13 @@ public final class Nandbox {
 
 		public Long sendPhoto(String chatId, String photoFileId, String caption);
 
+
+
+		/**
+		 * @param productId
+		 * 			  Unique identifier for the target product and can not set to null
+		 */
+		public void getProductItem(String productId);
 		/**
 		 * @param chatId
 		 *            Unique identifier for the target chat or User_id and can not set
@@ -310,6 +322,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with Photo
 		 *            "Photo caption 0-256 characters
 		 */
+
 		public void sendPhoto(String chatId, String photoFileId, Long reference, String caption);
 
 		/**

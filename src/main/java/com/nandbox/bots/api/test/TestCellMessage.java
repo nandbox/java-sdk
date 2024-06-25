@@ -4,6 +4,7 @@ import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.Nandbox.Api;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
+import com.nandbox.bots.api.data.ProductItem;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.inmessages.*;
 
@@ -92,8 +93,13 @@ public class TestCellMessage {
 			public void onMyProfile(User user) {
 				
 			}
-	
-			@Override
+
+			   @Override
+			   public void onProductItem(ProductItem productItem) {
+
+			   }
+
+			   @Override
 			public void onUserDetails(User user) {
 				
 			}

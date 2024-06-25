@@ -2,6 +2,7 @@ package com.nandbox.bots.api.test;
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.Chat;
+import com.nandbox.bots.api.data.ProductItem;
 import com.nandbox.bots.api.data.User;
 import com.nandbox.bots.api.inmessages.*;
 import net.minidev.json.JSONObject;
@@ -88,6 +89,11 @@ public class Main {
 
             @Override
             public void onMyProfile(User user) {
+
+            }
+
+            @Override
+            public void onProductItem(ProductItem productItem) {
 
             }
 
