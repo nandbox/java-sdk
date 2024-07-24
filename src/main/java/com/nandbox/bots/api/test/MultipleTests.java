@@ -38,7 +38,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091785371560007:0:cfVQTNRgB5G21liL9ltzP8RzuTR5Yx";
+	public static final String TOKEN = "90091783776537554:90090684291377082:lFDgb4ksTJgvZoNSfNhfOH41WxE6kX";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -73,8 +73,7 @@ public class MultipleTests {
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
-				String productItemId = "5121105821126175";
-				api.getProductItem(productItemId);
+
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
@@ -87,7 +86,10 @@ public class MultipleTests {
 							api.getChat(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equals("getBlackList")) {
 							api.getBlackList(incomingMsg.getChat().getId());
-						} else if (incomingMsg.getText().equals("addBlacklistPatterns")) {
+
+						}else if (incomingMsg.getText().equalsIgnoreCase("getProfile")){
+							api.getMyProfiles();
+						}else if (incomingMsg.getText().equals("addBlacklistPatterns")) {
 
 							ArrayList<Data> dataList = new ArrayList<>();
 
@@ -212,7 +214,12 @@ public class MultipleTests {
 							api.getChat(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equals("getUser")) {
 							api.getUser(incomingMsg.getFrom().getId());
-						} else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
+
+						}
+						else if ("getProduct".equalsIgnoreCase(incomingMsg.getText())){
+							api.getProductItem("5121406605126307");
+						}
+						else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
 
 							TextOutMessage outmsg = new TextOutMessage();
 							Long reference = getUniqueId();

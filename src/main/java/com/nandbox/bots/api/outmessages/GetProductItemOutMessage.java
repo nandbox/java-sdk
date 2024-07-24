@@ -10,7 +10,7 @@ public class GetProductItemOutMessage extends OutMessage{
     public JSONObject toJsonObject() {
         JSONObject obj = super.toJsonObject();
         if (id != null) {
-            obj.put(KEY_CHAT_ID, chatId);
+            obj.put("id", id);
         }
         return obj;
     }

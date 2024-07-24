@@ -1,5 +1,6 @@
 package com.nandbox.bots.api.data;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import java.util.List;
 import java.util.Map;
@@ -39,24 +40,24 @@ public class ProductItem {
     private List<String> addons;
     private String description;
     private String type;
-    private String pCode;
+    private Integer pCode;
     private Double price;
     private String vendor;
     private String variant;
-    private String id;
+    private Long id;
     private Attribute attribute;
     private String tag;
     private String sku;
     private String keyword;
     private String bundle;
     private List<Image> image;
-    private String assignCollection;
+    private JSONArray assignCollection;
     private Double compareAtPrice;
-    private String mainGroupId;
+    private Long mainGroupId;
     private Map<String, Object> params;
     private String serverId;
     private String version;
-    private String groupId;
+    private Long groupId;
     private String name;
     private String serviceProfileId;
     private String createdDate;
@@ -67,28 +68,29 @@ public class ProductItem {
 
     public ProductItem() {}
 
-    public ProductItem(JSONObject obj) {
+    public ProductItem(JSONObject object) {
+        JSONObject obj = (JSONObject) object.get("data");
         this.addons = (List<String>) obj.get(KEY_ADDONS);
         this.description = (String) obj.get(KEY_DESCRIPTION);
         this.type = (String) obj.get(KEY_TYPE);
-        this.pCode = (String) obj.get(KEY_P_CODE);
+        this.pCode = (Integer) obj.get(KEY_P_CODE);
         this.price = (Double) obj.get(KEY_PRICE);
         this.vendor = (String) obj.get(KEY_VENDOR);
         this.variant = (String) obj.get(KEY_VARIANT);
-        this.id = (String) obj.get(KEY_ID);
+        this.id = (Long) obj.get(KEY_ID);
         this.attribute = obj.get(KEY_ATTRIBUTE) != null ? new Attribute((JSONObject) obj.get(KEY_ATTRIBUTE)) : null;
         this.tag = (String) obj.get(KEY_TAG);
         this.sku = (String) obj.get(KEY_SKU);
         this.keyword = (String) obj.get(KEY_KEYWORD);
         this.bundle = (String) obj.get(KEY_BUNDLE);
         this.image = ((List<JSONObject>) obj.get(KEY_IMAGE)).stream().map(Image::new).collect(Collectors.toList());
-        this.assignCollection = (String) obj.get(KEY_ASSIGN_COLLECTION);
+        this.assignCollection = (JSONArray) obj.get(KEY_ASSIGN_COLLECTION);
         this.compareAtPrice = (Double) obj.get(KEY_COMPARE_AT_PRICE);
-        this.mainGroupId = (String) obj.get(KEY_MAIN_GROUP_ID);
+        this.mainGroupId = (Long) obj.get(KEY_MAIN_GROUP_ID);
         this.params = (Map<String, Object>) obj.get(KEY_PARAMS);
         this.serverId = (String) obj.get(KEY_SERVER_ID);
         this.version = (String) obj.get(KEY_VERSION);
-        this.groupId = (String) obj.get(KEY_GROUP_ID);
+        this.groupId = (Long) obj.get(KEY_GROUP_ID);
         this.name = (String) obj.get(KEY_NAME);
         this.serviceProfileId = (String) obj.get(KEY_SERVICE_PROFILE_ID);
         this.createdDate = (String) obj.get(KEY_CREATED_DATE);
@@ -104,7 +106,7 @@ public class ProductItem {
         if (addons != null) obj.put(KEY_ADDONS, addons);
         if (description != null) obj.put(KEY_DESCRIPTION, description);
         if (type != null) obj.put(KEY_TYPE, type);
-        if (pCode != null) obj.put(KEY_P_CODE, pCode);
+        if (pCode != 0) obj.put(KEY_P_CODE, pCode);
         if (price != null) obj.put(KEY_PRICE, price);
         if (vendor != null) obj.put(KEY_VENDOR, vendor);
         if (variant != null) obj.put(KEY_VARIANT, variant);
@@ -141,18 +143,18 @@ public class ProductItem {
         private static final String KEY_MESSAGE = "message";
         private static final String KEY_BARCODE = "barcode";
 
-        private Double cost;
-        private Integer quantity;
-        private Boolean hasSkuOrBarcode;
-        private Double tax;
+        private Integer cost;
+        private Boolean quantity;
+        private Integer hasSkuOrBarcode;
+        private Integer tax;
         private String message;
         private String barcode;
 
         public Attribute(JSONObject attribute) {
-            this.cost = (Double) attribute.get(KEY_COST);
-            this.quantity = (Integer) attribute.get(KEY_QUANTITY);
-            this.hasSkuOrBarcode = (Boolean) attribute.get(KEY_HAS_SKU_OR_BARCODE);
-            this.tax = (Double) attribute.get(KEY_TAX);
+            this.cost = (Integer) attribute.get(KEY_COST);
+            this.quantity = (Boolean) attribute.get(KEY_QUANTITY);
+            this.hasSkuOrBarcode = (Integer) attribute.get(KEY_HAS_SKU_OR_BARCODE);
+            this.tax = (Integer) attribute.get(KEY_TAX);
             this.message = (String) attribute.get(KEY_MESSAGE);
             this.barcode = (String) attribute.get(KEY_BARCODE);
         }

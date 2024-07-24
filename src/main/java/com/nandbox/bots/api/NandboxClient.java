@@ -1022,6 +1022,7 @@ public class NandboxClient {
 					callback.onReceive(incomingMsg);
 					return;
 				case "getProductItemResponse":
+					System.out.println(obj.toJSONString());
 					ProductItem productItem = new ProductItem(obj);
 					callback.onProductItem(productItem);
 					return;
