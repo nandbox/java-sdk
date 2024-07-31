@@ -1048,8 +1048,8 @@ public class NandboxClient {
 					callback.onInlineSearh(inlineSearch);
 					return;
 				case "getCollectionProductResponse":
-					CollectionProduct collectionProduct = new CollectionProduct(obj);
-					callback.onCollectionProduct(collectionProduct);
+					GetProductCollectionResponse getProductCollectionResponse = new GetProductCollectionResponse(obj);
+					callback.onCollectionProduct(getProductCollectionResponse.getCollectionProducts());
 					return;
 				case "messageAck":
 					MessageAck msgAck = new MessageAck(obj);

@@ -75,7 +75,7 @@ public class MultipleTests {
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
 				api.listCollectionItem();
-
+				api.getCollectionProduct("5121605136126295");
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
 						
@@ -826,9 +826,12 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onCollectionProduct(CollectionProduct collectionProduct) {
+			public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
 
 			}
+
+
+
 
 			@Override
 			public void listCollectionItemResponse(List<Category> collections) {

@@ -686,9 +686,13 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onCollectionProduct(CollectionProduct collectionProduct) {
+			public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
 
 			}
+
+
+
+
 
 			@Override
 			public void listCollectionItemResponse(List<Category> collections) {

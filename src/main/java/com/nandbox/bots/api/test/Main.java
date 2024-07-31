@@ -97,7 +97,7 @@ public class Main {
             }
 
             @Override
-            public void onCollectionProduct(CollectionProduct collectionProduct) {
+            public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
 
             }
 

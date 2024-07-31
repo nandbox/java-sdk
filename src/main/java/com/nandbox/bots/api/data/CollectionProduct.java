@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CollectionProduct {
-    private String id;
+    private long id;
     private String name;
     private Double price;
     private String status;
@@ -14,7 +14,7 @@ public class CollectionProduct {
     public CollectionProduct() {}
 
     public CollectionProduct(JSONObject obj) {
-        this.id = (String) obj.get("id");
+        this.id = (long) obj.get("id");
         this.name = (String) obj.get("name");
         this.price = (Double) obj.get("price");
         this.status = (String) obj.get("status");
@@ -24,7 +24,7 @@ public class CollectionProduct {
     public JSONObject toJsonObject() {
         JSONObject obj = new JSONObject();
 
-        if (id != null) obj.put("id", id);
+        if (id != 0) obj.put("id", id);
         if (name != null) obj.put("name", name);
         if (price != null) obj.put("price", price);
         if (status != null) obj.put("status", status);

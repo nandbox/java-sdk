@@ -154,9 +154,9 @@ public final class Nandbox {
 		public void onProductItem(ProductItem productItem);
 		/**
 		 * @param collectionProduct
-		 * 			  the collection
+		 * 			  the ProductItem
 		 */
-		public void onCollectionProduct(CollectionProduct collectionProduct);
+		public void onCollectionProduct(List<CollectionProduct> collectionProduct);
 
 		/**
 		 * @param collections
