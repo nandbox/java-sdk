@@ -4,6 +4,7 @@ import static com.nandbox.bots.api.util.Utils.getUniqueId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
@@ -686,6 +687,11 @@ public class TestTextMessage {
 
 			@Override
 			public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			}
+
+			@Override
+			public void listCollectionItemResponse(List<Category> collections) {
 
 			}
 

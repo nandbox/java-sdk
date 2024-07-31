@@ -106,6 +106,11 @@ public class SetWorkflow {
             }
 
             @Override
+            public void listCollectionItemResponse(List<Category> collections) {
+
+            }
+
+            @Override
             public void onUserDetails(User user) {
 
             }

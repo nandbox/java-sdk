@@ -1,13 +1,11 @@
 package com.nandbox.bots.api.test;
 
+import java.util.List;
 import java.util.Random;
 
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.CollectionProduct;
-import com.nandbox.bots.api.data.ProductItem;
-import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONObject;
@@ -147,6 +145,11 @@ public class SendWebLinksBot {
 
 			@Override
 			public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			}
+
+			@Override
+			public void listCollectionItemResponse(List<Category> collections) {
 
 			}
 

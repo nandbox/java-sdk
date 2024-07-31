@@ -690,8 +690,13 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void getChatAdministrators(String chatId) {
+				public void listCollectionItem() {
+					ListCollectionItemOutMessage listCollectionItemOutMessage = new ListCollectionItemOutMessage();
+					api.send(listCollectionItemOutMessage);
+				}
 
+				@Override
+				public void getChatAdministrators(String chatId) {
 					GetChatAdministratorsOutMessage getChatAdministratorsOutMessage = new GetChatAdministratorsOutMessage();
 					getChatAdministratorsOutMessage.setChatId(chatId);
 					api.send(getChatAdministratorsOutMessage);
@@ -1071,6 +1076,10 @@ public class NandboxClient {
 					user = new User((JSONObject) obj.get(KEY_USER));
 					callback.onUserDetails(user);
 					return;
+					case "listCollectionItemResponse":
+						ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
+						callback.listCollectionItemResponse(listCollectionItemResponse.getCategories());
+						return ;
 				case "chatDetails":
 					Chat chat = new Chat((JSONObject) obj.get(KEY_CHAT));
 					callback.onChatDetails(chat);

@@ -6,6 +6,7 @@ import static com.nandbox.bots.api.util.Utils.getUniqueId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
@@ -38,7 +39,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783776537554:90090684291377082:lFDgb4ksTJgvZoNSfNhfOH41WxE6kX";
+	public static final String TOKEN = "90091783776537554:90090684291377082:NiaGViIdXHfRVZBAHViUfmUqt4fo6Q";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -73,7 +74,7 @@ public class MultipleTests {
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
-
+				api.listCollectionItem();
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
@@ -829,6 +830,10 @@ public class MultipleTests {
 
 			}
 
+			@Override
+			public void listCollectionItemResponse(List<Category> collections) {
+
+			}
 
 
 			@Override

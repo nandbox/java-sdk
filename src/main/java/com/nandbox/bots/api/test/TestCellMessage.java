@@ -3,13 +3,12 @@ package com.nandbox.bots.api.test;
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.Nandbox.Api;
 import com.nandbox.bots.api.NandboxClient;
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.CollectionProduct;
-import com.nandbox.bots.api.data.ProductItem;
-import com.nandbox.bots.api.data.User;
+import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 
 import net.minidev.json.JSONObject;
+
+import java.util.List;
 
 public class TestCellMessage {
 
@@ -102,6 +101,11 @@ public class TestCellMessage {
 
 			   @Override
 			   public void onCollectionProduct(CollectionProduct collectionProduct) {
+
+			   }
+
+			   @Override
+			   public void listCollectionItemResponse(List<Category> collections) {
 
 			   }
 

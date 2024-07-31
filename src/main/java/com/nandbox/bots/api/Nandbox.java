@@ -159,6 +159,12 @@ public final class Nandbox {
 		public void onCollectionProduct(CollectionProduct collectionProduct);
 
 		/**
+		 * @param collections
+		 * 			   collections
+		 */
+		public void listCollectionItemResponse(List<Category> collections);
+
+		/**
 		 * @param user
 		 *            user object contain user details
 		 */
@@ -312,6 +318,7 @@ public final class Nandbox {
 		 * 			  Unique identifier for the target product and can not set to null
 		 */
 		public void getProductItem(String productId);
+		public void listCollectionItem();
 		/**
 		 * @param chatId
 		 *            Unique identifier for the target chat or User_id and can not set
