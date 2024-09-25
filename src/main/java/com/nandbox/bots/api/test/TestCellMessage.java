@@ -95,7 +95,7 @@ public class TestCellMessage {
 			}
 
 			   @Override
-			   public void onProductItem(ProductItem productItem) {
+			   public void onProductDetail(ProductItem productItem) {
 
 			   }
 

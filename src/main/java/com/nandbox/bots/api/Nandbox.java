@@ -151,7 +151,7 @@ public final class Nandbox {
 		 * @param productItem
 		 * 			  the product
 		 */
-		public void onProductItem(ProductItem productItem);
+		public void onProductDetail(ProductItem productItem);
 		/**
 		 * @param collectionProduct
 		 * 			  the ProductItem
@@ -317,7 +317,7 @@ public final class Nandbox {
 		 * @param productId
 		 * 			  Unique identifier for the target product and can not set to null
 		 */
-		public void getProductItem(String productId);
+		public void getProductDetail(String productId);
 		public void listCollectionItem();
 		/**
 		 * @param chatId

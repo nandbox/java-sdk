@@ -681,7 +681,7 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onProductItem(ProductItem productItem) {
+			public void onProductDetail(ProductItem productItem) {
 
 			}
 

@@ -24,6 +24,7 @@ public class Main {
             public void onConnect(Nandbox.Api api) {
                 System.out.println("Connected Successfully");
                 this.api=api;
+                api.getProductDetail("");
             }
 
             @Override
@@ -92,7 +93,7 @@ public class Main {
             }
 
             @Override
-            public void onProductItem(ProductItem productItem) {
+            public void onProductDetail(ProductItem productItem) {
 
             }
 

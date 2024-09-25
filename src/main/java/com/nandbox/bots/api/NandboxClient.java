@@ -683,7 +683,7 @@ public class NandboxClient {
 					api.send(chatOutMessage);
 				}
 				@Override
-				public void getProductItem(String productId) {
+				public void getProductDetail(String productId) {
 					GetProductItemOutMessage getProductItemOutMessage = new GetProductItemOutMessage();
 					getProductItemOutMessage.setProductId(productId);
 					api.send(getProductItemOutMessage);
@@ -1026,10 +1026,10 @@ public class NandboxClient {
 					IncomingMessage incomingMsg = new IncomingMessage(obj);
 					callback.onReceive(incomingMsg);
 					return;
-				case "getProductItemResponse":
+				case "getProductDetailResponse":
 					System.out.println(obj.toJSONString());
 					ProductItem productItem = new ProductItem(obj);
-					callback.onProductItem(productItem);
+					callback.onProductDetail(productItem);
 					return;
 				case "scheduledMessage":
 					IncomingMessage incomingScheduleMsg = new IncomingMessage(obj);

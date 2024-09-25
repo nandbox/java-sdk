@@ -43,7 +43,7 @@ public class ProductItem {
     private Integer pCode;
     private Double price;
     private String vendor;
-    private String variant;
+    private JSONArray variant;
     private Long id;
     private Attribute attribute;
     private String tag;
@@ -64,7 +64,7 @@ public class ProductItem {
     private String updatedDate;
     private String category;
     private String status;
-    private Map<String, Object> option;
+    private JSONArray option;
 
     public ProductItem() {}
 
@@ -76,7 +76,7 @@ public class ProductItem {
         this.pCode = (Integer) obj.get(KEY_P_CODE);
         this.price = (Double) obj.get(KEY_PRICE);
         this.vendor = (String) obj.get(KEY_VENDOR);
-        this.variant = (String) obj.get(KEY_VARIANT);
+        this.variant = (JSONArray) obj.get(KEY_VARIANT);
         this.id = (Long) obj.get(KEY_ID);
         this.attribute = obj.get(KEY_ATTRIBUTE) != null ? new Attribute((JSONObject) obj.get(KEY_ATTRIBUTE)) : null;
         this.tag = (String) obj.get(KEY_TAG);
@@ -94,10 +94,10 @@ public class ProductItem {
         this.name = (String) obj.get(KEY_NAME);
         this.serviceProfileId = (String) obj.get(KEY_SERVICE_PROFILE_ID);
         this.createdDate = (String) obj.get(KEY_CREATED_DATE);
-        this.updatedDate = (String) obj.get(KEY_UPDATED_DATE);
+        this.updatedDate = (String)String.valueOf(obj.get(KEY_UPDATED_DATE));
         this.category = (String) obj.get(KEY_CATEGORY);
         this.status = (String) obj.get(KEY_STATUS);
-        this.option = (Map<String, Object>) obj.get(KEY_OPTION);
+        this.option = (JSONArray) obj.get(KEY_OPTION);
     }
 
     public JSONObject toJsonObject() {

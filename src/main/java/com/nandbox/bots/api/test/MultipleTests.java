@@ -39,7 +39,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783776537554:90090684291377082:NiaGViIdXHfRVZBAHViUfmUqt4fo6Q";
+	public static final String TOKEN = "90091783781508815:90090684288020977:O5xSu8TMl2kM2SutEl1T6YezXAEGDO";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -54,6 +54,9 @@ public class MultipleTests {
 			public void onConnect(Nandbox.Api api) {
 				System.out.println("ONCONNECT");
 				this.api = api;
+				api.getProductDetail("5121691410126519");
+				api.getChat("90090684261974255");
+				api.getUser("90089584752198136");
 			}
 
 			@Override
@@ -74,8 +77,7 @@ public class MultipleTests {
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
-				api.listCollectionItem();
-				api.getCollectionProduct("5121605136126295");
+
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
 						
@@ -218,7 +220,7 @@ public class MultipleTests {
 
 						}
 						else if ("getProduct".equalsIgnoreCase(incomingMsg.getText())){
-							api.getProductItem("5121406605126307");
+							api.getProductDetail("5121406605126307");
 						}
 						else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
 
@@ -821,7 +823,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onProductItem(ProductItem productItem) {
+			public void onProductDetail(ProductItem productItem) {
 				System.out.println("product: " + productItem.toJsonObject().toString());
 			}
 
