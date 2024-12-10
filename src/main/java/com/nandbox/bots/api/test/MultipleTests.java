@@ -54,9 +54,6 @@ public class MultipleTests {
 			public void onConnect(Nandbox.Api api) {
 				System.out.println("ONCONNECT");
 				this.api = api;
-				api.getProductDetail("5121691410126519");
-				api.getChat("90090684261974255");
-				api.getUser("90089584752198136");
 			}
 
 			@Override

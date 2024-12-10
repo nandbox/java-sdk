@@ -1,5 +1,6 @@
 package com.nandbox.bots.api.data;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -23,6 +24,7 @@ public class Button {
 	public static final String BUTTON_QUERY_LOCATION = "location";
 	public static final String BUTTON_QUERY_CONTACT = "contact";
 	public static final String KEY_BUTTON_NAV_TYPE = "nav_type";
+	public static final String KEY_NEXT = "next";
 
 	private Integer buttonSpan;
 	private Integer buttonOrder;
@@ -37,6 +39,7 @@ public class Button {
 	private String buttonIcon;
 	private String buttonIconBgColor;
 	private String navType;
+	private JSONArray next;
 
 	public Button() {
 
@@ -64,6 +67,7 @@ public class Button {
 		this.buttonIcon = (String) obj.get(KEY_BUTTON_ICON);
 		this.buttonIconBgColor = (String) obj.get(KEY_BUTTON_ICON_BG_COLOR);
 		this.navType = (String) obj.get(KEY_BUTTON_NAV_TYPE);
+		this.next = (JSONArray) obj.get(KEY_NEXT);
 
 	}
 
@@ -101,6 +105,9 @@ public class Button {
 
 		if (navType != null) {
 			obj.put(KEY_BUTTON_NAV_TYPE, navType);
+		}
+		if (next != null) {
+			obj.put(KEY_NEXT, next);
 		}
 
 		return obj;
@@ -140,6 +147,16 @@ public class Button {
 	/**
 	 * @return the buttonTextColor
 	 */
+	public void addButtonNext(JSONObject next) {
+		this.next.add(next);
+
+	}
+	public void setKeyButtonNext(JSONObject next) {
+		JSONArray newNext = new JSONArray();
+		newNext.add(next);
+		this.next = newNext;
+	}
+
 	public String getButtonTextColor() {
 		return buttonTextColor;
 	}
@@ -245,6 +262,7 @@ public class Button {
 	/**
 	 * @return the chat
 	 */
+
 	public String getChat() {
 		return chat;
 	}
