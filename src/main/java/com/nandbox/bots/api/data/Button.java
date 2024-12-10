@@ -147,10 +147,18 @@ public class Button {
 	/**
 	 * @return the buttonTextColor
 	 */
+	/**
+	 * @param next
+	 *            the buttonSpan to set
+	 */
 	public void addButtonNext(JSONObject next) {
 		this.next.add(next);
 
 	}
+	/**
+	 * @param next
+	 *            the buttonSpan to set
+	 */
 	public void setKeyButtonNext(JSONObject next) {
 		JSONArray newNext = new JSONArray();
 		newNext.add(next);
