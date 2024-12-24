@@ -231,7 +231,7 @@ public class NandboxClient {
 			//System.out.println("Stopping Websocket client");
 			NandboxClient.log.info("Stopping Websocket client");
 			try {
-				if (InternalWebSocket.this != null)
+				if (InternalWebSocket.this != null &&InternalWebSocket.this.getSession() !=null )
 					InternalWebSocket.this.getSession().close();
 			} catch (Exception e) {
 				//System.out.println("Exception : " + e.getMessage() + " while closing websocket session");
