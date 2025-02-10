@@ -66,6 +66,8 @@ public class IncomingMessage {
 	private static final String KEY_ARTICLE = "article";
 	private static final String KEY_URL = "url";
 	private static final String KEY_SCHEDULE_DATE = "schedule_date";
+	private static final String KEY_APP_ID = "app_id";
+
 	// private static final String KEY_TAG= "tagsDefinition";
 
 	private String messageId;
@@ -97,6 +99,7 @@ public class IncomingMessage {
 	private WhiteListUser whitelistUser;
 	private TagDefination tag;
 	private Long scheduleDate;
+	private Long appId;
 
 	public IncomingMessage(JSONObject jsonObj) {
 
@@ -133,6 +136,10 @@ public class IncomingMessage {
 		this.status = (String) obj.get(KEY_STATUS);
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
+		this.appId =obj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
+				: null;
+
 		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null
 				: new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
 		// this.tag = obj.get(KEY_TAG) != null ? new Tag((JSONObject) obj.get(KEY_TAG))
