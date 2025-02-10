@@ -252,6 +252,9 @@ public class IncomingMessage {
 		if (scheduleDate != null) {
 			obj.put(KEY_SCHEDULE_DATE, scheduleDate);
 		}
+		if (appId != null) {
+			obj.put(KEY_APP_ID, appId);
+		}
 
 		// if (tag != null) {
 		// obj.put(KEY_TAG, tag);
@@ -260,6 +263,10 @@ public class IncomingMessage {
 		NandboxClient.log.info("to " + obj.toJSONString());
 		return obj;
 
+	}
+
+	public Long getAppId() {
+		return appId;
 	}
 
 	/**
