@@ -36,6 +36,7 @@ public class ProductItem {
     private static final String KEY_CATEGORY = "category";
     private static final String KEY_STATUS = "status";
     private static final String KEY_OPTION = "option";
+    private static final String KEY_APP_ID = "app_id";
 
     private List<String> addons;
     private String description;
@@ -65,6 +66,8 @@ public class ProductItem {
     private String category;
     private String status;
     private JSONArray option;
+    private Long appId;
+
 
     public ProductItem() {}
 
@@ -98,6 +101,9 @@ public class ProductItem {
         this.category = (String) obj.get(KEY_CATEGORY);
         this.status = (String) obj.get(KEY_STATUS);
         this.option = (JSONArray) obj.get(KEY_OPTION);
+        this.appId =object.get(KEY_APP_ID) != null
+                ? Long.parseLong(String.valueOf(object.get(KEY_APP_ID)))
+                : null;
     }
 
     public JSONObject toJsonObject() {
@@ -131,6 +137,7 @@ public class ProductItem {
         if (category != null) obj.put(KEY_CATEGORY, category);
         if (status != null) obj.put(KEY_STATUS, status);
         if (option != null) obj.put(KEY_OPTION, option);
+        if (appId!=null) obj.put(KEY_APP_ID,appId);
 
         return obj;
     }

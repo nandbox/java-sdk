@@ -9,7 +9,7 @@ public class GetUserOutMessage extends OutMessage {
 	private  String userId;
 
 	public GetUserOutMessage() {
-		this.method = OutMessageMethod.getUserDetail;
+		this.method = OutMessageMethod.getUser;
 	}
 
 	@Override

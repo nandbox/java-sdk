@@ -19,12 +19,12 @@ public abstract class OutMessage {
 
 		sendMessage, sendPhoto, sendVideo, sendCellMessage, sendCellPhoto, sendCellVideo, sendAudio, sendVoice,
 		sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton,
-		inlineSearchAnswer, setMyProfile, getUserDetail, getChatDetail, getChatAdministrators, getChatMember, banChatMember,
+		inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember,
 		unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,
 		getBlacklist, getWhitelist, addBlacklist, addWhitelist, deleteBlacklist, addBlacklistPatterns,
 		deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist, setAdminChatMenu,
 		setAdminNavigationButton, cancelMessageSchedule,setWorkflow,addChatMember,createChat,addChatAdmin,setWorkflowAction
-		,getCollectionProduct,listCollectionItem,getProductDetail
+		,getCollectionProduct,listCollectionItem, getProductItem
 
 	}
 
@@ -35,6 +35,7 @@ public abstract class OutMessage {
 
 	protected static final String KEY_METHOD = "method";
 	protected static final String KEY_CHAT_ID = "chat_id";
+	protected static final String KEY_APP_ID = "app_id";
 	protected static final String KEY_REFERENCE = "reference";
 	protected static final String KEY_TO_USER_ID = "to_user_id";
 	protected static final String KEY_REPLAY_TO_MESSAGE_ID = "reply_to_message_id";
@@ -52,6 +53,7 @@ public abstract class OutMessage {
 	protected OutMessageMethod method;
 	protected String chatId;
 	protected Long reference;
+	protected Long app_id;
 	protected String toUserId;
 	protected String replyToMessageId;
 	protected Integer webPagePreview;
@@ -107,6 +109,9 @@ public abstract class OutMessage {
 
 		if (menuRef != null) {
 			obj.put(KEY_MENU_REF, menuRef);
+		}
+		if (app_id != null) {
+			obj.put(KEY_APP_ID, app_id);
 		}
 		if (inlineMenus != null) {
 			JSONArray inlineMenusArrayObj = new JSONArray();
@@ -197,7 +202,15 @@ public abstract class OutMessage {
 	public String getToUserId() {
 		return toUserId;
 	}
-
+	/**
+	 * @return the app_Id
+	 */
+	public Long getApp_id() {
+		return app_id;
+	}
+	public void setApp_id(long app_id) {
+		this. app_id=app_id;
+	}
 	/**
 	 * @param toUserId
 	 *            the toUserId to set

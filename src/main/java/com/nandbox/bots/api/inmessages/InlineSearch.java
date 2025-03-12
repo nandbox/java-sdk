@@ -23,9 +23,10 @@ public class InlineSearch {
 	private static final String KEY_SEARCH_ID = "search_id";	
 	private static final String KEY_OFFSET = "offset";
 	private static final String KEY_KEYWORDS = "keywords";
-	
-	
-	
+	private static final String KEY_APP_ID = "app_id";
+
+
+
 	private Long date;
 	private String method;
 	private User from;
@@ -33,7 +34,7 @@ public class InlineSearch {
 	private Integer searchId;
 	private String offset;
 	private String keywords;
-
+	private Long appId;
 	public InlineSearch(JSONObject jsonObj) {
 
 		//System.out.println("json " + jsonObj.toJSONString());
@@ -46,7 +47,10 @@ public class InlineSearch {
 		this.date = Utils.getLong(obj.get(KEY_DATE));
 		this.searchId = Utils.getInteger(obj.get(KEY_SEARCH_ID));
 		this.offset = (String) obj.get(KEY_OFFSET);
-		this.keywords = String.valueOf(obj.get(KEY_KEYWORDS));		
+		this.keywords = String.valueOf(obj.get(KEY_KEYWORDS));
+		this.appId =jsonObj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
+				: null;
 	}
 
 	/**
@@ -81,8 +85,10 @@ public class InlineSearch {
 		if (keywords != null) {
 
 			obj.put(KEY_KEYWORDS, keywords);
-		}			
-
+		}
+		if (appId!=null){
+			obj.put(KEY_APP_ID,appId);
+		}
 		//System.out.println("to " + obj.toJSONString());
 		return obj;
 
@@ -94,7 +100,9 @@ public class InlineSearch {
 	public Long getDate() {
 		return date;
 	}
-
+	public Long getAppId(){
+		return appId;
+	}
 	/**
 	 * @param date
 	 *            the date to set

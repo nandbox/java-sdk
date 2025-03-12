@@ -17,16 +17,22 @@ public class PermanentUrl {
 	private static final String KEY_FILE = "file";
 	private static final String KEY_URL = "url";
 	protected static final String KEY_PARAM1 = "param1";
-	
+	private static final String KEY_APP_ID = "app_id";
+
+
 	private String file;
 	private String url;
-	private String param1;	
+	private String param1;
+	private Long appId;
 
 	public PermanentUrl(JSONObject jsonObj) {
 
 		this.setUrl(String.valueOf(jsonObj.get(KEY_URL)));
 		this.setFile(String.valueOf(jsonObj.get(KEY_FILE)));
-		this.setParam1(String.valueOf(jsonObj.get(KEY_PARAM1)));		
+		this.setParam1(String.valueOf(jsonObj.get(KEY_PARAM1)));
+		this.appId =jsonObj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
+				: null;
 	}
 
 	/**
@@ -41,7 +47,10 @@ public class PermanentUrl {
 		if (file != null)
 			obj.put(KEY_FILE, file);
 		if (param1 != null)
-			obj.put(KEY_PARAM1, param1);		
+			obj.put(KEY_PARAM1, param1);
+		if (appId!=null){
+			obj.put(KEY_APP_ID,appId);
+		}
 		return obj;
 	}
 
@@ -51,7 +60,9 @@ public class PermanentUrl {
 	public String getFile() {
 		return file;
 	}
-
+	public Long getAppId(){
+		return appId;
+	}
 	/**
 	 * @param file the file to set
 	 */
