@@ -12,13 +12,16 @@ public class WhiteList {
 	private static final String KEY_EOP = "eop";
 	private static final String KEY_USERS = "users";
 	private static final String KEY_CHAT = "chat";
+	private static final String KEY_APP_ID = "app_id";
 
 	private String eop;
 	private Chat chat;
 	private SignupUser[] users;
-
+	private Long appId;
 	public WhiteList(JSONObject jsonObj) {
-
+		this.appId =jsonObj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
+				: null;
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_WHITELIST);
 
 		this.eop = (String) obj.get(KEY_EOP);
@@ -52,7 +55,9 @@ public class WhiteList {
 		if (eop != null) {
 			obj.put(KEY_EOP, eop);
 		}
-
+		if (appId!=null){
+			obj.put(KEY_APP_ID,appId);
+		}
 		return obj;
 
 	}
@@ -75,6 +80,9 @@ public class WhiteList {
 
 	public SignupUser[] getUsers() {
 		return users;
+	}
+	public Long getAppId(){
+		return appId;
 	}
 
 	public void setUsers(SignupUser[] users) {

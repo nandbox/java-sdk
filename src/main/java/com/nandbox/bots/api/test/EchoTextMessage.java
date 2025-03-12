@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783913582166:0:nssXmKkPvYiBG8VCvcz4yYfr9auCID";
+	public static final String TOKEN = "90091783779467293:0:1szFDHGvpDwv4zyLXD3HP6XUBAII22";
 
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
@@ -31,13 +31,14 @@ public class EchoTextMessage {
 				if (incomingMsg.isTextMsg()) {
 					String chatId = incomingMsg.getChat().getId(); // get your chat Id
 					String text = incomingMsg.getText(); // get your text message
-					api.sendText(chatId, text); // Sending message back as an Echo
+					api.getUser("90089584766092404", Long.valueOf("90090684298937728")); // Sending message back as an Echo
+
 				}
 			}
 
 			@Override
 			public void onReceive(JSONObject obj) {
-
+				System.out.println(obj.toJSONString());
 			}
 
 			@Override
@@ -104,8 +105,8 @@ public class EchoTextMessage {
 
 
 			@Override
-			public void onUserDetails(User user) {
-
+			public void onUserDetails(User user,Long appId) {
+				System.out.println(appId);
 			}
 
 			@Override
@@ -131,8 +132,10 @@ public class EchoTextMessage {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat) {
+			public void onChatDetails(Chat chat,Long appId) {
 				// TODO Auto-generated method stub
+				System.out.println(appId);
+				System.out.println("HERE");
 				
 			}
 

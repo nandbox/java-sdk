@@ -113,7 +113,7 @@ public class TestCellMessage {
 			   }
 
 			   @Override
-			public void onUserDetails(User user) {
+			public void onUserDetails(User user,Long appId) {
 				
 			}
 	
@@ -133,7 +133,7 @@ public class TestCellMessage {
 			}
 	
 			@Override
-			public void onChatDetails(Chat chat) {
+			public void onChatDetails(Chat chat,Long appId) {
 				
 			}
 	

@@ -5,7 +5,7 @@ import net.minidev.json.JSONObject;
 public class GetChatOutMessage extends OutMessage {
 
 	public GetChatOutMessage() {
-		this.method = OutMessageMethod.getChatDetail;
+		this.method = OutMessageMethod.getChat;
 	}
 
 	@Override
@@ -14,6 +14,7 @@ public class GetChatOutMessage extends OutMessage {
 		if (chatId != null) {
 			obj.put(KEY_CHAT_ID, chatId);
 		}
+		System.out.println(obj.toJSONString());
 		return obj;
 	}
 

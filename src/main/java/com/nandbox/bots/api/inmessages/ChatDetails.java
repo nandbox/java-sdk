@@ -7,11 +7,14 @@ import net.minidev.json.JSONObject;
 
 public class ChatDetails {
 	private static final String KEY_CHAT = "chat";
-
+	private static final String KEY_APP_ID = "app_id";
+	private Long appId;
 	private Chat chat;
 
 	public ChatDetails(JSONObject obj) {
-
+		this.appId =obj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
+				: null;
 		this.chat = new Chat((JSONObject) obj.get(KEY_CHAT));
 
 	}
@@ -23,7 +26,9 @@ public class ChatDetails {
 		if (chat != null) {
 			obj.put(KEY_CHAT, chat.toJsonObject());
 		}
-
+		if (appId!=null){
+			obj.put(KEY_APP_ID,appId);
+		}
 		return obj;
 
 	}
@@ -65,6 +70,10 @@ public class ChatDetails {
 		return chat.getVersion();
 	}
 
+
+	public Long getAppId(){
+		return appId;
+	}
 	/**
 	 * @param version
 	 *            the chat version to set

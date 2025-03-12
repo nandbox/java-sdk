@@ -167,7 +167,7 @@ public final class Nandbox {
 		 * @param user
 		 *            user object contain user details
 		 */
-		public void onUserDetails(User user);
+		public void onUserDetails(User user,Long appId);
 
 		/**
 		 * @param user
@@ -193,7 +193,7 @@ public final class Nandbox {
 		 * @param chat
 		 *            chat object contain details of specific chat
 		 */
-		public void onChatDetails(Chat chat);
+		public void onChatDetails(Chat chat,Long appId);
 
 		/**
 		 * @param inlineSearch
@@ -239,7 +239,7 @@ public final class Nandbox {
 		 *            text message to be send
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendText(String chatId, String text);
+		public Long sendText(String chatId, String text,Long appId);
 
 		/**
 		 * @param chatId
@@ -251,7 +251,7 @@ public final class Nandbox {
 		 *            text message background color Hex code in format : #HHHHHH
 		 * @return reference the sent message reference
 		 */
-		public Long sendTextWithBackground(String chatId, String text, String bgColor);
+		public Long sendTextWithBackground(String chatId, String text, String bgColor,Long appId);
 
 		/**
 		 * @param chatId
@@ -263,7 +263,7 @@ public final class Nandbox {
 		 *            Unique local identifier for the target chat/user , can not set to
 		 *            <code>null</code>
 		 */
-		public void sendText(String chatId, String text, Long reference);
+		public void sendText(String chatId, String text, Long reference,Long appId);
 
 		/**
 		 * @param chatId
@@ -294,7 +294,7 @@ public final class Nandbox {
 		 * 
 		 */
 		public void sendText(String chatId, String text, Long reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor, String tab);
+				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -308,7 +308,7 @@ public final class Nandbox {
 		 * @return reference ( Unique local identifier for the message)
 		 */
 
-		public Long sendPhoto(String chatId, String photoFileId, String caption);
+		public Long sendPhoto(String chatId, String photoFileId, String caption,Long appId);
 
 
 
@@ -316,8 +316,8 @@ public final class Nandbox {
 		 * @param productId
 		 * 			  Unique identifier for the target product and can not set to null
 		 */
-		public void getProductDetail(String productId);
-		public void listCollectionItem();
+		public void getProductDetail(String productId,Long appId);
+		public void listCollectionItem(Long appId);
 		/**
 		 * @param chatId
 		 *            Unique identifier for the target chat or User_id and can not set
@@ -332,7 +332,7 @@ public final class Nandbox {
 		 *            "Photo caption 0-256 characters
 		 */
 
-		public void sendPhoto(String chatId, String photoFileId, Long reference, String caption);
+		public void sendPhoto(String chatId, String photoFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -363,7 +363,7 @@ public final class Nandbox {
 		 */
 		public void sendPhoto(String chatId, String photoFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab);
+				Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -376,7 +376,7 @@ public final class Nandbox {
 		 *            "Video caption 0-256 characters "
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendVideo(String chatId, String videoFileId, String caption);
+		public Long sendVideo(String chatId, String videoFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -391,7 +391,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with video
 		 *            "video caption 0-256 characters"
 		 */
-		public void sendVideo(String chatId, String videoFileId, Long reference, String caption);
+		public void sendVideo(String chatId, String videoFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -422,7 +422,7 @@ public final class Nandbox {
 		 */
 		public void sendVideo(String chatId, String videoFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab);
+				Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -435,7 +435,7 @@ public final class Nandbox {
 		 *            "Audio caption 0-256 characters "
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendAudio(String chatId, String audioFileId, String caption);
+		public Long sendAudio(String chatId, String audioFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -450,7 +450,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with audio
 		 *            "audio caption 0-256 characters"
 		 */
-		public void sendAudio(String chatId, String audioFileId, Long reference, String caption);
+		public void sendAudio(String chatId, String audioFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -488,7 +488,7 @@ public final class Nandbox {
 		 */
 		public void sendAudio(String chatId, String audioFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String performer,
-				String title, Integer chatSettings, String tab);
+				String title, Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -500,7 +500,7 @@ public final class Nandbox {
 		 *            Contact full name
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendContact(String chatId, String phoneNumber, String name);
+		public Long sendContact(String chatId, String phoneNumber, String name,Long appId);
 
 		/**
 		 * @param chatId
@@ -514,7 +514,7 @@ public final class Nandbox {
 		 *            Unique local identifier for the target chat/user , can not set to
 		 *            <code>null</code>
 		 */
-		public void sendContact(String chatId, String phoneNumber, String name, Long reference);
+		public void sendContact(String chatId, String phoneNumber, String name, Long reference,Long appId);
 
 		/**
 		 * @param chatId
@@ -544,7 +544,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendContact(String chatId, String phoneNumber, String name, Long reference, String replyToMessageId,
-				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String tab);
+				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -557,7 +557,7 @@ public final class Nandbox {
 		 *            "voice caption 0-256 characters"
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendVoice(String chatId, String voiceFileId, String caption);
+		public Long sendVoice(String chatId, String voiceFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -572,7 +572,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with voice
 		 *            "voice caption 0-256 characters"
 		 */
-		public void sendVoice(String chatId, String voiceFileId, Long reference, String caption);
+		public void sendVoice(String chatId, String voiceFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -606,7 +606,7 @@ public final class Nandbox {
 		 */
 		public void sendVoice(String chatId, String voiceFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, Long size,
-				Integer chatSettings, String tab);
+				Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -619,7 +619,7 @@ public final class Nandbox {
 		 *            "document caption 0-256 characters "
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendDocument(String chatId, String documentFileId, String caption);
+		public Long sendDocument(String chatId, String documentFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -634,7 +634,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with document
 		 *            "document caption 0-256 characters"
 		 */
-		public void sendDocument(String chatId, String documentFileId, Long reference, String caption);
+		public void sendDocument(String chatId, String documentFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -669,7 +669,7 @@ public final class Nandbox {
 		 */
 		public void sendDocument(String chatId, String documentFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String name,
-				Integer size, Integer chatSettings, String tab);
+				Integer size, Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -681,7 +681,7 @@ public final class Nandbox {
 		 *            Longitude of the location
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendlocation(String chatId, String latitude, String longitude);
+		public Long sendlocation(String chatId, String latitude, String longitude,Long appId);
 
 		/**
 		 * @param chatId
@@ -695,7 +695,7 @@ public final class Nandbox {
 		 *            Unique local identifier for the target chat/user , can not set to
 		 *            <code>null</code>
 		 */
-		public void sendlocation(String chatId, String latitude, String longitude, Long reference);
+		public void sendlocation(String chatId, String latitude, String longitude, Long reference,Long appId);
 
 		/**
 		 * @param chatId
@@ -730,7 +730,7 @@ public final class Nandbox {
 		 */
 		public void sendlocation(String chatId, String latitude, String longitude, Long reference,
 				String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-				String name, String details, Integer chatSettings, String tab);
+				String name, String details, Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -744,7 +744,7 @@ public final class Nandbox {
 		 * @return reference ( Unique local identifier for the message)
 		 */
 
-		public Long sendGIF(String chatId, String gifFileId, String caption);
+		public Long sendGIF(String chatId, String gifFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -760,7 +760,7 @@ public final class Nandbox {
 		 *            caption 0-256 characters"
 		 */
 
-		public void sendGIF(String chatId, String gifFileId, Long reference, String caption);
+		public void sendGIF(String chatId, String gifFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -790,7 +790,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendGIF(String chatId, String gifFileId, Long reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab);
+				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * @param chatId
@@ -803,7 +803,7 @@ public final class Nandbox {
 		 *            caption 0-256 characters "
 		 * @return reference ( Unique local identifier for the message)
 		 */
-		public Long sendGIFVideo(String chatId, String gifFileId, String caption);
+		public Long sendGIFVideo(String chatId, String gifFileId, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -818,7 +818,7 @@ public final class Nandbox {
 		 *            Caption (optionally <code>null</code>) to be send with gif "gif
 		 *            caption 0-256 characters"
 		 */
-		public void sendGIFVideo(String chatId, String gifFileId, Long reference, String caption);
+		public void sendGIFVideo(String chatId, String gifFileId, Long reference, String caption,Long appId);
 
 		/**
 		 * @param chatId
@@ -849,7 +849,7 @@ public final class Nandbox {
 		 */
 		public void sendGIFVideo(String chatId, String gifFileId, Long reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab);
+				Integer chatSettings, String tab,Long appId);
 
 		/**
 		 * Use this message to update existing Message sent
@@ -867,14 +867,14 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, String tab);
+		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, String tab,Long appId);
 
 		/**
 		 * @param collectionProductId
 		  			id for the collection
 		 *
 		 */
-		public void getCollectionProduct(String collectionProductId);
+		public void getCollectionProduct(String collectionProductId,Long appId);
 		/**
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
@@ -886,7 +886,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message
 		 *
 		 */
-		void updateTextMsg(String messageId, String text, String toUserId, String tab);
+		void updateTextMsg(String messageId, String text, String toUserId, String tab,Long appId);
 
 		/**
 		 * @param messageId
@@ -898,7 +898,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMediaCaption(String messageId, String caption, String toUserId, String tab);
+		void updateMediaCaption(String messageId, String caption, String toUserId, String tab,Long appId);
 
 		/**
 		 * @param messageId
@@ -910,7 +910,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateChatMsg(String messageId, String text, String chatId, String tab);
+		void updateChatMsg(String messageId, String text, String chatId, String tab,Long appId);
 
 		/**
 		 * @param messageId
@@ -922,7 +922,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message                
 		 */
-		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab);
+		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab,Long appId);
 		
 		@Deprecated
 		void sendCellText(String userId, String screenId, String cellId, String text, Long reference);
@@ -939,7 +939,7 @@ public final class Nandbox {
 		 * @param userId
 		 *            Id of Target user to receive updated message
 		 */
-		void getUser(String userId);
+		void getUser(String userId,Long appId);
 
 		/**
 		 * Use this method to get Group or Channel information.
@@ -947,7 +947,7 @@ public final class Nandbox {
 		 * @param chatId
 		 *            Id of Target Group or Channel id
 		 */
-		void getChat(String chatId);
+		void getChat(String chatId,Long appId);
 
 		/**
 		 * Use this method to get Chat Member user public profile.
@@ -958,7 +958,7 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 */
 
-		void getChatMember(String chatId, String userId);
+		void getChatMember(String chatId, String userId,Long appId);
 
 		/**
 		 * Use this method to get Chat Administrators
@@ -966,7 +966,7 @@ public final class Nandbox {
 		 * @param chatId
 		 *            Id of Target Group or Channel id
 		 */
-		void getChatAdministrators(String chatId);
+		void getChatAdministrators(String chatId,Long appId);
 
 		/**
 		 * Use this method to ban a Chat Member from accessing Chat
@@ -977,7 +977,7 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 */
 
-		void banChatMember(String chatId, String userId);
+		void banChatMember(String chatId, String userId,Long appId);
 
 		/**
 		 * Use this method to unban a Chat Member from accessing Chat.
@@ -988,7 +988,7 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 */
 
-		void unbanChatMember(String chatId, String userId);
+		void unbanChatMember(String chatId, String userId,Long appId);
 
 		/**
 		 * Use this method to remove a Chat Member from Chat.
@@ -999,7 +999,7 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 */
 
-		void removeChatMember(String chatId, String userId);
+		void removeChatMember(String chatId, String userId,Long appId);
 
 		/**
 		 * Use this message to recall existing Message sent .
@@ -1014,7 +1014,7 @@ public final class Nandbox {
 		 * @param reference
 		 *            Unique local identifier for the target chat/user
 		 */
-		void recallMessage(String chatId, String messageId, String toUserId, Long reference);
+		void recallMessage(String chatId, String messageId, String toUserId, Long reference,Long appId);
 
 		/**
 		 * Use this method to set Bot Profile
@@ -1049,33 +1049,33 @@ public final class Nandbox {
 		void generatePermanentUrl(String file, String param1);
 
 
-		void getBlackList(String chatId);
+		void getBlackList(String chatId,Long appId);
 
-		void getWhiteList(String chatId);
+		void getWhiteList(String chatId,Long appId);
 
-		void addBlackList(String chatId, List<String> users);
+		void addBlackList(String chatId, List<String> users,Long appId);
 
 //		void addWhiteList(String chatId, List<SignupUser> signupUser);
 
-		void deleteBlackList(String chatId, List<String> users);
+		void deleteBlackList(String chatId, List<String> users,Long appId);
 
-		void deleteWhiteList(String chatId, List<String> users);
+		void deleteWhiteList(String chatId, List<String> users,Long appId);
 
-		void addBlacklistPatterns(String chatId, List<Data> data);
+		void addBlacklistPatterns(String chatId, List<Data> data,Long appId);
 		
-		void addWhitelistPatterns(String chatId, List<Data> data);
+		void addWhitelistPatterns(String chatId, List<Data> data,Long appId);
 
-		void deleteBlackListPatterns(String chatId, List<String> pattern);
+		void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId);
 
-		void deleteWhiteListPatterns(String chatId, List<String> pattern);
+		void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId);
 
 
-		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers);
+		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers,Long appId);
 
-		void setWorkflow(String userId , String screenId,String appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
-		void setWorkflowAction(String userId ,String vappId, String screenId,String nextScreen,Long reference);
-		void createChat(String type,String title, int isPublic,long reference);
-		void addChatMember(long chatId, long userId);
-		void addChatAdminMember(long chatId, long userId);
+		void setWorkflow(String userId , String screenId,Long appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
+		void setWorkflowAction(String userId ,String vappId, String screenId,String nextScreen,Long reference,Long appId);
+		void createChat(String type,String title, int isPublic,long reference,Long appId);
+		void addChatMember(long chatId, long userId,Long appId);
+		void addChatAdminMember(long chatId, long userId,Long appId);
 	}
 }
