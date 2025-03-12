@@ -946,6 +946,8 @@ public final class Nandbox {
 		 * 
 		 * @param chatId
 		 *            Id of Target Group or Channel id
+		 * @param appId
+		 * 			  id for the app the request sending to
 		 */
 		void getChat(String chatId,Long appId);
 
@@ -956,6 +958,8 @@ public final class Nandbox {
 		 *            Id of Target Group or Channel id
 		 * @param userId
 		 *            Id of Target user to receive updated message
+		 * @param appId
+		 * 		     id for the app the request sending to
 		 */
 
 		void getChatMember(String chatId, String userId,Long appId);
@@ -965,6 +969,8 @@ public final class Nandbox {
 		 * 
 		 * @param chatId
 		 *            Id of Target Group or Channel id
+		 * @param appId
+		 *  		  id for the app the request sending to
 		 */
 		void getChatAdministrators(String chatId,Long appId);
 
@@ -975,6 +981,8 @@ public final class Nandbox {
 		 *            Id of Target Group or Channel id
 		 * @param userId
 		 *            Id of Target user to receive updated message
+		 * @param appId
+		 * 		      id for the app the request sending to
 		 */
 
 		void banChatMember(String chatId, String userId,Long appId);
@@ -986,6 +994,8 @@ public final class Nandbox {
 		 *            Id of Target Group or Channel id
 		 * @param userId
 		 *            Id of Target user to receive updated message
+		 * @param appId
+		 * 		  	id for the app the request sending to
 		 */
 
 		void unbanChatMember(String chatId, String userId,Long appId);
@@ -997,6 +1007,8 @@ public final class Nandbox {
 		 *            Id of Target Group or Channel id
 		 * @param userId
 		 *            Id of Target user to receive updated message
+		 * @param appId
+		 * 		   	id for the app the request sending to
 		 */
 
 		void removeChatMember(String chatId, String userId,Long appId);
@@ -1013,6 +1025,8 @@ public final class Nandbox {
 		 *            channel, unique identifier of the target user.
 		 * @param reference
 		 *            Unique local identifier for the target chat/user
+		 * @param appId
+		 * 		  		id for the app the request sending to
 		 */
 		void recallMessage(String chatId, String messageId, String toUserId, Long reference,Long appId);
 
@@ -1048,7 +1062,11 @@ public final class Nandbox {
 		 */
 		void generatePermanentUrl(String file, String param1);
 
-
+		/*
+		 * @param appId
+		 * 		   	id for the app the request sending to
+		*
+		*/
 		void getBlackList(String chatId,Long appId);
 
 		void getWhiteList(String chatId,Long appId);
