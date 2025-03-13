@@ -79,13 +79,13 @@ public class MultipleTests {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
 						
 						if (incomingMsg.getText().equalsIgnoreCase("getChatMember")) {
-							api.getChatMember(incomingMsg.getChat().getId(), incomingMsg.getFrom().getId(),incomingMsg.getAppId());
+							api.getChatMember(incomingMsg.getChat().getId(), incomingMsg.getFrom().getId());
 						} else if (incomingMsg.getText().equals("getAdmins")) {
-							api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChatAdministrators(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equalsIgnoreCase("getChat")) {
-							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChat(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equals("getBlackList")) {
-							api.getBlackList(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getBlackList(incomingMsg.getChat().getId());
 
 						}else if (incomingMsg.getText().equalsIgnoreCase("getProfile")){
 							api.getMyProfiles();
@@ -105,7 +105,7 @@ public class MultipleTests {
 
 							dataList.add(data2);
 
-							api.addBlacklistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId());
+							api.addBlacklistPatterns(incomingMsg.getChat().getId(), dataList);
 
 						} else if (incomingMsg.getText().equals("addWhitelistPatterns")) {
 
@@ -117,17 +117,17 @@ public class MultipleTests {
 
 							dataList.add(data);
 
-							api.addWhitelistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId());
+							api.addWhitelistPatterns(incomingMsg.getChat().getId(), dataList);
 
 						}
 
 						else if (incomingMsg.getText().equals("getWhiteList")) {
-							api.getWhiteList(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getWhiteList(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equals("addBlackList")) {
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 							users.add("222223");
-							api.addBlackList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.addBlackList(incomingMsg.getChat().getId(), users);
 						} else if (incomingMsg.getText().equals("addWhiteList")) {
 
 							ArrayList<String> tagsList = new ArrayList<>();
@@ -142,36 +142,36 @@ public class MultipleTests {
 
 							whiteListUsersArray.add(whiteListUser);
 
-							api.addWhiteList(incomingMsg.getChat().getId(), whiteListUsersArray,incomingMsg.getAppId());
+							api.addWhiteList(incomingMsg.getChat().getId(), whiteListUsersArray);
 
 						} else if (incomingMsg.getText().equals("deleteBlackList")) {
 
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 
-							api.deleteBlackList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.deleteBlackList(incomingMsg.getChat().getId(), users);
 
 						} else if (incomingMsg.getText().equals("deleteWhitelist")) {
 
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 
-							api.deleteWhiteList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.deleteWhiteList(incomingMsg.getChat().getId(), users);
 
 						} else if (incomingMsg.getText().equals("deleteBlacklistPatterns")) {
 
 							ArrayList<String> pattern = new ArrayList<>();
 							pattern.add("222*");
-							api.deleteBlackListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId());
+							api.deleteBlackListPatterns(incomingMsg.getChat().getId(), pattern);
 
 						} else if (incomingMsg.getText().equals("deleteWhitelistPatterns")) {
 
 							ArrayList<String> pattern = new ArrayList<>();
 							pattern.add("5555*");
-							api.deleteWhiteListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId());
+							api.deleteWhiteListPatterns(incomingMsg.getChat().getId(), pattern);
 
 						} else if (incomingMsg.getText().equalsIgnoreCase("BigText")) {
-							api.sendTextWithBackground(incomingMsg.getChat().getId(), "Hi From Bot", "#EE82EE",incomingMsg.getAppId());
+							api.sendTextWithBackground(incomingMsg.getChat().getId(), "Hi From Bot", "#EE82EE");
 						}
 
 					}
@@ -206,18 +206,18 @@ public class MultipleTests {
 							String tabId = incomingMsg.getText().split(" ")[1]; 
 							System.out.println("Tab ID is " + tabId);
 							Long reference = getUniqueId();
-							api.sendText(incomingMsg.getChat().getId(), "Your tab id is " + tabId, reference, null, null, null, null, null, null, tabId,incomingMsg.getAppId());
+							api.sendText(incomingMsg.getChat().getId(), "Your tab id is " + tabId, reference, null, null, null, null, null, null, tabId);
 							return;
 						} else if (incomingMsg.getText().equals("getMyProfile")) {
 							api.getMyProfiles();
 						} else if (incomingMsg.getText().equals("getChat")) {
-							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChat(incomingMsg.getChat().getId());
 						} else if (incomingMsg.getText().equals("getUser")) {
-							api.getUser(incomingMsg.getFrom().getId(),incomingMsg.getAppId());
+							api.getUser(incomingMsg.getFrom().getId());
 
 						}
 						else if ("getProduct".equalsIgnoreCase(incomingMsg.getText())){
-							api.getProductDetail("5121406605126307",incomingMsg.getAppId());
+							api.getProductDetail("5121406605126307");
 						}
 						else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
 
@@ -350,7 +350,7 @@ public class MultipleTests {
 						}
 
 						else {
-							api.sendText(incomingMsg.getChat().getId(), incomingMsg.getText(),incomingMsg.getAppId());
+							api.sendText(incomingMsg.getChat().getId(), incomingMsg.getText());
 						}
 					}
 					if (incomingMsg.getFrom().getId().equals(TOKEN.split(":")[0])) return ;
@@ -421,15 +421,15 @@ public class MultipleTests {
 				// "./upload/DocumentSample.docx");
 				String uploadedDocumentId = MediaTransfer.uploadFile(TOKEN, "./upload/welcome.jpg");
 
-				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, "Document Caption",incomingMsg.getAppId());
-				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, getUniqueId(), "Send doc with ref",incomingMsg.getAppId());
+				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, "Document Caption");
+				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, getUniqueId(), "Send doc with ref");
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedDocumentId, getUniqueId(), null, null, null,
-						null, "from all option send", null, null, null, null,incomingMsg.getAppId());
+						null, "from all option send", null, null, null, null);
 
 				api.sendText(incomingMsg.getChat().getId(),
 						"Document size : " + incomingMsg.getDocument().getSize() + " , Document File Name is : "
 								+ incomingMsg.getDocument().getName() + " , Document File ID is : "
-								+ incomingMsg.getDocument().getId(),incomingMsg.getAppId());
+								+ incomingMsg.getDocument().getId());
 			}
 
 			private void handleIncomingContactMsg(IncomingMessage incomingMsg) {
@@ -449,16 +449,16 @@ public class MultipleTests {
 
 				// send contatc using sendContact
 				api.sendContact(incomingMsg.getChat().getId(), incomingMsg.getContact().getPhoneNumber(),
-						incomingMsg.getContact().getName(),incomingMsg.getAppId());
+						incomingMsg.getContact().getName());
 
 				api.sendContact(incomingMsg.getChat().getId(), incomingMsg.getContact().getPhoneNumber(),
-						incomingMsg.getContact().getName(), getUniqueId(),incomingMsg.getAppId());
+						incomingMsg.getContact().getName(), getUniqueId());
 
 				api.sendContact(incomingMsg.getChat().getId(), incomingMsg.getContact().getPhoneNumber(),
-						incomingMsg.getContact().getName(), getUniqueId(), null, null, null, null, null, null,incomingMsg.getAppId());
+						incomingMsg.getContact().getName(), getUniqueId(), null, null, null, null, null, null);
 
 				api.sendText(incomingMsg.getChat().getId(), " Contact Name  is : " + incomingMsg.getContact().getName()
-						+ " Phone number  is : " + incomingMsg.getContact().getPhoneNumber(),incomingMsg.getAppId());
+						+ " Phone number  is : " + incomingMsg.getContact().getPhoneNumber());
 
 			}
 
@@ -475,7 +475,7 @@ public class MultipleTests {
 				String uploadedTextFileId = MediaTransfer.uploadFile(TOKEN, "./download/" + textFileId);
 
 				api.sendDocument(incomingMsg.getChat().getId(), uploadedTextFileId, getUniqueId(), null, null, null,
-						null, "Text File Caption", null, null, null, null,incomingMsg.getAppId());
+						null, "Text File Caption", null, null, null, null);
 
 			}
 
@@ -503,18 +503,18 @@ public class MultipleTests {
 				// send location using sendlocation
 
 				api.sendlocation(incomingMsg.getChat().getId(), incomingMsg.getLocation().getLatitude(),
-						incomingMsg.getLocation().getLongitude(),incomingMsg.getAppId());
+						incomingMsg.getLocation().getLongitude());
 				api.sendlocation(incomingMsg.getChat().getId(), incomingMsg.getLocation().getLatitude(),
-						incomingMsg.getLocation().getLongitude(), getUniqueId(),incomingMsg.getAppId());
+						incomingMsg.getLocation().getLongitude(), getUniqueId());
 				api.sendlocation(incomingMsg.getChat().getId(), incomingMsg.getLocation().getLatitude(),
 						incomingMsg.getLocation().getLongitude(), getUniqueId(), null, null, null, null, null, null,
-						null, null,incomingMsg.getAppId());
+						null, null);
 
 				api.sendText(incomingMsg.getChat().getId(),
 						" Latitude is : " + incomingMsg.getLocation().getLatitude() + " Longitude is : "
 								+ incomingMsg.getLocation().getLongitude() + " and name is :"
 								+ incomingMsg.getLocation().getName() + " and details is :"
-								+ incomingMsg.getLocation().getDetails(),incomingMsg.getAppId());
+								+ incomingMsg.getLocation().getDetails());
 			}
 
 			private void handleIncomingGifMsg(IncomingMessage incomingMsg) {
@@ -539,7 +539,7 @@ public class MultipleTests {
 							"Gif Size is : " + incomingMsg.getGif().getSize() + " and Gif width is :"
 									+ incomingMsg.getGif().getWidth() + " and Gif height is :"
 									+ incomingMsg.getGif().getHeight() + " and caption is : " + incomingMsg.getCaption()
-									+ "\n\n Wait please sending you a Gif ....",incomingMsg.getAppId());
+									+ "\n\n Wait please sending you a Gif ....");
 
 					String uploadedGifPhotoId = MediaTransfer.uploadFile(TOKEN, "./upload/gif_sample.gif");
 
@@ -556,7 +556,7 @@ public class MultipleTests {
 						// send GIF using sendGIF
 
 						api.sendGIF(incomingMsg.getChat().getId(),
-								"92ff95add24e1c5f9294e5bea733f1629f7636fa081cb6e16d1ec256b792528c.gif", "without ref",incomingMsg.getAppId());
+								"92ff95add24e1c5f9294e5bea733f1629f7636fa081cb6e16d1ec256b792528c.gif", "without ref");
 					}
 
 				} else if (incomingMsg.getGif().getThumbnail() != null
@@ -576,10 +576,10 @@ public class MultipleTests {
 
 						// send GIF using sendGIF
 
-						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, "without ref",incomingMsg.getAppId());
-						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, getUniqueId(), "with ref",incomingMsg.getAppId());
+						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, "without ref");
+						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, getUniqueId(), "with ref");
 						api.sendGIFVideo(incomingMsg.getChat().getId(), uploadedGifVideoId, getUniqueId(), null, null,
-								null, null, "with option", null, null,incomingMsg.getAppId());
+								null, null, "with option", null, null);
 					}
 
 				} else {
@@ -612,7 +612,7 @@ public class MultipleTests {
 						"Audio Title : " + incomingMsg.getAudio().getTitle() + " ,Audio Performer is : "
 								+ incomingMsg.getAudio().getPerformer() + ", Audio Size is : "
 								+ incomingMsg.getAudio().getSize() + " and Audio Duration is :"
-								+ formatDurationInMinsAndSeconds(incomingMsg.getAudio().getDuration()),incomingMsg.getAppId());
+								+ formatDurationInMinsAndSeconds(incomingMsg.getAudio().getDuration()));
 			}
 
 			private void handleIncomingVoiceMsg(IncomingMessage incomingMsg) {
@@ -631,7 +631,7 @@ public class MultipleTests {
 				api.send(voiceOutMsg);
 				api.sendText(incomingMsg.getChat().getId(),
 						"Voice Size is : " + incomingMsg.getVoice().getSize() + " and Voice Duration is :"
-								+ formatDurationInMinsAndSeconds(incomingMsg.getVoice().getDuration()),incomingMsg.getAppId());
+								+ formatDurationInMinsAndSeconds(incomingMsg.getVoice().getDuration()));
 
 			}
 
@@ -689,7 +689,7 @@ public class MultipleTests {
 								+ incomingMsg.getVideo().getWidth() + " and Video height is :"
 								+ incomingMsg.getVideo().getHeight() + " and Video duration is :"
 								+ formatDurationInMinsAndSeconds(incomingMsg.getVideo().getDuration())
-								+ " and caption is : " + incomingMsg.getCaption(),incomingMsg.getAppId());
+								+ " and caption is : " + incomingMsg.getCaption());
 
 			}
 
@@ -721,7 +721,7 @@ public class MultipleTests {
 						"Photo Size is : " + incomingMsg.getPhoto().getSize() + " and Photo width is :"
 								+ incomingMsg.getPhoto().getWidth() + " and Photo height is :"
 								+ incomingMsg.getPhoto().getHeight() + " and caption is : " + incomingMsg.getCaption()
-								+ "\n\n Wait please sending you a photo ....",incomingMsg.getAppId());
+								+ "\n\n Wait please sending you a photo ....");
 
 				String uploadedPhotId = MediaTransfer.uploadFile(TOKEN, "./upload/welcome.jpg");
 				if (uploadedPhotId != null) {
@@ -778,9 +778,9 @@ public class MultipleTests {
 			public void onChatMember(ChatMember chatMember) {
 				System.out.println("Chat Member Details received : ");
 				System.out.println("Chat Id : " + chatMember.getChat().getId());
-				api.getChat(chatMember.getChat().getId(),chatMember.getAppId());
+				api.getChat(chatMember.getChat().getId());
 				System.out.println("User Id : " + chatMember.getUser().getId());
-				api.getUser(chatMember.getUser().getId(),chatMember.getAppId());
+				api.getUser(chatMember.getUser().getId());
 
 			}
 
@@ -789,15 +789,15 @@ public class MultipleTests {
 
 				for (int i = 0; i < chatAdministrators.getAdministrators().length; i++) {
 					User user = chatAdministrators.getAdministrators()[i];
-					api.sendText(user.getId(), "Hi from Multiple tests bot",chatAdministrators.getAppId());
-					api.getUser(user.getId(),chatAdministrators.getAppId());
+					api.sendText(user.getId(), "Hi from Multiple tests bot");
+					api.getUser(user.getId());
 					System.out.println(user.toJsonObject());
 				}
 
 			}
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user) {
 				System.out.println("User Name : " + user.getName());
 				System.out.println("User Type : " + user.getType());
 			}
@@ -856,7 +856,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat) {
 				System.out.println("Chat Title : " + chat.getTitle());
 			}
 

@@ -9,10 +9,7 @@ import java.util.List;
 
 public class ListCollectionItemResponse {
     private static final String KEY_DATA = "data";
-    private static final String KEY_APP_ID = "app_id";
-
     private List<Category> categories;
-    private Long appId;
 
     public ListCollectionItemResponse(JSONObject obj) {
         this.categories = new ArrayList<>();
@@ -23,9 +20,6 @@ public class ListCollectionItemResponse {
                 this.categories.add(new Category(categoryObj));
             }
         }
-        this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                : null;
     }
 
     public JSONObject toJsonObject() {
@@ -39,9 +33,6 @@ public class ListCollectionItemResponse {
         if (!this.categories.isEmpty()) {
             obj.put(KEY_DATA, categoriesArray);
         }
-        if (appId!=null){
-            obj.put(KEY_APP_ID,appId);
-        }
 
         return obj;
     }
@@ -53,8 +44,5 @@ public class ListCollectionItemResponse {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-    public Long getAppId(){
-        return appId;
     }
 }

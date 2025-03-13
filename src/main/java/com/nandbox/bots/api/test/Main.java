@@ -24,6 +24,7 @@ public class Main {
             public void onConnect(Nandbox.Api api) {
                 System.out.println("Connected Successfully");
                 this.api=api;
+                api.getProductDetail("");
             }
 
             @Override
@@ -53,7 +54,7 @@ public class Main {
                 System.out.println(chatMenuCallback.getButtonData());
                 String chatId = chatMenuCallback.getChat().getId(); // get your chat Id
 //                String text = chatMenuCallback.getText(); // get your text message
-                api.sendText(chatId, chatMenuCallback.getButtonData().toJSONString(),chatMenuCallback.getAppId()); // Sending message back as an Echo
+                api.sendText(chatId, chatMenuCallback.getButtonData().toJSONString()); // Sending message back as an Echo
             }
 
             @Override
@@ -108,7 +109,7 @@ public class Main {
 
 
             @Override
-            public void onUserDetails(User user,Long appId) {
+            public void onUserDetails(User user) {
 
             }
 
@@ -128,7 +129,7 @@ public class Main {
             }
 
             @Override
-            public void onChatDetails(Chat chat,Long appId) {
+            public void onChatDetails(Chat chat) {
 
             }
 

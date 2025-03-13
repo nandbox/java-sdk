@@ -101,12 +101,11 @@ public class IncomingMessage {
 	private Long scheduleDate;
 	private Long appId;
 
-
 	public IncomingMessage(JSONObject jsonObj) {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_MESSAGE);
 
-		User fromUser = new User(obj);
+		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
 		User sentToUser = obj.get(KEY_SENT_TO) != null ? new User((JSONObject) obj.get(KEY_SENT_TO)) : null;
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.location = obj.get(KEY_LOCATION) != null ? new Location((JSONObject) obj.get(KEY_LOCATION)) : null;
@@ -137,8 +136,8 @@ public class IncomingMessage {
 		this.status = (String) obj.get(KEY_STATUS);
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
+		this.appId =obj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
 				: null;
 
 		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null

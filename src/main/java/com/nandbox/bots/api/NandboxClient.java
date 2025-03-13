@@ -89,7 +89,6 @@ public class NandboxClient {
 		private static final String KEY_NAME = "name";
 		private static final String KEY_ID = "ID";
 		private static final String KEY_REFERENCE = "reference";
-		private static final String KEY_APP_ID = "app_id";
 
 		Nandbox.Callback callback;
 		Session session;
@@ -278,8 +277,8 @@ public class NandboxClient {
 
 				private void prepareOutMessage(OutMessage message, String chatId, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						String caption, Integer chatSettings, String tab,Long appId) {
-					message.setApp_id(appId);
+						String caption, Integer chatSettings, String tab) {
+
 					message.setChatId(chatId);
 					message.setReference(reference);
 					if (toUserId != null) {
@@ -311,34 +310,34 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendText(String chatId, String text,Long appId) {
+				public Long sendText(String chatId, String text) {
 					Long reference = getUniqueId();
-					sendText(chatId, text, reference,appId);
+					sendText(chatId, text, reference);
 
 					return reference;
 				}
 
 				@Override
-				public Long sendTextWithBackground(String chatId, String text, String bgColor,Long appId) {
+				public Long sendTextWithBackground(String chatId, String text, String bgColor) {
 					Long reference = getUniqueId();
-					sendText(chatId, text, reference, null, null, null, null, null, bgColor, null,appId);
+					sendText(chatId, text, reference, null, null, null, null, null, bgColor, null);
 
 					return reference;
 				}
 
 				@Override
-				public void sendText(String chatId, String text, Long reference,Long appId) {
+				public void sendText(String chatId, String text, Long reference) {
 
-					sendText(chatId, text, reference, null, null, null, null, null, null, null,appId);
+					sendText(chatId, text, reference, null, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendText(String chatId, String text, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings,
-						String bgColor, String tab,Long appId) {
+						String bgColor, String tab) {
 					TextOutMessage message = new TextOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings, tab,appId);
+							disableNotification, null, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendMessage);
 					message.setText(text);
 					message.setBgColor(bgColor);
@@ -347,11 +346,11 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendPhoto(String chatId, String photoId, String caption,Long appId) {
+				public Long sendPhoto(String chatId, String photoId, String caption) {
 
 					Long reference = getUniqueId();
 
-					sendPhoto(chatId, photoId, reference, caption,appId);
+					sendPhoto(chatId, photoId, reference, caption);
 
 					return reference;
 				}
@@ -359,20 +358,20 @@ public class NandboxClient {
 
 
 				@Override
-				public void sendPhoto(String chatId, String photoId, Long reference, String caption,Long appId) {
+				public void sendPhoto(String chatId, String photoId, Long reference, String caption) {
 
-					sendPhoto(chatId, photoId, reference, null, null, null, null, caption, null, null,appId);
+					sendPhoto(chatId, photoId, reference, null, null, null, null, caption, null, null);
 
 				}
 
 				@Override
 				public void sendPhoto(String chatId, String photoFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings, String tab,Long appId) {
+						Integer chatSettings, String tab) {
 
 					PhotoOutMessage message = new PhotoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendPhoto);
 					message.setPhoto(photoFileId);
 					send(message);
@@ -380,26 +379,26 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendContact(String chatId, String phoneNumber, String name,Long appId) {
+				public Long sendContact(String chatId, String phoneNumber, String name) {
 					Long reference = getUniqueId();
 					sendContact(chatId, phoneNumber, name, reference);
 					return reference;
 				}
 
 				@Override
-				public void sendContact(String chatId, String phoneNumber, String name, Long reference,Long appId) {
+				public void sendContact(String chatId, String phoneNumber, String name, Long reference) {
 
-					sendContact(chatId, phoneNumber, name, reference, null, null, null, null, null, null,appId);
+					sendContact(chatId, phoneNumber, name, reference, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendContact(String chatId, String phoneNumber, String name, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						Integer chatSettings, String tab,Long appId) {
+						Integer chatSettings, String tab) {
 
 					ContactOutMessage contactOutMessage = new ContactOutMessage();
 					prepareOutMessage(contactOutMessage, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings, tab,appId);
+							disableNotification, null, chatSettings, tab);
 
 					contactOutMessage.setMethod(OutMessageMethod.sendContact);
 					contactOutMessage.setPhoneNumber(phoneNumber);
@@ -408,29 +407,29 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendVideo(String chatId, String videoId, String caption,Long appId) {
+				public Long sendVideo(String chatId, String videoId, String caption) {
 
 					Long reference = getUniqueId();
-					sendVideo(chatId, videoId, reference, caption,appId);
+					sendVideo(chatId, videoId, reference, caption);
 
 					return reference;
 
 				}
 
 				@Override
-				public void sendVideo(String chatId, String videoId, Long reference, String caption,Long appId) {
+				public void sendVideo(String chatId, String videoId, Long reference, String caption) {
 
-					sendVideo(chatId, videoId, reference, null, null, null, null, caption, null, null,appId);
+					sendVideo(chatId, videoId, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendVideo(String chatId, String videoFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings, String tab,Long appId) {
+						Integer chatSettings, String tab) {
 
 					VideoOutMessage message = new VideoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVideo);
 					message.setVideo(videoFileId);
 					send(message);
@@ -438,29 +437,29 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendAudio(String chatId, String audioId, String caption,Long appId) {
+				public Long sendAudio(String chatId, String audioId, String caption) {
 
 					Long reference = getUniqueId();
-					sendAudio(chatId, audioId, reference, caption,appId);
+					sendAudio(chatId, audioId, reference, caption);
 
 					return reference;
 
 				}
 
 				@Override
-				public void sendAudio(String chatId, String audioFileId, Long reference, String caption,Long appId) {
+				public void sendAudio(String chatId, String audioFileId, Long reference, String caption) {
 
-					sendAudio(chatId, audioFileId, reference, null, null, null, null, caption, null, null, null, null,appId);
+					sendAudio(chatId, audioFileId, reference, null, null, null, null, caption, null, null, null, null);
 				}
 
 				@Override
 				public void sendAudio(String chatId, String audioFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						String performer, String title, Integer chatSettings, String tab,Long appId) {
+						String performer, String title, Integer chatSettings, String tab) {
 
 					AudioOutMessage message = new AudioOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendAudio);
 					message.setPerformer(performer);
 					message.setTitle(title);
@@ -470,27 +469,27 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendVoice(String chatId, String voiceFileId, String caption,Long appId) {
+				public Long sendVoice(String chatId, String voiceFileId, String caption) {
 
 					Long reference = getUniqueId();
-					sendVoice(chatId, voiceFileId, reference, caption,appId);
+					sendVoice(chatId, voiceFileId, reference, caption);
 					return reference;
 				}
 
 				@Override
-				public void sendVoice(String chatId, String voiceFileId, Long reference, String caption,Long appId) {
+				public void sendVoice(String chatId, String voiceFileId, Long reference, String caption) {
 
-					sendVoice(chatId, voiceFileId, reference, null, null, null, null, caption, null, null, null,appId);
+					sendVoice(chatId, voiceFileId, reference, null, null, null, null, caption, null, null, null);
 				}
 
 				@Override
 				public void sendVoice(String chatId, String voiceFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, Long size,
-						Integer chatSettings, String tab,Long appId) {
+						Integer chatSettings, String tab) {
 
 					VoiceOutMessage message = new VoiceOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVoice);
 					message.setSize(size);
 					message.setVoice(voiceFileId);
@@ -498,28 +497,28 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendDocument(String chatId, String documentFileId, String caption,Long appId) {
+				public Long sendDocument(String chatId, String documentFileId, String caption) {
 
 					Long reference = getUniqueId();
-					sendDocument(chatId, documentFileId, reference, caption, appId);
+					sendDocument(chatId, documentFileId, reference, caption);
 					return reference;
 				}
 
 				@Override
-				public void sendDocument(String chatId, String documentFileId, Long reference, String caption,Long appId) {
+				public void sendDocument(String chatId, String documentFileId, Long reference, String caption) {
 
-					sendDocument(chatId, documentFileId, reference, null, null, null, null, caption, null, null, null, null,appId);
+					sendDocument(chatId, documentFileId, reference, null, null, null, null, caption, null, null, null, null);
 
 				}
 
 				@Override
 				public void sendDocument(String chatId, String documentFileId, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						String name, Integer size, Integer chatSettings, String tab,Long appId) {
+						String name, Integer size, Integer chatSettings, String tab) {
 
 					DocumentOutMessage message = new DocumentOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendDocument);
 					message.setDocument(documentFileId);
 					message.setName(name);
@@ -528,26 +527,26 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendlocation(String chatId, String latitude, String longitude,Long appId) {
+				public Long sendlocation(String chatId, String latitude, String longitude) {
 
 					Long reference = getUniqueId();
-					sendlocation(chatId, latitude, longitude, reference,appId);
+					sendlocation(chatId, latitude, longitude, reference);
 					return reference;
 				}
 
 				@Override
-				public void sendlocation(String chatId, String latitude, String longitude, Long reference,Long appId) {
-					sendlocation(chatId, latitude, longitude, reference, null, null, null, null, null, null, null, null,appId);
+				public void sendlocation(String chatId, String latitude, String longitude, Long reference) {
+					sendlocation(chatId, latitude, longitude, reference, null, null, null, null, null, null, null, null);
 				}
 
 				@Override
 				public void sendlocation(String chatId, String latitude, String longitude, Long reference,
 						String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-						String name, String details, Integer chatSettings, String tab,Long appId) {
+						String name, String details, Integer chatSettings, String tab) {
 
 					LocationOutMessage message = new LocationOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, null, chatSettings, tab,appId);
+							disableNotification, null, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendLocation);
 					message.setName(name);
 					message.setDetails(details);
@@ -556,28 +555,28 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendGIF(String chatId, String gif, String caption,Long appId) {
+				public Long sendGIF(String chatId, String gif, String caption) {
 
 					Long reference = getUniqueId();
 
-					sendPhoto(chatId, gif, reference, caption,appId);
+					sendPhoto(chatId, gif, reference, caption);
 
 					return reference;
 				}
 
 				@Override
-				public void sendGIF(String chatId, String gif, Long reference, String caption,Long appId) {
+				public void sendGIF(String chatId, String gif, Long reference, String caption) {
 
-					sendPhoto(chatId, gif, reference, null, null, null, null, caption, null, null,appId);
+					sendPhoto(chatId, gif, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendGIF(String chatId, String gif, Long reference, String replyToMessageId, String toUserId,
-						Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab,Long appId) {
+						Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab) {
 
 					PhotoOutMessage message = new PhotoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendPhoto);
 					message.setPhoto(gif);
 					send(message);
@@ -585,29 +584,29 @@ public class NandboxClient {
 				}
 
 				@Override
-				public Long sendGIFVideo(String chatId, String gif, String caption,Long appId) {
+				public Long sendGIFVideo(String chatId, String gif, String caption) {
 
 					Long reference = getUniqueId();
-					sendVideo(chatId, gif, reference, caption,appId);
+					sendVideo(chatId, gif, reference, caption);
 
 					return reference;
 
 				}
 
 				@Override
-				public void sendGIFVideo(String chatId, String gif, Long reference, String caption,Long appId) {
+				public void sendGIFVideo(String chatId, String gif, Long reference, String caption) {
 
-					sendVideo(chatId, gif, reference, null, null, null, null, caption, null, null,appId);
+					sendVideo(chatId, gif, reference, null, null, null, null, caption, null, null);
 				}
 
 				@Override
 				public void sendGIFVideo(String chatId, String gif, Long reference, String replyToMessageId,
 						String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-						Integer chatSettings, String tab,Long appId) {
+						Integer chatSettings, String tab) {
 
 					VideoOutMessage message = new VideoOutMessage();
 					prepareOutMessage(message, chatId, reference, replyToMessageId, toUserId, webPagePreview,
-							disableNotification, caption, chatSettings, tab,appId);
+							disableNotification, caption, chatSettings, tab);
 					message.setMethod(OutMessageMethod.sendVideo);
 					message.setVideo(gif);
 					send(message);
@@ -616,10 +615,10 @@ public class NandboxClient {
 
 				@Override
 				public void updateMessage(String messageId, String text, String caption, String toUserId,
-						String chatId, String tab,Long appId) {
+						String chatId, String tab) {
 
 					UpdateOutMessage updateMessage = new UpdateOutMessage();
-					updateMessage.setApp_id(appId);
+
 					updateMessage.setMessageId(messageId);
 					updateMessage.setText(text);
 					updateMessage.setCaption(caption);
@@ -632,102 +631,94 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void getCollectionProduct(String collectionProductId,Long appId) {
+				public void getCollectionProduct(String collectionProductId) {
 					GetCollectionProductOutMessage collectionProductOutMessage = new GetCollectionProductOutMessage();
 					collectionProductOutMessage.setId(collectionProductId);
-					collectionProductOutMessage.setApp_id(appId);
 					api.send(collectionProductOutMessage);
 				}
 
 				@Override
-				public void updateTextMsg(String messageId, String text, String toUserId, String tab,Long appId) {
+				public void updateTextMsg(String messageId, String text, String toUserId, String tab) {
 
-					updateMessage(messageId, text, null, toUserId, null, tab,appId);
+					updateMessage(messageId, text, null, toUserId, null, tab);
 				}
 
 				@Override
-				public void updateMediaCaption(String messageId, String caption, String toUserId, String tab,Long appId) {
+				public void updateMediaCaption(String messageId, String caption, String toUserId, String tab) {
 
-					updateMessage(messageId, null, caption, toUserId, null, tab,appId);
+					updateMessage(messageId, null, caption, toUserId, null, tab);
 				}
 
 				@Override
-				public void updateChatMsg(String messageId, String text, String chatId, String tab,Long appId) {
+				public void updateChatMsg(String messageId, String text, String chatId, String tab) {
 
-					updateMessage(messageId, text, null, null, chatId, tab,appId);
+					updateMessage(messageId, text, null, null, chatId, tab);
 				}
 
 				@Override
-				public void updateChatMediaCaption(String messageId, String caption, String chatId, String tab,Long appId) {
+				public void updateChatMediaCaption(String messageId, String caption, String chatId, String tab) {
 
-					updateMessage(messageId, null, caption, null, chatId, tab,appId);
+					updateMessage(messageId, null, caption, null, chatId, tab);
 				}
 
 				@Override
-				public void getChatMember(String chatId, String userId,Long appId) {
+				public void getChatMember(String chatId, String userId) {
 					GetChatMemberOutMessage getChatMemberOutMessage = new GetChatMemberOutMessage();
 					getChatMemberOutMessage.setChatId(chatId);
 					getChatMemberOutMessage.setUserId(userId);
-					getChatMemberOutMessage.setApp_id(appId);
 					api.send(getChatMemberOutMessage);
 				}
 
 				@Override
-				public void getUser(String userId,Long appId) {
+				public void getUser(String userId) {
 					GetUserOutMessage getUserOutMessage = new GetUserOutMessage();
 					getUserOutMessage.setUserId(userId);
-					getUserOutMessage.setApp_id(appId);
 					api.send(getUserOutMessage);
 
 				}
 
 				@Override
-				public void getChat(String chatId,Long appId) {
+				public void getChat(String chatId) {
 
 					GetChatOutMessage chatOutMessage = new GetChatOutMessage();
 					chatOutMessage.setChatId(chatId);
-					chatOutMessage.setApp_id(appId);
 					api.send(chatOutMessage);
 				}
 				@Override
-				public void getProductDetail(String productId,Long appId) {
+				public void getProductDetail(String productId) {
 					GetProductItemOutMessage getProductItemOutMessage = new GetProductItemOutMessage();
 					getProductItemOutMessage.setProductId(productId);
-					getProductItemOutMessage.setApp_id(appId);
 					api.send(getProductItemOutMessage);
 				}
 
 				@Override
-				public void listCollectionItem(Long appId) {
+				public void listCollectionItem() {
 					ListCollectionItemOutMessage listCollectionItemOutMessage = new ListCollectionItemOutMessage();
-					listCollectionItemOutMessage.setApp_id(appId);
 					api.send(listCollectionItemOutMessage);
 				}
 
 				@Override
-				public void getChatAdministrators(String chatId,Long appId) {
+				public void getChatAdministrators(String chatId) {
 					GetChatAdministratorsOutMessage getChatAdministratorsOutMessage = new GetChatAdministratorsOutMessage();
 					getChatAdministratorsOutMessage.setChatId(chatId);
-					getChatAdministratorsOutMessage.setApp_id(appId);
 					api.send(getChatAdministratorsOutMessage);
 				}
 
 				@Override
-				public void banChatMember(String chatId, String userId,Long appId) {
+				public void banChatMember(String chatId, String userId) {
 					BanChatMemberOutMessage banChatMemberOutMessage = new BanChatMemberOutMessage();
 					banChatMemberOutMessage.setChatId(chatId);
 					banChatMemberOutMessage.setUserId(userId);
-					banChatMemberOutMessage.setApp_id(appId);
 					api.send(banChatMemberOutMessage);
 				}
 
 				@Override
-				public void addBlackList(String chatId, List<String> users,Long appId) {
+				public void addBlackList(String chatId, List<String> users) {
 
 					AddBlackListOutMessage addBlackListOutMessage = new AddBlackListOutMessage();
 					addBlackListOutMessage.setChatId(chatId);
 					addBlackListOutMessage.setUsers(users);
-					addBlackListOutMessage.setApp_id(appId);
+
 					api.send(addBlackListOutMessage);
 				}
 
@@ -736,11 +727,10 @@ public class NandboxClient {
 				 * @param userId
 				 */
 				@Override
-				public void addChatMember(long chatId, long userId,Long appId) {
+				public void addChatMember(long chatId, long userId) {
 					AddChatMemberOutMessage addChatMemberOutMessage = new AddChatMemberOutMessage();
 					addChatMemberOutMessage.setChatId(chatId);
 					addChatMemberOutMessage.setUserId(userId);
-					addChatMemberOutMessage.setApp_id(appId);
 					api.send(addChatMemberOutMessage);
 				}
 
@@ -749,22 +739,20 @@ public class NandboxClient {
 				 * @param userId
 				 */
 				@Override
-				public void addChatAdminMember(long chatId, long userId,Long appId) {
+				public void addChatAdminMember(long chatId, long userId) {
 					AddChatAdminMemberOutMessage addChatAdminMemberOutMessage = new AddChatAdminMemberOutMessage();
 					addChatAdminMemberOutMessage.setChatId(chatId);
 					addChatAdminMemberOutMessage.setUserId(userId);
-					addChatAdminMemberOutMessage.setApp_id(appId);
 					api.send(addChatAdminMemberOutMessage);
 				}
 
 				@Override
-				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers,Long appId) {
+				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers) {
 
 					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
 
 					addWhiteistOutMessage.setChatId(chatId);
 					addWhiteistOutMessage.setWhiteListUser(whiteListUsers);
-					addWhiteistOutMessage.setApp_id(appId);
 					api.send(addWhiteistOutMessage);
 				}
 
@@ -776,12 +764,11 @@ public class NandboxClient {
 				 * @param disableNotification
 				 */
 				@Override
-				public void setWorkflow(String userId, String screenId,Long appId, List<WorkflowCell> workflowCell, Long reference, Boolean disableNotification) {
+				public void setWorkflow(String userId, String screenId,String appId, List<WorkflowCell> workflowCell, Long reference, Boolean disableNotification) {
 					SetWorkflowOutMessage setWorkflowOutMessage = new SetWorkflowOutMessage();
 					setWorkflowOutMessage.setUserId(userId);
 					setWorkflowOutMessage.setScreenId(screenId);
-					setWorkflowOutMessage.setAppId(String.valueOf(appId));
-					setWorkflowOutMessage.setApp_id(appId);
+					setWorkflowOutMessage.setAppId(appId);
 					setWorkflowOutMessage.setWorkflowCell(workflowCell);
 					setWorkflowOutMessage.setReference(reference);
 					setWorkflowOutMessage.setDisableNotification(disableNotification);
@@ -798,14 +785,13 @@ public class NandboxClient {
 				 * @param reference
 				 */
 				@Override
-				public void setWorkflowAction(String userId,String vappId, String screenId, String nextScreen, Long reference,Long appId) {
+				public void setWorkflowAction(String userId,String vappId, String screenId, String nextScreen, Long reference) {
 					SetWorkflowActionOutMessage setWorkflowActionOutMessage = new SetWorkflowActionOutMessage();
 					setWorkflowActionOutMessage.setUserId(userId);
 					setWorkflowActionOutMessage.setVappId(vappId);
 					setWorkflowActionOutMessage.setScreenId(screenId);
 					setWorkflowActionOutMessage.setNextScreen(nextScreen);
 					setWorkflowActionOutMessage.setReference(reference);
-					setWorkflowActionOutMessage.setApp_id(appId);
 					api.send(setWorkflowActionOutMessage);
 				}
 
@@ -815,102 +801,96 @@ public class NandboxClient {
 				 * @param isPublic
 				 */
 				@Override
-				public void createChat(String type,String title, int isPublic,long reference,Long appId) {
+				public void createChat(String type,String title, int isPublic,long reference) {
 					CreateChatOutMessage createChatOutMessage = new CreateChatOutMessage();
 					createChatOutMessage.setType(type);
 					createChatOutMessage.setTitle(title);
 					createChatOutMessage.setIsPublic(isPublic);
 					createChatOutMessage.setReference(reference);
-					createChatOutMessage.setApp_id(appId);
 
 					api.send(createChatOutMessage);
 				}
 
 				@Override
-				public void deleteBlackList(String chatId, List<String> users,Long appId) {
+				public void deleteBlackList(String chatId, List<String> users) {
 
 					DeleteBlackListOutMessage deleteBlackListOutMessage = new DeleteBlackListOutMessage();
 					deleteBlackListOutMessage.setChatId(chatId);
 					deleteBlackListOutMessage.setUsers(users);
-					deleteBlackListOutMessage.setApp_id(appId);
+
 					api.send(deleteBlackListOutMessage);
 				}
 
 				@Override
-				public void deleteWhiteList(String chatId, List<String> users,Long appId) {
+				public void deleteWhiteList(String chatId, List<String> users) {
 
 					DeleteWhiteListOutMessage deleteWhiteListOutMessage = new DeleteWhiteListOutMessage();
 					deleteWhiteListOutMessage.setChatId(chatId);
 					deleteWhiteListOutMessage.setUsers(users);
-					deleteWhiteListOutMessage.setApp_id(appId);
+
 					api.send(deleteWhiteListOutMessage);
 				}
 
 				@Override
-				public void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId) {
+				public void deleteBlackListPatterns(String chatId, List<String> pattern) {
 
 					DeleteBlackListPatternsOutMessage deleteBlackListPatterns = new DeleteBlackListPatternsOutMessage();
 					deleteBlackListPatterns.setChatId(chatId);
 					deleteBlackListPatterns.setPattern(pattern);
-					deleteBlackListPatterns.setApp_id(appId);
+
 					api.send(deleteBlackListPatterns);
 				}
 
 				@Override
-				public void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId) {
+				public void deleteWhiteListPatterns(String chatId, List<String> pattern) {
 
 					DeleteWhiteListPatternsOutMessage deleteWhiteListPatterns = new DeleteWhiteListPatternsOutMessage();
 					deleteWhiteListPatterns.setChatId(chatId);
 					deleteWhiteListPatterns.setPattern(pattern);
-					deleteWhiteListPatterns.setApp_id(appId);
+
 					api.send(deleteWhiteListPatterns);
 				}
 
 
 				@Override
-				public void addBlacklistPatterns(String chatId, List<Data> data,Long appId) {
+				public void addBlacklistPatterns(String chatId, List<Data> data) {
 
 					AddBlacklistPatternsOutMessage addBlacklistPatternsOutMessage = new AddBlacklistPatternsOutMessage();
 					addBlacklistPatternsOutMessage.setChatId(chatId);
 					addBlacklistPatternsOutMessage.setData(data);
-					addBlacklistPatternsOutMessage.setApp_id(appId);
 					api.send(addBlacklistPatternsOutMessage);
 				}
 
 				@Override
-				public void addWhitelistPatterns(String chatId, List<Data> data,Long appId) {
+				public void addWhitelistPatterns(String chatId, List<Data> data) {
 
 					AddWhitelistPatternsOutMessage addWhitelistPatternsOutMessage = new AddWhitelistPatternsOutMessage();
 					addWhitelistPatternsOutMessage.setChatId(chatId);
 					addWhitelistPatternsOutMessage.setData(data);
-					addWhitelistPatternsOutMessage.setApp_id(appId);
 					api.send(addWhitelistPatternsOutMessage);
 				}
 
 				@Override
-				public void unbanChatMember(String chatId, String userId,Long appId) {
+				public void unbanChatMember(String chatId, String userId) {
 					UnbanChatMember unbanChatMember = new UnbanChatMember();
 					unbanChatMember.setChatId(chatId);
 					unbanChatMember.setUserId(userId);
-					unbanChatMember.setApp_id(appId);
 					api.send(unbanChatMember);
 
 				}
 
 				@Override
-				public void removeChatMember(String chatId, String userId,Long appId) {
+				public void removeChatMember(String chatId, String userId) {
 
 					RemoveChatMemberOutMessage removeChatMemberOutMessage = new RemoveChatMemberOutMessage();
 					removeChatMemberOutMessage.setChatId(chatId);
 					removeChatMemberOutMessage.setUserId(userId);
-					removeChatMemberOutMessage.setApp_id(appId);
 					api.send(removeChatMemberOutMessage);
 				}
 
 				@Override
-				public void recallMessage(String chatId, String messageId, String toUserId, Long reference,Long appId) {
+				public void recallMessage(String chatId, String messageId, String toUserId, Long reference) {
 					RecallOutMessage recallOutMessage = new RecallOutMessage();
-					recallOutMessage.setApp_id(appId);
 					recallOutMessage.setChatId(chatId);
 					recallOutMessage.setMessageId(messageId);
 					recallOutMessage.setToUserId(toUserId);
@@ -941,18 +921,16 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void getBlackList(String chatId,Long appId) {
+				public void getBlackList(String chatId) {
 					GetBlackListOutMessage getBlackListOutMessage = new GetBlackListOutMessage();
 					getBlackListOutMessage.setChatId(chatId);
-					getBlackListOutMessage.setApp_id(appId);
 					api.send(getBlackListOutMessage);
 				}
 
 				@Override
-				public void getWhiteList(String chatId,Long appId) {
+				public void getWhiteList(String chatId) {
 					GetWhiteListOutMessage getWhiteListOutMessage = new GetWhiteListOutMessage();
 					getWhiteListOutMessage.setChatId(chatId);
-					getWhiteListOutMessage.setApp_id(appId);
 					api.send(getWhiteListOutMessage);
 				}
 
@@ -1012,7 +990,6 @@ public class NandboxClient {
 		@OnWebSocketMessage
 		public void onUpdate(String msg) {
 			User user;
-			Long appId;
 			lastMessage = System.currentTimeMillis();
 			//System.out.println("INTERNAL: ONMESSAGE");
 			NandboxClient.log.info("INTERNAL: ONMESSAGE");
@@ -1051,7 +1028,7 @@ public class NandboxClient {
 					IncomingMessage incomingMsg = new IncomingMessage(obj);
 					callback.onReceive(incomingMsg);
 					return;
-				case "getProductItemResponse":
+				case "getProductDetailResponse":
 					System.out.println(obj.toJSONString());
 					ProductItem productItem = new ProductItem(obj);
 					callback.onProductDetail(productItem);
@@ -1095,23 +1072,19 @@ public class NandboxClient {
 					return;
 				case "myProfile":
 					user = new User((JSONObject) obj.get(KEY_USER));
-
 					callback.onMyProfile(user);
 					return;
 				case "userDetails":
 					user = new User((JSONObject) obj.get(KEY_USER));
-					appId = Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)));
-
-					callback.onUserDetails(user,appId);
+					callback.onUserDetails(user);
 					return;
-				case "listCollectionItemResponse":
-					ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
-					callback.listCollectionItemResponse(listCollectionItemResponse.getCategories());
-					return ;
+					case "listCollectionItemResponse":
+						ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
+						callback.listCollectionItemResponse(listCollectionItemResponse.getCategories());
+						return ;
 				case "chatDetails":
 					Chat chat = new Chat((JSONObject) obj.get(KEY_CHAT));
-					 appId = Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)));
-					callback.onChatDetails(chat,appId);
+					callback.onChatDetails(chat);
 					return;
 				case "chatAdministrators":
 					ChatAdministrators chatAdministrators = new ChatAdministrators(obj);

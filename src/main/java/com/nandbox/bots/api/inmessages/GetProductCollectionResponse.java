@@ -10,10 +10,8 @@ import java.util.List;
 
 public class GetProductCollectionResponse {
     private static final String KEY_DATA = "data";
-    private static final String KEY_APP_ID = "app_id";
-
     private List<CollectionProduct> collectionProducts;
-    private Long appId;
+
     public GetProductCollectionResponse(JSONObject obj) {
         this.collectionProducts = new ArrayList<>();
         if (obj.containsKey(KEY_DATA)) {
@@ -23,9 +21,6 @@ public class GetProductCollectionResponse {
                 this.collectionProducts.add(new CollectionProduct(productObj));
             }
         }
-        this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                : null;
     }
 
     public JSONObject toJsonObject() {
@@ -39,9 +34,7 @@ public class GetProductCollectionResponse {
         if (!collectionProducts.isEmpty()) {
             obj.put(KEY_DATA, productsArray);
         }
-        if (appId!=null){
-            obj.put(KEY_APP_ID,appId);
-        }
+
         return obj;
     }
 
@@ -52,8 +45,5 @@ public class GetProductCollectionResponse {
 
     public void setCollectionProducts(List<CollectionProduct> collectionProducts) {
         this.collectionProducts = collectionProducts;
-    }
-    public Long getAppId(){
-        return appId;
     }
 }

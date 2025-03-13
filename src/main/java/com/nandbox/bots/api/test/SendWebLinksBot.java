@@ -64,7 +64,7 @@ public class SendWebLinksBot {
 							if (!incomingText.contains("&") || !incomingText.contains("=")) {
 
 								api.sendText(chatId,
-										"Invalid command , command format : webview=<WEB_VIEW_FLAG from 1 to 4>&link=<ANY WEB LINK>",incomingMsg.getAppId());
+										"Invalid command , command format : webview=<WEB_VIEW_FLAG from 1 to 4>&link=<ANY WEB LINK>");
 
 							} else {
 								String[] data = incomingText.split("&");
@@ -73,14 +73,14 @@ public class SendWebLinksBot {
 								if ("larg".equalsIgnoreCase(format))
 								{
 									for (int i = 0; i < msgsCount; i++) {
-										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, getRendomColorString(), null,incomingMsg.getAppId());
+										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, getRendomColorString(), null);
 										Thread.sleep(500);
 									}
 								}
 								else
 								{
 									for (int i = 0; i < msgsCount; i++) {
-										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, null, null,incomingMsg.getAppId());
+										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, null, null);
 									}
 								}
 								
@@ -92,7 +92,7 @@ public class SendWebLinksBot {
 				} catch (Exception excp) {
 					excp.printStackTrace();
 					api.sendText(incomingMsg.getChat().getId(),
-							"Invalid command , command format : webview=<WEB_VIEW_FLAG from 1 to 4>&link=<ANY WEB LINK>",incomingMsg.getAppId());
+							"Invalid command , command format : webview=<WEB_VIEW_FLAG from 1 to 4>&link=<ANY WEB LINK>");
 				}
 			}
 
@@ -104,15 +104,15 @@ public class SendWebLinksBot {
 				String chatId = chatMenuCallback.getChat().getId();
 
 				if (chatMenuCallback.getButtonCallback().equals("optionCB")) {
-					api.sendText(chatId, "Coming soon",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Coming soon");
 				}
 
 				if (chatMenuCallback.getButtonCallback().equals("mainCB")) {
-					api.sendText(chatId, "Main menu",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Main menu");
 				}
 
 				if (chatMenuCallback.getButtonCallback().equals("funnyCB")) {
-					api.sendText(chatId, "Why are frogs always so happy? They eat what ever bugs them",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Why are frogs always so happy? They eat what ever bugs them");
 				}
 
 			}
@@ -168,7 +168,7 @@ public class SendWebLinksBot {
 			}
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user) {
 
 				System.out.println("USER ID = " + user.getId());
 			}
@@ -218,7 +218,7 @@ public class SendWebLinksBot {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat) {
 				// TODO Auto-generated method stub
 				
 			}

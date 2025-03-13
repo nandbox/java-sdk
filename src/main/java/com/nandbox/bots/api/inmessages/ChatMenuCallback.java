@@ -37,7 +37,7 @@ public class ChatMenuCallback {
 	private String buttonCallback;
 	private String menuRef;
 	private JSONArray buttonData;
-	private Long appId;
+	private String appId;
 	ButtonQueryResult buttonQueryResult;
 
 	public ChatMenuCallback(JSONObject jsonObj) {
@@ -45,7 +45,7 @@ public class ChatMenuCallback {
 		//System.out.println("json " + jsonObj.toJSONString());
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_CHAT_MENU_CALL_BACK);
 
-		User fromUser = new User( obj);
+		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		ButtonQueryResult btnqueryResults = obj.get(KEY_BUTTON_QUERY_RESULTS) == null ? null
 				: new ButtonQueryResult((JSONObject) obj.get(KEY_BUTTON_QUERY_RESULTS));
@@ -57,9 +57,7 @@ public class ChatMenuCallback {
 		this.nextMenu = String.valueOf(obj.get(KEY_NEXT_MENU));
 		this.date = Utils.getLong(obj.get(KEY_DATE));
 		this.buttonData = (JSONArray) obj.get(KEY_BUTTON_DATA);
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+		this.appId =  String.valueOf(obj.get(KEY_APP_ID));
 	}
 
 	/**
@@ -98,12 +96,7 @@ public class ChatMenuCallback {
 		if (buttonData!=null)
 			obj.put(KEY_BUTTON_DATA,buttonData);
 		//System.out.println("to " + obj.toJSONString());
-		if (appId!=null){
-			obj.put(KEY_APP_ID,appId);
-		}
 		return obj;
-
-
 
 	}
 
@@ -231,11 +224,11 @@ public class ChatMenuCallback {
 		return buttonData;
 	}
 
-	public Long getAppId() {
+	public String getAppId() {
 		return appId;
 	}
 
-	public void setAppId(Long appId) {
+	public void setAppId(String appId) {
 		this.appId = appId;
 	}
 }

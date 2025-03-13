@@ -28,7 +28,6 @@ public class InlineMessageCallback {
 	private static final String KEY_REFERENCE = "reference";
 	private static final String KEY_BUTTON_CALLBACK = "button_callback";
 	private static final String KEY_BUTTON_QUERY_RESULTS = "button_query_result";
-	private static final String KEY_APP_ID = "app_id";
 
 	private String messageId;
 	private String menuRef;	
@@ -38,7 +37,6 @@ public class InlineMessageCallback {
 	private Chat chat;
 	private String buttonCallback;
 	ButtonQueryResult buttonQueryResult;
-	private Long appId;
 
 	public InlineMessageCallback(JSONObject jsonObj) {
 
@@ -56,9 +54,6 @@ public class InlineMessageCallback {
 		this.buttonCallback = String.valueOf(obj.get(KEY_BUTTON_CALLBACK));
 
 		this.date = Utils.getLong(obj.get(KEY_DATE));
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
 	}
 
 	/**
@@ -87,10 +82,8 @@ public class InlineMessageCallback {
 
 			obj.put(KEY_MENU_REF, menuRef);
 		}
-
-		if (appId!=null){
-			obj.put(KEY_APP_ID,appId);
-		}
+		
+		
 		if (reference != null)
 			obj.put(KEY_REFERENCE, reference);
 
@@ -156,9 +149,7 @@ public class InlineMessageCallback {
 	public User getFrom() {
 		return from;
 	}
-	public Long getAppId(){
-		return appId;
-	}
+
 	/**
 	 * @param from
 	 *            the from to set (User type)

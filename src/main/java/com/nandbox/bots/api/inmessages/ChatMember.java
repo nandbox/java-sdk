@@ -27,7 +27,6 @@ public class ChatMember {
 	private static final String KEY_TAGS = "tags";
 	private static final String KEY_ACCOUNT_TYPE = "account_type";
 	private static final String KEY_LOGIN_ID = "login_id";
-	private static final String KEY_APP_ID = "app_id";
 
 	private User user;
 	private Chat chat;
@@ -37,7 +36,7 @@ public class ChatMember {
 	private List<String> tags = new ArrayList<>();
 	private String accountType;
 	private String loginId;
-	private Long appId;
+	
 	@SuppressWarnings("unchecked")
 	public ChatMember(JSONObject jsonObj) {
 
@@ -52,9 +51,7 @@ public class ChatMember {
 		this.accountType = (String) obj.get(KEY_ACCOUNT_TYPE);
 		this.loginId = (String) obj.get(KEY_LOGIN_ID);
 //		this.tags = (String) obj.get(KEY_TAGS);
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+		
 
 
 
@@ -75,9 +72,6 @@ public class ChatMember {
 		}
 		if (type != null) {
 			obj.put(KEY_TYPE, type);
-		}
-		if (appId!=null){
-			obj.put(KEY_APP_ID,appId);
 		}
 		if (memberSince != null) {
 			obj.put(KEY_MEMBER_SINCE, memberSince);
@@ -127,9 +121,6 @@ public class ChatMember {
 		this.memberSince = memberSince;
 	}
 
-	public Long getAppId(){
-		return appId;
-	}
 	/**
 	 * @return the status
 	 */

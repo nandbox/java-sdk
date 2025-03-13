@@ -20,12 +20,11 @@ public class MessageAck {
 	private static final String KEY_MESSAGE_ID = "message_id";
 	private static final String KEY_DATE = "date";
 	private static final String KEY_REFERENCE = "reference";
-	private static final String KEY_APP_ID = "app_id";
 
 	private String messageId;
 	private Long date;
 	private String reference;
-	private Long appId;
+
 	public MessageAck(JSONObject jsonObj) {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_ACK);
@@ -33,9 +32,6 @@ public class MessageAck {
 		this.messageId = String.valueOf(obj.get(KEY_MESSAGE_ID));
 		this.reference = String.valueOf(obj.get(KEY_REFERENCE));
 		this.date = Utils.getLong(obj.get(KEY_DATE));
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
 	}
 
 	/**
@@ -54,9 +50,7 @@ public class MessageAck {
 		}
 		if (reference != null)
 			obj.put(KEY_REFERENCE, reference);
-		if (appId!=null){
-			obj.put(KEY_APP_ID,appId);
-		}
+
 		//System.out.println("to " + obj.toJSONString());
 		return obj;
 
@@ -76,9 +70,7 @@ public class MessageAck {
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
 	}
-	public Long getAppId(){
-		return appId;
-	}
+
 	/**
 	 * @return the date
 	 */

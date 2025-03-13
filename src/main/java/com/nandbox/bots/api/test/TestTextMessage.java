@@ -478,35 +478,35 @@ public class TestTextMessage {
 
 				} else if ("GCA".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90090684275605648";
-					api.getChatAdministrators(chatId,incomingMsg.getAppId());
+					api.getChatAdministrators(chatId);
 				} else if ("GU".equalsIgnoreCase(incomingMsg.getText())) {
 					String userId = "90089584980037358";
-					api.getUser(userId,incomingMsg.getAppId());
+					api.getUser(userId);
 
 				} else if ("GC".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584980037358";
-					api.getChat(chatId,incomingMsg.getAppId());
+					api.getChat(chatId);
 				}
 
 				else if ("GCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.getChatMember(chatId, userId,incomingMsg.getAppId());
+					api.getChatMember(chatId, userId);
 
 				} else if ("BCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.banChatMember(chatId, userId,incomingMsg.getAppId());
+					api.banChatMember(chatId, userId);
 
 				} else if ("UCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.unbanChatMember(chatId, userId,incomingMsg.getAppId());
+					api.unbanChatMember(chatId, userId);
 
 				} else if ("RCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.removeChatMember(chatId, userId,incomingMsg.getAppId());
+					api.removeChatMember(chatId, userId);
 
 				} else if ("SC".equalsIgnoreCase(incomingMsg.getText())) {
 					Chat chat = new Chat();
@@ -546,11 +546,11 @@ public class TestTextMessage {
 						e.printStackTrace();
 					}
 					api.sendText(incomingMsg.getChat().getId(), "Link without prview http://www.nandbox.com",
-							getUniqueId(), null, null, WEB_PREVIEW_DISABLE, true, null, null, null,incomingMsg.getAppId());
+							getUniqueId(), null, null, WEB_PREVIEW_DISABLE, true, null, null, null);
 					api.sendText(incomingMsg.getChat().getId(), "Link with prview http://www.nandbox.com",
-							getUniqueId(), null, null, null, true, null, null, null,incomingMsg.getAppId());
+							getUniqueId(), null, null, null, true, null, null, null);
 				} else if ("getChatAdmins".equalsIgnoreCase(incomingMsg.getText())) {
-					api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+					api.getChatAdministrators(incomingMsg.getChat().getId());
 				} else if ("getMyProfile".equalsIgnoreCase(incomingMsg.getText())) {
 					api.getMyProfiles();
 				}
@@ -594,33 +594,33 @@ public class TestTextMessage {
 				String userId = inlineMsgCallback.getFrom().getId();
 
 				if (inlineMsgCallback.getButtonCallback().equals("NarutoCB")) {
-					api.sendText(chatId, "Rasengan !!!",inlineMsgCallback.getAppId());
+					api.sendText(chatId, "Rasengan !!!");
 				}
 				if (inlineMsgCallback.getButtonCallback().equals("SasukeCB")) {
-					api.sendText(chatId, "Chidori z-z-z ",inlineMsgCallback.getAppId());
+					api.sendText(chatId, "Chidori z-z-z ");
 				}
 				if (inlineMsgCallback.getButtonCallback().equals("SakuraCB")) {
-					api.sendText(chatId, "Shannaro (*_*)",inlineMsgCallback.getAppId());
+					api.sendText(chatId, "Shannaro (*_*)");
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionCB")) {
-					api.updateMediaCaption(msgId, "My New Caption ", userId, null,inlineMsgCallback.getAppId());
+					api.updateMediaCaption(msgId, "My New Caption ", userId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextCB")) {
-					api.updateTextMsg(msgId, "My New Text ", userId, null,inlineMsgCallback.getAppId());
+					api.updateTextMsg(msgId, "My New Text ", userId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCB")) {
-					api.updateChatMsg(msgId, "My New Text in group ", chatId, null,inlineMsgCallback.getAppId());
+					api.updateChatMsg(msgId, "My New Text in group ", chatId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionChatCB")) {
-					api.updateChatMsg(msgId, "My New Caption in group ", chatId, null,inlineMsgCallback.getAppId());
+					api.updateChatMsg(msgId, "My New Caption in group ", chatId, null);
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCBboth")) {
-					api.updateMessage(msgId, "my new message", null, userId, chatId, null,inlineMsgCallback.getAppId());
+					api.updateMessage(msgId, "my new message", null, userId, chatId, null);
 				}
 
 			}
@@ -646,15 +646,15 @@ public class TestTextMessage {
 				String chatId = chatMenuCallback.getChat().getId();
 
 				if (chatMenuCallback.getButtonCallback().equals("optionCB")) {
-					api.sendText(chatId, "Coming soon",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Coming soon");
 				}
 
 				if (chatMenuCallback.getButtonCallback().equals("mainCB")) {
-					api.sendText(chatId, "Main menu",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Main menu");
 				}
 
 				if (chatMenuCallback.getButtonCallback().equals("funnyCB")) {
-					api.sendText(chatId, "Why are frogs always so happy? They eat what ever bugs them",chatMenuCallback.getAppId());
+					api.sendText(chatId, "Why are frogs always so happy? They eat what ever bugs them");
 				}
 
 			}
@@ -712,7 +712,7 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user) {
 
 				System.out.println("USER ID = " + user.getId());
 			}
@@ -750,7 +750,7 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat) {
 
 			}
 

@@ -46,7 +46,7 @@ public class SetWorkflow {
             public void onChatMenuCallBack(ChatMenuCallback chatMenuCallback) {
                 String userId = chatMenuCallback.getChat().getId();
                 String screenId = chatMenuCallback.getMenuRef();
-                Long appId = chatMenuCallback.getAppId();
+                String appId = chatMenuCallback.getAppId();
                 String btnCallback = chatMenuCallback.getButtonCallback();
                 System.out.println("APP ID:-" + appId + "\n" + "USER ID:-" + userId + "\n" + "SCREEN ID:-" + screenId + "\n" + "BUTTON CALLBACK:-" + btnCallback + "\n" );
 
@@ -62,7 +62,7 @@ public class SetWorkflow {
                 List<WorkflowCell> arr = new ArrayList<>();
                 arr.add(cell);
 
-                api.setWorkflow(userId,screenId, appId,arr,123456789L,false);
+                api.setWorkflow(userId,screenId,appId,arr,123456789L,false);
             }
 
             @Override
@@ -114,7 +114,7 @@ public class SetWorkflow {
             }
 
             @Override
-            public void onUserDetails(User user,Long appId) {
+            public void onUserDetails(User user) {
 
             }
 
@@ -141,7 +141,7 @@ public class SetWorkflow {
             }
 
             @Override
-            public void onChatDetails(Chat chat,Long appId) {
+            public void onChatDetails(Chat chat) {
                 // TODO Auto-generated method stub
 
             }
