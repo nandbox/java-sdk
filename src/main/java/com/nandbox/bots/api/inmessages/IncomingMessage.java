@@ -106,7 +106,7 @@ public class IncomingMessage {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_MESSAGE);
 
-		User fromUser = new User(obj);
+		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
 		User sentToUser = obj.get(KEY_SENT_TO) != null ? new User((JSONObject) obj.get(KEY_SENT_TO)) : null;
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.location = obj.get(KEY_LOCATION) != null ? new Location((JSONObject) obj.get(KEY_LOCATION)) : null;
