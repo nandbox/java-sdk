@@ -224,7 +224,12 @@ public abstract class OutMessage {
 		return app_id;
 	}
 	public void setApp_id(Long app_id) {
-		this. app_id=app_id;
+		if (app_id!=null){
+			this. app_id=app_id;
+
+		}else {
+			this.app_id=0l;
+		}
 	}
 	/**
 	 * @param toUserId
