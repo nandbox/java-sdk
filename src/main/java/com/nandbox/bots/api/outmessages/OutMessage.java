@@ -223,7 +223,7 @@ public abstract class OutMessage {
 	public Long getApp_id() {
 		return app_id;
 	}
-	public void setApp_id(long app_id) {
+	public void setApp_id(Long app_id) {
 		this. app_id=app_id;
 	}
 	/**
