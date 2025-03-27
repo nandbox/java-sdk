@@ -39,7 +39,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783781508815:90090684288020977:O5xSu8TMl2kM2SutEl1T6YezXAEGDO";
+	public static final String TOKEN = "90091844179652762:0:zW5HxL0CVuFLO9n4MNBdB9U8tnBmF5";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -48,6 +48,16 @@ public class MultipleTests {
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
 		client.connect(TOKEN, new Nandbox.Callback() {
+			@Override
+			public void onWhiteListPattern(Pattern pattern) {
+
+			}
+
+			@Override
+			public void onDeleteBlackList(WhiteList_ak blackList) {
+
+			}
+
 			Nandbox.Api api = null;
 
 			@Override
@@ -77,35 +87,35 @@ public class MultipleTests {
 
 				if (incomingMsg.getReplyToMessageId() != null) {
 					if (MessageType.text.toString().equals(incomingMsg.getType())) {
-						
+
 						if (incomingMsg.getText().equalsIgnoreCase("getChatMember")) {
-							api.getChatMember(incomingMsg.getChat().getId(), incomingMsg.getFrom().getId(),incomingMsg.getAppId());
+							api.getChatMember(incomingMsg.getChat().getId(), incomingMsg.getFrom().getId(),incomingMsg.getAppId(),incomingMsg.getReference());
 						} else if (incomingMsg.getText().equals("getAdmins")) {
-							api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId(),incomingMsg.getReference());
 						} else if (incomingMsg.getText().equalsIgnoreCase("getChat")) {
-							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId(),incomingMsg.getReference());
 						} else if (incomingMsg.getText().equals("getBlackList")) {
-							api.getBlackList(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getBlackList(incomingMsg.getAppId(),null);
 
 						}else if (incomingMsg.getText().equalsIgnoreCase("getProfile")){
-							api.getMyProfiles();
+							api.getMyProfiles(null);
 						}else if (incomingMsg.getText().equals("addBlacklistPatterns")) {
 
 							ArrayList<Data> dataList = new ArrayList<>();
 
 							Data data = new Data();
 							data.setPattern("44444*");
-							data.setExample("44444444");
+							data.setId("44444444");
 
 							dataList.add(data);
 
 							Data data2 = new Data();
 							data2.setPattern("222*");
-							data2.setExample("222222222");
+							data2.setId("222222222");
 
 							dataList.add(data2);
 
-							api.addBlacklistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId());
+							api.addBlacklistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId(),null);
 
 						} else if (incomingMsg.getText().equals("addWhitelistPatterns")) {
 
@@ -113,21 +123,21 @@ public class MultipleTests {
 
 							Data data = new Data();
 							data.setPattern("4444*");
-							data.setExample("444444");
+							data.setId("444444");
 
 							dataList.add(data);
 
-							api.addWhitelistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId());
+							api.addWhitelistPatterns(incomingMsg.getChat().getId(), dataList,incomingMsg.getAppId(),null);
 
 						}
 
 						else if (incomingMsg.getText().equals("getWhiteList")) {
-							api.getWhiteList(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getWhiteList(incomingMsg.getAppId(),null);
 						} else if (incomingMsg.getText().equals("addBlackList")) {
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 							users.add("222223");
-							api.addBlackList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.addBlackList( users,incomingMsg.getAppId(),null);
 						} else if (incomingMsg.getText().equals("addWhiteList")) {
 
 							ArrayList<String> tagsList = new ArrayList<>();
@@ -142,33 +152,33 @@ public class MultipleTests {
 
 							whiteListUsersArray.add(whiteListUser);
 
-							api.addWhiteList(incomingMsg.getChat().getId(), whiteListUsersArray,incomingMsg.getAppId());
+							api.addWhiteList( whiteListUsersArray,incomingMsg.getAppId(),null);
 
 						} else if (incomingMsg.getText().equals("deleteBlackList")) {
 
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 
-							api.deleteBlackList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.deleteBlackList( users,incomingMsg.getAppId(),null);
 
-						} else if (incomingMsg.getText().equals("deleteWhitelist")) {
+						} else if (incomingMsg.getText().equals("removeFromWhitelist")) {
 
 							ArrayList<String> users = new ArrayList<>();
 							users.add("111133");
 
-							api.deleteWhiteList(incomingMsg.getChat().getId(), users,incomingMsg.getAppId());
+							api.deleteWhiteList( users,incomingMsg.getAppId(),null);
 
-						} else if (incomingMsg.getText().equals("deleteBlacklistPatterns")) {
+						} else if (incomingMsg.getText().equals("removeBlacklistPatterns")) {
 
 							ArrayList<String> pattern = new ArrayList<>();
 							pattern.add("222*");
-							api.deleteBlackListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId());
+							api.deleteBlackListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId(),null);
 
-						} else if (incomingMsg.getText().equals("deleteWhitelistPatterns")) {
+						} else if (incomingMsg.getText().equals("removeWhitelistPatterns")) {
 
 							ArrayList<String> pattern = new ArrayList<>();
 							pattern.add("5555*");
-							api.deleteWhiteListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId());
+							api.deleteWhiteListPatterns(incomingMsg.getChat().getId(), pattern,incomingMsg.getAppId(),null);
 
 						} else if (incomingMsg.getText().equalsIgnoreCase("BigText")) {
 							api.sendTextWithBackground(incomingMsg.getChat().getId(), "Hi From Bot", "#EE82EE",incomingMsg.getAppId());
@@ -203,21 +213,21 @@ public class MultipleTests {
 
 
 						if (incomingMsg.getText().startsWith("Tab")) {
-							String tabId = incomingMsg.getText().split(" ")[1]; 
+							String tabId = incomingMsg.getText().split(" ")[1];
 							System.out.println("Tab ID is " + tabId);
 							Long reference = getUniqueId();
 							api.sendText(incomingMsg.getChat().getId(), "Your tab id is " + tabId, reference, null, null, null, null, null, null, tabId,incomingMsg.getAppId());
 							return;
 						} else if (incomingMsg.getText().equals("getMyProfile")) {
-							api.getMyProfiles();
+							api.getMyProfiles(null);
 						} else if (incomingMsg.getText().equals("getChat")) {
-							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+							api.getChat(incomingMsg.getChat().getId(),incomingMsg.getAppId(),incomingMsg.getReference());
 						} else if (incomingMsg.getText().equals("getUser")) {
-							api.getUser(incomingMsg.getFrom().getId(),incomingMsg.getAppId());
+							api.getUser(incomingMsg.getFrom().getId(),incomingMsg.getAppId(),null);
 
 						}
 						else if ("getProduct".equalsIgnoreCase(incomingMsg.getText())){
-							api.getProductDetail("5121406605126307",incomingMsg.getAppId());
+							api.getProductDetail("5121406605126307",incomingMsg.getAppId(),incomingMsg.getReference());
 						}
 						else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
 
@@ -259,11 +269,11 @@ public class MultipleTests {
 
 							outmsg.setEcho(1);
 							String menuRef = MAIN_MENU_001;
-							Button oneBtn = createButton("Visit a Milestone", "oneBtnCBInWebView", 1, "RED", "White",
+							Button oneBtn = createButton("Visit a Milestone", "oneBtnCBInWebView", 1, "Gray", "White",
 									null, null);
-							Button secondBtn = createButton("Cairo Porto Mall", "secondBtn", 1, "RED", "White", null,
+							Button secondBtn = createButton("Cairo Porto Mall", "secondBtn", 1, "Gray", "White", null,
 									null);
-							Button thirdButton = createButton("Seven Stars Mall", "thirdBtn", 1, "RED", "White", null,
+							Button thirdButton = createButton("Seven Stars Mall", "thirdBtn", 1, "Gray", "White", null,
 									null);
 							oneBtn.setButtonURL("https://edition.cnn.com/");
 
@@ -778,9 +788,9 @@ public class MultipleTests {
 			public void onChatMember(ChatMember chatMember) {
 				System.out.println("Chat Member Details received : ");
 				System.out.println("Chat Id : " + chatMember.getChat().getId());
-				api.getChat(chatMember.getChat().getId(),chatMember.getAppId());
+				api.getChat(chatMember.getChat().getId(),chatMember.getAppId(),null);
 				System.out.println("User Id : " + chatMember.getUser().getId());
-				api.getUser(chatMember.getUser().getId(),chatMember.getAppId());
+				api.getUser(chatMember.getUser().getId(),chatMember.getAppId(),null);
 
 			}
 
@@ -790,7 +800,7 @@ public class MultipleTests {
 				for (int i = 0; i < chatAdministrators.getAdministrators().length; i++) {
 					User user = chatAdministrators.getAdministrators()[i];
 					api.sendText(user.getId(), "Hi from Multiple tests bot",chatAdministrators.getAppId());
-					api.getUser(user.getId(),chatAdministrators.getAppId());
+					api.getUser(user.getId(),chatAdministrators.getAppId(),null);
 					System.out.println(user.toJsonObject());
 				}
 
@@ -833,7 +843,7 @@ public class MultipleTests {
 
 
 			@Override
-			public void listCollectionItemResponse(List<Category> collections) {
+			public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
 			}
 
@@ -866,6 +876,11 @@ public class MultipleTests {
 			}
 
 			@Override
+			public void onBlackListPattern(Pattern pattern) {
+
+			}
+
+			@Override
 			public void onBlackList(BlackList blackList) {
 
 				for (int i = 0; i < blackList.getUsers().length; i++) {
@@ -879,7 +894,6 @@ public class MultipleTests {
 				// System.out.println("blackList.getUsers().getMsisdn()=" +
 				// blackList.getUsers().getMsisdn());
 				System.out.println("blackList.getEop()=" + blackList.getEop());
-				System.out.println("blackList.getChat().getId()=" + blackList.getChat().getId());
 			}
 
 			@Override
@@ -894,7 +908,11 @@ public class MultipleTests {
 				}
 
 				System.out.println("getEop()=" + whiteList.getEop());
-				System.out.println("getChat().getId()=" + whiteList.getChat().getId());
+
+			}
+
+			@Override
+			public void onDeleteWhiteList(WhiteList_ak whiteList) {
 
 			}
 
@@ -914,7 +932,7 @@ public class MultipleTests {
 			@Override
 			public void onCreateChat(Chat chat) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 		});

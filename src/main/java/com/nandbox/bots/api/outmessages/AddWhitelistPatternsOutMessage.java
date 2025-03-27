@@ -13,7 +13,7 @@ import net.minidev.json.JSONObject;
  */
 public class AddWhitelistPatternsOutMessage extends OutMessage {
 
-	protected static final String KEY_DATA = "data";
+	protected static final String KEY_DATA = "patterns";
 
 	private List<Data> data = new ArrayList<>();
 

@@ -10,29 +10,27 @@ public class WhiteList {
 
 	private static final String KEY_WHITELIST = "whitelist";
 	private static final String KEY_EOP = "eop";
-	private static final String KEY_USERS = "users";
-	private static final String KEY_CHAT = "chat";
+	private static final String KEY_USERS = "signups";
 	private static final String KEY_APP_ID = "app_id";
+	private static final String KEY_REFERENCE = "reference";
 
-	private String eop;
-	private Chat chat;
+	private Boolean eop;
 	private SignupUser[] users;
 	private Long appId;
+	private Long reference;
 	public WhiteList(JSONObject jsonObj) {
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
-		JSONObject obj = (JSONObject) jsonObj.get(KEY_WHITELIST);
-
-		this.eop = (String) obj.get(KEY_EOP);
-
-		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
-		
-		JSONArray usersArrayObj = (JSONArray) obj.get(KEY_USERS);
+				: 0;
+		this.eop = (Boolean) jsonObj.get(KEY_EOP);
+		JSONArray usersArrayObj = (JSONArray) jsonObj.get(KEY_USERS);
 		this.users = new SignupUser[usersArrayObj.size()];
 		for (int i = 0; i < usersArrayObj.size(); i++) {
 			users[i] = new SignupUser((JSONObject) usersArrayObj.get(i));
 		}
+		this.reference =jsonObj.get(KEY_REFERENCE) != null
+				? Long.parseLong(String.valueOf(jsonObj.get(KEY_REFERENCE)))
+				: 0l;
 
 	}
 
@@ -49,34 +47,36 @@ public class WhiteList {
 			obj.put(KEY_USERS, usersArrayObjnew);
 		}
 
-		if (chat != null) {
-			obj.put(KEY_CHAT, chat.toJsonObject());
-		}
+
 		if (eop != null) {
 			obj.put(KEY_EOP, eop);
 		}
 		if (appId!=null){
 			obj.put(KEY_APP_ID,appId);
 		}
+		if (reference!=null){
+			obj.put(KEY_REFERENCE,reference);
+		}
 		return obj;
 
 	}
 
-	public String getEop() {
+	public Boolean getEop() {
 		return eop;
 	}
 
-	public void setEop(String eop) {
+	public Long getReference() {
+		return reference;
+	}
+
+	public void setReference(Long reference) {
+		this.reference = reference;
+	}
+
+	public void setEop(Boolean eop) {
 		this.eop = eop;
 	}
 
-	public Chat getChat() {
-		return chat;
-	}
-
-	public void setChat(Chat chat) {
-		this.chat = chat;
-	}
 
 	public SignupUser[] getUsers() {
 		return users;

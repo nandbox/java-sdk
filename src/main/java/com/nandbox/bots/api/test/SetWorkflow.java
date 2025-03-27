@@ -109,7 +109,7 @@ public class SetWorkflow {
 
 
             @Override
-            public void listCollectionItemResponse(List<Category> collections) {
+            public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
             }
 
@@ -153,14 +153,34 @@ public class SetWorkflow {
             }
 
             @Override
+            public void onBlackListPattern(Pattern pattern) {
+
+            }
+
+            @Override
+            public void onWhiteListPattern(Pattern pattern) {
+
+            }
+
+            @Override
             public void onBlackList(BlackList blackList) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
+            public void onDeleteBlackList(WhiteList_ak blackList) {
+
+            }
+
+            @Override
             public void onWhiteList(WhiteList blackList) {
                 // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onDeleteWhiteList(WhiteList_ak whiteList) {
 
             }
 

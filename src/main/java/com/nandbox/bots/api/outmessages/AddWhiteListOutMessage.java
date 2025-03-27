@@ -14,13 +14,13 @@ import net.minidev.json.JSONObject;
  */
 public class AddWhiteListOutMessage extends OutMessage {
 
-	protected static final String KEY_USERS = "users";
+	protected static final String KEY_USERS = "signups";
 
 	private List<WhiteListUser> whiteListUser = new ArrayList<>();
 
 	// private WhiteListUser whiteListUser;
 	public AddWhiteListOutMessage() {
-		this.method = OutMessageMethod.addWhitelist;
+		this.method = OutMessageMethod.addToWhitelist;
 	}
 
 	@Override

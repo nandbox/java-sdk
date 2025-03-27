@@ -21,8 +21,8 @@ public abstract class OutMessage {
 		sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton,
 		inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember,
 		unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,
-		getBlacklist, getWhitelist, addBlacklist, addWhitelist, deleteBlacklist, addBlacklistPatterns,
-		deleteBlacklistPatterns, addWhitelistPatterns, deleteWhitelistPatterns, deleteWhitelist, setAdminChatMenu,
+		getBlacklistUsers, getWhitelistUsers, addToBlacklist, addToWhitelist, removeFromBlacklist, addBlacklistPatterns,
+		removeBlacklistPatterns, addWhitelistPatterns, removeWhitelistPatterns, removeFromWhitelist, setAdminChatMenu,
 		setAdminNavigationButton, cancelMessageSchedule,setWorkflow,addChatMember,createChat,addChatAdmin,setWorkflowAction
 		,getCollectionProduct,listCollectionItem, getProductItem
 
@@ -37,6 +37,7 @@ public abstract class OutMessage {
 	protected static final String KEY_CHAT_ID = "chat_id";
 	protected static final String KEY_APP_ID = "app_id";
 	protected static final String KEY_REFERENCE = "reference";
+	protected static final String KEY_REF = "ref";
 	protected static final String KEY_TO_USER_ID = "to_user_id";
 	protected static final String KEY_REPLAY_TO_MESSAGE_ID = "reply_to_message_id";
 	protected static final String KEY_WEB_PAGE_PREVIEW = "web_page_preview";
@@ -53,6 +54,8 @@ public abstract class OutMessage {
 	protected OutMessageMethod method;
 	protected String chatId;
 	protected Long reference;
+	protected Long ref;
+
 	protected Long app_id;
 	protected String toUserId;
 	protected String replyToMessageId;
@@ -81,6 +84,9 @@ public abstract class OutMessage {
 
 		if (reference != null) {
 			obj.put(KEY_REFERENCE, reference);
+		}
+		if (ref != null) {
+			obj.put(KEY_REF, ref);
 		}
 
 		if (toUserId != null) {
@@ -143,10 +149,19 @@ public abstract class OutMessage {
 		return webPagePreview;
 	}
 
+	public void setRef(Long ref) {
+		this.ref = ref;
+	}
+
+	public Long getRef() {
+		return ref;
+	}
+
 	/**
 	 * @param webPagePreview
 	 *            the webPagePreview to set
 	 */
+
 	public void setWebPagePreview(Integer webPagePreview) {
 		this.webPagePreview = webPagePreview;
 	}

@@ -161,7 +161,7 @@ public final class Nandbox {
 		 * @param collections
 		 * 			   collections
 		 */
-		public void listCollectionItemResponse(List<Category> collections);
+		public void listCollectionItemResponse(ListCollectionItemResponse collections);
 
 		/**
 		 * @param user
@@ -200,11 +200,16 @@ public final class Nandbox {
 		 *            inline search object that contain inline search info
 		 */
 		public void onInlineSearh(InlineSearch inlineSearch);
-		
+
+		public void onBlackListPattern(Pattern pattern);
+		public void onWhiteListPattern(Pattern pattern);
 		public void onBlackList(BlackList blackList);
-		
+		public void onDeleteBlackList(WhiteList_ak blackList);
+
+
 		public void onWhiteList(WhiteList whiteList);
-		
+		public void onDeleteWhiteList(WhiteList_ak whiteList);
+
 		/**
 		 * This event should be used to handle incoming schedule message from server
 		 * 
@@ -316,8 +321,8 @@ public final class Nandbox {
 		 * @param productId
 		 * 			  Unique identifier for the target product and can not set to null
 		 */
-		public void getProductDetail(String productId,Long appId);
-		public void listCollectionItem(Long appId);
+		public void getProductDetail(String productId,Long appId,Long reference);
+		public void listCollectionItem(Long appId,Long reference);
 		/**
 		 * @param chatId
 		 *            Unique identifier for the target chat or User_id and can not set
@@ -939,7 +944,7 @@ public final class Nandbox {
 		 * @param userId
 		 *            Id of Target user to receive updated message
 		 */
-		void getUser(String userId,Long appId);
+		void getUser(String userId,Long appId,Long reference);
 
 		/**
 		 * Use this method to get Group or Channel information.
@@ -949,7 +954,7 @@ public final class Nandbox {
 		 * @param appId
 		 * 			  id for the app the request sending to
 		 */
-		void getChat(String chatId,Long appId);
+		void getChat(String chatId,Long appId,Long reference);
 
 		/**
 		 * Use this method to get Chat Member user public profile.
@@ -962,7 +967,7 @@ public final class Nandbox {
 		 * 		     id for the app the request sending to
 		 */
 
-		void getChatMember(String chatId, String userId,Long appId);
+		void getChatMember(String chatId, String userId,Long appId,Long reference);
 
 		/**
 		 * Use this method to get Chat Administrators
@@ -972,7 +977,7 @@ public final class Nandbox {
 		 * @param appId
 		 *  		  id for the app the request sending to
 		 */
-		void getChatAdministrators(String chatId,Long appId);
+		void getChatAdministrators(String chatId,Long appId,Long reference);
 
 		/**
 		 * Use this method to ban a Chat Member from accessing Chat
@@ -985,7 +990,7 @@ public final class Nandbox {
 		 * 		      id for the app the request sending to
 		 */
 
-		void banChatMember(String chatId, String userId,Long appId);
+		void banChatMember(String chatId, String userId,Long appId,Long reference);
 
 		/**
 		 * Use this method to unban a Chat Member from accessing Chat.
@@ -998,7 +1003,7 @@ public final class Nandbox {
 		 * 		  	id for the app the request sending to
 		 */
 
-		void unbanChatMember(String chatId, String userId,Long appId);
+		void unbanChatMember(String chatId, String userId,Long appId,Long reference);
 
 		/**
 		 * Use this method to remove a Chat Member from Chat.
@@ -1011,7 +1016,7 @@ public final class Nandbox {
 		 * 		   	id for the app the request sending to
 		 */
 
-		void removeChatMember(String chatId, String userId,Long appId);
+		void removeChatMember(String chatId, String userId,Long appId,Long reference);
 
 		/**
 		 * Use this message to recall existing Message sent .
@@ -1036,7 +1041,7 @@ public final class Nandbox {
 		 * @param user
 		 *            User object with unique user Id used to update User information
 		 */
-		void setMyProifle(User user);
+		void setMyProifle(User user,Long reference);
 
 		/**
 		 * Use this method to set Chat Group or Channel information
@@ -1044,12 +1049,12 @@ public final class Nandbox {
 		 * @param chat
 		 *            Chat object with unique chat Id used to update chat information
 		 */
-		void setChat(Chat chat);
+		void setChat(Chat chat,Long appId,Long reference);
 
 		/**
 		 * Use this method to get Bot Profile
 		 */
-		void getMyProfiles();
+		void getMyProfiles(Long reference);
 
 		/**
 		 * Use this method to generate permanent URL for the file
@@ -1067,28 +1072,28 @@ public final class Nandbox {
 		 * 		   	id for the app the request sending to
 		*
 		*/
-		void getBlackList(String chatId,Long appId);
+		void getBlackList(Long appId,Long reference);
 
-		void getWhiteList(String chatId,Long appId);
+		void getWhiteList(Long appId,Long reference);
 
-		void addBlackList(String chatId, List<String> users,Long appId);
+		void addBlackList( List<String> users,Long appId,Long referece);
 
 //		void addWhiteList(String chatId, List<SignupUser> signupUser);
 
-		void deleteBlackList(String chatId, List<String> users,Long appId);
+		void deleteBlackList( List<String> users,Long appId,Long reference);
 
-		void deleteWhiteList(String chatId, List<String> users,Long appId);
+		void deleteWhiteList( List<String> users,Long appId,Long reference);
 
-		void addBlacklistPatterns(String chatId, List<Data> data,Long appId);
+		void addBlacklistPatterns(String chatId, List<Data> data,Long appId,Long reference);
 		
-		void addWhitelistPatterns(String chatId, List<Data> data,Long appId);
+		void addWhitelistPatterns( String chatId,List<Data> data,Long appId,Long reference);
 
-		void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId);
+		void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId,Long reference);
 
-		void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId);
+		void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId,Long reference);
 
 
-		void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers,Long appId);
+		void addWhiteList(List<WhiteListUser> whiteListUsers,Long appId,Long reference);
 
 		void setWorkflow(String userId , String screenId,Long appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
 		void setWorkflowAction(String userId ,String vappId, String screenId,String nextScreen,Long reference,Long appId);

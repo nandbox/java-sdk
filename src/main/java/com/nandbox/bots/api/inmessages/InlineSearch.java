@@ -50,7 +50,7 @@ public class InlineSearch {
 		this.keywords = String.valueOf(obj.get(KEY_KEYWORDS));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 	}
 
 	/**

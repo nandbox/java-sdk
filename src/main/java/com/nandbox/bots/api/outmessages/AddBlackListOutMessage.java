@@ -11,12 +11,12 @@ import net.minidev.json.JSONObject;
  */
 public class AddBlackListOutMessage extends OutMessage {
 
-	protected static final String KEY_USERS = "users";
+	protected static final String KEY_USERS = "signups";
 
 	private List<String> users = new ArrayList<>();
 
 	public AddBlackListOutMessage() {
-		this.method = OutMessageMethod.addBlacklist;
+		this.method = OutMessageMethod.addToBlacklist;
 	}
 
 	@Override

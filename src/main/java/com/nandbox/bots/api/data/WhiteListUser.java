@@ -8,7 +8,7 @@ public class WhiteListUser  {
 
 	// private static final String KEY_Users = "id";
 	// private static final String KEY_ID = "id";
-	private static final String KEY_SIGNUP_USER = "signup_user";
+	private static final String KEY_SIGNUP_USER = "signup_id";
 	private static final String KEY_TAGS = "tags";
 
 	private String signupUser;

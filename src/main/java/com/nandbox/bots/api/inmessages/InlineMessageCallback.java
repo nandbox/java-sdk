@@ -58,7 +58,7 @@ public class InlineMessageCallback {
 		this.date = Utils.getLong(obj.get(KEY_DATE));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 	}
 
 	/**

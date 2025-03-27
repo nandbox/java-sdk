@@ -11,12 +11,12 @@ import net.minidev.json.JSONObject;
  */
 public class DeleteWhiteListOutMessage extends OutMessage {
 
-	protected static final String KEY_USERS = "users";
+	protected static final String KEY_USERS = "signups";
 
 	private List<String> users = new ArrayList<>();
 
 	public DeleteWhiteListOutMessage() {
-		this.method = OutMessageMethod.deleteWhitelist;
+		this.method = OutMessageMethod.removeFromWhitelist;
 	}
 
 	@Override

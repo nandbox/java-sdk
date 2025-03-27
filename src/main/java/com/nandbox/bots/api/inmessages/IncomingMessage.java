@@ -139,7 +139,7 @@ public class IncomingMessage {
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 
 		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null
 				: new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));

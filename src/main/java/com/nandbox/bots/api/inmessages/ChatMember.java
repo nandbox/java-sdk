@@ -54,7 +54,7 @@ public class ChatMember {
 //		this.tags = (String) obj.get(KEY_TAGS);
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 
 
 

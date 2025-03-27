@@ -7,11 +7,11 @@ import net.minidev.json.JSONObject;
 
 public class DeleteBlackListPatternsOutMessage extends OutMessage {
 
-	protected static final String KEY_PATTERN = "pattern";
+	protected static final String KEY_PATTERN = "patterns";
 	private List<String> pattern = new ArrayList<>();
 
 	public DeleteBlackListPatternsOutMessage() {
-		this.method = OutMessageMethod.deleteBlacklistPatterns;
+		this.method = OutMessageMethod.removeBlacklistPatterns;
 	}
 
 	@Override

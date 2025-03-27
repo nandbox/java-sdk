@@ -21,7 +21,7 @@ public class ChatAdministrators {
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 		JSONArray adminArrayObj = (JSONArray) obj.get(KEY_ADMINISTRATORS);
 		if (adminArrayObj != null) {
 

@@ -37,6 +37,10 @@ public class ProductItem {
     private static final String KEY_STATUS = "status";
     private static final String KEY_OPTION = "option";
     private static final String KEY_APP_ID = "app_id";
+    private static final String KEY_REFERENCE = "reference";
+    private static final String KEY_REF = "ref";
+
+
 
     private List<String> addons;
     private String description;
@@ -67,6 +71,8 @@ public class ProductItem {
     private String status;
     private JSONArray option;
     private Long appId;
+    private Long reference;
+
 
 
     public ProductItem() {}
@@ -80,7 +86,7 @@ public class ProductItem {
         this.price = (Double) obj.get(KEY_PRICE);
         this.vendor = (String) obj.get(KEY_VENDOR);
         this.variant = (JSONArray) obj.get(KEY_VARIANT);
-        this.id = (Long) obj.get(KEY_ID);
+        this.id =Long.parseLong((String) obj.get(KEY_ID));
         this.attribute = obj.get(KEY_ATTRIBUTE) != null ? new Attribute((JSONObject) obj.get(KEY_ATTRIBUTE)) : null;
         this.tag = (String) obj.get(KEY_TAG);
         this.sku = (String) obj.get(KEY_SKU);
@@ -103,7 +109,10 @@ public class ProductItem {
         this.option = (JSONArray) obj.get(KEY_OPTION);
         this.appId =object.get(KEY_APP_ID) != null
                 ? Long.parseLong(String.valueOf(object.get(KEY_APP_ID)))
-                : null;
+                : Long.parseLong(String.valueOf(obj.get(KEY_MAIN_GROUP_ID)));
+        this.reference =object.get(KEY_REFERENCE) != null
+                ? Long.valueOf(Long.parseLong(String.valueOf(object.get(KEY_REFERENCE))))
+                : object.get(KEY_REF) != null ?Long.parseLong(String.valueOf(object.get(KEY_REF))):null;
     }
 
     public JSONObject toJsonObject() {
@@ -138,7 +147,7 @@ public class ProductItem {
         if (status != null) obj.put(KEY_STATUS, status);
         if (option != null) obj.put(KEY_OPTION, option);
         if (appId!=null) obj.put(KEY_APP_ID,appId);
-
+        if (reference!=null) obj.put(KEY_REFERENCE,reference);
         return obj;
     }
 
@@ -151,7 +160,7 @@ public class ProductItem {
         private static final String KEY_BARCODE = "barcode";
 
         private Integer cost;
-        private Boolean quantity;
+        private Integer quantity;
         private Integer hasSkuOrBarcode;
         private Integer tax;
         private String message;
@@ -159,7 +168,7 @@ public class ProductItem {
 
         public Attribute(JSONObject attribute) {
             this.cost = (Integer) attribute.get(KEY_COST);
-            this.quantity = (Boolean) attribute.get(KEY_QUANTITY);
+            this.quantity = (Integer) attribute.get(KEY_QUANTITY);
             this.hasSkuOrBarcode = (Integer) attribute.get(KEY_HAS_SKU_OR_BARCODE);
             this.tax = (Integer) attribute.get(KEY_TAX);
             this.message = (String) attribute.get(KEY_MESSAGE);

@@ -18,8 +18,22 @@ public class TestCellMessage {
 		 
 		   NandboxClient client = NandboxClient.get();
 		   client.connect(TOKEN, new Nandbox.Callback() {
-			   
-		   Nandbox.Api api = null;
+			   @Override
+			   public void onBlackListPattern(Pattern pattern) {
+
+			   }
+
+			   @Override
+			   public void onWhiteListPattern(Pattern pattern) {
+
+			   }
+
+			   @Override
+			   public void onDeleteBlackList(WhiteList_ak blackList) {
+
+			   }
+
+			   Nandbox.Api api = null;
 			   
 			@Override
 			public void onConnect(Api api) {
@@ -108,7 +122,7 @@ public class TestCellMessage {
 
 
 			   @Override
-			   public void listCollectionItemResponse(List<Category> collections) {
+			   public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
 			   }
 
@@ -151,8 +165,13 @@ public class TestCellMessage {
 			public void onWhiteList(WhiteList whiteList) {
 				
 			}
-	
-			@Override
+
+			   @Override
+			   public void onDeleteWhiteList(WhiteList_ak whiteList) {
+
+			   }
+
+			   @Override
 			public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {
 				
 			}

@@ -664,68 +664,74 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void getChatMember(String chatId, String userId,Long appId) {
+				public void getChatMember(String chatId, String userId,Long appId,Long reference) {
 					GetChatMemberOutMessage getChatMemberOutMessage = new GetChatMemberOutMessage();
 					getChatMemberOutMessage.setChatId(chatId);
 					getChatMemberOutMessage.setUserId(userId);
 					getChatMemberOutMessage.setApp_id(appId);
+					getChatMemberOutMessage.setReference(reference);
 					api.send(getChatMemberOutMessage);
 				}
 
 				@Override
-				public void getUser(String userId,Long appId) {
+				public void getUser(String userId,Long appId,Long reference) {
 					GetUserOutMessage getUserOutMessage = new GetUserOutMessage();
 					getUserOutMessage.setUserId(userId);
 					getUserOutMessage.setApp_id(appId);
+					getUserOutMessage.setReference(reference);
 					api.send(getUserOutMessage);
 
 				}
 
 				@Override
-				public void getChat(String chatId,Long appId) {
-
+				public void getChat(String chatId,Long appId,Long reference) {
 					GetChatOutMessage chatOutMessage = new GetChatOutMessage();
 					chatOutMessage.setChatId(chatId);
 					chatOutMessage.setApp_id(appId);
+					chatOutMessage.setReference(reference);
 					api.send(chatOutMessage);
 				}
 				@Override
-				public void getProductDetail(String productId,Long appId) {
+				public void getProductDetail(String productId,Long appId,Long reference) {
 					GetProductItemOutMessage getProductItemOutMessage = new GetProductItemOutMessage();
 					getProductItemOutMessage.setProductId(productId);
 					getProductItemOutMessage.setApp_id(appId);
+					getProductItemOutMessage.setRef(reference);
 					api.send(getProductItemOutMessage);
 				}
 
 				@Override
-				public void listCollectionItem(Long appId) {
+				public void listCollectionItem(Long appId,Long reference) {
 					ListCollectionItemOutMessage listCollectionItemOutMessage = new ListCollectionItemOutMessage();
 					listCollectionItemOutMessage.setApp_id(appId);
+					listCollectionItemOutMessage.setRef(reference);
 					api.send(listCollectionItemOutMessage);
 				}
 
 				@Override
-				public void getChatAdministrators(String chatId,Long appId) {
+				public void getChatAdministrators(String chatId,Long appId,Long reference) {
 					GetChatAdministratorsOutMessage getChatAdministratorsOutMessage = new GetChatAdministratorsOutMessage();
 					getChatAdministratorsOutMessage.setChatId(chatId);
 					getChatAdministratorsOutMessage.setApp_id(appId);
+					getChatAdministratorsOutMessage.setReference(reference);
 					api.send(getChatAdministratorsOutMessage);
 				}
 
 				@Override
-				public void banChatMember(String chatId, String userId,Long appId) {
+				public void banChatMember(String chatId, String userId,Long appId,Long reference) {
 					BanChatMemberOutMessage banChatMemberOutMessage = new BanChatMemberOutMessage();
 					banChatMemberOutMessage.setChatId(chatId);
 					banChatMemberOutMessage.setUserId(userId);
 					banChatMemberOutMessage.setApp_id(appId);
+					banChatMemberOutMessage.setReference(reference);
 					api.send(banChatMemberOutMessage);
 				}
 
 				@Override
-				public void addBlackList(String chatId, List<String> users,Long appId) {
+				public void addBlackList( List<String> users,Long appId,Long reference) {
 
 					AddBlackListOutMessage addBlackListOutMessage = new AddBlackListOutMessage();
-					addBlackListOutMessage.setChatId(chatId);
+					addBlackListOutMessage.setReference(reference);
 					addBlackListOutMessage.setUsers(users);
 					addBlackListOutMessage.setApp_id(appId);
 					api.send(addBlackListOutMessage);
@@ -758,11 +764,11 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void addWhiteList(String chatId, List<WhiteListUser> whiteListUsers,Long appId) {
+				public void addWhiteList(List<WhiteListUser> whiteListUsers,Long appId,Long reference) {
 
 					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
 
-					addWhiteistOutMessage.setChatId(chatId);
+					addWhiteistOutMessage.setReference(reference);
 					addWhiteistOutMessage.setWhiteListUser(whiteListUsers);
 					addWhiteistOutMessage.setApp_id(appId);
 					api.send(addWhiteistOutMessage);
@@ -827,40 +833,42 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void deleteBlackList(String chatId, List<String> users,Long appId) {
+				public void deleteBlackList( List<String> users,Long appId,Long reference) {
 
 					DeleteBlackListOutMessage deleteBlackListOutMessage = new DeleteBlackListOutMessage();
-					deleteBlackListOutMessage.setChatId(chatId);
+					deleteBlackListOutMessage.setReference(reference);
 					deleteBlackListOutMessage.setUsers(users);
 					deleteBlackListOutMessage.setApp_id(appId);
 					api.send(deleteBlackListOutMessage);
 				}
 
 				@Override
-				public void deleteWhiteList(String chatId, List<String> users,Long appId) {
+				public void deleteWhiteList( List<String> users,Long appId,Long reference) {
 
 					DeleteWhiteListOutMessage deleteWhiteListOutMessage = new DeleteWhiteListOutMessage();
-					deleteWhiteListOutMessage.setChatId(chatId);
+					deleteWhiteListOutMessage.setReference(reference);
 					deleteWhiteListOutMessage.setUsers(users);
 					deleteWhiteListOutMessage.setApp_id(appId);
 					api.send(deleteWhiteListOutMessage);
 				}
 
 				@Override
-				public void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId) {
+				public void deleteBlackListPatterns(String chatId, List<String> pattern,Long appId,Long reference) {
 
 					DeleteBlackListPatternsOutMessage deleteBlackListPatterns = new DeleteBlackListPatternsOutMessage();
 					deleteBlackListPatterns.setChatId(chatId);
+					deleteBlackListPatterns.setReference(reference);
 					deleteBlackListPatterns.setPattern(pattern);
 					deleteBlackListPatterns.setApp_id(appId);
 					api.send(deleteBlackListPatterns);
 				}
 
 				@Override
-				public void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId) {
+				public void deleteWhiteListPatterns(String chatId, List<String> pattern,Long appId,Long reference) {
 
 					DeleteWhiteListPatternsOutMessage deleteWhiteListPatterns = new DeleteWhiteListPatternsOutMessage();
 					deleteWhiteListPatterns.setChatId(chatId);
+					deleteWhiteListPatterns.setReference(reference);
 					deleteWhiteListPatterns.setPattern(pattern);
 					deleteWhiteListPatterns.setApp_id(appId);
 					api.send(deleteWhiteListPatterns);
@@ -868,42 +876,46 @@ public class NandboxClient {
 
 
 				@Override
-				public void addBlacklistPatterns(String chatId, List<Data> data,Long appId) {
+				public void addBlacklistPatterns(String chatId, List<Data> data,Long appId,Long reference) {
 
 					AddBlacklistPatternsOutMessage addBlacklistPatternsOutMessage = new AddBlacklistPatternsOutMessage();
 					addBlacklistPatternsOutMessage.setChatId(chatId);
+					addBlacklistPatternsOutMessage.setReference(reference);
 					addBlacklistPatternsOutMessage.setData(data);
 					addBlacklistPatternsOutMessage.setApp_id(appId);
 					api.send(addBlacklistPatternsOutMessage);
 				}
 
 				@Override
-				public void addWhitelistPatterns(String chatId, List<Data> data,Long appId) {
+				public void addWhitelistPatterns(String chatId, List<Data> data,Long appId,Long reference) {
 
 					AddWhitelistPatternsOutMessage addWhitelistPatternsOutMessage = new AddWhitelistPatternsOutMessage();
 					addWhitelistPatternsOutMessage.setChatId(chatId);
+					addWhitelistPatternsOutMessage.setReference(reference);
 					addWhitelistPatternsOutMessage.setData(data);
 					addWhitelistPatternsOutMessage.setApp_id(appId);
 					api.send(addWhitelistPatternsOutMessage);
 				}
 
 				@Override
-				public void unbanChatMember(String chatId, String userId,Long appId) {
+				public void unbanChatMember(String chatId, String userId,Long appId,Long reference) {
 					UnbanChatMember unbanChatMember = new UnbanChatMember();
 					unbanChatMember.setChatId(chatId);
 					unbanChatMember.setUserId(userId);
 					unbanChatMember.setApp_id(appId);
+					unbanChatMember.setReference(reference);
 					api.send(unbanChatMember);
 
 				}
 
 				@Override
-				public void removeChatMember(String chatId, String userId,Long appId) {
+				public void removeChatMember(String chatId, String userId,Long appId,Long reference) {
 
 					RemoveChatMemberOutMessage removeChatMemberOutMessage = new RemoveChatMemberOutMessage();
 					removeChatMemberOutMessage.setChatId(chatId);
 					removeChatMemberOutMessage.setUserId(userId);
 					removeChatMemberOutMessage.setApp_id(appId);
+					removeChatMemberOutMessage.setReference(reference);
 					api.send(removeChatMemberOutMessage);
 				}
 
@@ -919,40 +931,44 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void setMyProifle(User user) {
+				public void setMyProifle(User user,Long reference) {
 
 					SetMyProfileOutMessage setMyProfileOutMessage = new SetMyProfileOutMessage();
 					setMyProfileOutMessage.setUser(user);
+					setMyProfileOutMessage.setReference(reference);
 					api.send(setMyProfileOutMessage);
 				}
 
 				@Override
-				public void setChat(Chat chat) {
+				public void setChat(Chat chat,Long appId,Long reference) {
 					SetChatOutMessage setChatOutMessage = new SetChatOutMessage();
 					setChatOutMessage.setChat(chat);
+					setChatOutMessage.setApp_id(appId);
+					setChatOutMessage.setReference(reference);
 					api.send(setChatOutMessage);
 
 				}
 
 				@Override
-				public void getMyProfiles() {
+				public void getMyProfiles(Long reference) {
 					GetMyProfiles getMyProfiles = new GetMyProfiles();
+					getMyProfiles.setReference(reference);
 					api.send(getMyProfiles);
 				}
 
 				@Override
-				public void getBlackList(String chatId,Long appId) {
+				public void getBlackList(Long appId,Long reference) {
 					GetBlackListOutMessage getBlackListOutMessage = new GetBlackListOutMessage();
-					getBlackListOutMessage.setChatId(chatId);
+					getBlackListOutMessage.setReference(reference);
 					getBlackListOutMessage.setApp_id(appId);
 					api.send(getBlackListOutMessage);
 				}
 
 				@Override
-				public void getWhiteList(String chatId,Long appId) {
+				public void getWhiteList(Long appId,Long reference) {
 					GetWhiteListOutMessage getWhiteListOutMessage = new GetWhiteListOutMessage();
-					getWhiteListOutMessage.setChatId(chatId);
 					getWhiteListOutMessage.setApp_id(appId);
+					getWhiteListOutMessage.setReference(reference);
 					api.send(getWhiteListOutMessage);
 				}
 
@@ -1106,7 +1122,7 @@ public class NandboxClient {
 					return;
 				case "listCollectionItemResponse":
 					ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
-					callback.listCollectionItemResponse(listCollectionItemResponse.getCategories());
+					callback.listCollectionItemResponse(listCollectionItemResponse);
 					return ;
 				case "chatDetails":
 					Chat chat = new Chat((JSONObject) obj.get(KEY_CHAT));
@@ -1129,10 +1145,32 @@ public class NandboxClient {
 					user = new User((JSONObject) obj.get(KEY_USER));
 					callback.userLeftBot(user);
 					return;
+				case "addBlacklistPatterns_ack":
+                    case "deleteBlacklistPatterns_ack":
+                        Pattern blackListpattern = new Pattern(obj);
+					callback.onBlackListPattern(blackListpattern);
+					return;
+                    case "deleteWhitelistPatterns_ack":
+                    case "addWhitelistPatterns_ack":
+                        Pattern deletedWhiteListpattern = new Pattern(obj);
+					callback.onWhiteListPattern(deletedWhiteListpattern);
+					return;
+                    case "removeFromBlacklist_ack":
+					WhiteList_ak blackListAk=new WhiteList_ak(obj);
+					callback.onDeleteBlackList(blackListAk);
+					return;
+				case "addToBlacklist_ack":
+				case "getBlacklistUsersResponse":
 				case "blacklist":
 					BlackList blackList = new BlackList(obj);
 					callback.onBlackList(blackList);
 					return;
+				case "removeFromWhitelist_ack":
+					WhiteList_ak whiteListAk=new WhiteList_ak(obj);
+					callback.onDeleteWhiteList(whiteListAk);
+					return;
+				case "addToWhitelist_ack":
+				case "getWhitelistUsersResponse":
 				case "whitelist":
 					WhiteList whiteList = new WhiteList(obj);
 					callback.onWhiteList(whiteList);
@@ -1153,6 +1191,7 @@ public class NandboxClient {
 				String error = String.valueOf(obj.get(KEY_ERROR));
 				//System.err.println("Error : " + error);
 				NandboxClient.log.error("Error : " + error);
+				System.out.println("Error : " + error);
 			}
 		}
 

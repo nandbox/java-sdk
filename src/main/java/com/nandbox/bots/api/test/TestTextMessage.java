@@ -37,6 +37,22 @@ public class TestTextMessage {
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
 		client.connect(TOKEN, new Nandbox.Callback() {
+			@Override
+			public void onWhiteListPattern(Pattern pattern) {
+
+			}
+
+			@Override
+			public void onBlackListPattern(Pattern pattern) {
+
+			}
+
+			@Override
+			public void onDeleteBlackList(WhiteList_ak blackList) {
+
+
+			}
+
 			Nandbox.Api api = null;
 
 			@Override
@@ -478,41 +494,41 @@ public class TestTextMessage {
 
 				} else if ("GCA".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90090684275605648";
-					api.getChatAdministrators(chatId,incomingMsg.getAppId());
+					api.getChatAdministrators(chatId,incomingMsg.getAppId(),incomingMsg.getReference());
 				} else if ("GU".equalsIgnoreCase(incomingMsg.getText())) {
 					String userId = "90089584980037358";
-					api.getUser(userId,incomingMsg.getAppId());
+					api.getUser(userId,incomingMsg.getAppId(),null);
 
 				} else if ("GC".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584980037358";
-					api.getChat(chatId,incomingMsg.getAppId());
+					api.getChat(chatId,incomingMsg.getAppId(),incomingMsg.getReference());
 				}
 
 				else if ("GCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.getChatMember(chatId, userId,incomingMsg.getAppId());
+					api.getChatMember(chatId, userId,incomingMsg.getAppId(),incomingMsg.getReference());
 
 				} else if ("BCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.banChatMember(chatId, userId,incomingMsg.getAppId());
+					api.banChatMember(chatId, userId,incomingMsg.getAppId(),incomingMsg.getReference());
 
 				} else if ("UCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.unbanChatMember(chatId, userId,incomingMsg.getAppId());
+					api.unbanChatMember(chatId, userId,incomingMsg.getAppId(),incomingMsg.getReference());
 
 				} else if ("RCM".equalsIgnoreCase(incomingMsg.getText())) {
 					String chatId = "90089584806788930";
 					String userId = "90090684275605648";
-					api.removeChatMember(chatId, userId,incomingMsg.getAppId());
+					api.removeChatMember(chatId, userId,incomingMsg.getAppId(),incomingMsg.getReference());
 
 				} else if ("SC".equalsIgnoreCase(incomingMsg.getText())) {
 					Chat chat = new Chat();
 					chat.setTitle("NEW TITLE");
 					chat.setId("90090684268836495");
-					api.setChat(chat);
+					api.setChat(chat,incomingMsg.getAppId(),incomingMsg.getReference());
 
 				}
 
@@ -527,7 +543,7 @@ public class TestTextMessage {
 
 				} else if ("GMP".equalsIgnoreCase(incomingMsg.getText())) {
 
-					api.getMyProfiles();
+					api.getMyProfiles(null);
 
 				} else if ("SMP".equalsIgnoreCase(incomingMsg.getText())) {
 					User user = new User();
@@ -536,7 +552,7 @@ public class TestTextMessage {
 					Photo photo = new Photo();
 					photo.setId("e801b7277dbd921376f26b13aeadf0ee4b49950a66641f2761863a823e035845.jpg");
 
-					api.setMyProifle(user);
+					api.setMyProifle(user,null);
 
 				} else if ("linkPreview".equalsIgnoreCase(incomingMsg.getText())) {
 					try {
@@ -550,9 +566,9 @@ public class TestTextMessage {
 					api.sendText(incomingMsg.getChat().getId(), "Link with prview http://www.nandbox.com",
 							getUniqueId(), null, null, null, true, null, null, null,incomingMsg.getAppId());
 				} else if ("getChatAdmins".equalsIgnoreCase(incomingMsg.getText())) {
-					api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId());
+					api.getChatAdministrators(incomingMsg.getChat().getId(),incomingMsg.getAppId(),incomingMsg.getReference());
 				} else if ("getMyProfile".equalsIgnoreCase(incomingMsg.getText())) {
-					api.getMyProfiles();
+					api.getMyProfiles(null);
 				}
 
 			}
@@ -695,7 +711,7 @@ public class TestTextMessage {
 
 
 			@Override
-			public void listCollectionItemResponse(List<Category> collections) {
+			public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
 			}
 
@@ -766,6 +782,11 @@ public class TestTextMessage {
 
 			@Override
 			public void onWhiteList(WhiteList blackList) {
+
+			}
+
+			@Override
+			public void onDeleteWhiteList(WhiteList_ak whiteList) {
 
 			}
 

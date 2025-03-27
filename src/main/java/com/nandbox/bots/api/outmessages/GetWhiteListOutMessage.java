@@ -21,7 +21,7 @@ public class GetWhiteListOutMessage extends OutMessage {
 	}
 
 	public GetWhiteListOutMessage() {
-		this.method = OutMessageMethod.getWhitelist;
+		this.method = OutMessageMethod.getWhitelistUsers;
 	}
 
 	@Override

@@ -26,6 +26,21 @@ public class SendWebLinksBot {
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
 		client.connect(TOKEN, new Nandbox.Callback() {
+			@Override
+			public void onWhiteListPattern(Pattern pattern) {
+
+			}
+
+			@Override
+			public void onBlackListPattern(Pattern pattern) {
+
+			}
+
+			@Override
+			public void onDeleteBlackList(WhiteList_ak blackList) {
+
+			}
+
 			Nandbox.Api api = null;
 
 			@Override
@@ -150,7 +165,7 @@ public class SendWebLinksBot {
 
 
 			@Override
-			public void listCollectionItemResponse(List<Category> collections) {
+			public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
 			}
 
@@ -250,6 +265,11 @@ public class SendWebLinksBot {
 			public void onWhiteList(WhiteList blackList) {
 				// TODO Auto-generated method stub
 				
+			}
+
+			@Override
+			public void onDeleteWhiteList(WhiteList_ak whiteList) {
+
 			}
 
 			@Override

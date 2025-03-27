@@ -14,7 +14,7 @@ public class ChatDetails {
 	public ChatDetails(JSONObject obj) {
 		this.appId =obj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-				: null;
+				: 0;
 		this.chat = new Chat((JSONObject) obj.get(KEY_CHAT));
 
 	}

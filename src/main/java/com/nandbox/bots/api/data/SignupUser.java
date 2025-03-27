@@ -5,7 +5,7 @@ import net.minidev.json.JSONObject;
 public class SignupUser {
 
 	private static final String KEY_ID = "id";
-	private static final String KEY_SIGNUP_USER = "signup_user";
+	private static final String KEY_SIGNUP_USER = "signup_id";
 
 	private String id;
 	private String signupUser;
@@ -14,6 +14,8 @@ public class SignupUser {
 		this.id = (String) obj.get(KEY_ID);
 		this.signupUser = (String) obj.get(KEY_SIGNUP_USER);
 
+	}
+	public SignupUser() {
 	}
 
 	public JSONObject toJsonObject() {

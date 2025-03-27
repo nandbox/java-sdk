@@ -7,13 +7,12 @@ import net.minidev.json.JSONObject;
 
 public class DeleteWhiteListPatternsOutMessage extends OutMessage {
 
-	protected static final String KEY_PATTERN = "pattern";
+	protected static final String KEY_PATTERN = "patterns";
 	private List<String> pattern = new ArrayList<>();
 
 	public DeleteWhiteListPatternsOutMessage() {
-		this.method = OutMessageMethod.deleteWhitelistPatterns;
+		this.method = OutMessageMethod.removeWhitelistPatterns;
 	}
-
 	@Override
 	public JSONObject toJsonObject() {
 		JSONObject obj = super.toJsonObject();

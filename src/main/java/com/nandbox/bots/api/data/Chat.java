@@ -32,7 +32,7 @@ public class Chat {
 	private String name;
 	private String type;
 	private String version;
-	private Integer languageCode;
+	private String languageCode;
 	private String regions;
 	private String description;
 	private Photo photo;
@@ -52,7 +52,7 @@ public class Chat {
 		this.name = (String) obj.get(KEY_NAME);
 		this.type = (String) obj.get(KEY_TYPE);
 		this.version = (String) obj.get(KEY_VERSION);
-		this.languageCode = (Integer) obj.get(KEY_LANGUAGE_CODE);
+		this.languageCode = (String) obj.get(KEY_LANGUAGE_CODE);
 		this.regions = (String) obj.get(KEY_REGIONS);
 		this.description = (String) obj.get(KEY_DESCRIPTION);
 		this.category = (String) obj.get(KEY_CATEGORY);
@@ -162,7 +162,7 @@ public class Chat {
 	/**
 	 * @return the languageCode
 	 */
-	public Integer getLanguageCode() {
+	public String getLanguageCode() {
 		return languageCode;
 	}
 
@@ -170,7 +170,7 @@ public class Chat {
 	 * @param languageCode
 	 *            the languageCode to set
 	 */
-	public void setLanguageCode(Integer languageCode) {
+	public void setLanguageCode(String languageCode) {
 		this.languageCode = languageCode;
 	}
 

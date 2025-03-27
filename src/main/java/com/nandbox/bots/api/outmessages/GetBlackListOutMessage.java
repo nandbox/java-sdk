@@ -12,7 +12,7 @@ public class GetBlackListOutMessage extends OutMessage {
 	private String pageSize;
 
 	public GetBlackListOutMessage() {
-		this.method = OutMessageMethod.getBlacklist;
+		this.method = OutMessageMethod.getBlacklistUsers;
 	}
 
 	@Override

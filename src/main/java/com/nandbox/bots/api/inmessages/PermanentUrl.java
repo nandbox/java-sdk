@@ -32,7 +32,7 @@ public class PermanentUrl {
 		this.setParam1(String.valueOf(jsonObj.get(KEY_PARAM1)));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
 				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+				: 0;;
 	}
 
 	/**

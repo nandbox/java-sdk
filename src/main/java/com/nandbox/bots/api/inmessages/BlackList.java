@@ -10,32 +10,33 @@ public class BlackList {
 
 	private static final String KEY_BLACKLIST = "blacklist";
 	private static final String KEY_EOP = "eop";
-	private static final String KEY_USERS = "users";
-	private static final String KEY_CHAT = "chat";
+	private static final String KEY_USERS = "signups";
 	private static final String KEY_APP_ID = "app_id";
+	private static final String KEY_REFERENCE = "reference";
 
-	private String eop;
-	private Chat chat;
+	private Boolean eop;
 	// private Users users;
 	// private ArrayList <Users> arrayUser = new ArrayList<>();
 	private SignupUser[] users;
 	private Long appId;
+	private Long reference;
 
-	public BlackList(JSONObject jsonObj) {
+	public BlackList(JSONObject obj) {
 
-		JSONObject obj = (JSONObject) jsonObj.get(KEY_BLACKLIST);
 
-		this.eop = (String) obj.get(KEY_EOP);
+		this.eop = (Boolean) obj.get(KEY_EOP);
 
-		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
-		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: null;
+		this.appId =obj.get(KEY_APP_ID) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
+				: 0;;
 		JSONArray usersArrayObj = (JSONArray) obj.get(KEY_USERS);
 		this.users = new SignupUser[usersArrayObj.size()];
 		for (int i = 0; i < usersArrayObj.size(); i++) {
 			users[i] = new SignupUser((JSONObject) usersArrayObj.get(i));
 		}
+		this.reference =obj.get(KEY_REFERENCE) != null
+				? Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)))
+				: 0l;
 
 	}
 
@@ -54,35 +55,36 @@ public class BlackList {
 		if (appId!=null){
 			obj.put(KEY_APP_ID,appId);
 		}
-		if (chat != null) {
-			obj.put(KEY_CHAT, chat.toJsonObject());
-		}
+
 		if (eop != null) {
 			obj.put(KEY_EOP, eop);
 		}
-
+		if (reference!=null){
+			obj.put(KEY_REFERENCE,reference);
+		}
 		return obj;
 
 	}
 
-	public String getEop() {
+	public Boolean getEop() {
 		return eop;
 	}
 
-	public void setEop(String eop) {
+	public void setEop(Boolean eop) {
 		this.eop = eop;
 	}
 
-	public Chat getChat() {
-		return chat;
-	}
 	public Long getAppId(){
 		return appId;
 	}
-	public void setChat(Chat chat) {
-		this.chat = chat;
+
+	public Long getReference() {
+		return reference;
 	}
 
+	public void setReference(Long reference) {
+		this.reference = reference;
+	}
 	public SignupUser[] getUsers() {
 		return users;
 	}

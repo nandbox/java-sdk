@@ -13,17 +13,22 @@ import java.util.List;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783779467293:0:1szFDHGvpDwv4zyLXD3HP6XUBAII22";
+	public static final String TOKEN = "90091783822039252:0:DMDzxIveNFaGbI48D4I14NqGdx5WcH";
+	//90090684265505180 => channel Helloooo
+	//90090684293000559 => main app
+	//90089584801743482 => basyone (user)
+	//90089584778203966 => hesham22yy (user)
+	//90089584759479548 => hamed (user)
 
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
 		client.connect(TOKEN, new Nandbox.Callback() {
 			Nandbox.Api api = null;
-
 			@Override
 			public void onConnect(Api api) {
 				System.out.println("Authenticated");
 				this.api = api;
+
 			}
 
 			@Override
@@ -31,8 +36,7 @@ public class EchoTextMessage {
 				if (incomingMsg.isTextMsg()) {
 					String chatId = incomingMsg.getChat().getId(); // get your chat Id
 					String text = incomingMsg.getText(); // get your text message
-					api.getUser("90089584766092404", Long.valueOf("90090684298937728")); // Sending message back as an Echo
-
+					api.sendText(chatId, text,incomingMsg.getAppId());
 				}
 			}
 
@@ -68,12 +72,12 @@ public class EchoTextMessage {
 
 			@Override
 			public void onChatMember(ChatMember chatMember) {
-
+				System.out.println(chatMember.toJsonObject());
 			}
 
 			@Override
 			public void onChatAdministrators(ChatAdministrators chatAdministrators) {
-
+				System.out.println(chatAdministrators.toJsonObject());
 			}
 
 			@Override
@@ -83,12 +87,12 @@ public class EchoTextMessage {
 
 			@Override
 			public void onMyProfile(User user) {
-
+				System.out.println(user.toJsonObject());
 			}
 
 			@Override
 			public void onProductDetail(ProductItem productItem) {
-
+				System.out.println(productItem.toJsonObject());
 			}
 
 			@Override
@@ -99,14 +103,14 @@ public class EchoTextMessage {
 
 
 			@Override
-			public void listCollectionItemResponse(List<Category> collections) {
-
+			public void listCollectionItemResponse(ListCollectionItemResponse collections) {
+				System.out.println(collections.toJsonObject());
 			}
 
 
 			@Override
 			public void onUserDetails(User user,Long appId) {
-				System.out.println(appId);
+				System.out.println(user.toJsonObject());
 			}
 
 			@Override
@@ -133,10 +137,7 @@ public class EchoTextMessage {
 
 			@Override
 			public void onChatDetails(Chat chat,Long appId) {
-				// TODO Auto-generated method stub
-				System.out.println(appId);
-				System.out.println("HERE");
-				
+				System.out.println(chat.toJsonObject());
 			}
 
 			@Override
@@ -146,15 +147,37 @@ public class EchoTextMessage {
 			}
 
 			@Override
+			public void onBlackListPattern(Pattern blackListPattern) {
+				System.out.println(blackListPattern.toJson());
+			}
+
+			@Override
+			public void onWhiteListPattern(Pattern pattern) {
+				System.out.println(pattern.toJson());
+			}
+
+			@Override
 			public void onBlackList(BlackList blackList) {
-				// TODO Auto-generated method stub
+				// TODO Auto-generated method stub\
+				System.out.println(blackList.toJsonObject());
 				
 			}
 
 			@Override
-			public void onWhiteList(WhiteList blackList) {
+			public void onDeleteBlackList(WhiteList_ak blackList) {
+				System.out.println(blackList.toJsonObject());
+			}
+
+			@Override
+			public void onWhiteList(WhiteList whiteList) {
 				// TODO Auto-generated method stub
+				System.out.println(whiteList.toJsonObject());
 				
+			}
+
+			@Override
+			public void onDeleteWhiteList(WhiteList_ak whiteList) {
+				System.out.println(whiteList.toJsonObject());
 			}
 
 			@Override

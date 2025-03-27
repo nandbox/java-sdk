@@ -102,7 +102,7 @@ public class Main {
             }
 
             @Override
-            public void listCollectionItemResponse(List<Category> collections) {
+            public void listCollectionItemResponse(ListCollectionItemResponse collections) {
 
             }
 
@@ -138,12 +138,33 @@ public class Main {
             }
 
             @Override
+            public void onBlackListPattern(Pattern pattern) {
+
+            }
+
+            @Override
+            public void onWhiteListPattern(Pattern pattern) {
+
+            }
+
+            @Override
             public void onBlackList(BlackList blackList) {
 
             }
 
             @Override
+            public void onDeleteBlackList(WhiteList_ak blackList) {
+
+
+            }
+
+            @Override
             public void onWhiteList(WhiteList whiteList) {
+
+            }
+
+            @Override
+            public void onDeleteWhiteList(WhiteList_ak whiteList) {
 
             }
 

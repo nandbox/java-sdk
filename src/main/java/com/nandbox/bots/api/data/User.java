@@ -37,7 +37,9 @@ public class User {
 	private Long loginId;
 
 	
-	public User() { 
+	public 	User() {
+		this.loginId = 0l;
+		this.profile="other";
 	}
 
 	public User(JSONObject obj) {
@@ -49,12 +51,11 @@ public class User {
 		this.isBot = (Boolean) obj.get(KEY_IS_BOT);
 		this.lastSeen = (String) obj.get(KEY_LAST_SEEN);
 		this.status = (String) obj.get(KEY_STATUS);
-		this.profile = (String) obj.get(KEY_PROFILE);
-
+		this.profile =  obj.get(KEY_PROFILE)!=null ? (String) obj.get(KEY_PROFILE):"other";
 		this.photo = obj.get(KEY_PHOTO) != null ? new Photo((JSONObject) obj.get(KEY_PHOTO)) : null;
 		
 		this.shortName = (String) obj.get(KEY_SHORT_NAME);
-		this.loginId = (Long) obj.get(KEY_LOGIN_ID);
+		this.loginId =  obj.get(KEY_LOGIN_ID)!=null?(Long) obj.get(KEY_LOGIN_ID): 0l;
 	}
 
 	public JSONObject toJsonObject() {
@@ -256,7 +257,9 @@ public class User {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-
+	public void setLoginId(Long loginId){
+		this.loginId=loginId;
+	}
 	public long getLoginId() {
 		return loginId;
 	}
