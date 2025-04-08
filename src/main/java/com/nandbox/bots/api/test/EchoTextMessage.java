@@ -8,12 +8,11 @@ import com.nandbox.bots.api.inmessages.*;
 
 import net.minidev.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783822039252:0:DMDzxIveNFaGbI48D4I14NqGdx5WcH";
+	public static final String TOKEN = "90091783774349926:0:2wnkYKCptxRWeBGTHeJYskZiS4ePd9";
 	//90090684265505180 => channel Helloooo
 	//90090684293000559 => main app
 	//90089584801743482 => basyone (user)
@@ -91,12 +90,12 @@ public class EchoTextMessage {
 			}
 
 			@Override
-			public void onProductDetail(ProductItem productItem) {
+			public void onProductDetail(ProductItemResponse productItem) {
 				System.out.println(productItem.toJsonObject());
 			}
 
 			@Override
-			public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
+			public void onCollectionProduct(GetProductCollectionResponse collectionProduct) {
 
 			}
 
@@ -164,7 +163,7 @@ public class EchoTextMessage {
 			}
 
 			@Override
-			public void onDeleteBlackList(WhiteList_ak blackList) {
+			public void onDeleteBlackList(List_ak blackList) {
 				System.out.println(blackList.toJsonObject());
 			}
 
@@ -176,7 +175,7 @@ public class EchoTextMessage {
 			}
 
 			@Override
-			public void onDeleteWhiteList(WhiteList_ak whiteList) {
+			public void onDeleteWhiteList(List_ak whiteList) {
 				System.out.println(whiteList.toJsonObject());
 			}
 

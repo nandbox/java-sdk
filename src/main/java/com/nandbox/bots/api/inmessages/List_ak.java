@@ -1,14 +1,11 @@
 package com.nandbox.bots.api.inmessages;
 
-import com.nandbox.bots.api.data.Chat;
-import com.nandbox.bots.api.data.SignupUser;
-
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.util.Arrays;
 
-public class WhiteList_ak {
+public class List_ak {
 
     private static final String KEY_WHITELIST = "whitelist";
     private static final String KEY_EOP = "eop";
@@ -20,7 +17,7 @@ public class WhiteList_ak {
     private String[] users;
     private Long appId;
     private Long reference;
-    public WhiteList_ak(JSONObject jsonObj) {
+    public List_ak(JSONObject jsonObj) {
         this.appId =jsonObj.get(KEY_APP_ID) != null
                 ? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
                 : 0;

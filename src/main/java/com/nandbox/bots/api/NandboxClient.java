@@ -616,7 +616,7 @@ public class NandboxClient {
 
 				@Override
 				public void updateMessage(String messageId, String text, String caption, String toUserId,
-						String chatId, String tab,Long appId) {
+						String chatId, Long appId) {
 
 					UpdateOutMessage updateMessage = new UpdateOutMessage();
 					updateMessage.setApp_id(appId);
@@ -625,42 +625,42 @@ public class NandboxClient {
 					updateMessage.setCaption(caption);
 					updateMessage.setToUserId(toUserId);
 					updateMessage.setChatId(chatId);
-					updateMessage.setTab(tab);
 
 					send(updateMessage);
 
 				}
 
 				@Override
-				public void getCollectionProduct(String collectionProductId,Long appId) {
+				public void getCollectionProduct(String collectionProductId,Long appId,Long reference) {
 					GetCollectionProductOutMessage collectionProductOutMessage = new GetCollectionProductOutMessage();
 					collectionProductOutMessage.setId(collectionProductId);
 					collectionProductOutMessage.setApp_id(appId);
+					collectionProductOutMessage.setReference(reference);
 					api.send(collectionProductOutMessage);
 				}
 
 				@Override
-				public void updateTextMsg(String messageId, String text, String toUserId, String tab,Long appId) {
+				public void updateTextMsg(String messageId, String text, String toUserId,Long appId) {
 
-					updateMessage(messageId, text, null, toUserId, null, tab,appId);
+					updateMessage(messageId, text, null, toUserId, null, appId);
 				}
 
 				@Override
-				public void updateMediaCaption(String messageId, String caption, String toUserId, String tab,Long appId) {
+				public void updateMediaCaption(String messageId, String caption, String toUserId,Long appId) {
 
-					updateMessage(messageId, null, caption, toUserId, null, tab,appId);
+					updateMessage(messageId, null, caption, toUserId, null, appId);
 				}
 
 				@Override
-				public void updateChatMsg(String messageId, String text, String chatId, String tab,Long appId) {
+				public void updateChatMsg(String messageId, String text, String chatId, Long appId) {
 
-					updateMessage(messageId, text, null, null, chatId, tab,appId);
+					updateMessage(messageId, text, null, null, chatId, appId);
 				}
 
 				@Override
-				public void updateChatMediaCaption(String messageId, String caption, String chatId, String tab,Long appId) {
+				public void updateChatMediaCaption(String messageId, String caption, String chatId, Long appId) {
 
-					updateMessage(messageId, null, caption, null, chatId, tab,appId);
+					updateMessage(messageId, null, caption, null, chatId,appId);
 				}
 
 				@Override
@@ -931,7 +931,7 @@ public class NandboxClient {
 				}
 
 				@Override
-				public void setMyProifle(User user,Long reference) {
+				public void setMyProfile(User user,Long reference) {
 
 					SetMyProfileOutMessage setMyProfileOutMessage = new SetMyProfileOutMessage();
 					setMyProfileOutMessage.setUser(user);
@@ -1069,7 +1069,7 @@ public class NandboxClient {
 					return;
 				case "getProductItemResponse":
 					System.out.println(obj.toJSONString());
-					ProductItem productItem = new ProductItem(obj);
+					ProductItemResponse productItem = new ProductItemResponse(obj);
 					callback.onProductDetail(productItem);
 					return;
 				case "scheduledMessage":
@@ -1090,7 +1090,7 @@ public class NandboxClient {
 					return;
 				case "getCollectionProductResponse":
 					GetProductCollectionResponse getProductCollectionResponse = new GetProductCollectionResponse(obj);
-					callback.onCollectionProduct(getProductCollectionResponse.getCollectionProducts());
+					callback.onCollectionProduct(getProductCollectionResponse);
 					return;
 				case "messageAck":
 					MessageAck msgAck = new MessageAck(obj);
@@ -1120,7 +1120,7 @@ public class NandboxClient {
 
 					callback.onUserDetails(user,appId);
 					return;
-				case "listCollectionItemResponse":
+				case "listCollectionsResponse":
 					ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
 					callback.listCollectionItemResponse(listCollectionItemResponse);
 					return ;
@@ -1156,7 +1156,7 @@ public class NandboxClient {
 					callback.onWhiteListPattern(deletedWhiteListpattern);
 					return;
                     case "removeFromBlacklist_ack":
-					WhiteList_ak blackListAk=new WhiteList_ak(obj);
+					List_ak blackListAk=new List_ak(obj);
 					callback.onDeleteBlackList(blackListAk);
 					return;
 				case "addToBlacklist_ack":
@@ -1166,7 +1166,7 @@ public class NandboxClient {
 					callback.onBlackList(blackList);
 					return;
 				case "removeFromWhitelist_ack":
-					WhiteList_ak whiteListAk=new WhiteList_ak(obj);
+					List_ak whiteListAk=new List_ak(obj);
 					callback.onDeleteWhiteList(whiteListAk);
 					return;
 				case "addToWhitelist_ack":

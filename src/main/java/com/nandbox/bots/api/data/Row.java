@@ -6,9 +6,11 @@ import net.minidev.json.JSONObject;
 public class Row {
 	private static final String KEY_BUTTONS = "buttons";
 	private static final String KEY_ROW_ORDER = "row_order";
+	private static final String KEY_ROW_ID = "row_id";
 
 	private Button[] buttons;
 	private Integer rowOrder;
+	private String rowId;
 
 	public Row() {
 
@@ -29,6 +31,7 @@ public class Row {
 			buttons[i] = new Button((JSONObject) buttonsArrayObj.get(i));
 		}
 		this.rowOrder = (Integer) obj.get(KEY_ROW_ORDER);
+		this.rowId = (String) obj.get(KEY_ROW_ID);
 	}
 
 	public JSONObject toJsonObject() {
@@ -36,6 +39,8 @@ public class Row {
 
 		if (rowOrder != null)
 			obj.put(KEY_ROW_ORDER, rowOrder);
+		if (rowId != null)
+			obj.put(KEY_ROW_ID, rowId);
 
 		if (buttons != null) {
 
@@ -50,9 +55,18 @@ public class Row {
 
 	}
 
+	public String getRowId() {
+		return rowId;
+	}
+
+	public void setRowId(String rowId) {
+		this.rowId = rowId;
+	}
+
 	/**
 	 * @return the buttons
 	 */
+
 	public Button[] getButtons() {
 		return buttons;
 	}

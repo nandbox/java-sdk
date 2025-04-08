@@ -6,7 +6,10 @@ import java.util.stream.Collectors;
 
 public class CollectionProduct {
     private long id;
+    private Long businessChannelId;
+    private Long appId;
     private String name;
+    private String category;
     private Double price;
     private String status;
     private List<Image> image;
@@ -18,6 +21,9 @@ public class CollectionProduct {
         this.name = (String) obj.get("name");
         this.price = (Double) obj.get("price");
         this.status = (String) obj.get("status");
+        this.category=(String) obj.get("category");
+        this.businessChannelId = (Long) obj.get("business_channel_id");
+        this.appId = (Long) obj.get("app_id");
         this.image = ((List<JSONObject>) obj.get("image")).stream().map(Image::new).collect(Collectors.toList());
     }
 
@@ -33,5 +39,55 @@ public class CollectionProduct {
         return obj;
     }
 
+    public Long getAppId() {
+        return appId;
+    }
 
+    public void setAppId(Long appId) {
+        this.appId = appId;
+    }
+
+    public Long getBusinessChannelId() {
+        return businessChannelId;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Image> getImage() {
+        return image;
+    }
+
+    public void setImage(List<Image> image) {
+        this.image = image;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setBusinessChannelId(Long businessChannelId) {
+        this.businessChannelId = businessChannelId;
+    }
 }

@@ -24,7 +24,7 @@ public abstract class OutMessage {
 		getBlacklistUsers, getWhitelistUsers, addToBlacklist, addToWhitelist, removeFromBlacklist, addBlacklistPatterns,
 		removeBlacklistPatterns, addWhitelistPatterns, removeWhitelistPatterns, removeFromWhitelist, setAdminChatMenu,
 		setAdminNavigationButton, cancelMessageSchedule,setWorkflow,addChatMember,createChat,addChatAdmin,setWorkflowAction
-		,getCollectionProduct,listCollectionItem, getProductItem
+		,getCollectionProduct, listCollections, getProductItem
 
 	}
 

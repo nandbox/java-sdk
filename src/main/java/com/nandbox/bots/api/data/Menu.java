@@ -14,21 +14,27 @@ public class Menu {
 
 	private static final String KEY_MENU_REF = "menu_ref";
 	private static final String KEY_ROWS = "rows";
+	private static final String KEY_MENU_ID = "menu_id";
+	private static final String KEY_MENU_GROUP= "menu_group";
 
 	private String menuRef;
 	private Row[] rows;
-
+	private String menuId;
+	private String menuGroup;
 	public Menu() {
 
 	}
 
 	public Menu(JSONObject obj) {
+
 		JSONArray rowsArrayObj = (JSONArray) obj.get(KEY_ROWS);
 		this.rows = new Row[rowsArrayObj.size()];
 		for (int i = 0; i < rowsArrayObj.size(); i++) {
 			rows[i] = new Row((JSONObject) rowsArrayObj.get(i));
 		}
 		this.menuRef = (String) obj.get(KEY_MENU_REF);
+		this.menuId = (String) obj.get(KEY_MENU_ID);
+		this.menuGroup = (String) obj.get(KEY_MENU_GROUP);
 	}
 
 	public JSONObject toJsonObject() {
@@ -36,6 +42,10 @@ public class Menu {
 
 		if (menuRef != null)
 			obj.put(KEY_MENU_REF, menuRef);
+		if (menuGroup != null)
+			obj.put(KEY_MENU_GROUP, menuGroup);
+		if (menuId != null)
+			obj.put(KEY_MENU_ID, menuId);
 		if (rows != null) {
 
 			JSONArray rowsArrayObj = new JSONArray();
@@ -46,6 +56,22 @@ public class Menu {
 		}
 		return obj;
 
+	}
+
+	public String getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(String menuId) {
+		this.menuId = menuId;
+	}
+
+	public void setMenuGroup(String menuGroup) {
+		this.menuGroup = menuGroup;
+	}
+
+	public String getMenuGroup() {
+		return menuGroup;
 	}
 
 	/**

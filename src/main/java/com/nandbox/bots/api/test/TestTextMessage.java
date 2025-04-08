@@ -48,7 +48,7 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onDeleteBlackList(WhiteList_ak blackList) {
+			public void onDeleteBlackList(List_ak blackList) {
 
 
 			}
@@ -552,7 +552,7 @@ public class TestTextMessage {
 					Photo photo = new Photo();
 					photo.setId("e801b7277dbd921376f26b13aeadf0ee4b49950a66641f2761863a823e035845.jpg");
 
-					api.setMyProifle(user,null);
+					api.setMyProfile(user,null);
 
 				} else if ("linkPreview".equalsIgnoreCase(incomingMsg.getText())) {
 					try {
@@ -620,23 +620,23 @@ public class TestTextMessage {
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionCB")) {
-					api.updateMediaCaption(msgId, "My New Caption ", userId, null,inlineMsgCallback.getAppId());
+					api.updateMediaCaption(msgId, "My New Caption ", userId, inlineMsgCallback.getAppId());
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextCB")) {
-					api.updateTextMsg(msgId, "My New Text ", userId, null,inlineMsgCallback.getAppId());
+					api.updateTextMsg(msgId, "My New Text ", userId, inlineMsgCallback.getAppId());
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCB")) {
-					api.updateChatMsg(msgId, "My New Text in group ", chatId, null,inlineMsgCallback.getAppId());
+					api.updateChatMsg(msgId, "My New Text in group ", chatId, inlineMsgCallback.getAppId());
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editCaptionChatCB")) {
-					api.updateChatMsg(msgId, "My New Caption in group ", chatId, null,inlineMsgCallback.getAppId());
+					api.updateChatMsg(msgId, "My New Caption in group ", chatId, inlineMsgCallback.getAppId());
 				}
 
 				if (inlineMsgCallback.getButtonCallback().equals("editTextChatCBboth")) {
-					api.updateMessage(msgId, "my new message", null, userId, chatId, null,inlineMsgCallback.getAppId());
+					api.updateMessage(msgId, "my new message", null, userId, chatId, inlineMsgCallback.getAppId());
 				}
 
 			}
@@ -697,12 +697,12 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onProductDetail(ProductItem productItem) {
+			public void onProductDetail(ProductItemResponse productItem) {
 
 			}
 
 			@Override
-			public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
+			public void onCollectionProduct(GetProductCollectionResponse collectionProduct) {
 
 			}
 
@@ -786,7 +786,7 @@ public class TestTextMessage {
 			}
 
 			@Override
-			public void onDeleteWhiteList(WhiteList_ak whiteList) {
+			public void onDeleteWhiteList(List_ak whiteList) {
 
 			}
 

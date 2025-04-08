@@ -92,12 +92,12 @@ public class Main {
             }
 
             @Override
-            public void onProductDetail(ProductItem productItem) {
+            public void onProductDetail(ProductItemResponse productItem) {
 
             }
 
             @Override
-            public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
+            public void onCollectionProduct(GetProductCollectionResponse collectionProduct) {
 
             }
 
@@ -153,7 +153,7 @@ public class Main {
             }
 
             @Override
-            public void onDeleteBlackList(WhiteList_ak blackList) {
+            public void onDeleteBlackList(List_ak blackList) {
 
 
             }
@@ -164,7 +164,7 @@ public class Main {
             }
 
             @Override
-            public void onDeleteWhiteList(WhiteList_ak whiteList) {
+            public void onDeleteWhiteList(List_ak whiteList) {
 
             }
 

@@ -150,12 +150,12 @@ public final class Nandbox {
 		 * @param productItem
 		 * 			  the product
 		 */
-		public void onProductDetail(ProductItem productItem);
+		public void onProductDetail(ProductItemResponse productItem);
 		/**
 		 * @param collectionProduct
 		 * 			  the ProductItem
 		 */
-		public void onCollectionProduct(List<CollectionProduct> collectionProduct);
+		public void onCollectionProduct(GetProductCollectionResponse collectionProduct);
 
 		/**
 		 * @param collections
@@ -204,11 +204,11 @@ public final class Nandbox {
 		public void onBlackListPattern(Pattern pattern);
 		public void onWhiteListPattern(Pattern pattern);
 		public void onBlackList(BlackList blackList);
-		public void onDeleteBlackList(WhiteList_ak blackList);
+		public void onDeleteBlackList(List_ak blackList);
 
 
 		public void onWhiteList(WhiteList whiteList);
-		public void onDeleteWhiteList(WhiteList_ak whiteList);
+		public void onDeleteWhiteList(List_ak whiteList);
 
 		/**
 		 * This event should be used to handle incoming schedule message from server
@@ -872,14 +872,14 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, String tab,Long appId);
+		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, Long appId);
 
 		/**
 		 * @param collectionProductId
 		  			id for the collection
 		 *
 		 */
-		public void getCollectionProduct(String collectionProductId,Long appId);
+		public void getCollectionProduct(String collectionProductId,Long appId,Long reference);
 		/**
 		 * @param messageId
 		 *            Unique identifier for the message and can not set to null
@@ -891,7 +891,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message
 		 *
 		 */
-		void updateTextMsg(String messageId, String text, String toUserId, String tab,Long appId);
+		void updateTextMsg(String messageId, String text, String toUserId, Long appId);
 
 		/**
 		 * @param messageId
@@ -903,7 +903,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateMediaCaption(String messageId, String caption, String toUserId, String tab,Long appId);
+		void updateMediaCaption(String messageId, String caption, String toUserId,Long appId);
 
 		/**
 		 * @param messageId
@@ -915,7 +915,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message               
 		 */
-		void updateChatMsg(String messageId, String text, String chatId, String tab,Long appId);
+		void updateChatMsg(String messageId, String text, String chatId,Long appId);
 
 		/**
 		 * @param messageId
@@ -927,7 +927,7 @@ public final class Nandbox {
 		 * @param tab 
 		 * 			tab ID to which you want to send the message                
 		 */
-		void updateChatMediaCaption(String messageId, String caption, String chatId, String tab,Long appId);
+		void updateChatMediaCaption(String messageId, String caption, String chatId,Long appId);
 		
 		@Deprecated
 		void sendCellText(String userId, String screenId, String cellId, String text, Long reference);
@@ -1041,7 +1041,7 @@ public final class Nandbox {
 		 * @param user
 		 *            User object with unique user Id used to update User information
 		 */
-		void setMyProifle(User user,Long reference);
+		void setMyProfile(User user,Long reference);
 
 		/**
 		 * Use this method to set Chat Group or Channel information

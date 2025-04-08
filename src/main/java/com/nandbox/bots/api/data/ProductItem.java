@@ -77,8 +77,7 @@ public class ProductItem {
 
     public ProductItem() {}
 
-    public ProductItem(JSONObject object) {
-        JSONObject obj = (JSONObject) object.get("data");
+    public ProductItem(JSONObject obj) {
         this.addons = (List<String>) obj.get(KEY_ADDONS);
         this.description = (String) obj.get(KEY_DESCRIPTION);
         this.type = (String) obj.get(KEY_TYPE);
@@ -107,12 +106,12 @@ public class ProductItem {
         this.category = (String) obj.get(KEY_CATEGORY);
         this.status = (String) obj.get(KEY_STATUS);
         this.option = (JSONArray) obj.get(KEY_OPTION);
-        this.appId =object.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(object.get(KEY_APP_ID)))
+        this.appId =obj.get(KEY_APP_ID) != null
+                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
                 : Long.parseLong(String.valueOf(obj.get(KEY_MAIN_GROUP_ID)));
-        this.reference =object.get(KEY_REFERENCE) != null
-                ? Long.valueOf(Long.parseLong(String.valueOf(object.get(KEY_REFERENCE))))
-                : object.get(KEY_REF) != null ?Long.parseLong(String.valueOf(object.get(KEY_REF))):null;
+        this.reference =obj.get(KEY_REFERENCE) != null
+                ? Long.valueOf(Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE))))
+                : obj.get(KEY_REF) != null ?Long.parseLong(String.valueOf(obj.get(KEY_REF))):null;
     }
 
     public JSONObject toJsonObject() {
@@ -121,7 +120,7 @@ public class ProductItem {
         if (addons != null) obj.put(KEY_ADDONS, addons);
         if (description != null) obj.put(KEY_DESCRIPTION, description);
         if (type != null) obj.put(KEY_TYPE, type);
-        if (pCode != 0) obj.put(KEY_P_CODE, pCode);
+        if (pCode !=null) obj.put(KEY_P_CODE, pCode);
         if (price != null) obj.put(KEY_PRICE, price);
         if (vendor != null) obj.put(KEY_VENDOR, vendor);
         if (variant != null) obj.put(KEY_VARIANT, variant);

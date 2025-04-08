@@ -10,8 +10,8 @@ public class Category {
     private String id;
     private String name;
     private String description;
-    private String softId;
-    private String createdDate;
+    private String category;
+    private String date;
     private String version;
     private String status;
     private List<Image> images;
@@ -22,8 +22,8 @@ public class Category {
         this.id = (String) jsonobj.get("id");
         this.name = (String) jsonobj.get("name");
         this.description = (String) jsonobj.get("description");
-        this.softId = (String) jsonobj.get("soft_id");
-        this.createdDate = (String) jsonobj.get("created_date");
+        this.category = (String) jsonobj.get("category");
+        this.date = (String) jsonobj.get("date");
         this.version = (String) jsonobj.get("version");
         this.status = (String) jsonobj.get("status");
 
@@ -43,8 +43,8 @@ public class Category {
         if (this.id != null) obj.put("id", this.id);
         if (this.name != null) obj.put("name", this.name);
         if (this.description != null) obj.put("description", this.description);
-        if (this.softId != null) obj.put("soft_id", this.softId);
-        if (this.createdDate != null) obj.put("created_date", this.createdDate);
+        if (this.category != null) obj.put("category", this.category);
+        if (this.date != null) obj.put("date", this.date);
         if (this.version != null) obj.put("version", this.version);
         if (this.status != null) obj.put("status", this.status);
 

@@ -39,7 +39,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091844179652762:0:zW5HxL0CVuFLO9n4MNBdB9U8tnBmF5";
+	public static final String TOKEN = "90091783774349926:0:wke5tdJr3o2ggJhiugrbTJu3zxuAqp";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -54,7 +54,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onDeleteBlackList(WhiteList_ak blackList) {
+			public void onDeleteBlackList(List_ak blackList) {
 
 			}
 
@@ -254,6 +254,7 @@ public class MultipleTests {
 							inlineMenu.setRows(new Row[] { firstRow });
 							outmsg.setMenuRef(menuRef);
 							outmsg.setInlineMenu(new Menu[] { inlineMenu });
+							outmsg.setApp_id(incomingMsg.getAppId());
 							api.send(outmsg);
 
 						}
@@ -280,9 +281,12 @@ public class MultipleTests {
 							Row firstRow = new Row();
 							firstRow.setRowOrder(1);
 							firstRow.setButtons(new Button[] { oneBtn, secondBtn, thirdButton });
+							firstRow.setRowId(menuRef);
 
 							Menu inlineMenu = new Menu();
+							inlineMenu.setMenuId(menuRef);
 							inlineMenu.setMenuRef(menuRef);
+							inlineMenu.setMenuGroup(menuRef);
 							inlineMenu.setRows(new Row[] { firstRow });
 							outmsg.setMenuRef(menuRef);
 							outmsg.setInlineMenu(new Menu[] { inlineMenu });
@@ -354,7 +358,7 @@ public class MultipleTests {
 
 							outmsg.setChatId(incomingMsg.getChat().getId());
 							outmsg.setMenus(new Menu[] { chatMenu });
-
+							outmsg.setApp_id(incomingMsg.getAppId());
 							api.send(outmsg);
 
 						}
@@ -830,12 +834,12 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onProductDetail(ProductItem productItem) {
+			public void onProductDetail(ProductItemResponse productItem) {
 				System.out.println("product: " + productItem.toJsonObject().toString());
 			}
 
 			@Override
-			public void onCollectionProduct(List<CollectionProduct> collectionProduct) {
+			public void onCollectionProduct(GetProductCollectionResponse collectionProduct) {
 
 			}
 
@@ -877,6 +881,7 @@ public class MultipleTests {
 
 			@Override
 			public void onBlackListPattern(Pattern pattern) {
+				Menu menu = new Menu();
 
 			}
 
@@ -912,7 +917,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onDeleteWhiteList(WhiteList_ak whiteList) {
+			public void onDeleteWhiteList(List_ak whiteList) {
 
 			}
 
