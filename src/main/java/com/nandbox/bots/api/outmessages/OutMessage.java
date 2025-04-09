@@ -1,6 +1,5 @@
 package com.nandbox.bots.api.outmessages;
 
-import com.nandbox.bots.api.data.Menu;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -64,7 +63,7 @@ public abstract class OutMessage {
 	protected String caption;
 	private Integer echo;
 	private String menuRef;
-	private Menu[] inlineMenus;
+	private JSONArray inlineMenus;
 	private Integer chatSettings;
 	private Long scheduleDate;
 	private String tab;
@@ -120,12 +119,7 @@ public abstract class OutMessage {
 			obj.put(KEY_APP_ID, app_id);
 		}
 		if (inlineMenus != null) {
-			JSONArray inlineMenusArrayObj = new JSONArray();
-			for (int i = 0; i < inlineMenus.length; i++) {
-				inlineMenusArrayObj.add(inlineMenus[i].toJsonObject());
-			}
-
-			obj.put(KEY_INLINE_MENU, inlineMenusArrayObj);
+			obj.put(KEY_INLINE_MENU, inlineMenus);
 		}
 
 		if (chatSettings != null) {
@@ -319,7 +313,7 @@ public abstract class OutMessage {
 	/**
 	 * @return the inlineMenu
 	 */
-	public Menu[] getInlineMenu() {
+	public JSONArray getInlineMenu() {
 		return inlineMenus;
 	}
 
@@ -327,7 +321,7 @@ public abstract class OutMessage {
 	 * @param inlineMenu
 	 *            the inlineMenu to set
 	 */
-	public void setInlineMenu(Menu[] inlineMenu) {
+	public void setInlineMenu(JSONArray inlineMenu) {
 		this.inlineMenus = inlineMenu;
 	}
 

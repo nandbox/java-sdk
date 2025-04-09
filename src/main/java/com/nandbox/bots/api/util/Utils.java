@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.nandbox.bots.api.Nandbox.Api;
-import com.nandbox.bots.api.data.Button;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
+import net.minidev.json.JSONArray;
 
 /**
  * Media Utility CLass
@@ -41,28 +41,25 @@ public class Utils {
 		return durationInMinsAndSeconds;
 	}
 
-	public static void setNavigationButton(String chatId, String nextMenu, Api api) {
+	public static void setNavigationButton(String chatId, String nextMenu, Api api, JSONArray buttons) {
 
-		Button navigationButton = new Button();
-		navigationButton.setNextMenu(nextMenu);
+
 		SetNavigationButtonOutMessage navMsg = new SetNavigationButtonOutMessage();
 
 		navMsg.setChatId(chatId);
-		navMsg.setNavigationButtons(new Button[] { navigationButton });
+		navMsg.setNavigationButtons(buttons);
 
 		api.send(navMsg);
 
 	}
 
-	public static void setAdminNavigationButton(String chatId, String nextMenu, Api api) {
+	public static void setAdminNavigationButton(String chatId, String nextMenu, Api api, JSONArray buttons) {
 
-		Button adminNavigationButton = new Button();
-		adminNavigationButton.setNextMenu(nextMenu);
-		adminNavigationButton.setNavType("admin");
+
 		SetNavigationButtonOutMessage navMsg = new SetNavigationButtonOutMessage();
 
 		navMsg.setChatId(chatId);
-		navMsg.setNavigationButtons(new Button[] { adminNavigationButton });
+		navMsg.setNavigationButtons(buttons);
 
 		api.send(navMsg);
 

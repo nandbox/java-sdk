@@ -29,6 +29,7 @@ import com.nandbox.bots.api.outmessages.VoiceOutMessage;
 import com.nandbox.bots.api.util.MediaTransfer;
 import com.nandbox.bots.api.util.Utils;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -229,140 +230,6 @@ public class MultipleTests {
 						else if ("getProduct".equalsIgnoreCase(incomingMsg.getText())){
 							api.getProductDetail("5121406605126307",incomingMsg.getAppId(),incomingMsg.getReference());
 						}
-						else if ("1bc".equalsIgnoreCase(incomingMsg.getText())) {
-
-							TextOutMessage outmsg = new TextOutMessage();
-							Long reference = getUniqueId();
-							outmsg.setChatId(incomingMsg.getChat().getId());
-							outmsg.setReference(reference);
-							outmsg.setText("https://edition.cnn.com/");
-							outmsg.setWebPagePreview(WEB_PREVIEW_INSTANCE_VIEW);
-
-							outmsg.setEcho(1);
-							String menuRef = MAIN_MENU_001;
-							Button oneBtn = createButton("", "oneBtnCBInWebView", 1, "RED", "White", null, null);
-
-							oneBtn.setButtonIcon("ic_ball_ic_24dp");
-							oneBtn.setButtonIconBgColor("#FFFF44");
-
-							Row firstRow = new Row();
-							firstRow.setRowOrder(1);
-							firstRow.setButtons(new Button[] { oneBtn });
-
-							Menu inlineMenu = new Menu();
-							inlineMenu.setMenuRef(menuRef);
-							inlineMenu.setRows(new Row[] { firstRow });
-							outmsg.setMenuRef(menuRef);
-							outmsg.setInlineMenu(new Menu[] { inlineMenu });
-							outmsg.setApp_id(incomingMsg.getAppId());
-							api.send(outmsg);
-
-						}
-
-						else if ("3bc".equalsIgnoreCase(incomingMsg.getText())) {
-
-							TextOutMessage outmsg = new TextOutMessage();
-							Long reference = getUniqueId();
-							outmsg.setChatId(incomingMsg.getChat().getId());
-							outmsg.setReference(reference);
-							outmsg.setText("https://edition.cnn.com/");
-							outmsg.setWebPagePreview(WEB_PREVIEW_INSTANCE_VIEW);
-
-							outmsg.setEcho(1);
-							String menuRef = MAIN_MENU_001;
-							Button oneBtn = createButton("Visit a Milestone", "oneBtnCBInWebView", 1, "Gray", "White",
-									null, null);
-							Button secondBtn = createButton("Cairo Porto Mall", "secondBtn", 1, "Gray", "White", null,
-									null);
-							Button thirdButton = createButton("Seven Stars Mall", "thirdBtn", 1, "Gray", "White", null,
-									null);
-							oneBtn.setButtonURL("https://edition.cnn.com/");
-
-							Row firstRow = new Row();
-							firstRow.setRowOrder(1);
-							firstRow.setButtons(new Button[] { oneBtn, secondBtn, thirdButton });
-							firstRow.setRowId(menuRef);
-
-							Menu inlineMenu = new Menu();
-							inlineMenu.setMenuId(menuRef);
-							inlineMenu.setMenuRef(menuRef);
-							inlineMenu.setMenuGroup(menuRef);
-							inlineMenu.setRows(new Row[] { firstRow });
-							outmsg.setMenuRef(menuRef);
-							outmsg.setInlineMenu(new Menu[] { inlineMenu });
-							api.send(outmsg);
-
-						}
-
-						else if ("buttonIcon".equalsIgnoreCase(incomingMsg.getText())) {
-
-							TextOutMessage outmsg = new TextOutMessage();
-							Long reference = getUniqueId();
-							outmsg.setChatId(incomingMsg.getChat().getId());
-							outmsg.setReference(reference);
-							outmsg.setText("https://edition.cnn.com/");
-							outmsg.setWebPagePreview(WEB_PREVIEW_INSTANCE_VIEW);
-
-							outmsg.setEcho(1);
-							String menuRef = MAIN_MENU_001;
-							Button oneBtn = createButton("RSS", "oneBtnCBInWebView", 1, "RED", "White", null, null);
-							oneBtn.setButtonIcon("ic_mood_bad_24dp");
-							oneBtn.setButtonIconBgColor("#FFFF44");
-							Button secondBtn = createButton("Calendar", "secondBtn", 1, "RED", "White", null, null);
-							secondBtn.setButtonIcon("ic_hourglass_full_24dp");
-							secondBtn.setButtonIconBgColor("White");
-							Button thirdButton = createButton("Feed", "thirdBtn", 1, "RED", "White", null, null);
-							thirdButton.setButtonIcon("ic_credit_card_24dp");
-							thirdButton.setButtonIconBgColor("Yellow");
-							thirdButton.setButtonURL("https://edition.cnn.com/");
-
-							Row firstRow = new Row();
-							firstRow.setRowOrder(1);
-							firstRow.setButtons(new Button[] { oneBtn, secondBtn, thirdButton });
-
-							Menu inlineMenu = new Menu();
-							inlineMenu.setMenuRef(menuRef);
-							inlineMenu.setRows(new Row[] { firstRow });
-							outmsg.setMenuRef(menuRef);
-							outmsg.setInlineMenu(new Menu[] { inlineMenu });
-							api.send(outmsg);
-
-						}
-
-						if ("3m".equalsIgnoreCase(incomingMsg.getText())) {
-
-							String chatId = incomingMsg.getChat().getId();
-
-							Utils.setNavigationButton(chatId, "mainMenu", api);
-
-							Button menuBtn1 = createButton("مصراوي", "mainCB", 1, "Gray", "Red", null, null);
-							menuBtn1.setButtonIcon("ic_smoke_free_24dp");
-							menuBtn1.setButtonIconBgColor("#00FFFF");
-							Button menuBtn2 = createButton("Funny", "funnyCB", 1, "Gray", "Red", null, null);
-							menuBtn2.setButtonIcon("ic_timeline_24dp");
-
-							Button menuBtn3 = createButton("Option", "optionCB", 1, "Gray", "Red", null, null);
-							menuBtn3.setButtonIcon("ic_pregnant_woman_24dp");
-							menuBtn3.setButtonIconBgColor("orange");
-
-							SetChatMenuOutMessage outmsg = new SetChatMenuOutMessage();
-
-							Row firstRow = new Row();
-							firstRow.setRowOrder(1);
-							firstRow.setButtons(new Button[] { menuBtn1, menuBtn2, menuBtn3 });
-
-							Menu chatMenu = new Menu();
-							String menuRef = "mainMenu";
-							chatMenu.setMenuRef(menuRef);
-							chatMenu.setRows(new Row[] { firstRow });
-
-							outmsg.setChatId(incomingMsg.getChat().getId());
-							outmsg.setMenus(new Menu[] { chatMenu });
-							outmsg.setApp_id(incomingMsg.getAppId());
-							api.send(outmsg);
-
-						}
-
 						else {
 							api.sendText(incomingMsg.getChat().getId(), incomingMsg.getText(),incomingMsg.getAppId());
 						}
@@ -750,18 +617,7 @@ public class MultipleTests {
 
 			}
 
-			private Button createButton(String label, String callback, int order, String bgColor, String txtColor,
-					String buttonQuery, String nextMenuRef) {
-				Button btn = new Button();
-				btn.setButtonLabel(label);
-				btn.setButtonOrder(order);
-				btn.setButtonCallBack(callback);
-				btn.setButtonBgColor(bgColor);
-				btn.setButtonTextColor(txtColor);
-				btn.setButtonQuery(buttonQuery);
-				btn.setNextMenu(nextMenuRef);
-				return btn;
-			}
+
 
 			@Override
 			public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback) {
@@ -881,7 +737,7 @@ public class MultipleTests {
 
 			@Override
 			public void onBlackListPattern(Pattern pattern) {
-				Menu menu = new Menu();
+
 
 			}
 

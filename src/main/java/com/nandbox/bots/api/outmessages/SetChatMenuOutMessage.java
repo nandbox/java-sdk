@@ -1,6 +1,5 @@
 package com.nandbox.bots.api.outmessages;
 
-import com.nandbox.bots.api.data.Menu;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -16,7 +15,7 @@ public class SetChatMenuOutMessage extends OutMessage {
 
 	private static final String KEY_MENU = "menus";
 
-	private Menu[] menus;
+	private JSONArray menus;
 
 	public SetChatMenuOutMessage() {
 		this.method = OutMessageMethod.setChatMenu;
@@ -26,12 +25,7 @@ public class SetChatMenuOutMessage extends OutMessage {
 	public JSONObject toJsonObject() {
 		JSONObject obj = super.toJsonObject();
 		if (menus != null) {
-			JSONArray menusArrayObj = new JSONArray();
-			for (int i = 0; i < menus.length; i++) {
-				menusArrayObj.add(menus[i].toJsonObject());
-			}
-
-			obj.put(KEY_MENU, menusArrayObj);
+			obj.put(KEY_MENU, menus);
 		}
 		return obj;
 	}
@@ -39,7 +33,7 @@ public class SetChatMenuOutMessage extends OutMessage {
 	/**
 	 * @return the menus
 	 */
-	public Menu[] getMenus() {
+	public JSONArray getMenus() {
 		return menus;
 	}
 
@@ -47,7 +41,7 @@ public class SetChatMenuOutMessage extends OutMessage {
 	 * @param menus
 	 *            the menus to set
 	 */
-	public void setMenus(Menu[] menus) {
+	public void setMenus(JSONArray menus) {
 		this.menus = menus;
 	}
 }
