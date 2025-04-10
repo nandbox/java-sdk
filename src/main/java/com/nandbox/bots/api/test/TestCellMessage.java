@@ -47,7 +47,7 @@ public class TestCellMessage {
 					String userId = incomingMsg.getFrom().getId();
 					String screenId = "menu1";
 					String cellId = "buttonwsoeowkgf";
-					long reference = 99555555220L;
+					String reference = "99555555220";
 					String text = "Testing Cells Feature";
 					
 					api.sendCellText(userId, screenId, cellId, text, reference);
@@ -127,7 +127,7 @@ public class TestCellMessage {
 			   }
 
 			   @Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user,String appId) {
 				
 			}
 	
@@ -147,7 +147,7 @@ public class TestCellMessage {
 			}
 	
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat,String appId) {
 				
 			}
 	

@@ -9,16 +9,16 @@ public class ProductItemResponse {
     private static final String KEY_REFERENCE= "reference";
 
         private ProductItem productItem;
-    private Long appId;
-    private Long reference;
+    private String appId;
+    private String reference;
         public ProductItemResponse() {}
 
         public ProductItemResponse(JSONObject obj) {
             this.appId =obj.get(KEY_APP_ID) != null
-                    ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                    : null;
+                    ? String.valueOf(obj.get(KEY_APP_ID))
+                    : "0";
             this.reference =obj.get(KEY_REFERENCE) != null
-                    ? Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)))
+                    ? String.valueOf(obj.get(KEY_REFERENCE))
                     : null;
             this.productItem = obj.get(KEY_DATA) != null ? new ProductItem((JSONObject) obj.get(KEY_DATA)) : null;
         }
@@ -39,14 +39,14 @@ public class ProductItemResponse {
         public ProductItem getProductItem() {
             return productItem;
         }
-    public Long getAppId(){
+    public String getAppId(){
         return appId;
     }
         public void setProductItem(ProductItem productItem) {
             this.productItem = productItem;
         }
 
-    public Long getReference() {
+    public String getReference() {
         return reference;
     }
 

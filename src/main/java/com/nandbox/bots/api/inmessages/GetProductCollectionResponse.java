@@ -13,8 +13,8 @@ public class GetProductCollectionResponse {
     private static final String KEY_REFERENCE = "reference";
 
     private List<CollectionProduct> collectionProducts;
-    private Long appId;
-    private Long reference;
+    private String appId;
+    private String reference;
     public GetProductCollectionResponse(JSONObject obj) {
         this.collectionProducts = new ArrayList<>();
         if (obj.containsKey(KEY_PRODUCTS)) {
@@ -25,10 +25,10 @@ public class GetProductCollectionResponse {
             }
         }
         this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                : null;
+                ? String.valueOf(obj.get(KEY_APP_ID))
+                : "0";
         this.reference =obj.get(KEY_REFERENCE) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)))
+                ? String.valueOf(obj.get(KEY_REFERENCE))
                 : null;
     }
 
@@ -57,15 +57,15 @@ public class GetProductCollectionResponse {
     public void setCollectionProducts(List<CollectionProduct> collectionProducts) {
         this.collectionProducts = collectionProducts;
     }
-    public Long getAppId(){
+    public String getAppId(){
         return appId;
     }
 
-    public Long getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public void setReference(Long reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 }

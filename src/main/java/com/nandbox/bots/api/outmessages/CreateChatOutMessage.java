@@ -14,7 +14,7 @@ public class CreateChatOutMessage extends OutMessage {
     private String type;
     private String title;
     private Integer isPublic;
-    private Long reference;
+    private String reference;
 
     public CreateChatOutMessage() {
         this.method = OutMessageMethod.createChat;
@@ -25,7 +25,7 @@ public class CreateChatOutMessage extends OutMessage {
     }
     public void setTitle(String title) { this.title=title; }
     public void setIsPublic(int isPublic) { this.isPublic=isPublic; }
-    public void setReference(long reference) { this.reference=reference; }
+    public void setReference(String reference) { this.reference=reference; }
     @Override
     public JSONObject toJsonObject(){
         JSONObject obj = super.toJsonObject();

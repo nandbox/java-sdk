@@ -37,7 +37,7 @@ public class ChatMenuCallback {
 	private String buttonCallback;
 	private String menuRef;
 	private JSONArray buttonData;
-	private Long appId;
+	private String appId;
 	ButtonQueryResult buttonQueryResult;
 
 	public ChatMenuCallback(JSONObject jsonObj) {
@@ -58,8 +58,8 @@ public class ChatMenuCallback {
 		this.date = Utils.getLong(obj.get(KEY_DATE));
 		this.buttonData = (JSONArray) obj.get(KEY_BUTTON_DATA);
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 	}
 
 	/**
@@ -231,11 +231,11 @@ public class ChatMenuCallback {
 		return buttonData;
 	}
 
-	public Long getAppId() {
+	public String getAppId() {
 		return appId;
 	}
 
-	public void setAppId(Long appId) {
+	public void setAppId(String appId) {
 		this.appId = appId;
 	}
 }

@@ -38,7 +38,7 @@ public class InlineMessageCallback {
 	private Chat chat;
 	private String buttonCallback;
 	ButtonQueryResult buttonQueryResult;
-	private Long appId;
+	private String appId;
 
 	public InlineMessageCallback(JSONObject jsonObj) {
 
@@ -57,8 +57,8 @@ public class InlineMessageCallback {
 
 		this.date = Utils.getLong(obj.get(KEY_DATE));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class InlineMessageCallback {
 	public User getFrom() {
 		return from;
 	}
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

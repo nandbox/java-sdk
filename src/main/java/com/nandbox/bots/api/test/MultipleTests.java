@@ -216,7 +216,7 @@ public class MultipleTests {
 						if (incomingMsg.getText().startsWith("Tab")) {
 							String tabId = incomingMsg.getText().split(" ")[1];
 							System.out.println("Tab ID is " + tabId);
-							Long reference = getUniqueId();
+							String reference = getUniqueId();
 							api.sendText(incomingMsg.getChat().getId(), "Your tab id is " + tabId, reference, null, null, null, null, null, null, tabId,incomingMsg.getAppId());
 							return;
 						} else if (incomingMsg.getText().equals("getMyProfile")) {
@@ -667,7 +667,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user,String appId) {
 				System.out.println("User Name : " + user.getName());
 				System.out.println("User Type : " + user.getType());
 			}
@@ -726,7 +726,7 @@ public class MultipleTests {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat,String appId) {
 				System.out.println("Chat Title : " + chat.getTitle());
 			}
 

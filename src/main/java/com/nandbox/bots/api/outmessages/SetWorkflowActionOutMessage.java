@@ -12,7 +12,7 @@ public class SetWorkflowActionOutMessage extends OutMessage{
     private String vappId;
     private String screenId;
     private String nextScreen;
-    private Long reference;
+    private String reference;
 
     public SetWorkflowActionOutMessage() {
         this.method = OutMessageMethod.setWorkflowAction;
@@ -20,7 +20,7 @@ public class SetWorkflowActionOutMessage extends OutMessage{
 
     public void setUserId(String userId) { this.userId = userId; }
     public void setVappId(String vappId) { this.vappId = vappId; }
-    public void setReference(long reference) { this.reference = reference; }
+    public void setReference(String reference) { this.reference = reference; }
     public void setScreenId(String screenId) { this.screenId = screenId; }
     public void setNextScreen(String nextScreen) { this.nextScreen = nextScreen; }
 

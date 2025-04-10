@@ -37,7 +37,7 @@ public class ChatMember {
 	private List<String> tags = new ArrayList<>();
 	private String accountType;
 	private String loginId;
-	private Long appId;
+	private String appId;
 	@SuppressWarnings("unchecked")
 	public ChatMember(JSONObject jsonObj) {
 
@@ -53,8 +53,8 @@ public class ChatMember {
 		this.loginId = (String) obj.get(KEY_LOGIN_ID);
 //		this.tags = (String) obj.get(KEY_TAGS);
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 
 
 
@@ -127,7 +127,7 @@ public class ChatMember {
 		this.memberSince = memberSince;
 	}
 
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

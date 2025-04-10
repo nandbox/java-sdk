@@ -17,8 +17,8 @@ public class ListCollectionItemResponse {
     private static final String KEY_BUSINESS_CHANNEL_ID = "business_channel_id";
 
     private List<Category> categories;
-    private Long appId;
-    private Long reference;
+    private String appId;
+    private String reference;
     private Long bussinessChannelId;
 
     public ListCollectionItemResponse(JSONObject obj) {
@@ -32,11 +32,11 @@ public class ListCollectionItemResponse {
         }
 
         this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.valueOf(Long.parseLong(String.valueOf(obj.get(KEY_APP_ID))))
-                :obj.get(KEY_MAIN_GROUP_ID) !=null?  Long.parseLong(String.valueOf(obj.get(KEY_MAIN_GROUP_ID))):null;
-        this.bussinessChannelId = obj.get(KEY_BUSINESS_CHANNEL_ID)!=null?Long.valueOf(Long.parseLong(String.valueOf(obj.get(KEY_BUSINESS_CHANNEL_ID)))) :this.appId;
+                ? String.valueOf(obj.get(KEY_APP_ID))
+                :obj.get(KEY_MAIN_GROUP_ID) !=null? String.valueOf(obj.get(KEY_MAIN_GROUP_ID)):"0";
+        this.bussinessChannelId = obj.get(KEY_BUSINESS_CHANNEL_ID)!=null?Long.valueOf(Long.parseLong(String.valueOf(obj.get(KEY_BUSINESS_CHANNEL_ID)))) : Long.valueOf(this.appId);
                 this.reference =obj.get(KEY_REF) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_REF)))
+                ? String.valueOf(obj.get(KEY_REF))
                 : null;
 
     }
@@ -68,7 +68,7 @@ public class ListCollectionItemResponse {
         return categories;
     }
 
-    public Long getReference() {
+    public String getReference() {
         return reference;
     }
 
@@ -80,18 +80,18 @@ public class ListCollectionItemResponse {
         this.bussinessChannelId = bussinessChannelId;
     }
 
-    public void setReference(Long reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
-    public void setAppId(Long appId) {
+    public void setAppId(String appId) {
         this.appId = appId;
     }
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
-    public Long getAppId(){
+    public String getAppId(){
         return appId;
     }
 }

@@ -13,13 +13,13 @@ public class Pattern {
     private static final String KEY_APP_ID = "app_id";
     private static final String KEY_REFERENCE = "reference";
     private List<Data> data = new ArrayList<>();
-    private Long appId;
+    private String appId;
     private Long chatId;
-    private Long reference;
+    private String reference;
     public Pattern(JSONObject obj) {
         this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                : 0;
+                ? String.valueOf(obj.get(KEY_APP_ID))
+                : "0";
         this.chatId =obj.get(KEY_CHATID) != null
                 ? Long.parseLong(String.valueOf(obj.get(KEY_CHATID)))
                 : 0;
@@ -29,8 +29,8 @@ public class Pattern {
             this.data.add(new Data((JSONObject) usersArrayObj.get(i)));
         }
         this.reference =obj.get(KEY_REFERENCE) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)))
-                : 0l;
+                ? String.valueOf(obj.get(KEY_REFERENCE))
+                : "0";
 
     }
     public JSONObject toJson(){

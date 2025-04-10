@@ -18,7 +18,7 @@ public class WorkflowDetails {
     private String screenId;
     private String userId;
     private String vappId;
-    private Long reference;
+    private String reference;
 
     public WorkflowDetails(JSONObject jsonObj) {
         JSONObject obj = (JSONObject) jsonObj.get(KEY_WORKFLOW_DETAILS);
@@ -36,7 +36,7 @@ public class WorkflowDetails {
         userId = (String) jsonObj.get(KEY_USER_ID);
         screenId = (String) jsonObj.get(KEY_SCREEN_ID);
         vappId = (String) jsonObj.get(KEY_VAPP_ID);
-        reference = (long) jsonObj.get(KEY_REFERENCE);
+        reference = (String) jsonObj.get(KEY_REFERENCE);
     }
 
     public JSONObject toJsonObject() {

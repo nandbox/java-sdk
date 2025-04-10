@@ -15,12 +15,12 @@ public class List_ak {
 
     private Boolean eop;
     private String[] users;
-    private Long appId;
-    private Long reference;
+    private String appId;
+    private String reference;
     public List_ak(JSONObject jsonObj) {
         this.appId =jsonObj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-                : 0;
+                ? String.valueOf(jsonObj.get(KEY_APP_ID))
+                : "0";
         this.eop = (Boolean) jsonObj.get(KEY_EOP);
         JSONArray usersArrayObj = (JSONArray) jsonObj.get(KEY_USERS);
         this.users = new String[usersArrayObj.size()];
@@ -28,8 +28,8 @@ public class List_ak {
             users[i] =(String) usersArrayObj.get(i);
         }
         this.reference =jsonObj.get(KEY_REFERENCE) != null
-                ? Long.parseLong(String.valueOf(jsonObj.get(KEY_REFERENCE)))
-                : 0l;
+                ?String.valueOf(jsonObj.get(KEY_REFERENCE))
+                : "0";
 
     }
 
@@ -62,11 +62,11 @@ public class List_ak {
         return eop;
     }
 
-    public Long getReference() {
+    public String getReference() {
         return reference;
     }
 
-    public void setReference(Long reference) {
+    public void setReference(String reference) {
         this.reference = reference;
     }
 
@@ -78,7 +78,7 @@ public class List_ak {
     public String[] getUsers() {
         return users;
     }
-    public Long getAppId(){
+    public String getAppId(){
         return appId;
     }
 

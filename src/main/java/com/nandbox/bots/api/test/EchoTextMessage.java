@@ -55,11 +55,11 @@ public class EchoTextMessage {
 					JSONArray arr = (JSONArray) parser.parse(menuJsonString);
 					UpdateMenuCell outmsg = new UpdateMenuCell();
 					outmsg.setAppId("90090684298937728");
-					outmsg.setApp_id(90090684298937728L);
+					outmsg.setApp_id("90090684298937728");
 					outmsg.setCells(arr);
 					outmsg.setMenuId("XPN97fuGgQyXy9f");
 					outmsg.setUserId("90089584766092404");
-					outmsg.setReference(19287119010L);
+					outmsg.setReference("19287119010");
 
 					api.send(outmsg);
 				}catch (Exception e){
@@ -147,7 +147,7 @@ public class EchoTextMessage {
 
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user,String appId) {
 				System.out.println(user.toJsonObject());
 			}
 
@@ -174,7 +174,7 @@ public class EchoTextMessage {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat,String appId) {
 				System.out.println(chat.toJsonObject());
 			}
 

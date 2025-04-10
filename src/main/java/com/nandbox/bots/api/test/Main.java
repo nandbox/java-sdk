@@ -108,7 +108,7 @@ public class Main {
 
 
             @Override
-            public void onUserDetails(User user,Long appId) {
+            public void onUserDetails(User user,String appId) {
 
             }
 
@@ -128,7 +128,7 @@ public class Main {
             }
 
             @Override
-            public void onChatDetails(Chat chat,Long appId) {
+            public void onChatDetails(Chat chat,String appId) {
 
             }
 

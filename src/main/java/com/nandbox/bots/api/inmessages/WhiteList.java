@@ -16,12 +16,12 @@ public class WhiteList {
 
 	private Boolean eop;
 	private SignupUser[] users;
-	private Long appId;
-	private Long reference;
+	private String appId;
+	private String reference;
 	public WhiteList(JSONObject jsonObj) {
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;
+				?String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 		this.eop = (Boolean) jsonObj.get(KEY_EOP);
 		JSONArray usersArrayObj = (JSONArray) jsonObj.get(KEY_USERS);
 		this.users = new SignupUser[usersArrayObj.size()];
@@ -29,8 +29,8 @@ public class WhiteList {
 			users[i] = new SignupUser((JSONObject) usersArrayObj.get(i));
 		}
 		this.reference =jsonObj.get(KEY_REFERENCE) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_REFERENCE)))
-				: 0l;
+				? String.valueOf(jsonObj.get(KEY_REFERENCE))
+				: "0";
 
 	}
 
@@ -65,11 +65,11 @@ public class WhiteList {
 		return eop;
 	}
 
-	public Long getReference() {
+	public String getReference() {
 		return reference;
 	}
 
-	public void setReference(Long reference) {
+	public void setReference(String reference) {
 		this.reference = reference;
 	}
 
@@ -81,7 +81,7 @@ public class WhiteList {
 	public SignupUser[] getUsers() {
 		return users;
 	}
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 

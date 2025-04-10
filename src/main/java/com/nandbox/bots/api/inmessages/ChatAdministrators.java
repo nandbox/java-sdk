@@ -15,13 +15,13 @@ public class ChatAdministrators {
 
 	private User[] administrators;
 	private Chat chat;
-	private Long appId;
+	private String appId;
 	public ChatAdministrators(JSONObject jsonObj) {
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_CHAT_ADMINISTRATORS);
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				:"0";
 		JSONArray adminArrayObj = (JSONArray) obj.get(KEY_ADMINISTRATORS);
 		if (adminArrayObj != null) {
 
@@ -70,7 +70,7 @@ public class ChatAdministrators {
 	public void setChat(Chat chat) {
 		this.chat = chat;
 	}
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

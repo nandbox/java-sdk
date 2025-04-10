@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class CollectionProduct {
     private long id;
     private Long businessChannelId;
-    private Long appId;
+    private String appId;
     private String name;
     private String category;
     private Double price;
@@ -23,7 +23,7 @@ public class CollectionProduct {
         this.status = (String) obj.get("status");
         this.category=(String) obj.get("category");
         this.businessChannelId = (Long) obj.get("business_channel_id");
-        this.appId = (Long) obj.get("app_id");
+        this.appId = (String) obj.get("app_id");
         this.image = ((List<JSONObject>) obj.get("image")).stream().map(Image::new).collect(Collectors.toList());
     }
 
@@ -39,11 +39,11 @@ public class CollectionProduct {
         return obj;
     }
 
-    public Long getAppId() {
+    public String getAppId() {
         return appId;
     }
 
-    public void setAppId(Long appId) {
+    public void setAppId(String appId) {
         this.appId = appId;
     }
 

@@ -52,10 +52,10 @@ public abstract class OutMessage {
 
 	protected OutMessageMethod method;
 	protected String chatId;
-	protected Long reference;
-	protected Long ref;
+	protected String reference;
+	protected String ref;
 
-	protected Long app_id;
+	protected String app_id;
 	protected String toUserId;
 	protected String replyToMessageId;
 	protected Integer webPagePreview;
@@ -143,11 +143,11 @@ public abstract class OutMessage {
 		return webPagePreview;
 	}
 
-	public void setRef(Long ref) {
+	public void setRef(String ref) {
 		this.ref = ref;
 	}
 
-	public Long getRef() {
+	public String getRef() {
 		return ref;
 	}
 
@@ -193,7 +193,7 @@ public abstract class OutMessage {
 	/**
 	 * @return the reference
 	 */
-	public Long getReference() {
+	public String getReference() {
 		return reference;
 	}
 
@@ -201,7 +201,7 @@ public abstract class OutMessage {
 	 * @param reference
 	 *            the reference to set
 	 */
-	public void setReference(Long reference) {
+	public void setReference(String reference) {
 		this.reference = reference;
 	}
 
@@ -214,15 +214,15 @@ public abstract class OutMessage {
 	/**
 	 * @return the app_Id
 	 */
-	public Long getApp_id() {
+	public String getApp_id() {
 		return app_id;
 	}
-	public void setApp_id(Long app_id) {
+	public void setApp_id(String app_id) {
 		if (app_id!=null){
 			this. app_id=app_id;
 
 		}else {
-			this.app_id=0l;
+			this.app_id="0";
 		}
 	}
 	/**

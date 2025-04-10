@@ -8,13 +8,13 @@ import net.minidev.json.JSONObject;
 public class ChatDetails {
 	private static final String KEY_CHAT = "chat";
 	private static final String KEY_APP_ID = "app_id";
-	private Long appId;
+	private String appId;
 	private Chat chat;
 
 	public ChatDetails(JSONObject obj) {
 		this.appId =obj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-				: 0;
+				? String.valueOf(obj.get(KEY_APP_ID))
+				: "0";
 		this.chat = new Chat((JSONObject) obj.get(KEY_CHAT));
 
 	}
@@ -71,7 +71,7 @@ public class ChatDetails {
 	}
 
 
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

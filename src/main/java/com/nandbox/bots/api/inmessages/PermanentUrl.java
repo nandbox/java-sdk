@@ -23,7 +23,7 @@ public class PermanentUrl {
 	private String file;
 	private String url;
 	private String param1;
-	private Long appId;
+	private String appId;
 
 	public PermanentUrl(JSONObject jsonObj) {
 
@@ -31,8 +31,8 @@ public class PermanentUrl {
 		this.setFile(String.valueOf(jsonObj.get(KEY_FILE)));
 		this.setParam1(String.valueOf(jsonObj.get(KEY_PARAM1)));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class PermanentUrl {
 	public String getFile() {
 		return file;
 	}
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

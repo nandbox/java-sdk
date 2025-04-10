@@ -183,7 +183,7 @@ public class SendWebLinksBot {
 			}
 
 			@Override
-			public void onUserDetails(User user,Long appId) {
+			public void onUserDetails(User user,String appId) {
 
 				System.out.println("USER ID = " + user.getId());
 			}
@@ -233,7 +233,7 @@ public class SendWebLinksBot {
 			}
 
 			@Override
-			public void onChatDetails(Chat chat,Long appId) {
+			public void onChatDetails(Chat chat,String appId) {
 				// TODO Auto-generated method stub
 				
 			}

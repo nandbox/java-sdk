@@ -72,8 +72,8 @@ public class Utils {
 		return nextVal;
 	}
 
-	public static long getUniqueId() {
-		return Long.parseLong(String.valueOf(Calendar.getInstance().getTimeInMillis()) + getNext());
+	public static String getUniqueId() {
+		return String.valueOf(Calendar.getInstance().getTimeInMillis()) + getNext();
 	}
 
 	public static String formatDate(Date date) {

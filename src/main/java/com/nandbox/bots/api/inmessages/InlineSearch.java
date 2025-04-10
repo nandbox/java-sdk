@@ -34,7 +34,7 @@ public class InlineSearch {
 	private Integer searchId;
 	private String offset;
 	private String keywords;
-	private Long appId;
+	private String appId;
 	public InlineSearch(JSONObject jsonObj) {
 
 		//System.out.println("json " + jsonObj.toJSONString());
@@ -49,8 +49,8 @@ public class InlineSearch {
 		this.offset = (String) obj.get(KEY_OFFSET);
 		this.keywords = String.valueOf(obj.get(KEY_KEYWORDS));
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class InlineSearch {
 	public Long getDate() {
 		return date;
 	}
-	public Long getAppId(){
+	public String getAppId(){
 		return appId;
 	}
 	/**

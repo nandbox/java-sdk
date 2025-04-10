@@ -70,8 +70,8 @@ public class ProductItem {
     private String category;
     private String status;
     private JSONArray option;
-    private Long appId;
-    private Long reference;
+    private String appId;
+    private String reference;
 
 
 
@@ -107,11 +107,11 @@ public class ProductItem {
         this.status = (String) obj.get(KEY_STATUS);
         this.option = (JSONArray) obj.get(KEY_OPTION);
         this.appId =obj.get(KEY_APP_ID) != null
-                ? Long.parseLong(String.valueOf(obj.get(KEY_APP_ID)))
-                : Long.parseLong(String.valueOf(obj.get(KEY_MAIN_GROUP_ID)));
+                ? String.valueOf(obj.get(KEY_APP_ID))
+                : String.valueOf(obj.get(KEY_MAIN_GROUP_ID));
         this.reference =obj.get(KEY_REFERENCE) != null
-                ? Long.valueOf(Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE))))
-                : obj.get(KEY_REF) != null ?Long.parseLong(String.valueOf(obj.get(KEY_REF))):null;
+                ? String.valueOf(obj.get(KEY_REFERENCE))
+                : obj.get(KEY_REF) != null ?String.valueOf(obj.get(KEY_REF)):null;
     }
 
     public JSONObject toJsonObject() {

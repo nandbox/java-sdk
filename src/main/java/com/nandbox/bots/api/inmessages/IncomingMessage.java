@@ -73,7 +73,7 @@ public class IncomingMessage {
 	private String messageId;
 	private String type;
 	private Long date;
-	private Long reference;
+	private String reference;
 	private User from;
 	private String replyToMessageId;
 	private String caption;
@@ -99,7 +99,7 @@ public class IncomingMessage {
 	private WhiteListUser whitelistUser;
 	private TagDefination tag;
 	private Long scheduleDate;
-	private Long appId;
+	private String appId;
 
 
 	public IncomingMessage(JSONObject jsonObj) {
@@ -126,7 +126,7 @@ public class IncomingMessage {
 		this.text = (String) obj.get(KEY_TEXT);
 		this.messageId = (String) obj.get(KEY_MESSAGE_ID);
 		this.date = Long.parseLong(String.valueOf(obj.get(KEY_DATE)));
-		this.reference = Long.parseLong(String.valueOf(obj.get(KEY_REFERENCE)));
+		this.reference = String.valueOf(obj.get(KEY_REFERENCE));
 		this.from = fromUser;
 		this.sentTo = sentToUser;
 		this.fromAdmin = (Utils.getInteger(obj.get(KEY_FROM_ADMIN)));
@@ -138,8 +138,8 @@ public class IncomingMessage {
 		this.chatSettings = Utils.getInteger(obj.get(KEY_CHAT_SETTINGS));
 		this.bgColor = (String) obj.get(KEY_BG_COLOR);
 		this.appId =jsonObj.get(KEY_APP_ID) != null
-				? Long.parseLong(String.valueOf(jsonObj.get(KEY_APP_ID)))
-				: 0;;
+				? String.valueOf(jsonObj.get(KEY_APP_ID))
+				: "0";
 
 		this.whitelistUser = obj.get(WHITELIST_USER) == null ? null
 				: new WhiteListUser((JSONObject) obj.get(WHITELIST_USER));
@@ -266,7 +266,7 @@ public class IncomingMessage {
 
 	}
 
-	public Long getAppId() {
+	public String getAppId() {
 		return appId;
 	}
 
@@ -320,7 +320,7 @@ public class IncomingMessage {
 	/**
 	 * @return the reference ( Unique local identifier for the target chat/user)
 	 */
-	public Long getReference() {
+	public String getReference() {
 		return reference;
 	}
 
@@ -329,7 +329,7 @@ public class IncomingMessage {
 	 *            the reference to set ( Unique local identifier for the target
 	 *            chat/user)
 	 */
-	public void setReference(Long reference) {
+	public void setReference(String reference) {
 		this.reference = reference;
 	}
 
