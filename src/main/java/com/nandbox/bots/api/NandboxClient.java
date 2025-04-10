@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.*;
+import net.minidev.json.JSONArray;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -776,19 +777,18 @@ public class NandboxClient {
 
 				/**
 				 * @param userId
-				 * @param screenId
-				 * @param workflowCell
+				 * @param menuId
+				 * @param cells
 				 * @param reference
 				 * @param disableNotification
 				 */
 				@Override
-				public void setWorkflow(String userId, String screenId,Long appId, List<WorkflowCell> workflowCell, Long reference, Boolean disableNotification) {
-					SetWorkflowOutMessage setWorkflowOutMessage = new SetWorkflowOutMessage();
+				public void updateMenuCell(String userId, String menuId, Long appId, JSONArray cells, Long reference, Boolean disableNotification) {
+					UpdateMenuCell setWorkflowOutMessage = new UpdateMenuCell();
 					setWorkflowOutMessage.setUserId(userId);
-					setWorkflowOutMessage.setScreenId(screenId);
-					setWorkflowOutMessage.setAppId(String.valueOf(appId));
+					setWorkflowOutMessage.setMenuId(menuId);
 					setWorkflowOutMessage.setApp_id(appId);
-					setWorkflowOutMessage.setWorkflowCell(workflowCell);
+					setWorkflowOutMessage.setCells(cells);
 					setWorkflowOutMessage.setReference(reference);
 					setWorkflowOutMessage.setDisableNotification(disableNotification);
 

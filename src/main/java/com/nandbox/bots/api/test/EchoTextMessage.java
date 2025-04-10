@@ -8,6 +8,7 @@ import com.nandbox.bots.api.inmessages.*;
 
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
+import com.nandbox.bots.api.outmessages.UpdateMenuCell;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -29,60 +30,38 @@ public class EchoTextMessage {
 			public void onConnect(Api api) {
 				System.out.println("Authenticated");
 				try {
-					SetChatMenuOutMessage setChatMenuOutMessage = new SetChatMenuOutMessage();
-					setChatMenuOutMessage.setChatId("90090684340969360");
-					setChatMenuOutMessage.setApp_id(90090684298937728L);
-					SetNavigationButtonOutMessage nv = new SetNavigationButtonOutMessage();
-
-
-					String jsonString = "[\n" +
-							"  {\n" +
-							"    \"menu_id\": \"XPN97fuGgQyXy9f\",\n" +
-							"    \"cat\": \"menu\",\n" +
-							"    \"menu_name\": \"First Menu\",\n" +
-							"    \"menu_group\": \"xrDiQUheNzMpOwQ\",\n" +
-							"    \"menu_version\": \"23xg7aYtxWbvPpwK\",\n" +
-							"    \"menu_order\": 0,\n" +
-							"    \"rows\": [\n" +
-							"      {\n" +
-							"        \"row_id\": \"r_0ga0Jla7UGw4dQi\",\n" +
-							"        \"row_order\": 0,\n" +
-							"        \"menu_id\": \"XPN97fuGgQyXy9f\",\n" +
-							"        \"cells\": [\n" +
-							"          {\n" +
-							"            \"cell_id\": \"b_Hw1zp6f57YzU1NA\",\n" +
-							"            \"form\": \"button\",\n" +
-							"            \"style\": \"filled\",\n" +
-							"            \"cell_order\": 0,\n" +
-							"            \"version\": \"s83V6bGzaJIaYFZl\",\n" +
-							"            \"callback\": \"b_Hw1zp6f57YzU1NA\",\n" +
-							"            \"label\": \"Filled\"\n" +
-							"          },\n" +
-							"          {\n" +
-							"            \"cell_id\": \"b_uu1zq6Vo9jt3j9H\",\n" +
-							"            \"form\": \"button\",\n" +
-							"            \"style\": \"filled\",\n" +
-							"            \"cell_order\": 1,\n" +
-							"            \"version\": \"tSQhFcU0ZAEDciHc\",\n" +
-							"            \"callback\": \"b_uu1zq6Vo9jt3j9H\",\n" +
-							"            \"label\": \"Filled\"\n" +
-							"          }\n" +
-							"        ],\n" +
-							"        \"row_version\": \"r_0ga0Jla7UGw4dQi\"\n" +
-							"      }\n" +
-							"    ]\n" +
-							"  }\n" +
-							"]";
+				String menuJsonString = "[\n" +
+						"  {\n" +
+						"    \"cell_id\": \"b_cgZLTq1q9YNijkm\",\n" +
+						"    \"form\": \"card\",\n" +
+						"    \"style\": \"centered\",\n" +
+						"    \"cell_order\": 0,\n" +
+						"    \"version\": \"l2Wlizo73HR2LGNQ\",\n" +
+						"    \"callback\": \"b_cgZLTq1q9YNijkm\",\n" +
+						"    \"headline\": \"Testing\",\n" +
+						"    \"subhead\": \"Subhead 123\",\n" +
+						"    \"image\": \"https://nandbox.com/wp-content/uploads/2022/12/yoga.webp\",\n" +
+						"    \"font_size\": {\n" +
+						"      \"headline\": \"md\",\n" +
+						"      \"subhead\": \"md\"\n" +
+						"    },\n" +
+						"    \"text_align\": {\n" +
+						"      \"headline\": \"center\",\n" +
+						"      \"subhead\": \"center\"\n" +
+						"    }\n" +
+						"  }\n" +
+						"]";
 					JSONParser parser = new JSONParser(-1);
-					JSONArray arr = (JSONArray) parser.parse(jsonString);
-					nv.setChatId("90090684340969360");
-					nv.setApp_id(90090684298937728L);
-					nv.setNavigation_button("XPN97fuGgQyXy9f");
-					api.send(nv);
-					setChatMenuOutMessage.setMenus(arr);
-					setChatMenuOutMessage.setReference(1234L);
-					setChatMenuOutMessage.setEcho(1);
-					api.send(setChatMenuOutMessage);
+					JSONArray arr = (JSONArray) parser.parse(menuJsonString);
+					UpdateMenuCell outmsg = new UpdateMenuCell();
+					outmsg.setAppId("90090684298937728");
+					outmsg.setApp_id(90090684298937728L);
+					outmsg.setCells(arr);
+					outmsg.setMenuId("XPN97fuGgQyXy9f");
+					outmsg.setUserId("90089584766092404");
+					outmsg.setReference(19287119010L);
+
+					api.send(outmsg);
 				}catch (Exception e){
 
 				}

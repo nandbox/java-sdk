@@ -1,42 +1,34 @@
 package com.nandbox.bots.api.outmessages;
 
-import com.nandbox.bots.api.data.WorkflowCell;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SetWorkflowOutMessage extends OutMessage {
+public class UpdateMenuCell extends OutMessage {
     private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_SCREEN_ID = "screen_id";
-    private static final String KEY_WORKFLOW_CELL = "workflow_cell";
+    private static final String KEY_MENU_ID = "menu_id";
+    private static final String KEY_CELLS = "cells";
     private static final String KEY_APP_ID = "app_id";
     private static final String KEY_DISABLE_NOTIFICATION = "disable_notification";
 
     private String userId;
     private String appId;
-    private String screenId;
-    private List<WorkflowCell> workflowCell = new ArrayList<>();
+    private String menuId;
+    private JSONArray cells = new JSONArray();
     private Boolean disableNotification;
 
-    public SetWorkflowOutMessage() {
-        this.method = OutMessageMethod.setWorkflow;
+    public UpdateMenuCell() {
+        this.method = OutMessageMethod.updateMenuCell;
     }
 
     @Override
     public JSONObject toJsonObject() {
         JSONObject obj = super.toJsonObject();
-        JSONArray workflowCells = new JSONArray();
 
-        for (int i = 0; i < workflowCell.size(); i++) {
-            workflowCells.add(workflowCell.get(i).toJsonObject());
-        }
-        obj.put(KEY_WORKFLOW_CELL, workflowCells);
+
+        obj.put(KEY_CELLS, cells);
         obj.put(KEY_USER_ID, userId);
-        obj.put(KEY_SCREEN_ID, screenId);
+        obj.put(KEY_MENU_ID, menuId);
         obj.put(KEY_APP_ID, appId);
-        obj.put(KEY_DISABLE_NOTIFICATION, disableNotification);
 
         return obj;
     }
@@ -57,20 +49,20 @@ public class SetWorkflowOutMessage extends OutMessage {
         this.appId = appId;
     }
 
-    public String getScreenId() {
-        return screenId;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setScreenId(String screenId) {
-        this.screenId = screenId;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 
-    public List<WorkflowCell> getWorkflowCell() {
-        return workflowCell;
+    public JSONArray getCells() {
+        return cells;
     }
 
-    public void setWorkflowCell(List<WorkflowCell> workflowCell) {
-        this.workflowCell = workflowCell;
+    public void setCells(JSONArray cells) {
+        this.cells = cells;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class SetWorkflow {
                 List<WorkflowCell> arr = new ArrayList<>();
                 arr.add(cell);
 
-                api.setWorkflow(userId,screenId, appId,arr,123456789L,false);
+                api.updateMenuCell(userId,screenId, appId,new JSONArray(),123456789L,false);
             }
 
             @Override

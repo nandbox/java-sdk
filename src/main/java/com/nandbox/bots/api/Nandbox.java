@@ -6,6 +6,7 @@ import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.OutMessage;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 /**
@@ -1095,7 +1096,7 @@ public final class Nandbox {
 
 		void addWhiteList(List<WhiteListUser> whiteListUsers,Long appId,Long reference);
 
-		void setWorkflow(String userId , String screenId,Long appId, List<WorkflowCell> workflowCell,Long reference,Boolean disableNotification);
+		void updateMenuCell(String userId , String menuId, Long appId, JSONArray cells, Long reference, Boolean disableNotification);
 		void setWorkflowAction(String userId ,String vappId, String screenId,String nextScreen,Long reference,Long appId);
 		void createChat(String type,String title, int isPublic,long reference,Long appId);
 		void addChatMember(long chatId, long userId,Long appId);
