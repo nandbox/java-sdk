@@ -870,8 +870,7 @@ public final class Nandbox {
 		 *            Id of Target user to receive updated message
 		 * @param chatId
 		 *            Id of Target Group or Channel id
-		 * @param tab 
-		 * 			tab ID to which you want to send the message               
+		 * 			tab ID to which you want to send the message
 		 */
 		void updateMessage(String messageId, String text, String caption, String toUserId, String chatId, Long appId);
 
@@ -888,7 +887,6 @@ public final class Nandbox {
 		 *            The new message text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
-		 * @param tab
 		 * 			tab ID to which you want to send the message
 		 *
 		 */
@@ -901,8 +899,7 @@ public final class Nandbox {
 		 *            The new caption text
 		 * @param toUserId
 		 *            Id of Target user to receive updated message
-		 * @param tab 
-		 * 			tab ID to which you want to send the message               
+		 * 			tab ID to which you want to send the message
 		 */
 		void updateMediaCaption(String messageId, String caption, String toUserId,Long appId);
 
@@ -913,8 +910,7 @@ public final class Nandbox {
 		 *            The new message text
 		 * @param chatId
 		 *            Id of Target Group or Channel id
-		 * @param tab 
-		 * 			tab ID to which you want to send the message               
+		 * 			tab ID to which you want to send the message
 		 */
 		void updateChatMsg(String messageId, String text, String chatId,Long appId);
 
@@ -925,8 +921,7 @@ public final class Nandbox {
 		 *            The new caption text
 		 * @param chatId
 		 *            Id of Target Group or Channel id
-		 * @param tab 
-		 * 			tab ID to which you want to send the message                
+		 * 			tab ID to which you want to send the message
 		 */
 		void updateChatMediaCaption(String messageId, String caption, String chatId,Long appId);
 		
