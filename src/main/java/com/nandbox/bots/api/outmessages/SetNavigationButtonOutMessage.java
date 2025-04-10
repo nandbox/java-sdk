@@ -13,9 +13,9 @@ import net.minidev.json.JSONObject;
  */
 public class SetNavigationButtonOutMessage extends OutMessage {
 
-	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_buttons";
+	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_button";
 
-	private JSONArray navigationButtons;
+	private String navigation_button;
 
 	public SetNavigationButtonOutMessage() {
 		this.method = OutMessageMethod.setNavigationButton;
@@ -25,19 +25,19 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 	public JSONObject toJsonObject() {
 
 		JSONObject obj = super.toJsonObject();
-		if (navigationButtons != null) {
+		if (navigation_button != null) {
 
-			obj.put(KEY_NAVIGATION_BUTTONS, navigationButtons);
+			obj.put(KEY_NAVIGATION_BUTTONS, navigation_button);
 		}
 		return obj;
 	}
 
-	public JSONArray getNavigationButtons() {
-		return navigationButtons;
+	public String getNavigation_button() {
+		return navigation_button;
 	}
 
-	public void setNavigationButtons(JSONArray navigationButtons) {
-		this.navigationButtons = navigationButtons;
+	public void setNavigation_button(String navigation_button) {
+		this.navigation_button = navigation_button;
 	}
 
 

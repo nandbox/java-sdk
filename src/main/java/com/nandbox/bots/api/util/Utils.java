@@ -41,25 +41,25 @@ public class Utils {
 		return durationInMinsAndSeconds;
 	}
 
-	public static void setNavigationButton(String chatId, String nextMenu, Api api, JSONArray buttons) {
+	public static void setNavigationButton(String chatId, String nextMenu, Api api, String buttons) {
 
 
 		SetNavigationButtonOutMessage navMsg = new SetNavigationButtonOutMessage();
 
 		navMsg.setChatId(chatId);
-		navMsg.setNavigationButtons(buttons);
+		navMsg.setNavigation_button(buttons);
 
 		api.send(navMsg);
 
 	}
 
-	public static void setAdminNavigationButton(String chatId, String nextMenu, Api api, JSONArray buttons) {
+	public static void setAdminNavigationButton(String chatId, String nextMenu, Api api, String buttons) {
 
 
 		SetNavigationButtonOutMessage navMsg = new SetNavigationButtonOutMessage();
 
 		navMsg.setChatId(chatId);
-		navMsg.setNavigationButtons(buttons);
+		navMsg.setNavigation_button(buttons);
 
 		api.send(navMsg);
 
