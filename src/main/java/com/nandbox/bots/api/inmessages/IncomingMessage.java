@@ -67,7 +67,7 @@ public class IncomingMessage {
 	private static final String KEY_URL = "url";
 	private static final String KEY_SCHEDULE_DATE = "schedule_date";
 	private static final String KEY_APP_ID = "app_id";
-
+	private static final String KEY_TAB = "tab";
 	// private static final String KEY_TAG= "tagsDefinition";
 
 	private String messageId;
@@ -100,6 +100,7 @@ public class IncomingMessage {
 	private TagDefination tag;
 	private Long scheduleDate;
 	private String appId;
+	private String tab;
 
 
 	public IncomingMessage(JSONObject jsonObj) {
@@ -147,6 +148,9 @@ public class IncomingMessage {
 		// : null;
 		this.scheduleDate = obj.get(KEY_SCHEDULE_DATE) != null
 				? Long.parseLong(String.valueOf(obj.get(KEY_SCHEDULE_DATE)))
+				: null;
+		this.tab = obj.get(KEY_TAB) != null
+				? String.valueOf(obj.get(KEY_TAB))
 				: null;
 
 	}
@@ -255,6 +259,9 @@ public class IncomingMessage {
 		}
 		if (appId != null) {
 			obj.put(KEY_APP_ID, appId);
+		}
+		if (tab != null) {
+			obj.put(KEY_TAB, tab);
 		}
 
 		// if (tag != null) {
