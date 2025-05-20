@@ -683,6 +683,14 @@ public class IncomingMessage {
 		return isMsgWithType(MessageType.contact);
 	}
 
+	public String getTab() {
+		return tab;
+	}
+
+	public void setTab(String tab) {
+		this.tab = tab;
+	}
+
 	private boolean isMsgWithType(MessageType msgType) {
 
 		return msgType.toString().equals(this.getType());
