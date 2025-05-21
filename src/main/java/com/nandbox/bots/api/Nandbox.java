@@ -300,7 +300,7 @@ public final class Nandbox {
 		 * 
 		 */
 		public void sendText(String chatId, String text, String reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor, String tab,String appId);
+				Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String bgColor, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -369,7 +369,7 @@ public final class Nandbox {
 		 */
 		public void sendPhoto(String chatId, String photoFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab,String appId);
+				Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -428,7 +428,7 @@ public final class Nandbox {
 		 */
 		public void sendVideo(String chatId, String videoFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab,String appId);
+				Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -494,7 +494,7 @@ public final class Nandbox {
 		 */
 		public void sendAudio(String chatId, String audioFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String performer,
-				String title, Integer chatSettings, String tab,String appId);
+				String title, Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -550,7 +550,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendContact(String chatId, String phoneNumber, String name, String reference, String replyToMessageId,
-				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String tab,String appId);
+				String toUserId, Integer webPagePreview, Boolean disableNotification, Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -612,7 +612,7 @@ public final class Nandbox {
 		 */
 		public void sendVoice(String chatId, String voiceFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, Long size,
-				Integer chatSettings, String tab,String appId);
+				Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -675,7 +675,7 @@ public final class Nandbox {
 		 */
 		public void sendDocument(String chatId, String documentFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption, String name,
-				Integer size, Integer chatSettings, String tab,String appId);
+				Integer size, Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -736,7 +736,7 @@ public final class Nandbox {
 		 */
 		public void sendlocation(String chatId, String latitude, String longitude, String reference,
 				String replyToMessageId, String toUserId, Integer webPagePreview, Boolean disableNotification,
-				String name, String details, Integer chatSettings, String tab,String appId);
+				String name, String details, Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -796,7 +796,7 @@ public final class Nandbox {
 		 * 			tab ID to which you want to send the message           
 		 */
 		public void sendGIF(String chatId, String gifFileId, String reference, String replyToMessageId, String toUserId,
-				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab,String appId);
+				Integer webPagePreview, Boolean disableNotification, String caption, Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * @param chatId
@@ -855,7 +855,7 @@ public final class Nandbox {
 		 */
 		public void sendGIFVideo(String chatId, String gifFileId, String reference, String replyToMessageId,
 				String toUserId, Integer webPagePreview, Boolean disableNotification, String caption,
-				Integer chatSettings, String tab,String appId);
+				Integer chatSettings, String tab,String[] tags,String appId);
 
 		/**
 		 * Use this message to update existing Message sent

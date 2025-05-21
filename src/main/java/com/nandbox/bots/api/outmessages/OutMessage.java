@@ -49,6 +49,7 @@ public abstract class OutMessage {
 	protected static final String KEY_STYLE = "style";
 	protected static final String KEY_SCHEDULE_DATE = "schedule_date";
 	protected static final String KEY_TAB = "tab";
+	protected static final String KEY_TAG = "tag";
 
 	protected OutMessageMethod method;
 	protected String chatId;
@@ -67,6 +68,7 @@ public abstract class OutMessage {
 	private Integer chatSettings;
 	private Long scheduleDate;
 	private String tab;
+	private String[] tag;
 
 
 	public JSONObject toJsonObject() {
@@ -133,6 +135,9 @@ public abstract class OutMessage {
 		if (tab != null) {
 			obj.put(KEY_TAB, tab);
 		}
+		if (tag!=null&&tag.length>0){
+			obj.put(KEY_TAG,tag);
+		}
 		return obj;
 	}
 
@@ -146,6 +151,15 @@ public abstract class OutMessage {
 	public void setRef(String ref) {
 		this.ref = ref;
 	}
+
+	public String[] getTag() {
+		return tag;
+	}
+
+	public void setTag(String[] tag) {
+		this.tag = tag;
+	}
+
 
 	public String getRef() {
 		return ref;

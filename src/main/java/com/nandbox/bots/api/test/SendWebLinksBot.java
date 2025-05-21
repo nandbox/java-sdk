@@ -88,14 +88,14 @@ public class SendWebLinksBot {
 								if ("larg".equalsIgnoreCase(format))
 								{
 									for (int i = 0; i < msgsCount; i++) {
-										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, getRendomColorString(), null,incomingMsg.getAppId());
+										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, getRendomColorString(), null,null,incomingMsg.getAppId());
 										Thread.sleep(500);
 									}
 								}
 								else
 								{
 									for (int i = 0; i < msgsCount; i++) {
-										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, null, null,incomingMsg.getAppId());
+										api.sendText(chatId, String.valueOf(i+1), Utils.getUniqueId(), null, null, null, null, null, null, null,null,incomingMsg.getAppId());
 									}
 								}
 								
