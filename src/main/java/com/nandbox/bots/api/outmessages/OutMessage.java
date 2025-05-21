@@ -49,7 +49,7 @@ public abstract class OutMessage {
 	protected static final String KEY_STYLE = "style";
 	protected static final String KEY_SCHEDULE_DATE = "schedule_date";
 	protected static final String KEY_TAB = "tab";
-	protected static final String KEY_TAG = "tag";
+	protected static final String KEY_TAG = "tags";
 
 	protected OutMessageMethod method;
 	protected String chatId;
