@@ -791,7 +791,7 @@ public class NandboxClient {
 					UpdateMenuCell setWorkflowOutMessage = new UpdateMenuCell();
 					setWorkflowOutMessage.setUserId(userId);
 					setWorkflowOutMessage.setMenuId(menuId);
-					setWorkflowOutMessage.setApp_id(appId);
+					setWorkflowOutMessage.setAppId(appId);
 					setWorkflowOutMessage.setCells(cells);
 					setWorkflowOutMessage.setReference(reference);
 					setWorkflowOutMessage.setDisableNotification(disableNotification);
