@@ -7,7 +7,7 @@
 
 	<groupId>com.nandbox.bots.api</groupId>
 	<artifactId>bots-api</artifactId>
-	<version>1.5.3</version>
+	<version>1.5.4</version>
 
 	<name>nandboxbots-api</name>
 	<url>https://botapi.nandbox.com</url>

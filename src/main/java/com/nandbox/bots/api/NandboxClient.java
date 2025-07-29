@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import com.nandbox.bots.api.data.*;
@@ -53,6 +55,17 @@ public class NandboxClient {
 	private static String BOT_ID = null;
 	private static NandboxClient nandboxClient;
 	private WebSocketClient webSocketClient;
+	private static final Properties configs = getConfigs();
+	private static final int CORE_POOL_SIZE = Integer.parseInt(configs.getProperty("corePoolSize", "10"));
+	private static final int MAX_POOL_SIZE = Integer.parseInt(configs.getProperty("maximumPoolSize", "10"));
+	private static final long KEEP_ALIVE_TIME = Long.parseLong(configs.getProperty("keepAliveTime", "500"));
+	private static final ThreadPoolExecutor messageThreadPool =
+			new ThreadPoolExecutor(
+					CORE_POOL_SIZE, // corePoolSize
+					MAX_POOL_SIZE, // maximumPoolSize
+					KEEP_ALIVE_TIME, TimeUnit.SECONDS,
+					new LinkedBlockingQueue<Runnable>()
+			);
 	int closingCounter = 0;
 	int timeOutCounter = 0;
 	int connRefusedCounter = 0;
@@ -91,6 +104,7 @@ public class NandboxClient {
 		private static final String KEY_ID = "ID";
 		private static final String KEY_REFERENCE = "reference";
 		private static final String KEY_APP_ID = "app_id";
+
 
 		Nandbox.Callback callback;
 		Session session;
@@ -1031,172 +1045,175 @@ public class NandboxClient {
 
 		@OnWebSocketMessage
 		public void onUpdate(String msg) {
-			User user;
-			String appId;
-			lastMessage = System.currentTimeMillis();
-			//System.out.println("INTERNAL: ONMESSAGE");
-			NandboxClient.log.info("INTERNAL: ONMESSAGE");
-			JSONObject obj = (JSONObject) JSONValue.parse(msg);
-			//System.out.println(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
-			NandboxClient.log.info(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
-			String method = (String) obj.get(KEY_METHOD);
-			if (method != null) {
-				//System.err.println("method: " + method);
-				NandboxClient.log.info("method: " + method);
-				switch (method) {
-				case "TOKEN_AUTH_OK":
-					System.out.println("Authenticated!");
-					NandboxClient.log.info("Authenticated!");
-					authenticated = true;
-					BOT_ID = String.valueOf(obj.get(KEY_ID));
-					System.err.println("====> Your Bot Id is : " + BOT_ID);
-					System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
-					NandboxClient.log.info("====> Your Bot Id is : " + BOT_ID);
-					NandboxClient.log.info("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
-					if (pingThread != null) {
-						try {
-							pingThread.interrupt();
-						} catch (Exception e) {
-							//System.err.println(e);
-							NandboxClient.log.error(e);
-						}
+			messageThreadPool.execute(()->{
+				User user;
+				String appId;
+				lastMessage = System.currentTimeMillis();
+				//System.out.println("INTERNAL: ONMESSAGE");
+				NandboxClient.log.info("INTERNAL: ONMESSAGE");
+				JSONObject obj = (JSONObject) JSONValue.parse(msg);
+				//System.out.println(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
+				NandboxClient.log.info(formatDate(new Date()) + " >>>>>>>>> Update Obj : " + obj);
+				String method = (String) obj.get(KEY_METHOD);
+				if (method != null) {
+					//System.err.println("method: " + method);
+					NandboxClient.log.info("method: " + method);
+					switch (method) {
+						case "TOKEN_AUTH_OK":
+							System.out.println("Authenticated!");
+							NandboxClient.log.info("Authenticated!");
+							authenticated = true;
+							BOT_ID = String.valueOf(obj.get(KEY_ID));
+							System.err.println("====> Your Bot Id is : " + BOT_ID);
+							System.err.println("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
+							NandboxClient.log.info("====> Your Bot Id is : " + BOT_ID);
+							NandboxClient.log.info("====> Your Bot Name is : " + (String) obj.get(KEY_NAME));
+							if (pingThread != null) {
+								try {
+									pingThread.interrupt();
+								} catch (Exception e) {
+									//System.err.println(e);
+									NandboxClient.log.error(e);
+								}
+							}
+							pingThread = null;
+							pingThread = new PingThread();
+							pingThread.setName("PingThread");
+							pingThread.start();
+							callback.onConnect(api);
+							return;
+						case "message":
+							IncomingMessage incomingMsg = new IncomingMessage(obj);
+							callback.onReceive(incomingMsg);
+							return;
+						case "getProductItemResponse":
+							System.out.println(obj.toJSONString());
+							ProductItemResponse productItem = new ProductItemResponse(obj);
+							callback.onProductDetail(productItem);
+							return;
+						case "scheduledMessage":
+							IncomingMessage incomingScheduleMsg = new IncomingMessage(obj);
+							callback.onScheduleMessage(incomingScheduleMsg);
+							return;
+						case "chatMenuCallback":
+							ChatMenuCallback chatMenuCallback = new ChatMenuCallback(obj);
+							callback.onChatMenuCallBack(chatMenuCallback);
+							return;
+						case "inlineMessageCallback":
+							InlineMessageCallback inlineMsgCallback = new InlineMessageCallback(obj);
+							callback.onInlineMessageCallback(inlineMsgCallback);
+							return;
+						case "inlineSearch":
+							InlineSearch inlineSearch = new InlineSearch(obj);
+							callback.onInlineSearh(inlineSearch);
+							return;
+						case "getCollectionProductResponse":
+							GetProductCollectionResponse getProductCollectionResponse = new GetProductCollectionResponse(obj);
+							callback.onCollectionProduct(getProductCollectionResponse);
+							return;
+						case "messageAck":
+							MessageAck msgAck = new MessageAck(obj);
+							callback.onMessagAckCallback(msgAck);
+							return;
+						case "userJoinedBot":
+							user = new User((JSONObject) obj.get(KEY_USER));
+							callback.onUserJoinedBot(user);
+							return;
+						case "chatMember":
+							ChatMember chatMember = new ChatMember(obj);
+							callback.onChatMember(chatMember);
+							return;
+						case "createChatAck":
+							Chat chatObj = new Chat((JSONObject) obj.get(KEY_CHAT));
+							chatObj.setReference((String) obj.get(KEY_REFERENCE));
+							callback.onCreateChat(chatObj);
+							return;
+						case "myProfile":
+							user = new User((JSONObject) obj.get(KEY_USER));
+
+							callback.onMyProfile(user);
+							return;
+						case "userDetails":
+							user = new User((JSONObject) obj.get(KEY_USER));
+							appId = String.valueOf(obj.get(KEY_APP_ID));
+
+							callback.onUserDetails(user,appId);
+							return;
+						case "listCollectionsResponse":
+							ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
+							callback.listCollectionItemResponse(listCollectionItemResponse);
+							return ;
+						case "chatDetails":
+							Chat chat = new Chat((JSONObject) obj.get(KEY_CHAT));
+							appId = String.valueOf(obj.get(KEY_APP_ID));
+							callback.onChatDetails(chat,appId);
+							return;
+						case "chatAdministrators":
+							ChatAdministrators chatAdministrators = new ChatAdministrators(obj);
+							callback.onChatAdministrators(chatAdministrators);
+							return;
+						case "userStartedBot":
+							user = new User((JSONObject) obj.get(KEY_USER));
+							callback.userStartedBot(user);
+							return;
+						case "userStoppedBot":
+							user = new User((JSONObject) obj.get(KEY_USER));
+							callback.userStoppedBot(user);
+							return;
+						case "userLeftBot":
+							user = new User((JSONObject) obj.get(KEY_USER));
+							callback.userLeftBot(user);
+							return;
+						case "addBlacklistPatterns_ack":
+						case "deleteBlacklistPatterns_ack":
+							Pattern blackListpattern = new Pattern(obj);
+							callback.onBlackListPattern(blackListpattern);
+							return;
+						case "deleteWhitelistPatterns_ack":
+						case "addWhitelistPatterns_ack":
+							Pattern deletedWhiteListpattern = new Pattern(obj);
+							callback.onWhiteListPattern(deletedWhiteListpattern);
+							return;
+						case "removeFromBlacklist_ack":
+							List_ak blackListAk=new List_ak(obj);
+							callback.onDeleteBlackList(blackListAk);
+							return;
+						case "addToBlacklist_ack":
+						case "getBlacklistUsersResponse":
+						case "blacklist":
+							BlackList blackList = new BlackList(obj);
+							callback.onBlackList(blackList);
+							return;
+						case "removeFromWhitelist_ack":
+							List_ak whiteListAk=new List_ak(obj);
+							callback.onDeleteWhiteList(whiteListAk);
+							return;
+						case "addToWhitelist_ack":
+						case "getWhitelistUsersResponse":
+						case "whitelist":
+							WhiteList whiteList = new WhiteList(obj);
+							callback.onWhiteList(whiteList);
+							return;
+						case "permanentUrl":
+							PermanentUrl permenantURL = new PermanentUrl(obj);
+							callback.permanentUrl(permenantURL);
+							return;
+						case "workflowCell":
+							WorkflowDetails workflowDetails = new WorkflowDetails(obj);
+							callback.onWorkflowDetails(workflowDetails);
+							return;
+						default:
+							callback.onReceive(obj);
+							return;
 					}
-					pingThread = null;
-					pingThread = new PingThread();
-					pingThread.setName("PingThread");
-					pingThread.start();
-					callback.onConnect(api);
-					return;
-				case "message":
-					IncomingMessage incomingMsg = new IncomingMessage(obj);
-					callback.onReceive(incomingMsg);
-					return;
-				case "getProductItemResponse":
-					System.out.println(obj.toJSONString());
-					ProductItemResponse productItem = new ProductItemResponse(obj);
-					callback.onProductDetail(productItem);
-					return;
-				case "scheduledMessage":
-					IncomingMessage incomingScheduleMsg = new IncomingMessage(obj);
-					callback.onScheduleMessage(incomingScheduleMsg);
-					return;
-				case "chatMenuCallback":
-					ChatMenuCallback chatMenuCallback = new ChatMenuCallback(obj);
-					callback.onChatMenuCallBack(chatMenuCallback);
-					return;
-				case "inlineMessageCallback":
-					InlineMessageCallback inlineMsgCallback = new InlineMessageCallback(obj);
-					callback.onInlineMessageCallback(inlineMsgCallback);
-					return;
-				case "inlineSearch":
-					InlineSearch inlineSearch = new InlineSearch(obj);
-					callback.onInlineSearh(inlineSearch);
-					return;
-				case "getCollectionProductResponse":
-					GetProductCollectionResponse getProductCollectionResponse = new GetProductCollectionResponse(obj);
-					callback.onCollectionProduct(getProductCollectionResponse);
-					return;
-				case "messageAck":
-					MessageAck msgAck = new MessageAck(obj);
-					callback.onMessagAckCallback(msgAck);
-					return;
-				case "userJoinedBot":
-					user = new User((JSONObject) obj.get(KEY_USER));
-					callback.onUserJoinedBot(user);
-					return;
-				case "chatMember":
-					ChatMember chatMember = new ChatMember(obj);
-					callback.onChatMember(chatMember);
-					return;
-				case "createChatAck":
-					Chat chatObj = new Chat((JSONObject) obj.get(KEY_CHAT));
-					chatObj.setReference((String) obj.get(KEY_REFERENCE));
-					callback.onCreateChat(chatObj);
-					return;
-				case "myProfile":
-					user = new User((JSONObject) obj.get(KEY_USER));
-
-					callback.onMyProfile(user);
-					return;
-				case "userDetails":
-					user = new User((JSONObject) obj.get(KEY_USER));
-					appId = String.valueOf(obj.get(KEY_APP_ID));
-
-					callback.onUserDetails(user,appId);
-					return;
-				case "listCollectionsResponse":
-					ListCollectionItemResponse listCollectionItemResponse = new ListCollectionItemResponse(obj);
-					callback.listCollectionItemResponse(listCollectionItemResponse);
-					return ;
-				case "chatDetails":
-					Chat chat = new Chat((JSONObject) obj.get(KEY_CHAT));
-					 appId = String.valueOf(obj.get(KEY_APP_ID));
-					callback.onChatDetails(chat,appId);
-					return;
-				case "chatAdministrators":
-					ChatAdministrators chatAdministrators = new ChatAdministrators(obj);
-					callback.onChatAdministrators(chatAdministrators);
-					return;
-				case "userStartedBot":
-					user = new User((JSONObject) obj.get(KEY_USER));
-					callback.userStartedBot(user);
-					return;
-				case "userStoppedBot":
-					user = new User((JSONObject) obj.get(KEY_USER));
-					callback.userStoppedBot(user);
-					return;
-				case "userLeftBot":
-					user = new User((JSONObject) obj.get(KEY_USER));
-					callback.userLeftBot(user);
-					return;
-				case "addBlacklistPatterns_ack":
-                    case "deleteBlacklistPatterns_ack":
-                        Pattern blackListpattern = new Pattern(obj);
-					callback.onBlackListPattern(blackListpattern);
-					return;
-                    case "deleteWhitelistPatterns_ack":
-                    case "addWhitelistPatterns_ack":
-                        Pattern deletedWhiteListpattern = new Pattern(obj);
-					callback.onWhiteListPattern(deletedWhiteListpattern);
-					return;
-                    case "removeFromBlacklist_ack":
-					List_ak blackListAk=new List_ak(obj);
-					callback.onDeleteBlackList(blackListAk);
-					return;
-				case "addToBlacklist_ack":
-				case "getBlacklistUsersResponse":
-				case "blacklist":
-					BlackList blackList = new BlackList(obj);
-					callback.onBlackList(blackList);
-					return;
-				case "removeFromWhitelist_ack":
-					List_ak whiteListAk=new List_ak(obj);
-					callback.onDeleteWhiteList(whiteListAk);
-					return;
-				case "addToWhitelist_ack":
-				case "getWhitelistUsersResponse":
-				case "whitelist":
-					WhiteList whiteList = new WhiteList(obj);
-					callback.onWhiteList(whiteList);
-					return;
-				case "permanentUrl":
-					PermanentUrl permenantURL = new PermanentUrl(obj);
-					callback.permanentUrl(permenantURL);
-					return;
-				case "workflowCell":
-					WorkflowDetails workflowDetails = new WorkflowDetails(obj);
-					callback.onWorkflowDetails(workflowDetails);
-					return;
-				default:
-					callback.onReceive(obj);
-					return;
+				} else {
+					String error = String.valueOf(obj.get(KEY_ERROR));
+					//System.err.println("Error : " + error);
+					NandboxClient.log.error("Error : " + error);
+					System.out.println("Error : " + error);
 				}
-			} else {
-				String error = String.valueOf(obj.get(KEY_ERROR));
-				//System.err.println("Error : " + error);
-				NandboxClient.log.error("Error : " + error);
-				System.out.println("Error : " + error);
-			}
+			});
+
 		}
 
 		@OnWebSocketError
