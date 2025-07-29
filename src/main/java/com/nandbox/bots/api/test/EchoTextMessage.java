@@ -9,18 +9,17 @@ import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 import com.nandbox.bots.api.outmessages.UpdateMenuCell;
+import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
+import java.util.concurrent.TimeUnit;
+
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783774349926:0:y6tujiDtlZQhZeAGDMFiRfsUVIi54G";
-	//90090684265505180 => channel Helloooo
-	//90090684293000559 => main app
-	//90089584801743482 => basyone (user)
-	//90089584778203966 => hesham22yy (user)
-	//90089584759479548 => hamed (user)
+	public static final String TOKEN = "90091783968456064:0:wuxA2a4fVClXUOfLhBvxfOtqT7HLVO";
+
 
 	public static void main(String[] args) throws Exception {
 		NandboxClient client = NandboxClient.get();
@@ -28,53 +27,22 @@ public class EchoTextMessage {
 			Nandbox.Api api = null;
 			@Override
 			public void onConnect(Api api) {
-				System.out.println("Authenticated");
-				try {
-				String menuJsonString = "[\n" +
-						"  {\n" +
-						"    \"cell_id\": \"b_cgZLTq1q9YNijkm\",\n" +
-						"    \"form\": \"card\",\n" +
-						"    \"style\": \"centered\",\n" +
-						"    \"cell_order\": 0,\n" +
-						"    \"version\": \"l2Wlizo73HR2LGNQ\",\n" +
-						"    \"callback\": \"b_cgZLTq1q9YNijkm\",\n" +
-						"    \"headline\": \"Testing\",\n" +
-						"    \"subhead\": \"Subhead 123\",\n" +
-						"    \"image\": \"https://nandbox.com/wp-content/uploads/2022/12/yoga.webp\",\n" +
-						"    \"font_size\": {\n" +
-						"      \"headline\": \"md\",\n" +
-						"      \"subhead\": \"md\"\n" +
-						"    },\n" +
-						"    \"text_align\": {\n" +
-						"      \"headline\": \"center\",\n" +
-						"      \"subhead\": \"center\"\n" +
-						"    }\n" +
-						"  }\n" +
-						"]";
-					JSONParser parser = new JSONParser(-1);
-					JSONArray arr = (JSONArray) parser.parse(menuJsonString);
-					UpdateMenuCell outmsg = new UpdateMenuCell();
-					outmsg.setAppId("90090684298937728");
-					outmsg.setApp_id("90090684298937728");
-					outmsg.setCells(arr);
-					outmsg.setMenuId("XPN97fuGgQyXy9f");
-					outmsg.setUserId("90089584766092404");
-					outmsg.setReference("19287119010");
 
-					api.send(outmsg);
-				}catch (Exception e){
-
-				}
 				this.api = api;
 
 			}
 
 			@Override
 			public void onReceive(IncomingMessage incomingMsg) {
-				if (incomingMsg.isTextMsg()) {
-					String chatId = incomingMsg.getChat().getId(); // get your chat Id
-					String text = incomingMsg.getText(); // get your text message
-					api.sendText(chatId, text,incomingMsg.getAppId());
+				try {
+					if (incomingMsg.isTextMsg()) {
+						String chatId = incomingMsg.getChat().getId(); // get your chat Id
+						String text = incomingMsg.getText(); // get your text message
+
+						api.sendText(chatId,  text , Utils.getUniqueId(), null, incomingMsg.getFrom().getId(), null, null, incomingMsg.getChatSettings(), null, null,null,incomingMsg.getAppId());
+					}
+				} catch (Exception e) {
+					throw new RuntimeException(e);
 				}
 			}
 
