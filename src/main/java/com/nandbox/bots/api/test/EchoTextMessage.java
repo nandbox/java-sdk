@@ -204,6 +204,11 @@ public class EchoTextMessage {
 
 			}
 
+			@Override
+			public void onMenuCallBack(MenuCallback menuCallback) {
+
+			}
+
 
 		});
 	}

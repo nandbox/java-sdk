@@ -185,6 +185,11 @@ public class Main {
             public void onCreateChat(Chat chat) {
 
             }
+
+            @Override
+            public void onMenuCallBack(MenuCallback menuCallback) {
+
+            }
         });
 
 

@@ -291,6 +291,11 @@ public class SendWebLinksBot {
 
 			}
 
+			@Override
+			public void onMenuCallBack(MenuCallback menuCallback) {
+
+			}
+
 		});
 
 	}
