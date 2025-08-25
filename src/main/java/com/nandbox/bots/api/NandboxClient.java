@@ -1202,6 +1202,10 @@ public class NandboxClient {
 							WorkflowDetails workflowDetails = new WorkflowDetails(obj);
 							callback.onWorkflowDetails(workflowDetails);
 							return;
+						case "menuCallback":
+							MenuCallback menuCallback = new MenuCallback(obj);
+							callback.onMenuCallBack(menuCallback);
+							return;
 						default:
 							callback.onReceive(obj);
 							return;

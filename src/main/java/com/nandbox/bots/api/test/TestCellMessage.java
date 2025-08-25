@@ -187,6 +187,11 @@ public class TestCellMessage {
 				
 			}
 
+			   @Override
+			   public void onMenuCallBack(MenuCallback menuCallback) {
+
+			   }
+
 
 		   });
 

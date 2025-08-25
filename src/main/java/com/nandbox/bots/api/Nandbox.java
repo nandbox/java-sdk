@@ -223,6 +223,7 @@ public final class Nandbox {
 		public void onWorkflowDetails(WorkflowDetails workflowDetails);
 
 		void onCreateChat(Chat chat);
+		void onMenuCallBack(MenuCallback menuCallback);
 	}
 
 	/**
