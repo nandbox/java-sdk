@@ -1,9 +1,11 @@
 package com.nandbox.bots.api.data;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MenuCallback {
 
@@ -11,21 +13,23 @@ public class MenuCallback {
     private String api_id;
     private String app_id;
     private Chat chat;
-    private User user;
+    private User from;
     private long date;
+    private String menu_id;
     private List<Cell> cells;
     public MenuCallback() {
     }
     public MenuCallback(JSONObject jsonObject) {
+        this.menu_id = String.valueOf(jsonObject.get("menu_id"));
         this.source = String.valueOf(jsonObject.get("source"));
         this.api_id = String.valueOf(jsonObject.get("api_id"));
         this.app_id = String.valueOf(jsonObject.get("app_id"));
         this.chat = jsonObject.get("chat") != null ? new Chat((JSONObject) jsonObject.get("chat")) : null;
-        this.user = jsonObject.get("user") != null ? new User((JSONObject) jsonObject.get("user")) : null;
+        this.from = jsonObject.get("from") != null ? new User((JSONObject) jsonObject.get("from")) : null;
         this.date = Long.parseLong(String.valueOf(jsonObject.get("date")));
         if (jsonObject.get("cells") != null && jsonObject.get("cells") instanceof List) {
             List<?> cellObjs = (List<?>) jsonObject.get("cells");
-            this.cells = cellObjs.stream().filter(o -> o instanceof JSONObject).map(o -> new Cell((JSONObject) o)).collect(java.util.stream.Collectors.toList());
+            this.cells = cellObjs.stream().filter(o -> o instanceof JSONObject).map(o -> new Cell((JSONObject) o)).collect(Collectors.toList());
         }
     }
 
@@ -78,6 +82,14 @@ public class MenuCallback {
         public String getMenu_id() {
             return menu_id;
         }
+
+        public ValueType getValue_type() {
+            return value_type;
+        }
+        public void setValue_type(ValueType value_type) {
+            this.value_type = value_type;
+        }
+
         public void setMenu_id(String menu_id) {
             this.menu_id = menu_id;
         }
@@ -185,10 +197,10 @@ public class MenuCallback {
         this.chat = chat;
     }
     public User getUser() {
-        return user;
+        return from;
     }
     public void setUser(User user) {
-        this.user = user;
+        this.from = user;
     }
     public long getDate() {
         return date;
@@ -201,6 +213,59 @@ public class MenuCallback {
     }
     public void setCells(List<Cell> cells) {
         this.cells = cells;
+    }
+
+    public String getMenu_id() {
+        return menu_id;
+    }
+    public void setMenu_id(String menu_id) {
+        this.menu_id = menu_id;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("source", this.source);
+        json.put("api_id", this.api_id);
+        json.put("app_id", this.app_id);
+        if (this.chat != null) {
+            json.put("chat", this.chat.toJsonObject());
+        }
+        if (this.from != null) {
+            json.put("from", this.from.toJsonObject());
+        }
+        json.put("date", this.date);
+        if (this.cells != null) {
+            JSONArray cellList = new JSONArray();
+            this.cells.forEach(cell -> {
+                JSONObject cellJson = new JSONObject();
+                cellJson.put("menu_id", cell.getMenu_id());
+                cellJson.put("cell_id", cell.getCell_id());
+                cellJson.put("form", cell.getForm());
+                cellJson.put("style", cell.getStyle());
+                cellJson.put("label", cell.getLabel());
+                if (cell.getValue_type() != null) {
+                    JSONObject valueTypeJson = new JSONObject();
+                    valueTypeJson.put("data", cell.getValue_type().getData());
+                    cellJson.put("value_type", valueTypeJson);
+                }
+                if (cell.getValue() != null) {
+                    net.minidev.json.JSONArray valueList = new net.minidev.json.JSONArray();
+                    cell.getValue().forEach(value -> {
+                        JSONObject valueJson = new JSONObject();
+                        valueJson.put("id", value.getId());
+                        valueJson.put("value", value.getValue());
+                        if (value.getOption_label() != null) {
+                            valueJson.put("option_label", value.getOption_label());
+                        }
+                        valueList.add(valueJson);
+                    });
+                    cellJson.put("value", valueList);
+                }
+                cellList.add(cellJson);
+            });
+            json.put("cells", cellList);
+        }
+        return json;
     }
 
 }
