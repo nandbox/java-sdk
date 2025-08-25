@@ -14,11 +14,12 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783968456064:0:wuxA2a4fVClXUOfLhBvxfOtqT7HLVO";
+	public static final String TOKEN = "90091783774349926:0:Ju0wIVB0e0nkYr4i5OLs0qdLYxx4XY";
 
 
 	public static void main(String[] args) throws Exception {
