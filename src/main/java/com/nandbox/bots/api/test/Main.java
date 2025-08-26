@@ -3,12 +3,14 @@ import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
+import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public class Main {
@@ -188,7 +190,9 @@ public class Main {
 
             @Override
             public void onMenuCallBack(MenuCallback menuCallback) {
-
+                System.out.println("Inside onMenuCallBack fn");
+                Map<String,String> fieldsAndValues =  Utils.getFieldsAndValues(menuCallback.getCells());
+                System.out.println(fieldsAndValues);
             }
         });
 
