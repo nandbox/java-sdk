@@ -3,10 +3,14 @@ package com.nandbox.bots.api.util;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.nandbox.bots.api.Nandbox.Api;
+import com.nandbox.bots.api.data.MenuCallback;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 import net.minidev.json.JSONArray;
 
@@ -80,7 +84,22 @@ public class Utils {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
 		return format.format(date);
 	}
+	public static Map<String,String> getFieldsAndValues(List<MenuCallback.Cell> cells){
+		Map<String, String> result = new HashMap<>();
+		if (cells == null) return result;
+		for (MenuCallback.Cell cell : cells) {
+			String key = cell.getCallback();
+			String valueStr = "";
+			List<MenuCallback.CellValue> values = cell.getValue();
+			if (values != null && !values.isEmpty()) {
+				Object val = values.get(0).getValue();
+				valueStr = val != null ? val.toString() : "";
+			}
+			result.put(key, valueStr);
+		}
+		return result;
 
+	}
 	public static boolean getBoolean(Object o) {
 		if (o == null)
 			return false;
