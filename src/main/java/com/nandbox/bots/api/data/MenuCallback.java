@@ -16,6 +16,7 @@ public class MenuCallback {
     private User from;
     private long date;
     private String menu_id;
+    private String menu_group;
     private List<Cell> cells;
     public MenuCallback() {
     }
@@ -31,6 +32,7 @@ public class MenuCallback {
             List<?> cellObjs = (List<?>) jsonObject.get("cells");
             this.cells = cellObjs.stream().filter(o -> o instanceof JSONObject).map(o -> new Cell((JSONObject) o)).collect(Collectors.toList());
         }
+        this.menu_group = jsonObject.get("menu_group") != null ? String.valueOf(jsonObject.get("menu_group")) : null;
     }
 
     public static class Cell {
@@ -278,4 +280,11 @@ public class MenuCallback {
         return json;
     }
 
+    public String getMenu_group() {
+        return menu_group;
+    }
+
+    public void setMenu_group(String menu_group) {
+        this.menu_group = menu_group;
+    }
 }
