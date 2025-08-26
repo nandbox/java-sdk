@@ -40,7 +40,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783774349926:0:wke5tdJr3o2ggJhiugrbTJu3zxuAqp";
+	public static final String TOKEN = "90091783774349926:0:Ju0wIVB0e0nkYr4i5OLs0qdLYxx4XY";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 

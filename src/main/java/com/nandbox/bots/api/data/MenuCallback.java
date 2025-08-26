@@ -39,12 +39,13 @@ public class MenuCallback {
         private String form;
         private String style;
         private String label;
+        private String callback;
         private ValueType value_type;
         private List<CellValue> value;
 
         public Cell() {
         }
-        public Cell(String menu_id, String cell_id, String form, String style, String label, ValueType value_type, List<CellValue> value) {
+        public Cell(String menu_id, String cell_id, String form, String style, String label, ValueType value_type, List<CellValue> value,String callback) {
             this.menu_id = menu_id;
             this.cell_id = cell_id;
             this.form = form;
@@ -52,6 +53,7 @@ public class MenuCallback {
             this.label = label;
             this.value_type = value_type;
             this.value = value;
+            this.callback=callback;
         }
         public Cell(JSONObject jsonObject) {
             this.menu_id = String.valueOf(jsonObject.get("menu_id"));
@@ -71,6 +73,7 @@ public class MenuCallback {
                 }
                 this.value = valueList.stream().map(CellValue::new).collect(java.util.stream.Collectors.toList());
             }
+            this.callback = jsonObject.get("callback") != null ? String.valueOf(jsonObject.get("callback")) : null;
         }
 
         public List<CellValue> getValue() {
@@ -118,6 +121,12 @@ public class MenuCallback {
             this.label = label;
         }
 
+        public String getCallback() {
+            return callback;
+        }
+        public void setCallback(String callback) {
+            this.callback = callback;
+        }
     }
 
     public static class ValueType {
@@ -169,6 +178,7 @@ public class MenuCallback {
         public void setOption_label(String option_label) {
             this.option_label = option_label;
         }
+
 
     }
 
