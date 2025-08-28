@@ -15,7 +15,7 @@ Just import  the library to your project with one of the following options:
     <dependency>
          <groupId>com.nandbox.bots.api</groupId>
 		 <artifactId>bots-api</artifactId>
-		 <version>1.3</version>
+		 <version>1.5.4</version>
     </dependency>
 ```
 ## Build your first bot
@@ -61,27 +61,110 @@ UploadServer=https://<SERVER>:<PORT>/nandbox/upload/
 ```java
 public class MyFirstBot {
 
-	public static void main(String[] args) throws Exception {
+ public static void main(String[] args) throws Exception {
+  NandboxClient client = NandboxClient.get();
+  client.connect(TOKEN, new Nandbox.Callback() {
+   Nandbox.Api api = null;
 
-		NandboxClient client = NandboxClient.get();
-		client.connect(TOKEN, new Nandbox.Callback() {
-			Nandbox.Api api = null;
+   @Override
+   public void onConnect(Api api) {
+    System.out.println("Authenticated");
+    this.api = api;
+   }
 
-			@Override
-			public void onConnect(Api api) {
-				// it will go here if the bot connected to server successfuly 
-				System.out.println("Authenticated");
-				this.api = api;
-			}
+   @Override
+   public void onReceive(IncomingMessage incomingMsg) {
+    // Handle normal incoming messages
+   }
 
-			@Override
-			public void onReceive(IncomingMessage incomingMsg) {
-			// it will go here if the bot received any message 
-			}
-			// implement other nandbox.Callback() as per your bot need .
-		});
-	}
+   @Override
+   public void onReceive(JSONObject obj) {
+    // Handle raw JSON messages (unmapped by SDK)
+   }
+
+   @Override
+   public void onClose() {
+    // Called when WebSocket closes
+   }
+
+   @Override
+   public void onError() {
+    // Handle WebSocket errors
+   }
+
+   // === Menu Callbacks ===
+   @Override
+   public void onChatMenuCallBack(ChatMenuCallback chatMenuCallback) {}
+   @Override
+   public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback) {}
+   @Override
+   public void onMenuCallBack(MenuCallback menuCallback) {}
+
+   // === Message Acknowledgement ===
+   @Override
+   public void onMessagAckCallback(MessageAck msgAck) {}
+
+   // === User Events ===
+   @Override
+   public void onUserJoinedBot(User user) {}
+   @Override
+   public void userStartedBot(User user) {}
+   @Override
+   public void userStoppedBot(User user) {}
+   @Override
+   public void userLeftBot(User user) {}
+   @Override
+   public void onUserDetails(User user, String appId) {}
+   @Override
+   public void onMyProfile(User user) {}
+
+   // === Chat Events ===
+   @Override
+   public void onChatMember(ChatMember chatMember) {}
+   @Override
+   public void onChatAdministrators(ChatAdministrators chatAdministrators) {}
+   @Override
+   public void onChatDetails(Chat chat, String appId) {}
+   @Override
+   public void onCreateChat(Chat chat) {}
+
+   // === Product & Collection Events ===
+   @Override
+   public void onProductDetail(ProductItemResponse productItem) {}
+   @Override
+   public void onCollectionProduct(GetProductCollectionResponse collectionProduct) {}
+   @Override
+   public void listCollectionItemResponse(ListCollectionItemResponse collections) {}
+
+   // === Search & Workflow ===
+   @Override
+   public void onInlineSearh(InlineSearch inlineSearch) {}
+   @Override
+   public void onWorkflowDetails(WorkflowDetails workflowDetails) {}
+
+   // === Lists & Patterns ===
+   @Override
+   public void onBlackListPattern(Pattern pattern) {}
+   @Override
+   public void onWhiteListPattern(Pattern pattern) {}
+   @Override
+   public void onBlackList(BlackList blackList) {}
+   @Override
+   public void onDeleteBlackList(List_ak blackList) {}
+   @Override
+   public void onWhiteList(WhiteList whiteList) {}
+   @Override
+   public void onDeleteWhiteList(List_ak whiteList) {}
+
+   // === URL & Scheduled Messages ===
+   @Override
+   public void permanentUrl(PermanentUrl permenantUrl) {}
+   @Override
+   public void onScheduleMessage(IncomingMessage incomingScheduleMsg) {}
+  });
+ }
 }
+
 ```
 `client.connect(token, new Nandbox.Callback()`  : this method to connect to server please add your bot token  instead of `token`
 
@@ -89,116 +172,31 @@ public class MyFirstBot {
 ```java
 public class EchoTextMessage {
 
-	public static final String TOKEN = "<PUT your token here >";
+ public static final String TOKEN = "<PUT your token here>";
 
-	public static void main(String[] args) throws Exception {
-		NandboxClient client = NandboxClient.get();
-		client.connect(TOKEN, new Nandbox.Callback() {
-			Nandbox.Api api = null;
+ public static void main(String[] args) throws Exception {
+  NandboxClient client = NandboxClient.get();
+  client.connect(TOKEN, new Nandbox.Callback() {
+   Nandbox.Api api = null;
 
-			@Override
-			public void onConnect(Api api) {
-				System.out.println("Authenticated");
-				this.api = api;
-			}
+   @Override
+   public void onConnect(Api api) {
+    System.out.println("Authenticated");
+    this.api = api;
+   }
 
-			@Override
-			public void onReceive(IncomingMessage incomingMsg) {
-				if (incomingMsg.isTextMsg()) {
-					String chatId = incomingMsg.getChat().getId(); // get your chat Id
-					String text = incomingMsg.getText(); // get your text message
-					api.sendText(chatId, text); // Sending message back as an Echo
-				}
-			}
+   @Override
+   public void onReceive(IncomingMessage incomingMsg) {
+    if (incomingMsg.isTextMsg()) {
+     String chatId = incomingMsg.getChat().getId();
+     String text = incomingMsg.getText();
+     api.sendText(chatId, text); // Echo back
+    }
+   }
 
-			@Override
-			public void onReceive(JSONObject obj) {
-
-			}
-
-			@Override
-			public void onClose() {
-
-			}
-
-			@Override
-			public void onError() {
-
-			}
-
-			@Override
-			public void onChatMenuCallBack(ChatMenuCallback chatMenuCallback) {
-
-			}
-
-			@Override
-			public void onMessagAckCallback(MessageAck msgAck) {
-
-			}
-
-			@Override
-			public void onUserJoinedBot(User user) {
-
-			}
-
-			@Override
-			public void onChatMember(ChatMember chatMember) {
-
-			}
-
-			@Override
-			public void onChatAdministrators(ChatAdministrators chatAdministrators) {
-
-			}
-
-			@Override
-			public void userStartedBot(User user) {
-
-			}
-
-			@Override
-			public void onMyProfile(User user) {
-
-			}
-
-			@Override
-			public void onUserDetails(User user) {
-
-			}
-
-			@Override
-			public void userStoppedBot(User user) {
-
-			}
-
-			@Override
-			public void userLeftBot(User user) {
-
-			}
-
-			@Override
-			public void onInlineMessageCallback(InlineMessageCallback inlineMsgCallback) {
-				
-			}
-
-			@Override
-			public void permanentUrl(PermanentUrl permenantUrl) {
-				
-			}
-
-			@Override
-			public void onChatDetails(Chat chat) {
-				
-			}
-
-			@Override
-			public void onInlineSearh(InlineSearch inlineSearch) {
-			
-			}
-
-
-		});
-	}
+   // You can override other callbacks as needed
+  });
+ }
 }
 ```
 --
