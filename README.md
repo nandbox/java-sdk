@@ -15,7 +15,7 @@ Just import  the library to your project with one of the following options:
     <dependency>
          <groupId>com.nandbox.bots.api</groupId>
 		 <artifactId>bots-api</artifactId>
-		 <version>1.5.4</version>
+		 <version>1.5.3</version>
     </dependency>
 ```
 ## Build your first bot
