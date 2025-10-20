@@ -697,6 +697,7 @@ public class NandboxClient {
 					GetUserOutMessage getUserOutMessage = new GetUserOutMessage();
 					getUserOutMessage.setUserId(userId);
 					getUserOutMessage.setApp_id(appId);
+                    getUserOutMessage.setChatId(appId);
 					getUserOutMessage.setReference(reference);
 					api.send(getUserOutMessage);
 
