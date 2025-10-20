@@ -18,12 +18,12 @@ public abstract class OutMessage {
 
 		sendMessage, sendPhoto, sendVideo, sendCellMessage, sendCellPhoto, sendCellVideo, sendAudio, sendVoice,
 		sendLocation, sendGif, sendDocument, sendContact, editMessage, updateMessage, setChatMenu, setNavigationButton,
-		inlineSearchAnswer, setMyProfile, getUserDetail, getChat, getChatAdministrators, getChatMember, banChatMember,
+		inlineSearchAnswer, setMyProfile, getUser, getChat, getChatAdministrators, getChatMember, banChatMember,
 		unbanChatMember, removeChatMember, setChat, recallMessage, getMyProfiles, generatePermanentUrl, sendArticle,
 		getBlacklistUsers, getWhitelistUsers, addToBlacklist, addToWhitelist, removeFromBlacklist, addBlacklistPatterns,
 		removeBlacklistPatterns, addWhitelistPatterns, removeWhitelistPatterns, removeFromWhitelist, setAdminChatMenu,
 		setAdminNavigationButton, cancelMessageSchedule, updateMenuCell,addChatMember,createChat,addChatAdmin,setWorkflowAction
-		,getCollectionProduct, listCollections, getProductDetail
+		,getCollectionProduct, listCollections, getProductItem
 
 	}
 
