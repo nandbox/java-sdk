@@ -5,7 +5,7 @@ import net.minidev.json.JSONObject;
 public class GetProductItemOutMessage extends OutMessage{
     private String id;
 
-    public GetProductItemOutMessage(){this.method = OutMessageMethod.getProductDetail;}
+    public GetProductItemOutMessage(){this.method = OutMessageMethod.getProductItem;}
     @Override
     public JSONObject toJsonObject() {
         JSONObject obj = super.toJsonObject();
