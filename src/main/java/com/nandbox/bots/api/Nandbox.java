@@ -1097,5 +1097,6 @@ public final class Nandbox {
 		void createChat(String type,String title, int isPublic,String reference,String appId);
 		void addChatMember(long chatId, long userId,String appId);
 		void addChatAdminMember(long chatId, long userId,String appId);
+        void runCustomCode(long userId,JSONObject data,String appId);
 	}
 }
