@@ -14,8 +14,10 @@ import net.minidev.json.JSONObject;
 public class SetNavigationButtonOutMessage extends OutMessage {
 
 	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_button";
+    protected static final String KEY_NAV_TYPE = "nav_type";
 
 	private String navigation_button;
+    private String type;
 
 	public SetNavigationButtonOutMessage() {
 		this.method = OutMessageMethod.setNavigationButton;
@@ -29,6 +31,9 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 
 			obj.put(KEY_NAVIGATION_BUTTONS, navigation_button);
 		}
+        if (type!=null){
+            obj.put(KEY_NAV_TYPE,type);
+        }
 		return obj;
 	}
 
@@ -39,6 +44,10 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 	public void setNavigation_button(String navigation_button) {
 		this.navigation_button = navigation_button;
 	}
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
 
 }
