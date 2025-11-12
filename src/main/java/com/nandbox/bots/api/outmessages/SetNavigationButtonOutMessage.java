@@ -15,9 +15,11 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 
 	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_button";
     protected static final String KEY_NAV_TYPE = "nav_type";
+    protected static final String KEY_IS_OPEN = "is_open";
 
-	private String navigation_button;
+    private String navigation_button;
     private String type;
+    private Integer isOpen = 0;
 
 	public SetNavigationButtonOutMessage() {
 		this.method = OutMessageMethod.setNavigationButton;
@@ -34,6 +36,9 @@ public class SetNavigationButtonOutMessage extends OutMessage {
         if (type!=null){
             obj.put(KEY_NAV_TYPE,type);
         }
+        if (isOpen!=0){
+            obj.put(KEY_IS_OPEN,isOpen);
+        }
 		return obj;
 	}
 
@@ -41,7 +46,15 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 		return navigation_button;
 	}
 
-	public void setNavigation_button(String navigation_button) {
+    public void setIsOpen(Integer isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    public Integer getIsOpen() {
+        return isOpen;
+    }
+
+    public void setNavigation_button(String navigation_button) {
 		this.navigation_button = navigation_button;
 	}
     public void setType(String type) {
