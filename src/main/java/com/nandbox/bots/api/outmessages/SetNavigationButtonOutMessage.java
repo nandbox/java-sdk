@@ -15,7 +15,7 @@ public class SetNavigationButtonOutMessage extends OutMessage {
 
 	protected static final String KEY_NAVIGATION_BUTTONS = "navigation_button";
     protected static final String KEY_NAV_TYPE = "nav_type";
-    protected static final String KEY_IS_OPEN = "is_open";
+    protected static final String KEY_MENU_OPEN = "menu_open";
 
     private String navigation_button;
     private String type;
@@ -37,7 +37,7 @@ public class SetNavigationButtonOutMessage extends OutMessage {
             obj.put(KEY_NAV_TYPE,type);
         }
         if (isOpen!=0){
-            obj.put(KEY_IS_OPEN,isOpen);
+            obj.put(KEY_MENU_OPEN,isOpen);
         }
 		return obj;
 	}
