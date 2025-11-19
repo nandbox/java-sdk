@@ -1037,15 +1037,15 @@ public class NandboxClient {
 					videoMsg.setReference(reference);
 					api.send(videoMsg);
 				}
-                @Override
-                public void runCustomCode(long userId,JSONObject data,String appId){
-                        RunCustomCodeOutMessage runCustomCodeOutMessage = new RunCustomCodeOutMessage();
-                        runCustomCodeOutMessage.setUserId(userId);
-                        runCustomCodeOutMessage.setApp_id(appId);
-                        runCustomCodeOutMessage.setData(data);
-                        api.send(runCustomCodeOutMessage);
-
-                }
+//                @Override
+//                public void runCustomCode(long userId,JSONObject data,String appId){
+//                        RunCustomCodeOutMessage runCustomCodeOutMessage = new RunCustomCodeOutMessage();
+//                        runCustomCodeOutMessage.setUserId(userId);
+//                        runCustomCodeOutMessage.setApp_id(appId);
+//                        runCustomCodeOutMessage.setData(data);
+//                        api.send(runCustomCodeOutMessage);
+//
+//                }
 
 			};
 			//System.err.println(authObject.toJSONString());
