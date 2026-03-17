@@ -194,6 +194,11 @@ public class Main {
                 Map<String,String> fieldsAndValues =  Utils.getFieldsAndValues(menuCallback.getCells());
                 System.out.println(fieldsAndValues);
             }
+
+            @Override
+            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+
+            }
         });
 
 
