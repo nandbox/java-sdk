@@ -296,7 +296,12 @@ public class SendWebLinksBot {
 
 			}
 
-		});
+            @Override
+            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+
+            }
+
+        });
 
 	}
 

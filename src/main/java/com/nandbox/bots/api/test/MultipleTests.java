@@ -801,7 +801,12 @@ public class MultipleTests {
 
 			}
 
-		});
+            @Override
+            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+
+            }
+
+        });
 
 	}
 

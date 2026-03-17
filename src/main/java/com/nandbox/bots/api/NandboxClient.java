@@ -1216,6 +1216,32 @@ public class NandboxClient {
 							MenuCallback menuCallback = new MenuCallback(obj);
 							callback.onMenuCallBack(menuCallback);
 							return;
+                        case "extensionSetDocResponse":
+                        case "extensionGetDocResponse":
+                        case "extensionDeleteDocResponse":
+                        case "extensionListDocResponse":
+
+                            String type = null;
+
+                            switch (method) {
+                                case "extensionSetDocResponse":
+                                    type = "insert";
+                                    break;
+                                case "extensionGetDocResponse":
+                                    type = "get";
+                                    break;
+                                case "extensionDeleteDocResponse":
+                                    type = "delete";
+                                    break;
+                                case "extensionListDocResponse":
+                                    type = "list";
+                                    break;
+                            }
+
+                            obj.put("method", type);
+                            ExtensionDocResponse extensionDocResponse = new ExtensionDocResponse(obj);
+                            callback.onExtensionDocResponse(extensionDocResponse);
+                            return;
 						default:
 							callback.onReceive(obj);
 							return;

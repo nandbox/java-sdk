@@ -224,6 +224,7 @@ public final class Nandbox {
 
 		void onCreateChat(Chat chat);
 		void onMenuCallBack(MenuCallback menuCallback);
+        void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse);
 	}
 
 	/**

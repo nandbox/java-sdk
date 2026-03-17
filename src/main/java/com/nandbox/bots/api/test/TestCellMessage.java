@@ -192,8 +192,13 @@ public class TestCellMessage {
 
 			   }
 
+               @Override
+               public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
 
-		   });
+               }
+
+
+           });
 
 	}
 }

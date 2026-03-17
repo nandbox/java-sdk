@@ -9,6 +9,7 @@ import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 import com.nandbox.bots.api.outmessages.UpdateMenuCell;
+import com.nandbox.bots.api.util.DatabaseService;
 import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class EchoTextMessage {
 
-	public static final String TOKEN = "90091783774349926:0:Ju0wIVB0e0nkYr4i5OLs0qdLYxx4XY";
+	public static final String TOKEN = "90091783776380125:0:Ylkg3VugXnfpN0Mrfy0A8yXW7mWCmM";
 
 
 	public static void main(String[] args) throws Exception {
@@ -37,6 +38,8 @@ public class EchoTextMessage {
 			public void onReceive(IncomingMessage incomingMsg) {
 				try {
 					if (incomingMsg.isTextMsg()) {
+                        DatabaseService databaseService = DatabaseService.getInstance();
+                         databaseService.get(api ,"id","incoming_messages",Utils.getUniqueId());
 						String chatId = incomingMsg.getChat().getId(); // get your chat Id
 						String text = incomingMsg.getText(); // get your text message
 
@@ -210,7 +213,12 @@ public class EchoTextMessage {
 
 			}
 
+            @Override
+            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+                System.out.println(extensionDocResponse.getDoc().toJSONString());
+            }
 
-		});
+
+        });
 	}
 }
