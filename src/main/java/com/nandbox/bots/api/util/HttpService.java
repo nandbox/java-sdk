@@ -21,7 +21,7 @@ public class HttpService {
 
     // ===== PUBLIC METHODS =====
 
-    public static void get(String uri, JSONObject headers, String auth, HttpCallback callback) {
+    public static void get(String uri, JSONObject headers,String auth, HttpCallback callback) {
         execute("GET", uri, null, headers, auth, callback);
     }
 

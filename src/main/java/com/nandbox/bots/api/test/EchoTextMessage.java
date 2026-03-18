@@ -10,6 +10,7 @@ import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 import com.nandbox.bots.api.outmessages.UpdateMenuCell;
 import com.nandbox.bots.api.util.DatabaseService;
+import com.nandbox.bots.api.util.HttpService;
 import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -38,6 +39,20 @@ public class EchoTextMessage {
 			public void onReceive(IncomingMessage incomingMsg) {
 				try {
 					if (incomingMsg.isTextMsg()) {
+                        HttpService.get( "https://nandbox.com/",null,null, new HttpService.HttpCallback(
+
+                        ) {
+                            @Override
+                            public void onSuccess(int statusCode, String response) {
+                                System.out.println("Status Code: " + statusCode);
+                                System.out.println("Response: " + response);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+                                System.out.println("Error: " + e.getMessage());
+                            }
+                        });
                         DatabaseService databaseService = DatabaseService.getInstance();
                          databaseService.get(api ,"id","incoming_messages",Utils.getUniqueId());
 						String chatId = incomingMsg.getChat().getId(); // get your chat Id
