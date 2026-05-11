@@ -51,6 +51,11 @@ import net.minidev.json.JSONValue;
  *
  */
 public class NandboxClient {
+    public static enum Status {
+        Processing,
+        Success,
+        Rejected
+    }
 	private static final String CONFIG_FILE = "config.properties";
 	private static String BOT_ID = null;
 	private static NandboxClient nandboxClient;
@@ -783,7 +788,23 @@ public class NandboxClient {
 					api.send(addChatAdminMemberOutMessage);
 				}
 
-				@Override
+                @Override
+                public void paymentConfirmation(String chatId, long accountId,String orderId, JSONObject payload, String secret, String currency, double totalAmount, String appId,Status status,long debitAmountCents) {
+                    PaymentConfirmationOutMessage paymentConfirmationOutMessage = new PaymentConfirmationOutMessage();
+                    paymentConfirmationOutMessage.setOrderId(orderId);
+                    paymentConfirmationOutMessage.setChatId(chatId);
+                    paymentConfirmationOutMessage.setAccountId(accountId);
+                    paymentConfirmationOutMessage.setPayload(payload);
+                    paymentConfirmationOutMessage.setSecret(secret);
+                    paymentConfirmationOutMessage.setCurrency(currency);
+                    paymentConfirmationOutMessage.setTotalAmount(totalAmount);
+                    paymentConfirmationOutMessage.setStatus(status.toString());
+                    paymentConfirmationOutMessage.setApp_id(appId);
+                    paymentConfirmationOutMessage.setDebitAmountCents(debitAmountCents);
+                    api.send(paymentConfirmationOutMessage);
+                }
+
+                @Override
 				public void addWhiteList(List<WhiteListUser> whiteListUsers,String appId,String reference) {
 
 					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
@@ -1241,6 +1262,11 @@ public class NandboxClient {
                             obj.put("method", type);
                             ExtensionDocResponse extensionDocResponse = new ExtensionDocResponse(obj);
                             callback.onExtensionDocResponse(extensionDocResponse);
+                            return;
+
+                        case "paymentRequest":
+                            PaymentRequest paymentRequest = new PaymentRequest(obj);
+                            callback.onPaymentRequest(paymentRequest);
                             return;
 						default:
 							callback.onReceive(obj);

@@ -40,7 +40,7 @@ import net.minidev.json.JSONObject;
  */
 public class MultipleTests {
 
-	public static final String TOKEN = "90091783774349926:0:Ju0wIVB0e0nkYr4i5OLs0qdLYxx4XY";
+	public static final String TOKEN = "90091783774949795:0:u2oKtjtHAmeP96wN5ilia3Fi2vaBTi";
 
 	private static final String MAIN_MENU_001 = "MAIN_MENU_001";
 
@@ -804,6 +804,11 @@ public class MultipleTests {
             @Override
             public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
 
+            }
+
+            @Override
+            public void onPaymentRequest(PaymentRequest paymentRequest) {
+                System.out.println(paymentRequest.toJson().toJSONString());
             }
 
         });
