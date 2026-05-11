@@ -233,6 +233,11 @@ public class EchoTextMessage {
                 System.out.println(extensionDocResponse.getDoc().toJSONString());
             }
 
+            @Override
+            public void onPaymentRequest(PaymentRequest paymentRequest) {
+
+            }
+
 
         });
 	}

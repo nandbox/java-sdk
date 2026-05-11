@@ -199,6 +199,11 @@ public class Main {
             public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
 
             }
+
+            @Override
+            public void onPaymentRequest(PaymentRequest paymentRequest) {
+
+            }
         });
 
 

@@ -301,6 +301,11 @@ public class SendWebLinksBot {
 
             }
 
+            @Override
+            public void onPaymentRequest(PaymentRequest paymentRequest) {
+
+            }
+
         });
 
 	}
