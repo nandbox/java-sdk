@@ -789,12 +789,12 @@ public class NandboxClient {
 				}
 
                 @Override
-                public void paymentConfirmation(String chatId, long accountId,String orderId, JSONObject payload, String secret, String currency, double totalAmount, String appId,Status status,long debitAmountCents) {
+                public void submitPaymentResult(String chatId, long accountId, String orderId, JSONObject providerResponse, String secret, String currency, double totalAmount, String appId, Status status, long debitAmountCents) {
                     PaymentConfirmationOutMessage paymentConfirmationOutMessage = new PaymentConfirmationOutMessage();
                     paymentConfirmationOutMessage.setOrderId(orderId);
                     paymentConfirmationOutMessage.setChatId(chatId);
                     paymentConfirmationOutMessage.setAccountId(accountId);
-                    paymentConfirmationOutMessage.setPayload(payload);
+                    paymentConfirmationOutMessage.setProviderResponse(providerResponse);
                     paymentConfirmationOutMessage.setSecret(secret);
                     paymentConfirmationOutMessage.setCurrency(currency);
                     paymentConfirmationOutMessage.setTotalAmount(totalAmount);
@@ -1264,9 +1264,9 @@ public class NandboxClient {
                             callback.onExtensionDocResponse(extensionDocResponse);
                             return;
 
-                        case "paymentRequest":
+                        case "paymentAuthorizationRequest":
                             PaymentRequest paymentRequest = new PaymentRequest(obj);
-                            callback.onPaymentRequest(paymentRequest);
+                            callback.onPaymentAuthorizationRequest(paymentRequest);
                             return;
 						default:
 							callback.onReceive(obj);

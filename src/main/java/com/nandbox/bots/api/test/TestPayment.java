@@ -6,19 +6,7 @@ import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 
-import com.nandbox.bots.api.outmessages.PaymentConfirmationOutMessage;
-import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
-import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
-import com.nandbox.bots.api.outmessages.UpdateMenuCell;
-import com.nandbox.bots.api.util.DatabaseService;
-import com.nandbox.bots.api.util.HttpService;
-import com.nandbox.bots.api.util.Utils;
-import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class TestPayment {
 
@@ -193,17 +181,17 @@ public class TestPayment {
             }
 
             @Override
-            public void onPaymentRequest(PaymentRequest paymentRequest) {
+            public void onPaymentAuthorizationRequest(PaymentRequest paymentRequest) {
                 System.out.println(paymentRequest.toJson());
                 String orderId = paymentRequest.getOrderId();
                 String secret = paymentRequest.getSecret();
                 double amount = paymentRequest.getAmount();
                 String currency = paymentRequest.getCurrency();
                 long accountId = paymentRequest.getAccountId();
-                JSONObject payload = paymentRequest.getPayload();
+                JSONObject payload = paymentRequest.getPaymentMethod();
                 long debitAmountCents = paymentRequest.getDebitAmountCents();
                 System.out.println(debitAmountCents);
-                api.paymentConfirmation(appId,accountId,orderId,payload,secret,currency,amount,appId, NandboxClient.Status.Success,debitAmountCents);
+                api.submitPaymentResult(appId,accountId,orderId,payload,secret,currency,amount,appId, NandboxClient.Status.Success,debitAmountCents);
             }
 
 

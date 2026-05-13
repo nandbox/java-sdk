@@ -3,7 +3,7 @@ package com.nandbox.bots.api.util;
 import com.nandbox.bots.api.Nandbox;
 import com.nandbox.bots.api.NandboxClient;
 import com.nandbox.bots.api.outmessages.DeleteRecordOutMessage;
-import com.nandbox.bots.api.outmessages.GetReordOutMessage;
+import com.nandbox.bots.api.outmessages.GetRecordOutMessage;
 import com.nandbox.bots.api.outmessages.ListRecordsOutMessage;
 import com.nandbox.bots.api.outmessages.SetRecordOutMessage;
 import net.minidev.json.JSONArray;
@@ -39,7 +39,7 @@ public class DatabaseService {
      * GET
      */
     public void get(Nandbox.Api api, String id, String tableName,String ref) {
-        GetReordOutMessage outMessage = new GetReordOutMessage();
+        GetRecordOutMessage outMessage = new GetRecordOutMessage();
         outMessage.setTableName(tableName);
         outMessage.setId(id);
         outMessage.setRef(ref);

@@ -7,7 +7,7 @@ public class PaymentRequest {
     private static final String KEY_MERCHANT_NAME = "merchant_name";
     private static final String KEY_AMOUNT = "amount";
     private static final String KEY_CURRENCY = "currency";
-    private static final String KEY_PAYLOAD = "payload";
+    private static final String KEY_PAYLOAD = "paymentMethod";
     private static final String KEY_ACCOUNT_ID = "account_id";
     private static final String KEY_SECRET = "secret";
     private static final String KEY_APP_ID = "app_id";
@@ -18,7 +18,7 @@ public class PaymentRequest {
     private String merchantName;
     private double amount;
     private String currency;
-    private JSONObject payload;
+    private JSONObject paymentMethod;
     private long accountId;
     private String secret;
     private String appId;
@@ -43,7 +43,7 @@ public class PaymentRequest {
             this.currency = (String) obj.get(KEY_CURRENCY);
         }
         if (obj.containsKey(KEY_PAYLOAD)){
-            this.payload = (JSONObject) obj.get(KEY_PAYLOAD);
+            this.paymentMethod = (JSONObject) obj.get(KEY_PAYLOAD);
         }
         if (obj.containsKey(KEY_ACCOUNT_ID)){
             this.accountId = ((Number) obj.get(KEY_ACCOUNT_ID)).longValue();
@@ -151,12 +151,12 @@ public class PaymentRequest {
         this.orderId = orderId;
     }
 
-    public JSONObject getPayload() {
-        return payload;
+    public JSONObject getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPayload(JSONObject payload) {
-        this.payload = payload;
+    public void setPaymentMethod(JSONObject paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
     public JSONObject toJson(){
         JSONObject obj = new JSONObject();
@@ -164,7 +164,7 @@ public class PaymentRequest {
         obj.put(KEY_MERCHANT_NAME, merchantName);
         obj.put(KEY_AMOUNT, amount);
         obj.put(KEY_CURRENCY, currency);
-        obj.put(KEY_PAYLOAD, payload);
+        obj.put(KEY_PAYLOAD, paymentMethod);
         return obj;
     }
 }

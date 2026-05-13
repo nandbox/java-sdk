@@ -212,7 +212,7 @@ public class SetWorkflow {
             }
 
             @Override
-            public void onPaymentRequest(PaymentRequest paymentRequest) {
+            public void onPaymentAuthorizationRequest(PaymentRequest paymentRequest) {
 
             }
 

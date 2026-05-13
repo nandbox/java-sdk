@@ -225,7 +225,7 @@ public final class Nandbox {
 		void onCreateChat(Chat chat);
 		void onMenuCallBack(MenuCallback menuCallback);
         void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse);
-        void onPaymentRequest(PaymentRequest paymentRequest);
+        void onPaymentAuthorizationRequest(PaymentRequest paymentRequest);
 	}
 
 	/**
@@ -1099,7 +1099,7 @@ public final class Nandbox {
 		void createChat(String type,String title, int isPublic,String reference,String appId);
 		void addChatMember(long chatId, long userId,String appId);
 		void addChatAdminMember(long chatId, long userId,String appId);
-        void paymentConfirmation(String chatId, long userId, String orderId, JSONObject payload, String secret, String currency, double totalAmount, String appId, NandboxClient.Status status,long debitAmountCents);
+            void submitPaymentResult(String chatId, long userId, String orderId, JSONObject providerResponse, String secret, String currency, double totalAmount, String appId, NandboxClient.Status status, long debitAmountCents);
         //        void runCustomCode(long userId,JSONObject data,String appId);
 	}
 }
