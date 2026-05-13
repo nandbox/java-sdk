@@ -807,7 +807,7 @@ public class MultipleTests {
             }
 
             @Override
-            public void onPaymentRequest(PaymentRequest paymentRequest) {
+            public void onPaymentAuthorizationRequest(PaymentRequest paymentRequest) {
                 System.out.println(paymentRequest.toJson().toJSONString());
             }
 

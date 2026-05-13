@@ -2,10 +2,10 @@ package com.nandbox.bots.api.outmessages;
 
 import net.minidev.json.JSONObject;
 
-public class GetReordOutMessage extends OutMessage{
+public class GetRecordOutMessage extends OutMessage{
     String id ;
     String tableName;
-    public GetReordOutMessage(){
+    public GetRecordOutMessage(){
         this.method = OutMessageMethod.extensionGetDoc;
     }
 

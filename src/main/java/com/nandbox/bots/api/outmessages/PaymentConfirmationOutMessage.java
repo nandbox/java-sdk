@@ -4,7 +4,7 @@ import net.minidev.json.JSONObject;
 
 public class PaymentConfirmationOutMessage extends OutMessage {
     public static String KEY_ORDER_ID = "order_id";
-    public static String KEY_PAYLOAD = "payload";
+    public static String KEY_PAYLOAD = "providerResponse";
     public static String KEY_SECRET = "secret";
     public static String KEY_CURRENCY = "currency";
     public static String KEY_TOTAL_AMOUNT = "total_amount";
@@ -12,7 +12,7 @@ public class PaymentConfirmationOutMessage extends OutMessage {
     public static String KEY_STATUS = "status";
     public static String Key_DEBIT_AMOUNT_CENTS = "debit_amount_cents";
     private String orderId;
-    private JSONObject payload;
+    private JSONObject providerResponse;
     private String secret;
     private String currency;
     double totalAmount;
@@ -37,7 +37,7 @@ public class PaymentConfirmationOutMessage extends OutMessage {
     }
 
     public PaymentConfirmationOutMessage() {
-        this.method = OutMessageMethod.paymentConfirmation;
+        this.method = OutMessageMethod.submitPaymentResult;
     }
     public void setCurrency(String currency) {
         this.currency = currency;
@@ -57,8 +57,8 @@ public class PaymentConfirmationOutMessage extends OutMessage {
 
 
 
-    public void setPayload(JSONObject payload) {
-        this.payload = payload;
+    public void setProviderResponse(JSONObject payload) {
+        this.providerResponse = payload;
     }
 
     public void setTotalAmount(double totalAmount) {
@@ -87,8 +87,8 @@ public class PaymentConfirmationOutMessage extends OutMessage {
 
 
 
-    public JSONObject getPayload() {
-        return payload;
+    public JSONObject getProviderResponse() {
+        return providerResponse;
     }
 
 
@@ -98,8 +98,8 @@ public class PaymentConfirmationOutMessage extends OutMessage {
         if (orderId != null) {
             obj.put(KEY_ORDER_ID, orderId);
         }
-        if (payload != null) {
-            obj.put(KEY_PAYLOAD, payload);
+        if (providerResponse != null) {
+            obj.put(KEY_PAYLOAD, providerResponse);
         }
         if (secret != null) {
             obj.put(KEY_SECRET, secret);
