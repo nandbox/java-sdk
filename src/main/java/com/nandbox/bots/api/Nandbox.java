@@ -5,6 +5,7 @@ import java.util.List;
 import com.nandbox.bots.api.data.*;
 import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.OutMessage;
+import com.nandbox.bots.api.NandboxClient.*;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -226,6 +227,7 @@ public final class Nandbox {
 		void onMenuCallBack(MenuCallback menuCallback);
         void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse);
         void onPaymentAuthorizationRequest(PaymentRequest paymentRequest);
+        void onWebhookEvent(WebhookBody webhookBody);
 	}
 
 	/**
@@ -1099,7 +1101,8 @@ public final class Nandbox {
 		void createChat(String type,String title, int isPublic,String reference,String appId);
 		void addChatMember(long chatId, long userId,String appId);
 		void addChatAdminMember(long chatId, long userId,String appId);
-            void submitPaymentResult(String chatId, long userId, String orderId, JSONObject providerResponse, String secret, String currency, double totalAmount, String appId, NandboxClient.Status status, long debitAmountCents);
+            void submitPaymentResult(String chatId, long userId, String orderId, JSONObject providerResponse, String secret, String currency, double totalAmount, String appId, Status status, long debitAmountCents);
         //        void runCustomCode(long userId,JSONObject data,String appId);
+        void sendNotification(long userId, NotificationType notificationType, String title , String message, String appId);
 	}
 }

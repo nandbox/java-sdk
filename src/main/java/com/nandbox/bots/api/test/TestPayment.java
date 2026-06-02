@@ -10,8 +10,8 @@ import net.minidev.json.JSONObject;
 
 public class TestPayment {
 
-    public static final String TOKEN = "90091783786595892:0:hS94nKOJdehimpGeX7MjONJ1MQ9gSR";
-    public static final String appId = "90090684312609408";
+    public static final String TOKEN = "90091783781708950:0:oFk4sCwB9MRUNsu5pVsn0I8QKvMbwl";
+    public static final String appId = "90090684305722836";
 
     public static void main(String[] args) throws Exception {
         NandboxClient client = NandboxClient.get();
@@ -24,7 +24,9 @@ public class TestPayment {
 
             @Override
             public void onReceive(IncomingMessage incomingMsg) {
+                String userId = incomingMsg.getFrom().getId();
 
+                api.sendNotification(Long.parseLong(userId), NandboxClient.NotificationType.Email, "Testing ", "TEEEEESSSTT",appId);
             }
 
             @Override
@@ -192,6 +194,11 @@ public class TestPayment {
                 long debitAmountCents = paymentRequest.getDebitAmountCents();
                 System.out.println(debitAmountCents);
                 api.submitPaymentResult(appId,accountId,orderId,payload,secret,currency,amount,appId, NandboxClient.Status.Success,debitAmountCents);
+            }
+
+            @Override
+            public void onWebhookEvent(WebhookBody webhookBody) {
+                System.out.println(webhookBody.getBody().toJSONString());
             }
 
 

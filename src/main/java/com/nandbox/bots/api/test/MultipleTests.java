@@ -811,6 +811,11 @@ public class MultipleTests {
                 System.out.println(paymentRequest.toJson().toJSONString());
             }
 
+            @Override
+            public void onWebhookEvent(WebhookBody webhookBody) {
+
+            }
+
         });
 
 	}

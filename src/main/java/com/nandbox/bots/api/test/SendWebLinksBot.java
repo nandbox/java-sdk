@@ -306,6 +306,11 @@ public class SendWebLinksBot {
 
             }
 
+            @Override
+            public void onWebhookEvent(WebhookBody webhookBody) {
+
+            }
+
         });
 
 	}

@@ -204,6 +204,11 @@ public class Main {
             public void onPaymentAuthorizationRequest(PaymentRequest paymentRequest) {
 
             }
+
+            @Override
+            public void onWebhookEvent(WebhookBody webhookBody) {
+
+            }
         });
 
 

@@ -238,6 +238,11 @@ public class EchoTextMessage {
 
             }
 
+            @Override
+            public void onWebhookEvent(WebhookBody webhookBody) {
+
+            }
+
 
         });
 	}

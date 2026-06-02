@@ -202,6 +202,11 @@ public class TestCellMessage {
 
                }
 
+               @Override
+               public void onWebhookEvent(WebhookBody webhookBody) {
+
+               }
+
 
            });
 

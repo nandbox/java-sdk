@@ -56,6 +56,11 @@ public class NandboxClient {
         Success,
         Rejected
     }
+    public static enum NotificationType{
+        SMS,
+        Email,
+        Push,
+    }
 	private static final String CONFIG_FILE = "config.properties";
 	private static String BOT_ID = null;
 	private static NandboxClient nandboxClient;
@@ -805,6 +810,17 @@ public class NandboxClient {
                 }
 
                 @Override
+                public void sendNotification(long userId, NotificationType notificationType, String title, String message, String appId) {
+                    SendUserNotificationOutMessage sendNotificationOutMessage = new SendUserNotificationOutMessage();
+                    sendNotificationOutMessage.setAccountId(userId);
+                    sendNotificationOutMessage.setType(notificationType);
+                    sendNotificationOutMessage.setTitle(title);
+                    sendNotificationOutMessage.setMessage(message);
+                    sendNotificationOutMessage.setApp_id(appId);
+                    api.send(sendNotificationOutMessage);
+                }
+
+                @Override
 				public void addWhiteList(List<WhiteListUser> whiteListUsers,String appId,String reference) {
 
 					AddWhiteListOutMessage addWhiteistOutMessage = new AddWhiteListOutMessage();
@@ -1267,6 +1283,10 @@ public class NandboxClient {
                         case "paymentAuthorizationRequest":
                             PaymentRequest paymentRequest = new PaymentRequest(obj);
                             callback.onPaymentAuthorizationRequest(paymentRequest);
+                            return;
+                        case "WebhookEvent":
+                            WebhookBody webhookEvent = new WebhookBody(obj);
+                            callback.onWebhookEvent(webhookEvent);
                             return;
 						default:
 							callback.onReceive(obj);
