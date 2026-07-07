@@ -1,6 +1,7 @@
 
 package com.nandbox.bots.api.inmessages;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
@@ -8,6 +9,7 @@ public class ExtensionDocResponse {
     String id;
     String tableName;
     JSONObject doc;
+    JSONArray docs;
     String ref;
     String appId;
     String method;
@@ -23,6 +25,13 @@ public class ExtensionDocResponse {
                 this.doc = (JSONObject) (new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE)).parse(String.valueOf(obj.get("doc")));
             } catch (Exception e) {
                 this.doc = new JSONObject();
+            }
+        }
+        if (obj.containsKey("data")) {
+            try{
+                this.docs = (JSONArray) (new JSONParser(JSONParser.DEFAULT_PERMISSIVE_MODE)).parse(String.valueOf(obj.get("data")));
+            } catch (Exception e) {
+                this.docs = new JSONArray();
             }
         }
         if (obj.containsKey("ref")) {
