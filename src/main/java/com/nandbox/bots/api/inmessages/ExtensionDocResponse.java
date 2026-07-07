@@ -67,4 +67,13 @@ public class ExtensionDocResponse {
     public String getMethod() {
         return method;
     }
+
+    public JSONArray getDocs() {
+        return docs;
+    }
+
+    public void setDocs(JSONArray docs) {
+        this.docs = docs;
+    }
+
 }
