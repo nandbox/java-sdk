@@ -63,17 +63,31 @@ public class MenuCallback {
             this.form = String.valueOf(jsonObject.get("form"));
             this.style = String.valueOf(jsonObject.get("style"));
             this.label = String.valueOf(jsonObject.get("label"));
-            this.value_type = jsonObject.get("value_type") != null ? new ValueType(String.valueOf(((JSONObject)jsonObject.get("value_type")).get("data"))) : null;
-            if (jsonObject.get("value") != null) {
-                List<JSONObject> valueList = null;
-                try {
-                    valueList = (List<JSONObject>) jsonObject.get("value");
-                } catch (ClassCastException e) {
-                    // fallback: single value
-                    valueList = new java.util.ArrayList<>();
-                    valueList.add((JSONObject) jsonObject.get("value"));
-                }
-                this.value = valueList.stream().map(CellValue::new).collect(java.util.stream.Collectors.toList());
+            Object valueTypeObj = jsonObject.get("value_type");
+
+            if (valueTypeObj instanceof JSONObject) {
+                Object data = ((JSONObject) valueTypeObj).get("data");
+                this.value_type = data != null ? new ValueType(String.valueOf(data)) : null;
+            } else if (valueTypeObj != null) {
+                this.value_type = new ValueType(String.valueOf(valueTypeObj));
+            } else {
+                this.value_type = null;
+            }
+            Object valueObj = jsonObject.get("value");
+
+            if (valueObj instanceof List) {
+                this.value = ((List<?>) valueObj).stream()
+                        .filter(o -> o instanceof JSONObject)
+                        .map(o -> new CellValue((JSONObject) o))
+                        .collect(Collectors.toList());
+
+            } else if (valueObj instanceof JSONObject) {
+                this.value = java.util.Collections.singletonList(new CellValue((JSONObject) valueObj));
+
+            } else if (valueObj != null) {
+                this.value = java.util.Collections.singletonList(
+                        new CellValue(null, valueObj, null)
+                );
             }
             this.callback = jsonObject.get("callback") != null ? String.valueOf(jsonObject.get("callback")) : null;
         }
