@@ -23,9 +23,9 @@ public class WhiteList {
 				?String.valueOf(jsonObj.get(KEY_APP_ID))
 				: "0";
 		this.eop = (Boolean) jsonObj.get(KEY_EOP);
-		JSONArray usersArrayObj = (JSONArray) jsonObj.get(KEY_USERS);
-		this.users = new SignupUser[usersArrayObj.size()];
-		for (int i = 0; i < usersArrayObj.size(); i++) {
+		JSONArray usersArrayObj = jsonObj.get(KEY_USERS) instanceof JSONArray ? (JSONArray) jsonObj.get(KEY_USERS) : null;
+		this.users = new SignupUser[usersArrayObj == null ? 0 : usersArrayObj.size()];
+		for (int i = 0; usersArrayObj != null && i < usersArrayObj.size(); i++) {
 			users[i] = new SignupUser((JSONObject) usersArrayObj.get(i));
 		}
 		this.reference =jsonObj.get(KEY_REFERENCE) != null

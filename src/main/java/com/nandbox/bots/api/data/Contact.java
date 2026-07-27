@@ -33,15 +33,9 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		StringBuilder  outStrBuf = new StringBuilder();
-		outStrBuf.append("{\n");
-		if (name != null)
-			outStrBuf.append("\"" + KEY_NAME + "\":\"" + name + "\n");
-		if (phoneNumber != null)
-			outStrBuf.append("\"" + KEY_PHONE_NUMBER + "\":\"" + phoneNumber + "\n");
-
-		outStrBuf.append("}");
-		return outStrBuf.toString();
+		// Delegate so the output is always well-formed JSON. The previous hand-rolled
+		// version omitted the closing quote of each value and the separating commas.
+		return toJsonObject().toJSONString();
 	}
 
 	/**

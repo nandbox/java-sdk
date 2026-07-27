@@ -22,9 +22,9 @@ public class List_ak {
                 ? String.valueOf(jsonObj.get(KEY_APP_ID))
                 : "0";
         this.eop = (Boolean) jsonObj.get(KEY_EOP);
-        JSONArray usersArrayObj = (JSONArray) jsonObj.get(KEY_USERS);
-        this.users = new String[usersArrayObj.size()];
-        for (int i = 0; i < usersArrayObj.size(); i++) {
+        JSONArray usersArrayObj = jsonObj.get(KEY_USERS) instanceof JSONArray ? (JSONArray) jsonObj.get(KEY_USERS) : null;
+        this.users = new String[usersArrayObj == null ? 0 : usersArrayObj.size()];
+        for (int i = 0; usersArrayObj != null && i < usersArrayObj.size(); i++) {
             users[i] =(String) usersArrayObj.get(i);
         }
         this.reference =jsonObj.get(KEY_REFERENCE) != null

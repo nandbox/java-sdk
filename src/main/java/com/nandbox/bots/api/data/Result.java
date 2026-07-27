@@ -43,7 +43,6 @@ public class Result {
 		this.url = (String) obj.get(KEY_URL);		
 		this.type = (String) obj.get(KEY_TYPE);
 		this.thumbUrl = (String) obj.get(KEY_THUMB_URL);
-		this.id = (String) obj.get(KEY_ID);
 		this.width = Utils.getLong(obj.get(KEY_WIDTH));
 		this.height = Utils.getLong(obj.get(KEY_HEIGHT));		
 	}

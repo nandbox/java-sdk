@@ -1,5 +1,7 @@
 package com.nandbox.bots.api.data;
 
+import com.nandbox.bots.api.util.Utils;
+
 import net.minidev.json.JSONObject;
 
 public class Image {
@@ -12,9 +14,10 @@ public class Image {
     private Integer height;
 
     public Image(JSONObject img) {
-        this.width = (Integer) img.get(KEY_WIDTH);
+        // json-smart may hand back Integer or Long, so avoid a direct cast.
+        this.width = img.get(KEY_WIDTH) == null ? null : Utils.getInteger(img.get(KEY_WIDTH));
         this.url = (String) img.get(KEY_URL);
-        this.height = (Integer) img.get(KEY_HEIGHT);
+        this.height = img.get(KEY_HEIGHT) == null ? null : Utils.getInteger(img.get(KEY_HEIGHT));
     }
 
     public JSONObject toJsonObject() {

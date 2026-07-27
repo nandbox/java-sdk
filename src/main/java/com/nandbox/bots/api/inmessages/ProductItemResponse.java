@@ -32,6 +32,9 @@ public class ProductItemResponse {
             if (appId!=null){
                 obj.put(KEY_APP_ID,appId);
             }
+            if (reference!=null){
+                obj.put(KEY_REFERENCE,reference);
+            }
             return obj;
         }
 

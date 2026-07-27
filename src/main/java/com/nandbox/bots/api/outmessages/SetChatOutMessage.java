@@ -24,7 +24,12 @@ public class SetChatOutMessage extends OutMessage {
 	public JSONObject toJsonObject() {
 		JSONObject obj = super.toJsonObject();
 
-		obj.put(KEY_CHAT, chat);
+		// Serialize through Chat.toJsonObject() so the protocol's snake_case keys
+		// are used. Putting the POJO directly makes json-smart derive keys from the
+		// getter names instead (memberCount, languageCode, inviteLink, ...).
+		if (chat != null) {
+			obj.put(KEY_CHAT, chat.toJsonObject());
+		}
 		return obj;
 	}
 

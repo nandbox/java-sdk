@@ -7,7 +7,11 @@ public class PaymentRequest {
     private static final String KEY_MERCHANT_NAME = "merchant_name";
     private static final String KEY_AMOUNT = "amount";
     private static final String KEY_CURRENCY = "currency";
-    private static final String KEY_PAYLOAD = "paymentMethod";
+    // The server sends the tokenized card data under "payload" (Const.Key_payload,
+    // set by CourgettePaymentProvider_GooglePay/_ApplePay). Reading "paymentMethod"
+    // meant getPaymentMethod() was always null, so the token was unreachable.
+    // JS and Python already use "payload".
+    private static final String KEY_PAYLOAD = "payload";
     private static final String KEY_ACCOUNT_ID = "account_id";
     private static final String KEY_SECRET = "secret";
     private static final String KEY_APP_ID = "app_id";
@@ -29,7 +33,7 @@ public class PaymentRequest {
 
 
     public PaymentRequest(JSONObject obj){
-        System.out.println("PaymentRequest JSON: " + obj.toJSONString());
+        // Deliberately not logged: this payload carries the payment secret.
         if (obj.containsKey(KEY_ORDER_ID)){
             this.orderId = (String) obj.get(KEY_ORDER_ID);
         }

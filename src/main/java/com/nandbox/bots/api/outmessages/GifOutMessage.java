@@ -29,7 +29,8 @@ public class GifOutMessage extends OutMessage {
 	 *            send , its default is photo
 	 */
 	public GifOutMessage(GifType gifType) {
-		this.gifType = gifType;
+		// Keep the documented PHOTO default instead of throwing on a null argument.
+		this.gifType = gifType == null ? GifType.PHOTO : gifType;
 		switch (this.gifType) {
 		case PHOTO:
 			this.method = OutMessageMethod.sendPhoto;

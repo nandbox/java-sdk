@@ -36,7 +36,7 @@ public class SetNavigationButtonOutMessage extends OutMessage {
         if (type!=null){
             obj.put(KEY_NAV_TYPE,type);
         }
-        if (isOpen!=0){
+        if (isOpen!=null && isOpen!=0){
             obj.put(KEY_MENU_OPEN,isOpen);
         }
 		return obj;

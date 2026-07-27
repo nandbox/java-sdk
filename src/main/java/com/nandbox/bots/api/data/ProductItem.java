@@ -1,7 +1,10 @@
 package com.nandbox.bots.api.data;
 
+import com.nandbox.bots.api.util.Utils;
+
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -81,34 +84,50 @@ public class ProductItem {
         this.addons = (List<String>) obj.get(KEY_ADDONS);
         this.description = (String) obj.get(KEY_DESCRIPTION);
         this.type = (String) obj.get(KEY_TYPE);
-        this.pCode = (Integer) obj.get(KEY_P_CODE);
-        this.price = (Double) obj.get(KEY_PRICE);
+        // json-smart returns the narrowest numeric type that fits the literal, so
+        // these fields can arrive as Integer, Long or Double. Casting directly to
+        // one of them threw ClassCastException on valid payloads; "id" additionally
+        // threw NullPointerException when absent and ClassCastException when the
+        // server sent it as a number rather than a string.
+        this.pCode = obj.get(KEY_P_CODE) == null ? null : Utils.getInteger(obj.get(KEY_P_CODE));
+        this.price = obj.get(KEY_PRICE) instanceof Number ? ((Number) obj.get(KEY_PRICE)).doubleValue() : null;
         this.vendor = (String) obj.get(KEY_VENDOR);
         this.variant = (JSONArray) obj.get(KEY_VARIANT);
-        this.id =Long.parseLong((String) obj.get(KEY_ID));
+        this.id = obj.get(KEY_ID) == null ? null : Utils.getLong(obj.get(KEY_ID));
         this.attribute = obj.get(KEY_ATTRIBUTE) != null ? new Attribute((JSONObject) obj.get(KEY_ATTRIBUTE)) : null;
         this.tag = (String) obj.get(KEY_TAG);
         this.sku = (String) obj.get(KEY_SKU);
         this.keyword = (String) obj.get(KEY_KEYWORD);
         this.bundle = (String) obj.get(KEY_BUNDLE);
-        this.image = ((List<JSONObject>) obj.get(KEY_IMAGE)).stream().map(Image::new).collect(Collectors.toList());
+        this.image = new ArrayList<>();
+        if (obj.get(KEY_IMAGE) instanceof List) {
+            for (Object item : (List<?>) obj.get(KEY_IMAGE)) {
+                if (item instanceof JSONObject) {
+                    this.image.add(new Image((JSONObject) item));
+                }
+            }
+        }
         this.assignCollection = (JSONArray) obj.get(KEY_ASSIGN_COLLECTION);
-        this.compareAtPrice = (Double) obj.get(KEY_COMPARE_AT_PRICE);
-        this.mainGroupId = (Long) obj.get(KEY_MAIN_GROUP_ID);
+        this.compareAtPrice = obj.get(KEY_COMPARE_AT_PRICE) instanceof Number
+                ? ((Number) obj.get(KEY_COMPARE_AT_PRICE)).doubleValue() : null;
+        this.mainGroupId = obj.get(KEY_MAIN_GROUP_ID) == null ? null : Utils.getLong(obj.get(KEY_MAIN_GROUP_ID));
         this.params = (Map<String, Object>) obj.get(KEY_PARAMS);
         this.serverId = (String) obj.get(KEY_SERVER_ID);
         this.version = (String) obj.get(KEY_VERSION);
-        this.groupId = (Long) obj.get(KEY_GROUP_ID);
+        this.groupId = obj.get(KEY_GROUP_ID) == null ? null : Utils.getLong(obj.get(KEY_GROUP_ID));
         this.name = (String) obj.get(KEY_NAME);
         this.serviceProfileId = (String) obj.get(KEY_SERVICE_PROFILE_ID);
         this.createdDate = (String) obj.get(KEY_CREATED_DATE);
-        this.updatedDate = (String)String.valueOf(obj.get(KEY_UPDATED_DATE));
+        // String.valueOf(null) yields the literal text "null"; keep it absent instead.
+        this.updatedDate = obj.get(KEY_UPDATED_DATE) == null ? null : String.valueOf(obj.get(KEY_UPDATED_DATE));
         this.category = (String) obj.get(KEY_CATEGORY);
         this.status = (String) obj.get(KEY_STATUS);
         this.option = (JSONArray) obj.get(KEY_OPTION);
-        this.appId =obj.get(KEY_APP_ID) != null
+        // Falls back to main_group_id when app_id is absent; guard the fallback so a
+        // payload carrying neither leaves appId null rather than the text "null".
+        this.appId = obj.get(KEY_APP_ID) != null
                 ? String.valueOf(obj.get(KEY_APP_ID))
-                : String.valueOf(obj.get(KEY_MAIN_GROUP_ID));
+                : obj.get(KEY_MAIN_GROUP_ID) != null ? String.valueOf(obj.get(KEY_MAIN_GROUP_ID)) : null;
         this.reference =obj.get(KEY_REFERENCE) != null
                 ? String.valueOf(obj.get(KEY_REFERENCE))
                 : obj.get(KEY_REF) != null ?String.valueOf(obj.get(KEY_REF)):null;

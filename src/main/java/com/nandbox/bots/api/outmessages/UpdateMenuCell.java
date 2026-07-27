@@ -8,13 +8,11 @@ public class UpdateMenuCell extends OutMessage {
     private static final String KEY_MENU_ID = "menu_id";
     private static final String KEY_CELLS = "cells";
     private static final String KEY_APP_ID = "app_id";
-    private static final String KEY_DISABLE_NOTIFICATION = "disable_notification";
 
     private String userId;
     private String appId;
     private String menuId;
     private JSONArray cells = new JSONArray();
-    private Boolean disableNotification;
 
     public UpdateMenuCell() {
         this.method = OutMessageMethod.updateMenuCell;
@@ -25,10 +23,20 @@ public class UpdateMenuCell extends OutMessage {
         JSONObject obj = super.toJsonObject();
 
 
-        obj.put(KEY_CELLS, cells);
-        obj.put(KEY_USER_ID, userId);
-        obj.put(KEY_MENU_ID, menuId);
-        obj.put(KEY_APP_ID, appId);
+        if (cells != null) {
+            obj.put(KEY_CELLS, cells);
+        }
+        if (userId != null) {
+            obj.put(KEY_USER_ID, userId);
+        }
+        if (menuId != null) {
+            obj.put(KEY_MENU_ID, menuId);
+        }
+        // Only override the app_id written by super.toJsonObject() when this
+        // subclass actually carries one.
+        if (appId != null) {
+            obj.put(KEY_APP_ID, appId);
+        }
 
         return obj;
     }
@@ -63,15 +71,5 @@ public class UpdateMenuCell extends OutMessage {
 
     public void setCells(JSONArray cells) {
         this.cells = cells;
-    }
-
-    @Override
-    public Boolean getDisableNotification() {
-        return disableNotification;
-    }
-
-    @Override
-    public void setDisableNotification(Boolean disableNotification) {
-        this.disableNotification = disableNotification;
     }
 }

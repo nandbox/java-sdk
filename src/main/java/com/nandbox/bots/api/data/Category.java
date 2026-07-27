@@ -14,7 +14,9 @@ public class Category {
     private String date;
     private String version;
     private String status;
-    private List<Image> images;
+    // Initialised here so that a Category built from a null payload still has an
+    // empty list rather than null (toJsonObject dereferences it unconditionally).
+    private List<Image> images = new ArrayList<>();
 
     public Category(JSONObject jsonobj) {
         if (jsonobj == null) return;
@@ -28,9 +30,12 @@ public class Category {
         this.status = (String) jsonobj.get("status");
 
         this.images = new ArrayList<>();
-        if (jsonobj.containsKey("image")) {
+        if (jsonobj.get("image") instanceof JSONArray) {
             JSONArray imgArray = (JSONArray) jsonobj.get("image");
             for (Object item : imgArray) {
+                if (!(item instanceof JSONObject)) {
+                    continue;
+                }
                 JSONObject imgObj = (JSONObject) item;
                 this.images.add(new Image(imgObj));
             }

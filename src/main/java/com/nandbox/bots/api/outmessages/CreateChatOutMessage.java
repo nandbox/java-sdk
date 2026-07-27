@@ -7,14 +7,12 @@ public class CreateChatOutMessage extends OutMessage {
     private static final String KEY_CHAT = "chat";
     private static final String KEY_TYPE = "type";
     private static final String KEY_TITLE = "title";
-    private static final String KEY_REFERENCE = "reference";
     private static final String KEY_IS_PUBLIC = "isPublic";
     private static final String KEY_TIMEZONE = "timezone";
 
     private String type;
     private String title;
     private Integer isPublic;
-    private String reference;
 
     public CreateChatOutMessage() {
         this.method = OutMessageMethod.createChat;
@@ -25,22 +23,20 @@ public class CreateChatOutMessage extends OutMessage {
     }
     public void setTitle(String title) { this.title=title; }
     public void setIsPublic(int isPublic) { this.isPublic=isPublic; }
-    public void setReference(String reference) { this.reference=reference; }
+
     @Override
     public JSONObject toJsonObject(){
+        // reference is held and serialized by OutMessage; this class no longer
+        // shadows it, so the inherited getReference() reports the real value.
         JSONObject obj = super.toJsonObject();
         JSONObject chat = new JSONObject();
-        switch (type) {
-            case "Group":{
-                chat.put(KEY_TYPE,"Group");
-                chat.put(KEY_IS_PUBLIC,isPublic);
-                chat.put(KEY_TIMEZONE,"Africa/Cairo");
-                chat.put(KEY_TITLE,title);
-                break;
-            }
+        if ("Group".equals(type)) {
+            chat.put(KEY_TYPE,"Group");
+            chat.put(KEY_IS_PUBLIC,isPublic);
+            chat.put(KEY_TIMEZONE,"Africa/Cairo");
+            chat.put(KEY_TITLE,title);
         }
 
-        obj.put(KEY_REFERENCE,reference);
         obj.put(KEY_CHAT,chat);
         return obj;
     }

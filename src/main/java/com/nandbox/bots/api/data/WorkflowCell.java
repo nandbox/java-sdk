@@ -1,5 +1,7 @@
 package com.nandbox.bots.api.data;
 
+import com.nandbox.bots.api.util.Utils;
+
 import net.minidev.json.JSONObject;
 
 /**
@@ -40,7 +42,8 @@ public class WorkflowCell {
     public WorkflowCell(JSONObject obj) {
         this.cellId = (String) obj.get(KEY_CELL_ID);
         this.callBack = (String) obj.get(KEY_CALLBACK);
-        this.apiId = (Long) obj.get(KEY_API_ID);
+        // A small api_id parses to Integer, so a direct (Long) cast would throw.
+        this.apiId = obj.get(KEY_API_ID) == null ? null : Utils.getLong(obj.get(KEY_API_ID));
         this.cache = (Boolean) obj.get(KEY_CACHE);
         this.nextScreen = (String) obj.get(KEY_NEXT_SCREEN);
         this.url = (String) obj.get(KEY_URL);

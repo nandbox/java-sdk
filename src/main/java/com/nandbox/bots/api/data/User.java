@@ -1,5 +1,7 @@
 package com.nandbox.bots.api.data;
 
+import com.nandbox.bots.api.util.Utils;
+
 import net.minidev.json.JSONObject;
 
 /**
@@ -55,7 +57,8 @@ public class User {
 		this.photo = obj.get(KEY_PHOTO) != null ? new Photo((JSONObject) obj.get(KEY_PHOTO)) : null;
 		
 		this.shortName = (String) obj.get(KEY_SHORT_NAME);
-		this.signupId =  obj.get(KEY_SIGNUP_ID)!=null?(Long) obj.get(KEY_SIGNUP_ID): 0l;
+		// A small signup_id parses to Integer, so a direct (Long) cast would throw.
+		this.signupId = Utils.getLong(obj.get(KEY_SIGNUP_ID));
 	}
 
 	public JSONObject toJsonObject() {
@@ -89,7 +92,7 @@ public class User {
 			obj.put(KEY_PROFILE, profile);
 		
 		if (photo != null)
-			obj.put(KEY_PHOTO, photo);
+			obj.put(KEY_PHOTO, photo.toJsonObject());
 		
 		if(shortName != null)
 			obj.put(KEY_SHORT_NAME, shortName);
@@ -261,7 +264,9 @@ public class User {
 		this.signupId = signupId;
 	}
 	public long getSignupId() {
-		return signupId;
+		// The field is nullable (setSignupId accepts null) but this accessor returns
+		// a primitive, so fall back to the historical default instead of throwing.
+		return signupId == null ? 0L : signupId;
 	}
 
 }

@@ -21,7 +21,11 @@ public class SetMyProfileOutMessage extends OutMessage {
 	public JSONObject toJsonObject() {
 		JSONObject obj = super.toJsonObject();
 
-		obj.put(KEY_USER, user);
+		// Use User.toJsonObject() so the protocol keys (short_name, is_bot,
+		// last_seen, ...) are emitted rather than getter-derived camelCase names.
+		if (user != null) {
+			obj.put(KEY_USER, user.toJsonObject());
+		}
 		return obj;
 	}
 

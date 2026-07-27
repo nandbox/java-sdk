@@ -26,7 +26,7 @@ public class Utils {
 		text, image, video, audio, file, voice, textFile, contact, location, gif_video, gif_image, sticker, article
 	};
 
-	static AtomicInteger seq = new AtomicInteger();
+	private static final AtomicInteger seq = new AtomicInteger();
 
 	/**
 	 * @param duration
@@ -70,10 +70,9 @@ public class Utils {
 	}
 
 	public static int getNext() {
-		int nextVal = seq.incrementAndGet();
-		if (nextVal > 1000)
-			seq.set(0);
-		return nextVal;
+		// Single atomic update: the previous read-then-set could let concurrent
+		// callers both pass the bound before either reset the counter.
+		return seq.updateAndGet(current -> current >= 1000 ? 1 : current + 1);
 	}
 
 	public static String getUniqueId() {
@@ -112,26 +111,42 @@ public class Utils {
 		return false;
 	}
 
+	/**
+	 * Converts a JSON value to a {@code long}, returning {@code 0} when the value
+	 * is absent or is not a parseable number.
+	 */
 	public static long getLong(Object o) {
 		if (o == null)
 			return 0l;
-		if (o instanceof Long)
-			return (long) o;
-		if (o instanceof Integer)
-			return (int) o;
-		return Long.parseLong(o.toString());
+		// Covers Integer, Long, Double and BigDecimal, all of which json-smart can
+		// produce for the same field depending on the literal it parsed.
+		if (o instanceof Number)
+			return ((Number) o).longValue();
+		try {
+			return Long.parseLong(o.toString().trim());
+		} catch (NumberFormatException e) {
+			return 0l;
+		}
 	}
 
+	/**
+	 * Converts a JSON value to an {@code int}, returning {@code 0} when the value
+	 * is absent or is not a parseable number.
+	 */
 	public static int getInteger(Object o) {
 		if (o == null)
 			return 0;
-		if (o instanceof Integer)
-			return (int) o;
-		return Integer.parseInt(o.toString());
+		if (o instanceof Number)
+			return ((Number) o).intValue();
+		try {
+			return Integer.parseInt(o.toString().trim());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 
 	public static boolean isNotEmpty(String string) {
-		return !"".equals(string);
+		return string != null && !string.isEmpty();
 	}
 
 	// public static ArrayList<String> getTagsNames(Tag[] tagsDef, List<String>

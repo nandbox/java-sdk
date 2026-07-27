@@ -45,7 +45,7 @@ public class ChatMenuCallback {
 		//System.out.println("json " + jsonObj.toJSONString());
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_CHAT_MENU_CALL_BACK);
 
-		User fromUser = new User( obj);
+		User fromUser = obj.get(KEY_FROM) == null ? null : new User((JSONObject) obj.get(KEY_FROM));
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		ButtonQueryResult btnqueryResults = obj.get(KEY_BUTTON_QUERY_RESULTS) == null ? null
 				: new ButtonQueryResult((JSONObject) obj.get(KEY_BUTTON_QUERY_RESULTS));
@@ -90,7 +90,7 @@ public class ChatMenuCallback {
 			obj.put(KEY_BUTTON_CALLBACK, buttonCallback);
 
 		if (buttonQueryResult != null)
-			obj.put(KEY_BUTTON_QUERY_RESULTS, buttonQueryResult);
+			obj.put(KEY_BUTTON_QUERY_RESULTS, buttonQueryResult.toJsonObject());
 
 		if (nextMenu != null)
 			obj.put(KEY_NEXT_MENU, nextMenu);

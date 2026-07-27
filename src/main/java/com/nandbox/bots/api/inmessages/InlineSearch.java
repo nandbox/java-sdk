@@ -40,7 +40,7 @@ public class InlineSearch {
 		//System.out.println("json " + jsonObj.toJSONString());
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_INLINE_SEARCH);
 
-		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
+		User fromUser = obj.get(KEY_FROM) != null ? new User((JSONObject) obj.get(KEY_FROM)) : null;
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.method = String.valueOf(obj.get(KEY_METHOD));
 		this.from = fromUser;

@@ -41,16 +41,9 @@ public class Document {
 
 	@Override
 	public String toString() {
-		StringBuilder  outStrBuf = new StringBuilder ();
-		outStrBuf.append("{\n");
-		if (id != null)
-			outStrBuf.append("\"" + KEY_ID + "\":\"" + id + "\n");
-		if (name != null)
-			outStrBuf.append("\"" + KEY_NAME + "\":\"" + name + "\n");
-		if (size != null)
-			outStrBuf.append("\"" + KEY_SIZE + "\":\"" + size + "\n");
-		outStrBuf.append("}");
-		return outStrBuf.toString();
+		// Delegate so the output is always well-formed JSON. The previous hand-rolled
+		// version omitted the closing quote of each value and the separating commas.
+		return toJsonObject().toJSONString();
 	}
 
 	/**

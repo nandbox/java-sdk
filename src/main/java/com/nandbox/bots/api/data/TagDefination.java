@@ -17,11 +17,22 @@ public class TagDefination {
 	private Integer isPrivate;
 
 	public TagDefination(JSONObject obj) {
-		this.id = (String) obj.get(KEY_ID);
+		// The server writes the tag id as a long (ApiAddChatTag) and isPrivate as a
+		// boolean, so neither can be read with a plain cast: the old
+		// "(String) obj.get(KEY_ID)" threw ClassCastException, and
+		// Utils.getInteger(Boolean) always yielded 0.
+		Object rawId = obj.get(KEY_ID);
+		this.id = rawId == null ? null : String.valueOf(rawId);
 		this.name = (String) obj.get(KEY_NAME);
 		this.description = (String) obj.get(KEY_DESCRIPTION);
-		this.isPrivate = Utils.getInteger(obj.get(KEY_ISPRIVATE));
-
+		Object rawIsPrivate = obj.get(KEY_ISPRIVATE);
+		if (rawIsPrivate == null) {
+			this.isPrivate = null;
+		} else if (rawIsPrivate instanceof Boolean) {
+			this.isPrivate = ((Boolean) rawIsPrivate) ? 1 : 0;
+		} else {
+			this.isPrivate = Utils.getInteger(rawIsPrivate);
+		}
 	}
 
 	public JSONObject toJsonObject() {

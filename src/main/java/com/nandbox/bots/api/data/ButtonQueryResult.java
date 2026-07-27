@@ -15,9 +15,9 @@ public class ButtonQueryResult {
 	
 	public ButtonQueryResult(JSONObject obj) {
 
-		this.latitude = String.valueOf(obj.get(KEY_LATITUDE));
-		this.longitude = String.valueOf(obj.get(KEY_LONGITUDE));
-		this.contact = String.valueOf((KEY_CONTACT));
+		this.latitude = obj.get(KEY_LATITUDE) == null ? null : String.valueOf(obj.get(KEY_LATITUDE));
+		this.longitude = obj.get(KEY_LONGITUDE) == null ? null : String.valueOf(obj.get(KEY_LONGITUDE));
+		this.contact = obj.get(KEY_CONTACT) == null ? null : String.valueOf(obj.get(KEY_CONTACT));
 
 	}
 
@@ -25,8 +25,6 @@ public class ButtonQueryResult {
 
 		JSONObject obj = new JSONObject();
 		if (latitude != null)
-			obj.put(KEY_LATITUDE, latitude);
-		if (longitude != null)
 			obj.put(KEY_LATITUDE, latitude);
 
 		if (longitude != null)

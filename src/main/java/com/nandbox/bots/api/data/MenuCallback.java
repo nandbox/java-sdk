@@ -4,8 +4,9 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.nandbox.bots.api.util.Utils;
 
 public class MenuCallback {
 
@@ -20,14 +21,22 @@ public class MenuCallback {
     private List<Cell> cells;
     public MenuCallback() {
     }
+    /**
+     * Returns {@code null} for an absent key rather than the literal text "null",
+     * which is what String.valueOf(null) produces.
+     */
+    private static String asString(Object value) {
+        return value == null ? null : String.valueOf(value);
+    }
+
     public MenuCallback(JSONObject jsonObject) {
-        this.menu_id = String.valueOf(jsonObject.get("menu_id"));
-        this.source = String.valueOf(jsonObject.get("source"));
-        this.api_id = String.valueOf(jsonObject.get("api_id"));
-        this.app_id = String.valueOf(jsonObject.get("app_id"));
+        this.menu_id = asString(jsonObject.get("menu_id"));
+        this.source = asString(jsonObject.get("source"));
+        this.api_id = asString(jsonObject.get("api_id"));
+        this.app_id = asString(jsonObject.get("app_id"));
         this.chat = jsonObject.get("chat") != null ? new Chat((JSONObject) jsonObject.get("chat")) : null;
         this.from = jsonObject.get("from") != null ? new User((JSONObject) jsonObject.get("from")) : null;
-        this.date = Long.parseLong(String.valueOf(jsonObject.get("date")));
+        this.date = Utils.getLong(jsonObject.get("date"));
         if (jsonObject.get("cells") != null && jsonObject.get("cells") instanceof List) {
             List<?> cellObjs = (List<?>) jsonObject.get("cells");
             this.cells = cellObjs.stream().filter(o -> o instanceof JSONObject).map(o -> new Cell((JSONObject) o)).collect(Collectors.toList());
@@ -58,11 +67,11 @@ public class MenuCallback {
             this.callback=callback;
         }
         public Cell(JSONObject jsonObject) {
-            this.menu_id = String.valueOf(jsonObject.get("menu_id"));
-            this.cell_id = String.valueOf(jsonObject.get("cell_id"));
-            this.form = String.valueOf(jsonObject.get("form"));
-            this.style = String.valueOf(jsonObject.get("style"));
-            this.label = String.valueOf(jsonObject.get("label"));
+            this.menu_id = asString(jsonObject.get("menu_id"));
+            this.cell_id = asString(jsonObject.get("cell_id"));
+            this.form = asString(jsonObject.get("form"));
+            this.style = asString(jsonObject.get("style"));
+            this.label = asString(jsonObject.get("label"));
             Object valueTypeObj = jsonObject.get("value_type");
 
             if (valueTypeObj instanceof JSONObject) {
@@ -172,9 +181,9 @@ public class MenuCallback {
             this.option_label = option_label;
         }
         public CellValue(JSONObject jsonObject) {
-            this.id = String.valueOf(jsonObject.get("id"));
+            this.id = asString(jsonObject.get("id"));
             this.value = jsonObject.get("value");
-            this.option_label = jsonObject.get("option_label") != null ? String.valueOf(jsonObject.get("option_label")) : null;
+            this.option_label = asString(jsonObject.get("option_label"));
         }
         public Object getValue() {
             return value;
@@ -248,8 +257,23 @@ public class MenuCallback {
         this.menu_id = menu_id;
     }
 
+    /**
+     * Alias for {@link #toJSON()}, matching the toJsonObject() name used by every
+     * other class in this package so generic serialization can find it.
+     */
+    public JSONObject toJsonObject() {
+        return toJSON();
+    }
+
     public JSONObject toJSON() {
         JSONObject json = new JSONObject();
+        // menu_id and menu_group were parsed but never written back.
+        if (this.menu_id != null) {
+            json.put("menu_id", this.menu_id);
+        }
+        if (this.menu_group != null) {
+            json.put("menu_group", this.menu_group);
+        }
         json.put("source", this.source);
         json.put("api_id", this.api_id);
         json.put("app_id", this.app_id);
@@ -269,6 +293,11 @@ public class MenuCallback {
                 cellJson.put("form", cell.getForm());
                 cellJson.put("style", cell.getStyle());
                 cellJson.put("label", cell.getLabel());
+                // callback identifies the cell to the bot (Utils.getFieldsAndValues
+                // keys on it) but was omitted from the serialized form.
+                if (cell.getCallback() != null) {
+                    cellJson.put("callback", cell.getCallback());
+                }
                 if (cell.getValue_type() != null) {
                     JSONObject valueTypeJson = new JSONObject();
                     valueTypeJson.put("data", cell.getValue_type().getData());

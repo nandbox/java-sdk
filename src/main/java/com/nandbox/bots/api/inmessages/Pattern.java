@@ -23,9 +23,9 @@ public class Pattern {
         this.chatId =obj.get(KEY_CHATID) != null
                 ? Long.parseLong(String.valueOf(obj.get(KEY_CHATID)))
                 : 0;
-        JSONArray usersArrayObj = (JSONArray) obj.get(KEY_DATA);
+        JSONArray usersArrayObj = obj.get(KEY_DATA) instanceof JSONArray ? (JSONArray) obj.get(KEY_DATA) : null;
         this.data =new ArrayList<>();
-        for (int i = 0 ; i<usersArrayObj.size();i++){
+        for (int i = 0 ; usersArrayObj != null && i<usersArrayObj.size();i++){
             this.data.add(new Data((JSONObject) usersArrayObj.get(i)));
         }
         this.reference =obj.get(KEY_REFERENCE) != null

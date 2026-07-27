@@ -107,7 +107,7 @@ public class IncomingMessage {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_MESSAGE);
 
-		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
+		User fromUser = obj.get(KEY_FROM) != null ? new User((JSONObject) obj.get(KEY_FROM)) : null;
 		User sentToUser = obj.get(KEY_SENT_TO) != null ? new User((JSONObject) obj.get(KEY_SENT_TO)) : null;
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		this.location = obj.get(KEY_LOCATION) != null ? new Location((JSONObject) obj.get(KEY_LOCATION)) : null;
@@ -126,8 +126,8 @@ public class IncomingMessage {
 
 		this.text = (String) obj.get(KEY_TEXT);
 		this.messageId = (String) obj.get(KEY_MESSAGE_ID);
-		this.date = Long.parseLong(String.valueOf(obj.get(KEY_DATE)));
-		this.reference = String.valueOf(obj.get(KEY_REFERENCE));
+		this.date = obj.get(KEY_DATE) == null ? null : Utils.getLong(obj.get(KEY_DATE));
+		this.reference = obj.get(KEY_REFERENCE) == null ? null : String.valueOf(obj.get(KEY_REFERENCE));
 		this.from = fromUser;
 		this.sentTo = sentToUser;
 		this.fromAdmin = (Utils.getInteger(obj.get(KEY_FROM_ADMIN)));
@@ -185,8 +185,10 @@ public class IncomingMessage {
 
 		if (status != null)
 			obj.put(KEY_STATUS, status);
+		if (chatSettings != null)
+			obj.put(KEY_CHAT_SETTINGS, chatSettings);
 		if (sentTo != null)
-			obj.put(KEY_SENT_TO, sentTo);
+			obj.put(KEY_SENT_TO, sentTo.toJsonObject());
 
 		if (reference != null)
 			obj.put(KEY_REFERENCE, reference);
@@ -205,15 +207,15 @@ public class IncomingMessage {
 		}
 
 		if (location != null) {
-			obj.put(KEY_LOCATION, location);
+			obj.put(KEY_LOCATION, location.toJsonObject());
 		}
 
 		if (contact != null) {
-			obj.put(KEY_CONTACT, contact);
+			obj.put(KEY_CONTACT, contact.toJsonObject());
 		}
 
 		if (document != null) {
-			obj.put(KEY_DOCUMENT, document);
+			obj.put(KEY_DOCUMENT, document.toJsonObject());
 		}
 
 		if (photo != null) {
@@ -252,7 +254,7 @@ public class IncomingMessage {
 		}
 
 		if (whitelistUser != null) {
-			obj.put(WHITELIST_USER, whitelistUser);
+			obj.put(WHITELIST_USER, whitelistUser.toJsonObject());
 		}
 		if (scheduleDate != null) {
 			obj.put(KEY_SCHEDULE_DATE, scheduleDate);
@@ -267,8 +269,6 @@ public class IncomingMessage {
 		// if (tag != null) {
 		// obj.put(KEY_TAG, tag);
 		// }
-		//System.out.println("to " + obj.toJSONString());
-		NandboxClient.log.info("to " + obj.toJSONString());
 		return obj;
 
 	}

@@ -1,5 +1,7 @@
 package com.nandbox.bots.api.data;
 
+import com.nandbox.bots.api.util.Utils;
+
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
@@ -56,9 +58,12 @@ public class Chat {
 		this.regions = (String) obj.get(KEY_REGIONS);
 		this.description = (String) obj.get(KEY_DESCRIPTION);
 		this.category = (String) obj.get(KEY_CATEGORY);
-		this.memberCount = (Integer) obj.get(KEY_MEMBER_COUNT);
+		// json-smart yields Integer or Long depending on magnitude, so route the
+		// numeric field through Utils rather than casting straight to Integer.
+		this.memberCount = obj.get(KEY_MEMBER_COUNT) == null ? null : Utils.getInteger(obj.get(KEY_MEMBER_COUNT));
 		this.inviteLink = (String) obj.get(KEY_INVITE_LINK);
-		this.reference = obj.get(KEY_REFERENCE)==null ? null:(String) obj.get(KEY_REFERENCE);
+		this.reference = (String) obj.get(KEY_REFERENCE);
+		this.photo = obj.get(KEY_PHOTO) == null ? null : new Photo((JSONObject) obj.get(KEY_PHOTO));
 		// this.tag = obj.get(KEY_TAGS_DEFINITION) != null
 		// ? new Tag((JSONObject) obj.get(KEY_TAGS_DEFINITION))
 		// : null;
@@ -98,7 +103,7 @@ public class Chat {
 		if (inviteLink != null)
 			obj.put(KEY_INVITE_LINK, inviteLink);
 		if (photo != null)
-			obj.put(KEY_PHOTO, photo);
+			obj.put(KEY_PHOTO, photo.toJsonObject());
 		if (reference != null)
 			obj.put(KEY_REFERENCE, reference);
 		// if (tag != null)

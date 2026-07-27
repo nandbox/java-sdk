@@ -44,7 +44,7 @@ public class InlineMessageCallback {
 
 		JSONObject obj = (JSONObject) jsonObj.get(KEY_INLINE_MESSAGE_CALLBACK);
 
-		User fromUser = new User((JSONObject) obj.get(KEY_FROM));
+		User fromUser = obj.get(KEY_FROM) != null ? new User((JSONObject) obj.get(KEY_FROM)) : null;
 		this.chat = obj.get(KEY_CHAT) == null ? null : new Chat((JSONObject) obj.get(KEY_CHAT));
 		ButtonQueryResult btnqueryResults = obj.get(KEY_BUTTON_QUERY_RESULTS) == null ? null
 				: new ButtonQueryResult((JSONObject) obj.get(KEY_BUTTON_QUERY_RESULTS));
@@ -98,7 +98,7 @@ public class InlineMessageCallback {
 			obj.put(KEY_BUTTON_CALLBACK, buttonCallback);
 
 		if (buttonQueryResult != null)
-			obj.put(KEY_BUTTON_QUERY_RESULTS, buttonQueryResult);
+			obj.put(KEY_BUTTON_QUERY_RESULTS, buttonQueryResult.toJsonObject());
 
 		return obj;
 

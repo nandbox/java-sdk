@@ -29,9 +29,9 @@ public class BlackList {
 		this.appId =obj.get(KEY_APP_ID) != null
 				? String.valueOf(obj.get(KEY_APP_ID))
 				: "0";
-		JSONArray usersArrayObj = (JSONArray) obj.get(KEY_USERS);
-		this.users = new SignupUser[usersArrayObj.size()];
-		for (int i = 0; i < usersArrayObj.size(); i++) {
+		JSONArray usersArrayObj = obj.get(KEY_USERS) instanceof JSONArray ? (JSONArray) obj.get(KEY_USERS) : null;
+		this.users = new SignupUser[usersArrayObj == null ? 0 : usersArrayObj.size()];
+		for (int i = 0; usersArrayObj != null && i < usersArrayObj.size(); i++) {
 			users[i] = new SignupUser((JSONObject) usersArrayObj.get(i));
 		}
 		this.reference =obj.get(KEY_REFERENCE) != null
