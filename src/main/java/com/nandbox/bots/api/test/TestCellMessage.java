@@ -193,7 +193,7 @@ public class TestCellMessage {
 			   }
 
                @Override
-               public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+               public void onDocumentResponse(DocumentResponse documentResponse) {
 
                }
 

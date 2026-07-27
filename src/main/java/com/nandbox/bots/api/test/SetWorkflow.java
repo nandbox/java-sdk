@@ -207,7 +207,7 @@ public class SetWorkflow {
             }
 
             @Override
-            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+            public void onDocumentResponse(DocumentResponse documentResponse) {
 
             }
 

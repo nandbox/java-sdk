@@ -802,7 +802,7 @@ public class MultipleTests {
 			}
 
             @Override
-            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
+            public void onDocumentResponse(DocumentResponse documentResponse) {
 
             }
 

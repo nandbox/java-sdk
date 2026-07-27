@@ -9,7 +9,7 @@ import com.nandbox.bots.api.inmessages.*;
 import com.nandbox.bots.api.outmessages.SetChatMenuOutMessage;
 import com.nandbox.bots.api.outmessages.SetNavigationButtonOutMessage;
 import com.nandbox.bots.api.outmessages.UpdateMenuCell;
-import com.nandbox.bots.api.util.DatabaseService;
+import com.nandbox.bots.api.util.DocumentStore;
 import com.nandbox.bots.api.util.HttpService;
 import com.nandbox.bots.api.util.Utils;
 import net.minidev.json.JSONArray;
@@ -53,8 +53,8 @@ public class EchoTextMessage {
                                 System.out.println("Error: " + e.getMessage());
                             }
                         });
-                        DatabaseService databaseService = DatabaseService.getInstance();
-                         databaseService.get(api ,"id","incoming_messages",Utils.getUniqueId());
+                        DocumentStore documentStore = DocumentStore.getInstance();
+                        documentStore.getDocument(api, "incoming_messages", "id", Utils.getUniqueId());
 						String chatId = incomingMsg.getChat().getId(); // get your chat Id
 						String text = incomingMsg.getText(); // get your text message
 
@@ -229,8 +229,9 @@ public class EchoTextMessage {
 			}
 
             @Override
-            public void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse) {
-                System.out.println(extensionDocResponse.getDoc().toJSONString());
+            public void onDocumentResponse(DocumentResponse documentResponse) {
+                JSONObject document = documentResponse.getDocument();
+                System.out.println(document == null ? "not found" : document.toJSONString());
             }
 
             @Override

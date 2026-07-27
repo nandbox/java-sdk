@@ -1277,31 +1277,16 @@ public class NandboxClient {
 							MenuCallback menuCallback = new MenuCallback(obj);
 							callback.onMenuCallBack(menuCallback);
 							return;
-                        case "extensionSetDocResponse":
-                        case "extensionGetDocResponse":
-                        case "extensionDeleteDocResponse":
-                        case "extensionListDocResponse":
-
-                            String type = null;
-
-                            switch (method) {
-                                case "extensionSetDocResponse":
-                                    type = "insert";
-                                    break;
-                                case "extensionGetDocResponse":
-                                    type = "get";
-                                    break;
-                                case "extensionDeleteDocResponse":
-                                    type = "delete";
-                                    break;
-                                case "extensionListDocResponse":
-                                    type = "list";
-                                    break;
-                            }
-
-                            obj.put("method", type);
-                            ExtensionDocResponse extensionDocResponse = new ExtensionDocResponse(obj);
-                            callback.onExtensionDocResponse(extensionDocResponse);
+                        // The method name is passed through as-is. It used to be rewritten to
+                        // "insert" / "get" / "delete" / "list" before building the DTO, which
+                        // discarded the real name and left getMethod() returning a value that
+                        // appears nowhere in the protocol.
+                        case "setDocumentResponse":
+                        case "getDocumentResponse":
+                        case "deleteDocumentResponse":
+                        case "listDocumentsResponse":
+                            DocumentResponse documentResponse = new DocumentResponse(obj);
+                            callback.onDocumentResponse(documentResponse);
                             return;
 
                         case "paymentAuthorizationRequest":

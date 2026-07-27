@@ -23,7 +23,10 @@ public abstract class OutMessage {
 		getBlacklistUsers, getWhitelistUsers, addToBlacklist, addToWhitelist, removeFromBlacklist, addBlacklistPatterns,
 		removeBlacklistPatterns, addWhitelistPatterns, removeWhitelistPatterns, removeFromWhitelist, setAdminChatMenu,
 		setAdminNavigationButton, cancelMessageSchedule, updateMenuCell,addChatMember,createChat,addChatAdmin,setWorkflowAction
-		,getCollectionProduct, listCollections, getProductItem,runCustomCode, extensionSetDoc, extensionDeleteDoc, extensionGetDoc, extensionListDoc, submitPaymentResult,sendUserNotification
+		,getCollectionProduct, listCollections, getProductItem,runCustomCode, submitPaymentResult,sendUserNotification,
+		// Document store. Replaces extensionSetDoc / extensionGetDoc / extensionListDoc /
+		// extensionDeleteDoc, which the server still accepts from older bots.
+		setDocument, getDocument, listDocuments, deleteDocument
 
 	}
 

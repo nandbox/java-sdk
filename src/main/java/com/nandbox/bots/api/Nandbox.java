@@ -225,7 +225,7 @@ public final class Nandbox {
 
 		void onCreateChat(Chat chat);
 		void onMenuCallBack(MenuCallback menuCallback);
-        void onExtensionDocResponse(ExtensionDocResponse extensionDocResponse);
+        void onDocumentResponse(DocumentResponse documentResponse);
         void onPaymentAuthorizationRequest(PaymentRequest paymentRequest);
         void onWebhookEvent(WebhookBody webhookBody);
 	}
