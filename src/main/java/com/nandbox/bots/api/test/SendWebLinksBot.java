@@ -311,6 +311,17 @@ public class SendWebLinksBot {
 
             }
 
+            @Override
+            public void onEventResponse(EventResponse eventResponse) {
+
+            }
+
+            @Override
+            public void onEventMessage(EventMessage eventMessage) {
+
+            }
+
+
         });
 
 	}

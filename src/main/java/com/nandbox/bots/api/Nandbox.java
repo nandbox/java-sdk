@@ -228,6 +228,34 @@ public final class Nandbox {
         void onDocumentResponse(DocumentResponse documentResponse);
         void onPaymentAuthorizationRequest(PaymentRequest paymentRequest);
         void onWebhookEvent(WebhookBody webhookBody);
+
+        /**
+         * Reply to subscribeToEvent, unsubscribeFromEvent or listEventSubscriptions.
+         *
+         * <p>
+         * Default no-op so that adding it does not break bots that do not use event
+         * subscriptions. Override it if you send any of those three methods.
+         * </p>
+         *
+         * @param eventResponse
+         *            check getAck() before assuming the subscription changed
+         */
+        default void onEventResponse(EventResponse eventResponse) {
+        }
+
+        /**
+         * A change on an event this account is subscribed to.
+         *
+         * <p>
+         * Default no-op, as above.
+         * </p>
+         *
+         * @param eventMessage
+         *            getBody() is the raw payload; its keys vary by event and by the server
+         *            side filter, so read defensively
+         */
+        default void onEventMessage(EventMessage eventMessage) {
+        }
 	}
 
 	/**

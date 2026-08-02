@@ -1297,6 +1297,15 @@ public class NandboxClient {
                             WebhookBody webhookEvent = new WebhookBody(obj);
                             callback.onWebhookEvent(webhookEvent);
                             return;
+                        case "eventResponse":
+                        case "listEventSubscriptionsResponse":
+                            EventResponse eventResponse = new EventResponse(obj);
+                            callback.onEventResponse(eventResponse);
+                            return;
+                        case "eventMessage":
+                            EventMessage eventMessage = new EventMessage(obj);
+                            callback.onEventMessage(eventMessage);
+                            return;
 						default:
 							callback.onReceive(obj);
 							return;

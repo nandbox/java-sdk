@@ -209,6 +209,17 @@ public class Main {
             public void onWebhookEvent(WebhookBody webhookBody) {
 
             }
+
+            @Override
+            public void onEventResponse(EventResponse eventResponse) {
+
+            }
+
+            @Override
+            public void onEventMessage(EventMessage eventMessage) {
+
+            }
+
         });
 
 

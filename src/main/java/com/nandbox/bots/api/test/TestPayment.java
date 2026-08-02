@@ -201,6 +201,16 @@ public class TestPayment {
                 System.out.println(webhookBody.getBody().toJSONString());
             }
 
+            @Override
+            public void onEventResponse(EventResponse eventResponse) {
+
+            }
+
+            @Override
+            public void onEventMessage(EventMessage eventMessage) {
+
+            }
+
 
         });
     }

@@ -26,7 +26,10 @@ public abstract class OutMessage {
 		,getCollectionProduct, listCollections, getProductItem,runCustomCode, submitPaymentResult,sendUserNotification,
 		// Document store. Replaces extensionSetDoc / extensionGetDoc / extensionListDoc /
 		// extensionDeleteDoc, which the server still accepts from older bots.
-		setDocument, getDocument, listDocuments, deleteDocument
+		setDocument, getDocument, listDocuments, deleteDocument,
+
+		// Event subscriptions: which app activity is pushed to an account as an eventMessage.
+		subscribeToEvent, unsubscribeFromEvent, listEventSubscriptions
 
 	}
 
