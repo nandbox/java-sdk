@@ -1,0 +1,12 @@
+#contact nandbox to get the server URLs : support@nandbox.com
+URI=
+DownloadServer=
+UploadServer=
+corePoolSize=
+maximumPoolSize=
+keepAliveTime=
+Token=
+#MaxLogSize=<max size of a single log file>
+#NumberOfLogFiles=<max number of log files kept at once>
+#LogLevel=<log level:Trace,Debug,Info,Warn,Error,Fatal>
+#LogPath=<relative path to log from root directory of bot>
