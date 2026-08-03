@@ -2,3 +2,5 @@
 /secret.txt
 log*
 .idea/**/*
+private-key*.asc
+config.properties
